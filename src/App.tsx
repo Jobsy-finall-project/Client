@@ -8,6 +8,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CreateItem from "./pages/CreateItem";
 import CreateRecruitmentTrackPage from "./pages/CreateRecruitmentTrackPage";
+import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -23,6 +24,10 @@ const App: React.FC = () => {
           <Route
             path="/create-recruitment-track-page"
             element={<CreateRecruitmentTrackPage />}
+          />
+           <Route
+            path="/recruitment-track-step-page"
+            element={<RecruitmentTracksStepPage />}
           />
           <Route path="/" element={<HomePage />} />
         </Routes>
