@@ -1,7 +1,7 @@
 export default interface SignUpFormModel {
-  fullName: string;
+  firstName: string,
+  lastName: string,
+  userName: string;
   email: string;
   password: string;
-  confirmPassword?: string;
-  checkbox?: boolean;
 }

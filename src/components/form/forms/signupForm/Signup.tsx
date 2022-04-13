@@ -10,11 +10,12 @@ import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
 import SignUpFormModel from "../../../../models/forms/Signup";
 import User from "../../../../models/User";
+import UploadImage from "../../uploadImg/UploadImage";
 
 const SignupSchema = Yup.object().shape({
-  fullName: Yup.string()
-    .min(2, "Full name is too short, at least two character")
-    .max(50, "Full name is too long, no more than 50 characters.")
+  userName: Yup.string()
+    .min(2, "User name is too short, at least two character")
+    .max(50, "User name is too long, no more than 50 characters.")
     .required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
@@ -24,14 +25,6 @@ const SignupSchema = Yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
       "Password can only contain minimum four characters, at least one letter and one number"
     ),
-  confirmPassword: Yup.string().oneOf(
-    [Yup.ref("password"), null],
-    "Passwords must match"
-  ),
-  checkbox: Yup.boolean().oneOf(
-    [true],
-    "You must accept the terms and conditions"
-  ),
 });
 
 const SignupForm: React.FC = () => {
@@ -43,17 +36,15 @@ const SignupForm: React.FC = () => {
   const users = useSelector((state: State) => state.users);
 
   const [data, setData] = useState<SignUpFormModel>({
-    fullName: "",
+    firstName:"",
+    lastName:"",
+    userName: "",
     email: "",
-    password: "",
-    confirmPassword: "",
-    checkbox: false,
+    password: ""
   });
 
   const doSubmit = () => {
     const copyData: SignUpFormModel = { ...data };
-    delete copyData.confirmPassword;
-    delete copyData.checkbox;
 
     let user: User = { id: users.length, ...copyData, role: "Client" };
     createUser(user);
@@ -63,11 +54,11 @@ const SignupForm: React.FC = () => {
   return (
     <Formik<SignUpFormModel>
       initialValues={{
-        fullName: "",
+        firstName: "",
+        lastName: "",
+        userName: "",
         email: "",
-        password: "",
-        confirmPassword: "",
-        checkbox: false,
+        password: ""
       }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
@@ -83,21 +74,41 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
   ({ handleSubmit, handleChange, values, errors, touched }) => {
     return (
       <form onSubmit={handleSubmit} className="needs-validation">
+          <Input
+          type="text"
+          name="firstName"
+          label="First Name"
+          placeholder="First Name"
+          value={values.firstName}
+          onChange={handleChange}
+          errors={errors.firstName}
+          touched={touched.firstName}
+        />
+          <Input
+          type="text"
+          name="lastName"
+          label="Last Name"
+          placeholder="Last Name"
+          value={values.lastName}
+          onChange={handleChange}
+          errors={errors.lastName}
+          touched={touched.lastName}
+        />
         <Input
           type="text"
-          name="fullName"
-          label="Full Name"
-          placeholder="Your Full Name"
-          value={values.fullName}
+          name="userName"
+          label="User Name"
+          placeholder="User Name"
+          value={values.userName}
           onChange={handleChange}
-          errors={errors.fullName}
-          touched={touched.fullName}
+          errors={errors.userName}
+          touched={touched.userName}
         />
         <Input
           type="email"
           name="email"
           label="Email"
-          placeholder="you@example.com"
+          placeholder="Email"
           value={values.email}
           onChange={handleChange}
           errors={errors.email}
@@ -107,28 +118,18 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
           type="password"
           name="password"
           label="Password"
-          placeholder="ABcd123!"
+          placeholder="Password"
           value={values.password}
           onChange={handleChange}
           errors={errors.password}
           touched={touched.password}
         />
-        <Input
-          type="password"
-          name="confirmPassword"
-          label="Confirm Password"
-          placeholder="ABcd123!"
-          value={values.confirmPassword}
+        <UploadImage
+          name="upload-img"
+          label="Upload profile image"
+          type="text"
+          error=""
           onChange={handleChange}
-          errors={errors.confirmPassword}
-          touched={touched.confirmPassword}
-        />
-        <Checkbox
-          label="I confirm that I have read the"
-          value={!values.checkbox}
-          onChange={handleChange}
-          errors={errors.checkbox}
-          touched={touched.checkbox}
         />
         <Button
           style="primary"
