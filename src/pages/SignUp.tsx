@@ -5,13 +5,13 @@ import ThreeCircles from "../components/threeCircles/ThreeCircles";
 import SignupForm from "../components/form/forms/signupForm/Signup";
 
 const longText =
-  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum gravida scelerisque nunc senectus ac. Aliquam auctor lacinia pellentesque purus viverra dignissim. Vel quam varius.";
+  "It's quick and easy";
 
 const SignUp = () => {
   return (
     <React.Fragment>
       <ThreeCircles />
-      <TitleSection title="Signup" />
+      <TitleSection title="Sign up" />
       <SectionContent content={longText} />
       <SignupForm />
       <SectionContent content="I already have an account, Login" />
