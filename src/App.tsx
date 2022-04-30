@@ -10,6 +10,7 @@ import CreateItem from "./pages/CreateItem";
 import CreateRecruitmentTrackPage from "./pages/CreateRecruitmentTrackPage";
 import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import "./App.css";
+import CreateStepPage from "./pages/CreateStepPage";
 
 const App: React.FC = () => {
   return (
@@ -25,10 +26,11 @@ const App: React.FC = () => {
             path="/create-recruitment-track-page"
             element={<CreateRecruitmentTrackPage />}
           />
-           <Route
+          <Route
             path="/recruitment-track-step-page"
             element={<RecruitmentTracksStepPage />}
           />
+          <Route path="/create-step" element={<CreateStepPage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>
