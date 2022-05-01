@@ -14,15 +14,19 @@ const initialCardState: Card[] = [
 const initialUserState: User[] = [
   {
     id: 0,
-    fullName: "Maya Assayag",
+    firstName: "Maya",
+    lastName: "Assayag",
+    userName: "MayaAssayag",
     email: "maya@gmail.com",
     password: "123",
     role: "Admin",
   },
   {
-    id: 1,
-    fullName: "Lior Lapid",
-    email: "lior@gmail.com",
+    id: 0,
+    firstName: "Emily",
+    lastName: "Zborovsky",
+    userName: "Emilyz",
+    email: "emilyz@gmail.com",
     password: "123",
     role: "Client",
   },
@@ -30,7 +34,9 @@ const initialUserState: User[] = [
 
 const initialLoginUserState: User = {
   id: 0,
-  fullName: "Maya Assayag",
+  firstName: "Maya",
+  lastName: "Assayag",
+  userName: "MayaAssayag",
   email: "maya@gmail.com",
   password: "123",
   role: "Admin",
