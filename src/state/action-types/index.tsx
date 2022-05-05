@@ -4,4 +4,5 @@ export enum ActionType {
   CREATE_USER = "createUser",
   LOGIN_USER = "loginUser",
   SORT_ATTRIBUTE = "sortAttribute",
+  CREATE_STEP = "createStep",
 }

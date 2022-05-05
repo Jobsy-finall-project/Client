@@ -1,5 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
+import { bindActionCreators } from "redux";
+import { actionsCreators } from "../../../../state";
 import * as Yup from "yup";
 import StepModel from "../../../../models/forms/Step";
 import CreateStepStyled from "./CreateStepStyled";
@@ -13,12 +17,24 @@ const CreateStepSchema = Yup.object().shape({
     email: Yup.string(),
 });
 
-const doSubmit = () => {
-    console.log("step form submited!");
 
-};
 
 const CreateStep: React.FC = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    const { createStep } = bindActionCreators(actionsCreators, dispatch);
+
+    const doSubmit = (values: StepModel) => {
+        console.log("step form submited!");
+        const newStep: StepModel = {
+            ...values
+        }
+
+        createStep(newStep);
+        navigate("/functional-page");
+    };
+
     return (
         <Formik<StepModel>
             initialValues={{
@@ -30,8 +46,7 @@ const CreateStep: React.FC = () => {
             validationSchema={CreateStepSchema}
             onSubmit={(values) => {
                 console.log(values);
-
-                doSubmit();
+                doSubmit(values);
             }}
             component={StepForm}
         ></Formik>

@@ -3,6 +3,8 @@ import User from "../../models/User";
 import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
+import Step from "../../models/forms/Step";
+import axios from "axios";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -87,5 +89,21 @@ const sortAttributeReducer = (
       return state;
   }
 };
+
+const stepReducer = (
+  state: Step,
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.CREATE_STEP:
+      axios.post("/step/"/*need to insert application ID here*/, {
+        ...state
+      })
+      break;
+
+    default:
+      break;
+  }
+}
 
 export { cardReducer, userReducer, loginUserReducer, sortAttributeReducer };

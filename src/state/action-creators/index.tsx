@@ -4,6 +4,7 @@ import { Action } from "../actions/index";
 import Card from "../../models/Card";
 import User from "../../models/User";
 import SortAttribute from "../../models/SortAttribute";
+import Step from "../../models/forms/Step";
 
 export const createCard = (card: Card) => {
   return (dispatch: Dispatch<Action>) => {
@@ -49,3 +50,13 @@ export const sortAttribute = (sortAttribute: SortAttribute) => {
     });
   };
 };
+
+
+export const createStep = (step: Step) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CREATE_STEP,
+      payload: step
+    })
+  }
+}
