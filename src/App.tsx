@@ -11,6 +11,7 @@ import CreateRecruitmentTrackPage from "./pages/CreateRecruitmentTrackPage";
 import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import "./App.css";
 import CreateStepPage from "./pages/CreateStepPage";
+import CVs from "./pages/Cvs";
 
 const App: React.FC = () => {
   return (
@@ -31,6 +32,7 @@ const App: React.FC = () => {
             element={<RecruitmentTracksStepPage />}
           />
           <Route path="/create-step" element={<CreateStepPage />} />
+          <Route path="/cvs" element={<CVs />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>

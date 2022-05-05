@@ -4,6 +4,7 @@ import {
   userReducer,
   loginUserReducer,
   sortAttributeReducer,
+  cvsReducer
 } from "./reducer";
 
 const reducers = combineReducers({
@@ -11,6 +12,7 @@ const reducers = combineReducers({
   users: userReducer,
   loginUser: loginUserReducer,
   sortAttribute: sortAttributeReducer,
+  cvs: cvsReducer
 });
 
 export default reducers;
