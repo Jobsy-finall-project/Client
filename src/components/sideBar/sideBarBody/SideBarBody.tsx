@@ -20,9 +20,13 @@ const SideBarBody: React.FC = () => {
           title="Create recruitment track page"
           to="/create-recruitment-track-page"
         />
-         <SideBarLink
+        <SideBarLink
           title="recruitment track step page"
           to="/recruitment-track-step-page"
+        />
+        <SideBarLink
+          title="recruitment track page"
+          to="/recruitment-track-page"
         />
         <SideBarLink
           title="create new step"

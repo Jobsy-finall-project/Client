@@ -54,7 +54,7 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
     setAddEmailInput(!addEmailInput);
 
   }
-  const handlePositionPick = () => {
+  const goToCreateNewStep = () => {
     window.location.href = "/create-step"
   }
   
@@ -111,7 +111,7 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
 
     <Button 
       title="Add New Step"
-      onClick={handlePositionPick}
+      onClick={goToCreateNewStep}
       style="success"
       size="lg"
     />
