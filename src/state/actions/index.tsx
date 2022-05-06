@@ -3,7 +3,7 @@ import User from "../../models/User";
 import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
 import { ActionType } from "../action-types/index";
-import Step from "../../models/forms/Step";
+import Step from "../../models/forms/StepModel";
 
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;

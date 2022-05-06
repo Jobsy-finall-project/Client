@@ -5,7 +5,7 @@ import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
 import { actionsCreators } from "../../../../state";
 import * as Yup from "yup";
-import StepModel from "../../../../models/forms/Step";
+import StepModel from "../../../../models/forms/StepModel";
 import CreateStepStyled from "./CreateStepStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";

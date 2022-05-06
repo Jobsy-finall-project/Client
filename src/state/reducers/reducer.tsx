@@ -4,7 +4,7 @@ import CV from "../../models/CV"
 import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
-import Step from "../../models/forms/Step";
+import Step from "../../models/forms/StepModel";
 import axios from "axios";
 
 const initialCardState: Card[] = [
