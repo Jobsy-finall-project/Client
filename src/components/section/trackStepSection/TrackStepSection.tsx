@@ -54,9 +54,10 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
     setAddEmailInput(!addEmailInput);
 
   }
-
+  const handlePositionPick = () => {
+    window.location.href = "/create-step"
+  }
   
-
   return (
       <TrackStepSectionStyled>
        <div className="p-5 mb-4 bg-light rounded-3">
@@ -108,6 +109,12 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
         </div>
       </div>
 
+    <Button 
+      title="Add New Step"
+      onClick={handlePositionPick}
+      style="success"
+      size="lg"
+    />
   
     </TrackStepSectionStyled>
   );
