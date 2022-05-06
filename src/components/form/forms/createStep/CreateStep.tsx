@@ -31,6 +31,8 @@ const CreateStep: React.FC = () => {
             ...values
         }
 
+        console.log(newStep);
+
         createStep(newStep);
         navigate("/functional-page");
     };
@@ -38,6 +40,7 @@ const CreateStep: React.FC = () => {
     return (
         <Formik<StepModel>
             initialValues={{
+                applicationId: "",
                 title: "",
                 stepDetails: "",
                 date: new Date().toDateString(),

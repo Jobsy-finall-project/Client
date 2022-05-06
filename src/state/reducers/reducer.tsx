@@ -62,6 +62,8 @@ const initialCVsState: CV[] = [
   }
 ];
 
+const initialSteps: Step[] = []
+
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
   switch (action.type) {
@@ -122,16 +124,15 @@ const sortAttributeReducer = (
 };
 
 const stepReducer = (
-  state: Step,
+  state: Array<Step> = initialSteps,
   action: Action
 ) => {
   switch (action.type) {
     case ActionType.CREATE_STEP:
-      axios.post("/step/"/*need to insert application ID here*/, {
-        ...state
-      })
-      break;
-
+      // axios.post("/step/"/*need to insert application ID here*/, {
+      //   ...state
+      // })
+      return [...state, action.payload];
     default:
       break;
   }
