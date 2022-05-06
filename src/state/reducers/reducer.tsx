@@ -4,6 +4,8 @@ import CV from "../../models/CV"
 import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
+import Step from "../../models/forms/Step";
+import axios from "axios";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -59,6 +61,8 @@ const initialCVsState: CV[] = [
     file: f
   }
 ];
+
+const initialSteps: Step[] = []
 
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
@@ -119,6 +123,21 @@ const sortAttributeReducer = (
   }
 };
 
+const stepReducer = (
+  state: Array<Step> = initialSteps,
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.CREATE_STEP:
+      // axios.post("/step/"/*need to insert application ID here*/, {
+      //   ...state
+      // })
+      return [...state, action.payload];
+    default:
+      break;
+  }
+}
 
 
-export { cardReducer, userReducer, loginUserReducer, sortAttributeReducer, cvsReducer };
+
+export { cardReducer, userReducer, loginUserReducer, sortAttributeReducer, stepReducer , cvsReducer };

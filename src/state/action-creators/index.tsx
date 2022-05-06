@@ -5,6 +5,7 @@ import Card from "../../models/Card";
 import User from "../../models/User";
 import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
+import Step from "../../models/forms/Step";
 
 
 export const addCv = (cv: CV) => {
@@ -69,3 +70,13 @@ export const sortAttribute = (sortAttribute: SortAttribute) => {
     });
   };
 };
+
+
+export const createStep = (step: Step) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CREATE_STEP,
+      payload: step
+    })
+  }
+}
