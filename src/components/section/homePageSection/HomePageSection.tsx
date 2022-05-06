@@ -1,37 +1,65 @@
-import React from "react";
-import TitleSection from "../titleSection/TitleSection";
-import Button from "../../common/button/Button";
-import Cycle from "../../common/cycle/Cycle";
-import SectionSubtitle from "../subtitle/SectionSubtitle";
-import HomePageSectionStyled from "./HomePageSectionStyled";
+import React, {useState} from "react";
+import { ChangeEvent } from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Checkbox from '@mui/material/Checkbox';
+import IconButton from '@mui/material/IconButton';
+import CommentIcon from '@mui/icons-material/Comment';
+import Grid from '@mui/material/Grid'
+import TextField from '@mui/material/TextField';
+
 
 const HomePageSection: React.FC = () => {
+  
+  const tmp = ["jfrog senior devops", "facebook backend engineer", "datadog frontend junior"];
+  const [search, setSearchBar] = useState('')
+
+  const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
+    const title = event.currentTarget.value;
+    setSearchBar(title)
+  }
+  const handlePositionPick = () => {
+    window.location.href = "/recruitment-track-step-page"
+  }
   return (
-    <HomePageSectionStyled>
-      <div className="mb-4 rounded-3">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-7">
-              <TitleSection title="Title" />
-              <SectionSubtitle subtitle="Subtitle" />
-              <div className="btn-new-item">
-                <Button
-                  style="primary"
-                  size="sm"
-                  title="Get started"
-                  onClick={() => {}}
-                />
-              </div>
-            </div>
-            <div className="container">
-              <div className="col circle">
-                <Cycle color="#E7E7E7" size="250px" fill={true} />
-              </div>
-            </div>
-          </div>
-        </div>
+      <div>
+        <Grid container spacing={3} justifyContent="center" alignItems="center">
+            <Grid item xs={12} spacing={2}>
+            <TextField id="outlined-basic" label="search position" variant="outlined" onChange={handleSetSearch}/>
+            </Grid>
+            <Grid item spacing={2}>
+            <List sx={{ width: '100%', maxWidth: 360}}>
+              {tmp.map((value, index) => (
+                <div>
+                { value.includes(search) ? 
+                <ListItem
+                  key={value}
+                  onClick={handlePositionPick}                  
+                >
+                  <ListItemButton role={undefined} dense>
+                    <ListItemIcon>
+                      <Checkbox
+                        edge="start"
+                        // checked={checked.indexOf(value) !== -1}
+                        tabIndex={-1}
+                        disableRipple
+                        // inputProps={{ 'aria-labelledby': labelId }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={value} />
+                  </ListItemButton>
+                </ListItem>
+                : <div></div>}
+                </div>
+            ))}
+          </List>
+          </Grid>
+        </Grid>
+
       </div>
-    </HomePageSectionStyled>
   );
 };
 
