@@ -3,8 +3,28 @@ import { Dispatch } from "redux";
 import { Action } from "../actions/index";
 import Card from "../../models/Card";
 import User from "../../models/User";
+import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/Step";
+
+
+export const addCv = (cv: CV) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.ADD_CV,
+      payload: cv,
+    });
+  };
+};
+
+export const deleteCv = (cv: CV) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.DELETE_CV,
+      payload: cv,
+    });
+  };
+};
 
 export const createCard = (card: Card) => {
   return (dispatch: Dispatch<Action>) => {

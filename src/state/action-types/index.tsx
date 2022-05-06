@@ -5,4 +5,6 @@ export enum ActionType {
   LOGIN_USER = "loginUser",
   SORT_ATTRIBUTE = "sortAttribute",
   CREATE_STEP = "createStep",
+  ADD_CV = "addCV",
+  DELETE_CV="deleteCv"
 }
