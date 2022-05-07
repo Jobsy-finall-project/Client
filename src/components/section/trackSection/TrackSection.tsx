@@ -18,26 +18,22 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import Typography from "@mui/material/Typography";
 import { PropaneTwoTone } from "@mui/icons-material";
 import Button from "../../common/button/Button";
+import Track from "../../../models/Track";
 
-interface TrackSectionProps {
-  position: Position;
-  isActive: boolean;
-  isFavorite: boolean;
-  steps?: StepModel[];
-  comments?: string[];
-  emails?: string[];
-  cvFiles?: string[];
+interface TrackSectionProp {
+  track: Track
 }
 
-const TrackSection: React.FC<TrackSectionProps> = (props) => {
+const TrackSection: React.FC<TrackSectionProp> = (props) => {
   let navigation = useNavigate();
+  const trackToShow = props.track
   return (
     <div>
-      <Typography variant="h3">{props.position.name}</Typography>
-      <Typography variant="body1">{props.position.description}</Typography>
+      <Typography variant="h3">{trackToShow.position.name}</Typography>
+      <Typography variant="body1">{trackToShow.position.description}</Typography>
 
       <Timeline position="alternate">
-        {props.steps?.map((step) => {
+        {trackToShow.steps?.map((step) => {
           return (
             <TimelineItem
               onClick={() => {
