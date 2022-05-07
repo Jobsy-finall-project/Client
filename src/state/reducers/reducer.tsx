@@ -61,7 +61,48 @@ const initialCVsState: CV[] = [
   },
 ];
 
-// const initialSteps: Step[] = [];
+const initialSteps: Step[] = [
+  {
+    id: "0",
+    applicationId: "2",
+    title: "Telephon interview",
+    stepDetails: "telephone interview",
+    date: "07/05/2022",
+    email: "c@c.c",
+  },
+  {
+    id: "1",
+    applicationId: "2",
+    title: "HR",
+    stepDetails: "Hr interview",
+    date: "11/05/2022",
+    email: "c@c.c",
+  },
+  {
+    id: "0",
+    applicationId: "1",
+    title: "Telephon interview",
+    stepDetails: "telephone interview",
+    date: "07/05/2022",
+    email: "c@c.c",
+  },
+  {
+    id: "1",
+    applicationId: "1",
+    title: "HR",
+    stepDetails: "Hr interview",
+    date: "11/05/2022",
+    email: "c@c.c",
+  },
+  {
+    id: "2",
+    applicationId: "1",
+    title: "Technical",
+    stepDetails: "CTO interview",
+    date: "13/05/2022",
+    email: "c@c.c",
+  },
+];
 
 const initialRecTracks: Track[] = [
   {
@@ -74,32 +115,7 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [
-      {
-        id: "0",
-        applicationId: "1",
-        title: "Telephon interview",
-        stepDetails: "telephone interview",
-        date: "07/05/2022",
-        email: "c@c.c",
-      },
-      {
-        id: "1",
-        applicationId: "1",
-        title: "HR",
-        stepDetails: "Hr interview",
-        date: "11/05/2022",
-        email: "c@c.c",
-      },
-      {
-        id: "2",
-        applicationId: "1",
-        title: "Technical",
-        stepDetails: "CTO interview",
-        date: "13/05/2022",
-        email: "c@c.c",
-      },
-    ],
+    steps: [],
     comments: ["i realy want this one"],
     emails: [
       `Dear Felix Navarro,
@@ -127,24 +143,7 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [
-      {
-        id: "0",
-        applicationId: "2",
-        title: "Telephon interview",
-        stepDetails: "telephone interview",
-        date: "07/05/2022",
-        email: "c@c.c",
-      },
-      {
-        id: "1",
-        applicationId: "2",
-        title: "HR",
-        stepDetails: "Hr interview",
-        date: "11/05/2022",
-        email: "c@c.c",
-      },
-    ],
+    steps: [],
     comments: ["i realy want this one"],
     emails: [
       `Dear hadar,
@@ -216,17 +215,17 @@ const sortAttributeReducer = (
   }
 };
 
-const stepReducer = (
-  state: Array<Track> = initialRecTracks,
-  action: Action
-) => {
+const stepReducer = (state: Array<Step> = initialSteps, action: Action) => {
   switch (action.type) {
     case ActionType.CREATE_STEP:
-      const newStep = action.payload;
-      const track = state.find((track) => track.id === newStep.applicationId);
-      return [...(track?.steps ? track?.steps : []), newStep];
+      // const newStep = action.payload;
+      // return initialRecTracks
+      //   .find((track) => track.id === action.payload.applicationId)
+      //   ?.steps?.push(action.payload);
+
+      return [...state, action.payload];
     default:
-      return state[0].steps;
+      return state;
   }
 };
 

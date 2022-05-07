@@ -19,18 +19,27 @@ import Typography from "@mui/material/Typography";
 import { PropaneTwoTone } from "@mui/icons-material";
 import Button from "../../common/button/Button";
 import Track from "../../../models/Track";
+import { useSelector } from "react-redux";
+import { State } from "../../../state";
 
 interface TrackSectionProp {
-  track: Track
+  track: Track;
 }
 
 const TrackSection: React.FC<TrackSectionProp> = (props) => {
   let navigation = useNavigate();
-  const trackToShow = props.track
+  const trackToShow = props.track;
+  const steps = useSelector((state: State) => state.steps).filter(
+    (step) => step.applicationId === trackToShow.id
+  );
+
+  trackToShow.steps = steps;
   return (
     <div>
       <Typography variant="h3">{trackToShow.position.name}</Typography>
-      <Typography variant="body1">{trackToShow.position.description}</Typography>
+      <Typography variant="body1">
+        {trackToShow.position.description}
+      </Typography>
 
       <Timeline position="alternate">
         {trackToShow.steps?.map((step) => {
@@ -67,7 +76,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
       <Button
         title="Add New Step"
         onClick={() => {
-          navigation("/create-step");
+          navigation("/create-step", { state: trackToShow.id });
         }}
         style="primary"
         size="lg"
