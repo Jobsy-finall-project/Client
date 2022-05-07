@@ -22,7 +22,7 @@ const HomePageSection: React.FC = () => {
     setSearchBar(title)
   }
   const handlePositionPick = () => {
-    window.location.href = "/recruitment-track-step-page"
+    window.location.href = "/recruitment-track-page"
   }
   return (
       <div>

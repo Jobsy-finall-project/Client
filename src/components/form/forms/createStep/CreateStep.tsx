@@ -9,6 +9,7 @@ import StepModel from "../../../../models/forms/StepModel";
 import CreateStepStyled from "./CreateStepStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
+import {v4} from "uuid";
 
 const CreateStepSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -40,6 +41,7 @@ const CreateStep: React.FC = () => {
     return (
         <Formik<StepModel>
             initialValues={{
+                id: v4(),
                 applicationId: "",
                 title: "",
                 stepDetails: "",
