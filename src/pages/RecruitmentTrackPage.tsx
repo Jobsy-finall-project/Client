@@ -1,19 +1,17 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
 
 import TrackSection from "../components/section/trackSection/TrackSection";
+import Track from "../models/Track";
 
 const RecruitmentTrackPage = () => {
+  const location = useLocation();
   return (
     <React.Fragment>
-      <TrackSection 
-        position = {{positionId: '1', name: 'Microsoft - Full Stack Developer', description: 'full time job'}}
-        isActive = {true}
-        isFavorite = {true}
-        steps = {[]}
-        comments = {[]}
-        emails = {[]}
-        cvFiles = {[]}
-        />
+      <TrackSection
+        track={location.state as Track}
+      />
     </React.Fragment>
   );
 };

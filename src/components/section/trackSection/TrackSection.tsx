@@ -1,113 +1,88 @@
 import React, { useState } from "react";
 import Position from "../../../models/forms/Position";
 import StepModel from "../../../models/forms/StepModel";
+import { useNavigate } from "react-router-dom";
 
-import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
+import Timeline from "@mui/lab/Timeline";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
+import TimelineConnector from "@mui/lab/TimelineConnector";
+import TimelineContent from "@mui/lab/TimelineContent";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import TimelineDot from "@mui/lab/TimelineDot";
+import FastfoodIcon from "@mui/icons-material/Fastfood";
+import LaptopMacIcon from "@mui/icons-material/LaptopMac";
+import HotelIcon from "@mui/icons-material/Hotel";
+import RepeatIcon from "@mui/icons-material/Repeat";
+import Typography from "@mui/material/Typography";
+import { PropaneTwoTone } from "@mui/icons-material";
+import Button from "../../common/button/Button";
+import Track from "../../../models/Track";
+import { useSelector } from "react-redux";
+import { State } from "../../../state";
 
-interface TrackSectionProps {
-    position: Position,
-    isActive: boolean,
-    isFavorite: boolean,
-    steps?: StepModel[],
-    comments?: string[],
-    emails?: string[],
-    cvFiles?: string[]
-  }
-
-const TrackSection: React.FC<TrackSectionProps> = (props) => {
-
-    const steps = [
-        {
-          label: 'Select campaign settings',
-          description: `For each ad campaign that you create, you can control how much
-                    you're willing to spend on clicks and conversions, which networks
-                    and geographical locations you want your ads to show on, and more.`,
-        },
-        {
-          label: 'Create an ad group',
-          description:
-            'An ad group contains one or more ads which target a shared set of keywords.',
-        },
-        {
-          label: 'Create an ad',
-          description: `Try out different ad text to see what brings in the most customers,
-                    and learn how to enhance your ads using features like ad extensions.
-                    If you run into any problems with your ads, find out how to tell if
-                    they're running and how to resolve approval issues.`,
-        },
-    ];
-          
-    const [activeStep, setActiveStep] = React.useState(0);
-      
-    const handleNext = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-    
-    const handleBack = () => {
-        setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-    
-    const handleReset = () => {
-        setActiveStep(0);
-    };
-    
-    return (
-    <Box sx={{ maxWidth: 400 }}>
-    <Stepper activeStep={activeStep} orientation="vertical">
-      {steps.map((step, index) => (
-        <Step key={step.label}>
-          <StepLabel
-            optional={
-              index === 2 ? (
-                <Typography variant="caption">Last step</Typography>
-              ) : null
-            }
-          >
-            {step.label}
-          </StepLabel>
-          <StepContent>
-            <Typography>{step.description}</Typography>
-            <Box sx={{ mb: 2 }}>
-              <div>
-                <Button
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  {index === steps.length - 1 ? 'Finish' : 'Continue'}
-                </Button>
-                <Button
-                  disabled={index === 0}
-                  onClick={handleBack}
-                  sx={{ mt: 1, mr: 1 }}
-                >
-                  Back
-                </Button>
-              </div>
-            </Box>
-          </StepContent>
-        </Step>
-      ))}
-    </Stepper>
-    {activeStep === steps.length && (
-      <Paper square elevation={0} sx={{ p: 3 }}>
-        <Typography>All steps completed - you&apos;re finished</Typography>
-        <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-          Reset
-        </Button>
-      </Paper>
-    )}
-    </Box>
-    );
+interface TrackSectionProp {
+  track: Track;
 }
 
-  export default TrackSection;
+const TrackSection: React.FC<TrackSectionProp> = (props) => {
+  let navigation = useNavigate();
+  const trackToShow = props.track;
+  const steps = useSelector((state: State) => state.steps).filter(
+    (step) => step.applicationId === trackToShow.id
+  );
 
-  
+  trackToShow.steps = steps;
+  return (
+    <div>
+      <Typography variant="h3">{trackToShow.position.name}</Typography>
+      <Typography variant="body1">
+        {trackToShow.position.description}
+      </Typography>
+
+      <Timeline position="alternate">
+        {trackToShow.steps?.map((step) => {
+          return (
+            <TimelineItem
+              onClick={() => {
+                navigation("/recruitment-track-step-page", { state: step });
+              }}
+            >
+              <TimelineOppositeContent
+                sx={{ m: "auto 0" }}
+                align="right"
+                variant="body2"
+                color="text.secondary"
+              >
+                {step.date}
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineConnector />
+                <TimelineDot>
+                  <FastfoodIcon />
+                </TimelineDot>
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent sx={{ m: "auto 0" }}>
+                <Typography variant="h6" component="span">
+                  {step.title}
+                </Typography>
+              </TimelineContent>
+            </TimelineItem>
+          );
+        })}
+      </Timeline>
+      <Button
+        title="Add New Step"
+        onClick={() => {
+          navigation("/create-step", { state: trackToShow.id });
+        }}
+        style="primary"
+        size="lg"
+      />
+    </div>
+  );
+};
+
+export default TrackSection;

@@ -28,15 +28,8 @@ const SideBarBody: React.FC = () => {
           title="recruitment track page"
           to="/recruitment-track-page"
         />
-        <SideBarLink
-          title="create new step"
-          to="/create-step"
-        />
-        <SideBarLink
-          title="CVs"
-          to="/cvs"
-        />
-
+        <SideBarLink title="create new step" to="/create-step" />
+        <SideBarLink title="CVs" to="/cvs" />
       </Nav>
     </Offcanvas.Body>
   );
