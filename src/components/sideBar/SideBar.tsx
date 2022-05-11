@@ -10,7 +10,7 @@ const SideBar: React.FC = () => {
       aria-labelledby="offcanvasNavbarLabel"
       placement="end"
     >
-      <SideBarHeader title="Sidebar Title" />
+      <SideBarHeader title="Menu" />
       <SideBarBody />
     </Navbar.Offcanvas>
   );

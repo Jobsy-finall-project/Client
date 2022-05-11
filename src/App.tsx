@@ -17,7 +17,7 @@ import CVs from "./pages/Cvs";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Header brandName="Brand Name & Logo" />
+      <Header brandName="Jobsy" />
       <Router>
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
