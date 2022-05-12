@@ -10,6 +10,7 @@ import CreateItem from "./pages/CreateItem";
 import CreateRecruitmentTrackPage from "./pages/CreateRecruitmentTrackPage";
 import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import RecruitmentTrackPage from "./pages/RecruitmentTrackPage";
+import ApplyJob from "./pages/ApplyJob";
 import "./App.css";
 import CreateStepPage from "./pages/CreateStepPage";
 import CVs from "./pages/Cvs";
@@ -29,6 +30,10 @@ const App: React.FC = () => {
             element={<CreateRecruitmentTrackPage />}
           />
           <Route
+            path="/apply-job"
+            element={<ApplyJob />}
+          />
+          <Route
             path="/recruitment-track-step-page"
             element={<RecruitmentTracksStepPage />}
           />
@@ -41,7 +46,6 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>
-      <Footer />
     </div>
   );
 };

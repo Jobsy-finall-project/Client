@@ -12,21 +12,15 @@ const SideBarBody: React.FC = () => {
         <Link to="/sign-in">Sign in</Link>
         <Link to="/sign-up">Sign up</Link> */}
         <SideBarLink title="Home" to="/" />
-        <SideBarLink title="Functional page" to="functional-page" />
-        <SideBarLink title="Create new item" to="create-new-item" />
         <SideBarLink title="Sign in" to="sign-in" />
         <SideBarLink title="Sign up" to="sign-up" />
         <SideBarLink
+          title="Apply job"
+          to="/apply-job"
+        />
+        <SideBarLink
           title="Create recruitment track page"
           to="/create-recruitment-track-page"
-        />
-        <SideBarLink
-          title="recruitment track step page"
-          to="/recruitment-track-step-page"
-        />
-        <SideBarLink
-          title="recruitment track page"
-          to="/recruitment-track-page"
         />
         <SideBarLink title="create new step" to="/create-step" />
         <SideBarLink title="CVs" to="/cvs" />
