@@ -7,6 +7,7 @@ import {
   cvsReducer,
   stepReducer,
   trackReducer,
+  companyReducer,
 } from "./reducer";
 
 const reducers = combineReducers({
@@ -17,6 +18,7 @@ const reducers = combineReducers({
   cvs: cvsReducer,
   steps: stepReducer,
   tracks: trackReducer,
+  companys: companyReducer,
 });
 
 export default reducers;

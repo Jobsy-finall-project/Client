@@ -5,7 +5,12 @@ import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
+
+import Company from "../../models/forms/Company";
+
 import Track from "../../models/Track";
+import Position from "../../models/forms/Position";
+import { store } from "../store";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -156,7 +161,67 @@ const initialRecTracks: Track[] = [
     ],
     cvFiles: [],
   },
+
+  {
+    id: "3",
+    position: {
+      positionId: "3",
+      name: "Rapyd - Junior Frontend Developer",
+      description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
+        We are seeking for top-notch individuals who are passionate about secu`,
+    },
+    isActive: true,
+    isFavorite: true,
+    steps: [],
+    comments: ["i realy want this one"],
+    emails: [
+      `Dear hadar,
+    Congratulations on your offer from We are delighted to offer you the position of with an anticipated start date of .
+    As discussed over the phone, please find attached your detailed offer letter. If you choose to accept this offer, please sign, scan and email your letter to me at  by.
+    In the meantime, please don't hesitate to reach out to me, either through email or by calling me directly at if you should have any questions or concerns.
+    We look forward to hearing from you and hope you'll join our team!
+    Best regards,`,
+    ],
+    cvFiles: [],
+  },
+  {
+    id: "3",
+    position: {
+      positionId: "3",
+      name: "Monday - Junior Backend Developer",
+      description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
+        We are seeking for top-notch individuals who are passionate about secu`,
+    },
+    isActive: true,
+    isFavorite: true,
+    steps: [],
+    comments: ["i realy want this one"],
+    emails: [
+      `Dear hadar,
+    Congratulations on your offer from We are delighted to offer you the position of with an anticipated start date of .
+    As discussed over the phone, please find attached your detailed offer letter. If you choose to accept this offer, please sign, scan and email your letter to me at  by.
+    In the meantime, please don't hesitate to reach out to me, either through email or by calling me directly at if you should have any questions or concerns.
+    We look forward to hearing from you and hope you'll join our team!
+    Best regards,`,
+    ],
+    cvFiles: [],
+  },
 ];
+
+const initialCompanyState: Company[] = [
+  {
+    id: "1",
+    name: "microsoft",
+    description: "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
+    positions: [
+      {
+        positionId: "1",
+        name: "Full stack developer",
+        description: "python djngo and angular full stack developer"
+      }
+    ]
+  }
+]
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
   switch (action.type) {
@@ -244,6 +309,34 @@ const trackReducer = (
   }
 };
 
+const companyReducer = (
+  state: Array<Company> = initialCompanyState,
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.CREATE_COMPANY:
+      return [...state, action.payload];
+    case ActionType.CREATE_POSITION:
+      console.log("adding position");
+
+      const updatedCompany = action.payload;
+      const oldCompany = state.findIndex((curr) => curr.id === updatedCompany.id);
+
+      if (oldCompany !== -1) {
+        console.log("found old company", state[oldCompany]);
+
+        state[oldCompany].positions = updatedCompany.positions;
+        console.log("new state:", state);
+        return state;
+      } else {
+        return [...state, updatedCompany]
+      }
+
+    default:
+      return state;
+  }
+}
+
 export {
   cardReducer,
   userReducer,
@@ -252,4 +345,5 @@ export {
   stepReducer,
   cvsReducer,
   trackReducer,
+  companyReducer,
 };
