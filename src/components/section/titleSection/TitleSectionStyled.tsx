@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const TitleSectionStyled = styled.div`
   text-align: left;
-  margin-left: 20px;
+  margin-left: 100px;
   margin-top: 30px;
 `;
 

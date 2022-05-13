@@ -29,8 +29,6 @@ const CreateItemForm: React.FC = () => {
   const cards = useSelector((state: State) => state.cards);
 
   const handleCreateNewCard = (values: CardModel) => {
-
-
     const card: CardModel = {
       id: values.id,
       title: values.title,
@@ -97,9 +95,12 @@ const ItemCreationForm: (props: FormikProps<CardModel>) => JSX.Element = ({
         />
         <div className="create-new-item-btn">
           <Button
-            title="Create new card"
-            size="md"
-            style="primary"
+            title="Create New Card"
+            color=""
+            height="100px"
+            width="40px"
+            top=""
+            left=""
             onClick={handleSubmit}
           />
         </div>

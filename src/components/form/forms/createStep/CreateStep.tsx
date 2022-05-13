@@ -110,7 +110,15 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
           touched={touched.email}
           type="text"
         />
-        <Button style="primary" title="Save" size="lg" onClick={handleSubmit} />
+        <Button
+          title="Create New Step"
+          color=""
+          height="50px"
+          width="170px"
+          top="32px"
+          left="100px"
+          onClick={handleSubmit}
+        />
       </form>
     </CreateStepStyled>
   );

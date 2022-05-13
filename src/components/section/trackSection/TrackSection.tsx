@@ -75,11 +75,14 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
       </Timeline>
       <Button
         title="Add New Step"
+        color=""
+        height="50px"
+        width="170px"
+        top="32px"
+        left="100px"
         onClick={() => {
           navigation("/create-step", { state: trackToShow.id });
         }}
-        style="primary"
-        size="lg"
       />
     </div>
   );

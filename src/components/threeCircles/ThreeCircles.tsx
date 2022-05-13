@@ -7,13 +7,37 @@ const ThreeCircles: React.FC = () => {
     <ThreeCirclesStyled>
       <div className="container">
         <div id="lg-circle">
-          <Cycle color="#E7E7E7;" size="187px" fill={true} />
+          <Cycle
+            color="#E7E7E7;"
+            size="187px"
+            fill="true"
+            top=""
+            left=""
+            isLogo=""
+            image=""
+          />
         </div>
         <div id="md-circle">
-          <Cycle color="#000000" size="95px" fill={false} />
+          <Cycle
+            color="#000000"
+            size="95px"
+            fill=""
+            top=""
+            left=""
+            isLogo=""
+            image=""
+          />
         </div>
         <div id="sm-circle">
-          <Cycle color="#5A5A5A" size="54px" fill={true} />
+          <Cycle
+            color="#5A5A5A"
+            size="54px"
+            fill="true"
+            top=""
+            left=""
+            isLogo=""
+            image=""
+          />
         </div>
       </div>
     </ThreeCirclesStyled>

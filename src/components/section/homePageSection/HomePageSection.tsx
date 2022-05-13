@@ -69,7 +69,9 @@ const HomePageSection: React.FC = () => {
                             // inputProps={{ 'aria-labelledby': labelId }}
                           />
                         </ListItemIcon>
-                        <ListItemText primary={currTrack.position.name} />
+                        <ListItemText
+                          primary={`${currTrack.companyName} - ${currTrack.position.name}`}
+                        />
                       </ListItemButton>
                     </ListItem>
                   ) : (
