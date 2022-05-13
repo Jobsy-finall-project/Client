@@ -1,6 +1,6 @@
 import Position from "./Position";
 
-export default interface Comapny {
+export default interface Company {
     id: string;
     name: string;
     description: string;

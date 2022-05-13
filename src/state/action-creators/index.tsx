@@ -6,7 +6,9 @@ import User from "../../models/User";
 import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
-import Comapny from "../../models/forms/Company";
+import Company from "../../models/forms/Company";
+import Position from "../../models/forms/Position";
+import { store } from "../store";
 
 
 export const addCv = (cv: CV) => {
@@ -82,10 +84,19 @@ export const createStep = (step: Step) => {
   }
 }
 
-export const CreateCompany = (company: Comapny) => {
+export const CreateCompany = (company: Company) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.CREATE_COMPANY,
+      payload: company
+    })
+  }
+}
+
+export const AddPosition = (company: Company) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CREATE_POSITION,
       payload: company
     })
   }

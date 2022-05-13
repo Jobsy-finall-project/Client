@@ -42,6 +42,11 @@ interface CreateCompany {
   payload: Company
 }
 
+interface CreatePosition {
+  type: ActionType.CREATE_POSITION;
+  payload: Company
+}
+
 export type Action =
   | CreateCardAction
   | DeleteCardAction
@@ -50,4 +55,5 @@ export type Action =
   | CreateStepAction
   | AddCV
   | DeleteCV
-  | CreateCompany;
+  | CreateCompany
+  | CreatePosition;

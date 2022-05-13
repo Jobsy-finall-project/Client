@@ -7,6 +7,8 @@ import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
 import Company from "../../models/forms/Company";
 import Track from "../../models/Track";
+import Position from "../../models/forms/Position";
+import { store } from "../store";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -261,6 +263,17 @@ const companyReducer = (
   switch (action.type) {
     case ActionType.CREATE_COMPANY:
       return [...state, action.payload];
+    case ActionType.CREATE_POSITION:
+      const updatedCompany = action.payload;
+      const oldCompany = state.findIndex((curr) => curr.id === updatedCompany.id);
+
+      if (oldCompany !== -1) {
+        state[oldCompany].positions = updatedCompany.positions
+        return state;
+      } else {
+        return [...state, updatedCompany]
+      }
+
     default:
       return state;
   }
