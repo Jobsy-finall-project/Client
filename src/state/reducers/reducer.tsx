@@ -5,7 +5,7 @@ import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
-import axios from "axios";
+import Company from "../../models/forms/Company";
 import Track from "../../models/Track";
 
 const initialCardState: Card[] = [
@@ -157,6 +157,21 @@ const initialRecTracks: Track[] = [
   },
 ];
 
+const initialCompanyState: Company[] = [
+  {
+    id: "1",
+    name: "microsoft",
+    description: "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
+    positions: [
+      {
+        positionId: "1",
+        name: "Full stack developer",
+        description: "python djngo and angular full stack developer"
+      }
+    ]
+  }
+]
+
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
   switch (action.type) {
     case ActionType.CREATE_CARD:
@@ -239,6 +254,18 @@ const trackReducer = (
   }
 };
 
+const compayReducer = (
+  state: Array<Company> = initialCompanyState,
+  action: Action
+) => {
+  switch (action.type) {
+    case ActionType.CREATE_COMPANY:
+      return [...state, action.payload];
+    default:
+      return state;
+  }
+}
+
 export {
   cardReducer,
   userReducer,
@@ -247,4 +274,5 @@ export {
   stepReducer,
   cvsReducer,
   trackReducer,
+  compayReducer,
 };

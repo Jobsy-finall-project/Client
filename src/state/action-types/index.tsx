@@ -6,5 +6,6 @@ export enum ActionType {
   SORT_ATTRIBUTE = "sortAttribute",
   CREATE_STEP = "createStep",
   ADD_CV = "addCV",
-  DELETE_CV="deleteCv"
+  DELETE_CV = "deleteCv",
+  CREATE_COMPANY = "createCompany"
 }

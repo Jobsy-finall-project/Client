@@ -4,6 +4,7 @@ import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
 import { ActionType } from "../action-types/index";
 import Step from "../../models/forms/StepModel";
+import Company from "../../models/forms/Company";
 
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;
@@ -36,6 +37,11 @@ interface DeleteCV {
   payload: CV; // change when theres add cv
 }
 
+interface CreateCompany {
+  type: ActionType.CREATE_COMPANY;
+  payload: Company
+}
+
 export type Action =
   | CreateCardAction
   | DeleteCardAction
@@ -43,4 +49,5 @@ export type Action =
   | SortAttributeAction
   | CreateStepAction
   | AddCV
-  | DeleteCV;
+  | DeleteCV
+  | CreateCompany;
