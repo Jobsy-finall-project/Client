@@ -36,11 +36,11 @@ const SignupForm: React.FC = () => {
   const users = useSelector((state: State) => state.users);
 
   const [data, setData] = useState<SignUpFormModel>({
-    firstName:"",
-    lastName:"",
+    firstName: "",
+    lastName: "",
     userName: "",
     email: "",
-    password: ""
+    password: "",
   });
 
   const doSubmit = () => {
@@ -58,7 +58,7 @@ const SignupForm: React.FC = () => {
         lastName: "",
         userName: "",
         email: "",
-        password: ""
+        password: "",
       }}
       validationSchema={SignupSchema}
       onSubmit={(values) => {
@@ -74,7 +74,7 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
   ({ handleSubmit, handleChange, values, errors, touched }) => {
     return (
       <form onSubmit={handleSubmit} className="needs-validation">
-          <Input
+        <Input
           type="text"
           name="firstName"
           label="First Name"
@@ -84,7 +84,7 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
           errors={errors.firstName}
           touched={touched.firstName}
         />
-          <Input
+        <Input
           type="text"
           name="lastName"
           label="Last Name"
@@ -132,9 +132,12 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
           onChange={handleChange}
         />
         <Button
-          style="primary"
-          title="Create new account"
-          size="lg"
+          title="Create New Account"
+          color=""
+          height="50px"
+          width="170px"
+          top="32px"
+          left="100px"
           onClick={handleSubmit}
         />
       </form>

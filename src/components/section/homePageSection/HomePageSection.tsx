@@ -98,13 +98,12 @@ const HomePageSection: React.FC = () => {
                       <ListItemButton>
                       <KeyboardIcon/>
                         <ListItemText 
-                        primary={currTrack.position.name}
+                         primary={`${currTrack.companyName} - ${currTrack.position.name}`}
                         
                         primaryTypographyProps={positionTitle}
                         onClick={() => {
                         handleClick(currTrack);
                       }}/>
-             
                       </ListItemButton>
 
                     </ListItem>

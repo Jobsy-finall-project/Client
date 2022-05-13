@@ -7,7 +7,7 @@ import FunctionPage from "./pages/FunctionPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import CreateItem from "./pages/CreateItem";
-import CreateRecruitmentTrackPage from "./pages/CreateRecruitmentTrackPage";
+import CreateRecruitmentTrackPage from "./pages/createRecruitmentTrackPage/CreateRecruitmentTrackPage";
 import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import RecruitmentTrackPage from "./pages/RecruitmentTrackPage";
 import ApplyJob from "./pages/ApplyJob";

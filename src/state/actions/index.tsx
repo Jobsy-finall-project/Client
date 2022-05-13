@@ -1,10 +1,14 @@
 import Card from "../../models/Card";
 import User from "../../models/User";
-import CV from "../../models/CV"
+import CV from "../../models/CV";
 import SortAttribute from "../../models/SortAttribute";
 import { ActionType } from "../action-types/index";
 import Step from "../../models/forms/StepModel";
+
+import Track from "../../models/Track";
+
 import Company from "../../models/forms/Company";
+
 
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;
@@ -13,6 +17,15 @@ interface CreateCardAction {
 interface DeleteCardAction {
   type: ActionType.DELETE_CARD;
   payload: number;
+}
+
+interface CreateTrackAction {
+  type: ActionType.CREATE_TRACK;
+  payload: Track;
+}
+interface DeleteTrackAction {
+  type: ActionType.DELETE_TRACK;
+  payload: string;
 }
 interface CreateUserAction {
   type: ActionType.CREATE_USER;
@@ -55,5 +68,8 @@ export type Action =
   | CreateStepAction
   | AddCV
   | DeleteCV
+  | CreateTrackAction
+  | DeleteTrackAction;
   | CreateCompany
   | CreatePosition;
+

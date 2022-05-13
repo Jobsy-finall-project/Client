@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import * as Colors from "../../assets/Colors"
+import * as Colors from "../../assets/Colors";
 
 const ThreeCirclesStyled = styled.div`
   height: 270px;
-  background-color:${Colors.GRAY};
 
   & .container {
     position: relative;

@@ -23,9 +23,12 @@ const Section: React.FC<SectionProps> = (props) => {
           <SectionContent content={props.content} />
           <div className="btn-new-item">
             <Button
-              style="primary"
-              size="lg"
-              title="Add new item"
+              title="Create New Item"
+              color=""
+              height="50px"
+              width="170px"
+              top="32px"
+              left="100px"
               onClick={handleAddNewItemBtn}
             />
           </div>

@@ -5,7 +5,9 @@ import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
+
 import Company from "../../models/forms/Company";
+
 import Track from "../../models/Track";
 import Position from "../../models/forms/Position";
 import { store } from "../store";
@@ -109,9 +111,10 @@ const initialSteps: Step[] = [
 const initialRecTracks: Track[] = [
   {
     id: "1",
+    companyName: "Microsoft",
     position: {
       positionId: "1",
-      name: "Microsoft - Full Stack Developer",
+      name: "Full Stack Developer",
       description:
         "We are looking for an “all-around” backend engineer that will take a key role in building Slack-based products for Salesforce Marketing Cloud from scratch. We are on “day zero” - you will have the opportunity to design and develop a challenging large-scale system from scratch, as well as influence the culture and standards of a new engineering group. As a newcomer to the industry, you’ll get a chance to work with many technologies and receive mentorship from experienced engineers.",
     },
@@ -137,9 +140,10 @@ const initialRecTracks: Track[] = [
   },
   {
     id: "2",
+    companyName: "Rad hat",
     position: {
       positionId: "2",
-      name: "Rad hat - Devops",
+      name: "Devops",
       description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
         We are seeking for top-notch individuals who are passionate about secu`,
     },
@@ -296,6 +300,10 @@ const trackReducer = (
   action: Action
 ) => {
   switch (action.type) {
+    case ActionType.CREATE_TRACK:
+      return [...state, action.payload];
+    case ActionType.DELETE_TRACK:
+      return state.filter((track: Track) => track.id === action.payload);
     default:
       return state;
   }

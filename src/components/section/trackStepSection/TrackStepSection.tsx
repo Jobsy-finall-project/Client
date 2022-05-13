@@ -69,18 +69,25 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
                 value={newEmail}
                 onChange={handleAddEmailChange}
               />
+
               <Button
-                style="success"
-                size="lg"
                 title="+"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left="100px"
                 onClick={handleAddEmailClick}
               />
             </div>
           ) : null}
           <Button
-            style={addEmailInput ? "danger" : "primary"}
-            size="lg"
             title={addEmailInput ? "X" : "Add email"}
+            color={addEmailInput ? "danger" : "primary"}
+            height="50px"
+            width="170px"
+            top="32px"
+            left="100px"
             onClick={showEmailInput}
           />
           <h3>notes:</h3>
@@ -97,18 +104,25 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
                   value={newNote}
                   onChange={handleAddNoteChange}
                 />
+
                 <Button
-                  style="success"
-                  size="lg"
                   title="+"
+                  color="success"
+                  height="50px"
+                  width="170px"
+                  top="32px"
+                  left="100px"
                   onClick={handleAddNoteClick}
                 />
               </div>
             ) : null}
             <Button
-              style={addNoteInput ? "danger" : "primary"}
-              size="lg"
               title={addNoteInput ? "X" : "Add note"}
+              color={addNoteInput ? "danger" : "primary"}
+              height="50px"
+              width="170px"
+              top="32px"
+              left="100px"
               onClick={showNoteInput}
             />
           </div>

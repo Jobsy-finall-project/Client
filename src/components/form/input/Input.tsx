@@ -10,17 +10,18 @@ interface InputProps {
   onChange: (event: React.FormEvent) => void;
   errors: any;
   touched: any;
+  height?: string;
 }
 const Input: React.FC<InputProps> = (props) => {
   return (
-    <InputStyled>
-      <div className="col-12">
-        <label htmlFor={props.name} className="form-label">
+    <InputStyled height={props.height || "50px"}>
+      <div className="input component">
+        <label htmlFor={props.name} className="form-label label-input-filed">
           {props.label}
         </label>
         <input
           type={props.type}
-          className="form-control"
+          className="form-control input-filed"
           id={props.name}
           placeholder={props.placeholder}
           value={props.value}

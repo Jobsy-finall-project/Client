@@ -95,9 +95,12 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           <SectionContent content="Forget password?" />
         </div>
         <Button
-          style="primary"
           title="Login"
-          size="lg"
+          color=""
+          height="50px"
+          width="170px"
+          top="32px"
+          left="100px"
           onClick={handleSubmit}
         />
       </form>

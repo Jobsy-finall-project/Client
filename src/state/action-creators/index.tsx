@@ -6,9 +6,11 @@ import User from "../../models/User";
 import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
 import Step from "../../models/forms/StepModel";
+import Track from "../../models/Track";
 import Company from "../../models/forms/Company";
 import Position from "../../models/forms/Position";
 import { store } from "../store";
+
 
 
 export const addCv = (cv: CV) => {
@@ -47,6 +49,14 @@ export const deleteCard = (id: number) => {
   };
 };
 
+export const createTrack = (track: Track) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.CREATE_TRACK,
+      payload: track,
+    });
+  };
+};
 export const createUser = (user: User) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
