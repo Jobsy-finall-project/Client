@@ -15,6 +15,7 @@ import "./App.css";
 import CreateStepPage from "./pages/CreateStepPage";
 import CVs from "./pages/Cvs";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
+import CompanyListPage from "./pages/CompanyListPage";
 
 const App: React.FC = () => {
   return (
@@ -45,6 +46,7 @@ const App: React.FC = () => {
           <Route path="/create-step" element={<CreateStepPage />} />
           <Route path="/cvs" element={<CVs />} />
           <Route path="/create-new-company" element={<CreateCompanyPage />} />
+          <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>
