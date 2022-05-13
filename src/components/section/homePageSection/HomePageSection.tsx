@@ -6,6 +6,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import IconButton from "@mui/material/IconButton";
 import CommentIcon from "@mui/icons-material/Comment";
 import Grid from "@mui/material/Grid";
@@ -14,6 +16,12 @@ import { useSelector } from "react-redux";
 import { State } from "../../../state";
 import Track from "../../../models/Track";
 import { useNavigate } from "react-router-dom";
+import {HomePageSectionStyled, positionTitle} from "./HomePageSectionStyled";
+import Button from '@mui/material/Button';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import SearchIcon from '@mui/icons-material/Search';
+import InputAdornment from '@mui/material/InputAdornment';
+import KeyboardIcon from '@mui/icons-material/Keyboard';
 
 const HomePageSection: React.FC = () => {
   let navigation = useNavigate();
@@ -36,42 +44,72 @@ const HomePageSection: React.FC = () => {
     navigation("/recruitment-track-page", { state: track });
   };
 
+  const handleAddTrack = () =>{
+    navigation("/create-recruitment-track-page");
+  };
+
+
   return (
+  <HomePageSectionStyled>
     <div>
       <Grid container spacing={3} justifyContent="center" alignItems="center">
-        <Grid item xs={12}>
+      <Grid item container >
+        <h1 className="welcomeTitle"> Welcome back Username,</h1>
+      </Grid>
+
+        <Grid item container>
+        <h3 className="activePositionsTitle"> Active positions:</h3>
+
+        </Grid>
+        <Grid container item xs={12}>
+      
           <TextField
             id="outlined-basic"
             label="search position"
-            variant="outlined"
+            className="searchPosition"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment
+                 position="start"
+                 >
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
             onChange={handleSetSearch}
           />
+          
         </Grid>
-        <Grid item>
-          <List sx={{ width: "100%", maxWidth: 360 }}>
+        
+        <Grid item width={"50%"}>
+          <List>
             {(tracks as Array<Track>).map((currTrack: Track) => {
               return (
                 <div>
                   {currTrack.id.includes(search) ? (
+                    <>
                     <ListItem
-                      key={currTrack.position.name}
-                      onClick={() => {
-                        handleClick(currTrack);
-                      }}
+                      
+                      secondaryAction={
+                        <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite className="favoriteIcon"/>} />
+                     
+                      } 
                     >
-                      <ListItemButton role={undefined} dense>
-                        <ListItemIcon>
-                          <Checkbox
-                            edge="start"
-                            // checked={checked.indexOf(value) !== -1}
-                            tabIndex={-1}
-                            disableRipple
-                            // inputProps={{ 'aria-labelledby': labelId }}
-                          />
-                        </ListItemIcon>
-                        <ListItemText primary={currTrack.position.name} />
+                      <ListItemButton>
+                      <KeyboardIcon/>
+                        <ListItemText 
+                        primary={currTrack.position.name}
+                        
+                        primaryTypographyProps={positionTitle}
+                        onClick={() => {
+                        handleClick(currTrack);
+                      }}/>
+             
                       </ListItemButton>
+
                     </ListItem>
+                    
+                      </>
                   ) : (
                     <div></div>
                   )}
@@ -80,8 +118,26 @@ const HomePageSection: React.FC = () => {
             })}
           </List>
         </Grid>
+        
       </Grid>
+      <Grid container item >
+  
+        <Button 
+        className="addNewTrackButton"
+        variant="contained"
+        startIcon={<AddBoxIcon />}
+        onClick={() => {
+          handleAddTrack();
+        }}
+        >
+          new recruitment track
+          </Button>
+     
+          </Grid>
+
     </div>
+    </HomePageSectionStyled>
+
   );
 };
 
