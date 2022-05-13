@@ -34,14 +34,16 @@ const CreateCompany: React.FC = () => {
         console.log("step form submited!");
 
         const newCompany = companys.find(curr => curr.name === values.companyName);
+        const newPosition = { ...(values as Position) }
         if (!newCompany) {
             CreateCompany({
                 id: v4(),
                 name: values.companyName,
                 description: "",
-                positions: [{ ...(values as Position) }]
+                positions: [newPosition]
             })
         } else {
+            newCompany.positions.push(newPosition)
             AddPosition(newCompany);
         }
 

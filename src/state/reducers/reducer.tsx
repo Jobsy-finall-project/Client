@@ -264,11 +264,16 @@ const companyReducer = (
     case ActionType.CREATE_COMPANY:
       return [...state, action.payload];
     case ActionType.CREATE_POSITION:
+      console.log("adding position");
+
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex((curr) => curr.id === updatedCompany.id);
 
       if (oldCompany !== -1) {
-        state[oldCompany].positions = updatedCompany.positions
+        console.log("found old company", state[oldCompany]);
+
+        state[oldCompany].positions = updatedCompany.positions;
+        console.log("new state:", state);
         return state;
       } else {
         return [...state, updatedCompany]
