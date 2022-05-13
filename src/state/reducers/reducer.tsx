@@ -164,6 +164,7 @@ const initialRecTracks: Track[] = [
 
   {
     id: "3",
+    companyName: "Rapyd",
     position: {
       positionId: "3",
       name: "Rapyd - Junior Frontend Developer",
@@ -186,6 +187,7 @@ const initialRecTracks: Track[] = [
   },
   {
     id: "3",
+    companyName: "Monday",
     position: {
       positionId: "3",
       name: "Monday - Junior Backend Developer",
@@ -212,16 +214,17 @@ const initialCompanyState: Company[] = [
   {
     id: "1",
     name: "microsoft",
-    description: "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
+    description:
+      "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
     positions: [
       {
         positionId: "1",
         name: "Full stack developer",
-        description: "python djngo and angular full stack developer"
-      }
-    ]
-  }
-]
+        description: "python djngo and angular full stack developer",
+      },
+    ],
+  },
+];
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
   switch (action.type) {
@@ -320,7 +323,9 @@ const companyReducer = (
       console.log("adding position");
 
       const updatedCompany = action.payload;
-      const oldCompany = state.findIndex((curr) => curr.id === updatedCompany.id);
+      const oldCompany = state.findIndex(
+        (curr) => curr.id === updatedCompany.id
+      );
 
       if (oldCompany !== -1) {
         console.log("found old company", state[oldCompany]);
@@ -329,13 +334,13 @@ const companyReducer = (
         console.log("new state:", state);
         return state;
       } else {
-        return [...state, updatedCompany]
+        return [...state, updatedCompany];
       }
 
     default:
       return state;
   }
-}
+};
 
 export {
   cardReducer,
