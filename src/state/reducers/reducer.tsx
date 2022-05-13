@@ -167,7 +167,7 @@ const initialRecTracks: Track[] = [
     companyName: "Rapyd",
     position: {
       positionId: "3",
-      name: "Rapyd - Junior Frontend Developer",
+      name: "Junior Frontend Developer",
       description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
         We are seeking for top-notch individuals who are passionate about secu`,
     },
@@ -186,11 +186,11 @@ const initialRecTracks: Track[] = [
     cvFiles: [],
   },
   {
-    id: "3",
+    id: "4",
     companyName: "Monday",
     position: {
       positionId: "3",
-      name: "Monday - Junior Backend Developer",
+      name: "Junior Backend Developer",
       description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
         We are seeking for top-notch individuals who are passionate about secu`,
     },
