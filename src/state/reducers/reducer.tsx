@@ -155,6 +155,51 @@ const initialRecTracks: Track[] = [
     ],
     cvFiles: [],
   },
+
+  {
+    id: "3",
+    position: {
+      positionId: "3",
+      name: "Rapyd - Junior Frontend Developer",
+      description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
+        We are seeking for top-notch individuals who are passionate about secu`,
+    },
+    isActive: true,
+    isFavorite: true,
+    steps: [],
+    comments: ["i realy want this one"],
+    emails: [
+      `Dear hadar,
+    Congratulations on your offer from We are delighted to offer you the position of with an anticipated start date of .
+    As discussed over the phone, please find attached your detailed offer letter. If you choose to accept this offer, please sign, scan and email your letter to me at  by.
+    In the meantime, please don't hesitate to reach out to me, either through email or by calling me directly at if you should have any questions or concerns.
+    We look forward to hearing from you and hope you'll join our team!
+    Best regards,`,
+    ],
+    cvFiles: [],
+  },
+  {
+    id: "3",
+    position: {
+      positionId: "3",
+      name: "Monday - Junior Backend Developer",
+      description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
+        We are seeking for top-notch individuals who are passionate about secu`,
+    },
+    isActive: true,
+    isFavorite: true,
+    steps: [],
+    comments: ["i realy want this one"],
+    emails: [
+      `Dear hadar,
+    Congratulations on your offer from We are delighted to offer you the position of with an anticipated start date of .
+    As discussed over the phone, please find attached your detailed offer letter. If you choose to accept this offer, please sign, scan and email your letter to me at  by.
+    In the meantime, please don't hesitate to reach out to me, either through email or by calling me directly at if you should have any questions or concerns.
+    We look forward to hearing from you and hope you'll join our team!
+    Best regards,`,
+    ],
+    cvFiles: [],
+  },
 ];
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
