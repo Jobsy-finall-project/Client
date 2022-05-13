@@ -9,7 +9,6 @@ import Track from "../../models/Track";
 
 import Company from "../../models/forms/Company";
 
-
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;
   payload: Card;
@@ -52,12 +51,12 @@ interface DeleteCV {
 
 interface CreateCompany {
   type: ActionType.CREATE_COMPANY;
-  payload: Company
+  payload: Company;
 }
 
 interface CreatePosition {
   type: ActionType.CREATE_POSITION;
-  payload: Company
+  payload: Company;
 }
 
 export type Action =
@@ -69,7 +68,6 @@ export type Action =
   | AddCV
   | DeleteCV
   | CreateTrackAction
-  | DeleteTrackAction;
+  | DeleteTrackAction
   | CreateCompany
   | CreatePosition;
-
