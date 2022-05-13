@@ -32,7 +32,7 @@ const CreateCompany: React.FC = () => {
         console.log(newCompany);
 
         CreateCompany(newCompany);
-        navigate("/");
+        navigate("/companys");
     };
 
     return (

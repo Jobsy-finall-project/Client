@@ -254,7 +254,7 @@ const trackReducer = (
   }
 };
 
-const compayReducer = (
+const companyReducer = (
   state: Array<Company> = initialCompanyState,
   action: Action
 ) => {
@@ -274,5 +274,5 @@ export {
   stepReducer,
   cvsReducer,
   trackReducer,
-  compayReducer,
+  companyReducer,
 };

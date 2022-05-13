@@ -15,7 +15,7 @@ const CompanyListSection: React.FC = () => {
             <ul>
                 {
                     companys.map(currCompany => {
-                        return (<li>{currCompany.name}</li>)
+                        return (<li key={currCompany.id}>{currCompany.name}</li>)
                     })
                 }
             </ul>
