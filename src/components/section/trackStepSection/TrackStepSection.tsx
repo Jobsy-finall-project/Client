@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import TrackStepSectionStyled from "./TrackStepSectionStyled";
 import TitleSection from "../titleSection/TitleSection";
 import SectionContent from "../sectionContent/SectionContent";
-import Button from "../../common/button/Button";
+// import Button from "../../common/button/Button";
+import Button from '@mui/material/Button';
 import { useEffect } from "@storybook/addons";
 import Step from "../../../models/forms/StepModel";
+
 
 interface TrackStepSectionProps {
   step: Step;
@@ -69,27 +71,22 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
                 value={newEmail}
                 onChange={handleAddEmailChange}
               />
-
               <Button
-                title="+"
-                color=""
-                height="50px"
-                width="170px"
-                top="32px"
-                left="100px"
-                onClick={handleAddEmailClick}
-              />
+              variant="contained"
+              onClick={handleAddEmailClick}>
+                +
+              </Button>
+        
+                
+           
             </div>
           ) : null}
           <Button
-            title={addEmailInput ? "X" : "Add email"}
-            color={addEmailInput ? "danger" : "primary"}
-            height="50px"
-            width="170px"
-            top="32px"
-            left="100px"
-            onClick={showEmailInput}
-          />
+          variant="contained"
+          onClick={showEmailInput}
+          >
+             {addEmailInput ? "X" : "Add email"}
+             </Button>
           <h3>notes:</h3>
           <div>
             {notes.map((note) => (
@@ -104,27 +101,22 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
                   value={newNote}
                   onChange={handleAddNoteChange}
                 />
-
                 <Button
-                  title="+"
-                  color="success"
-                  height="50px"
-                  width="170px"
-                  top="32px"
-                  left="100px"
+                  variant="contained"
                   onClick={handleAddNoteClick}
-                />
+                  >
+                    +
+                  </Button>
+              
               </div>
             ) : null}
             <Button
-              title={addNoteInput ? "X" : "Add note"}
-              color={addNoteInput ? "danger" : "primary"}
-              height="50px"
-              width="170px"
-              top="32px"
-              left="100px"
-              onClick={showNoteInput}
-            />
+             variant="contained"
+             onClick={showNoteInput}
+             >
+             {addNoteInput ? "X" : "Add note"}
+             </Button>
+           
           </div>
         </div>
       </div>

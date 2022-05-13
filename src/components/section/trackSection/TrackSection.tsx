@@ -11,7 +11,6 @@ import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import FastfoodIcon from "@mui/icons-material/Fastfood";
 import LaptopMacIcon from "@mui/icons-material/LaptopMac";
 import HotelIcon from "@mui/icons-material/Hotel";
 import RepeatIcon from "@mui/icons-material/Repeat";
@@ -21,6 +20,8 @@ import Button from "../../common/button/Button";
 import Track from "../../../models/Track";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
+import TrackSectionStyled from "./TrackSectionStyled";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 
 interface TrackSectionProp {
   track: Track;
@@ -35,13 +36,16 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
 
   trackToShow.steps = steps;
   return (
+    <TrackSectionStyled>
     <div>
-      <Typography variant="h3">{trackToShow.position.name}</Typography>
-      <Typography variant="body1">
+      <Typography className="trackTitle" variant="h3">{trackToShow.position.name}</Typography>
+      <Typography className="trackDescription" variant="body1">
         {trackToShow.position.description}
       </Typography>
 
-      <Timeline position="alternate">
+      <Timeline 
+      position="alternate"
+      className="timeline">
         {trackToShow.steps?.map((step) => {
           return (
             <TimelineItem
@@ -53,19 +57,22 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                 sx={{ m: "auto 0" }}
                 align="right"
                 variant="body2"
-                color="text.secondary"
+                className="timelineDate"
               >
                 {step.date}
               </TimelineOppositeContent>
-              <TimelineSeparator>
+              <TimelineSeparator
+              className="timelineSeperator"
+              >
                 <TimelineConnector />
                 <TimelineDot>
-                  <FastfoodIcon />
+                  <AssignmentIcon />
                 </TimelineDot>
                 <TimelineConnector />
               </TimelineSeparator>
-              <TimelineContent sx={{ m: "auto 0" }}>
-                <Typography variant="h6" component="span">
+              <TimelineContent 
+              sx={{ m: "auto 0" }}>
+                <Typography className="timelineStep" variant="h6" component="span">
                   {step.title}
                 </Typography>
               </TimelineContent>
@@ -85,6 +92,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
         }}
       />
     </div>
+    </TrackSectionStyled>
   );
 };
 
