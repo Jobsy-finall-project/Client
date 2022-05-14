@@ -11,10 +11,16 @@ interface InputProps {
   errors: any;
   touched: any;
   height?: string;
+  width?: string;
+  marginTop?: string;
 }
 const Input: React.FC<InputProps> = (props) => {
   return (
-    <InputStyled height={props.height || "50px"}>
+    <InputStyled
+      height={props.height || "50px"}
+      width={props.width || "600px"}
+      marginTop={props.marginTop || "32px"}
+    >
       <div className="input component">
         <label htmlFor={props.name} className="form-label label-input-filed">
           {props.label}
