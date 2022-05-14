@@ -1,17 +1,45 @@
 import styled from "styled-components";
 
 const TrackStepSectionStyled = styled.div`
-  text-align: left;
-  margin-left: 20px;
-  margin-top: 30px;
+
+  & .container{
+    font-family: Gill Sans;
+  }
 
   & .stepTitle{
-    font-size: 4em;
-    color: black;
-    font-family: Gill Sans;
+    font-size: 2em;
+    color: black;    
     margin:auto;
     font-weight:bold;
+    margin-top:20px;
   }
+
+  & .stepDescription{ 
+    font-size: 2em;
+    color: black;
+    margin:auto;
+
+  }
+
+ & .myAccordion{
+   margin-top:15px;
+   margin:auto;
+   border-radius:30px;
+   text-align:center;
+ 
+ }
+
+ & .accordionContainer{
+  text-align:center;
+  font-size: 1em;
+  font-weight:bold;
+   margin:auto;
+   margin-top:10px;
+   border-radius:10px;
+   color: gray;
+   font-weight:bold;
+ }
+
 `;
 
 export default TrackStepSectionStyled;

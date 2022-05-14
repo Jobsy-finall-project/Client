@@ -92,7 +92,7 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           touched={touched.password}
         />
         <div className="forget-password">
-          <SectionContent content="Forget password?" />
+          <p>Forget password?</p>
         </div>
         <Button
           title="Login"

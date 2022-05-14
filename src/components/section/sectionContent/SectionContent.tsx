@@ -7,7 +7,7 @@ interface SectionContentProps {
 const SectionContent: React.FC<SectionContentProps> = (props) => {
   return (
     <SectionContentStyled>
-      <p className="col-md-8">{props.content}</p>
+      <p className="content">{props.content}</p>
     </SectionContentStyled>
   );
 };

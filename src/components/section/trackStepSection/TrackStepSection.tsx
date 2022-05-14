@@ -6,7 +6,11 @@ import SectionContent from "../sectionContent/SectionContent";
 import Button from '@mui/material/Button';
 import { useEffect } from "@storybook/addons";
 import Step from "../../../models/forms/StepModel";
-
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 interface TrackStepSectionProps {
   step: Step;
@@ -54,16 +58,30 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
 
   return (
     <TrackStepSectionStyled>
-      <div className="p-5 mb-4 bg-light rounded-3">
-        <div className="container-fluid py-5">
-          <TitleSection title={`${props.step.title} ${props.step.date}`} />
-          <SectionContent content={props.step.stepDetails} />
-          <h3>related emails:</h3>
-          <div>
-            {relatedEmails.map((email) => (
-              <li>{email}</li>
-            ))}
-          </div>
+      <div >
+        <div className="container" >
+          <h1 className="stepTitle">{`${props.step.title} ${props.step.date}`} </h1>
+          <p className="stepDescription">{props.step.stepDetails} </p>
+          <p >related emails:</p>
+          {relatedEmails? relatedEmails.map((email) => (
+      <Accordion className="accordionContainer">
+        <AccordionSummary 
+        className="myAccordion"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+       
+        >
+          <p >Email from hr</p>
+        </AccordionSummary>
+        <AccordionDetails>
+          <p>
+            {email}
+          </p>
+        </AccordionDetails>
+      </Accordion>
+        
+            )):null}
+       
           {addEmailInput ? (
             <div>
               <input
@@ -75,9 +93,7 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
               variant="contained"
               onClick={handleAddEmailClick}>
                 +
-              </Button>
-        
-                
+              </Button> 
            
             </div>
           ) : null}
@@ -89,11 +105,27 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
              </Button>
           <h3>notes:</h3>
           <div>
-            {notes.map((note) => (
-              <li>{note}</li>
-            ))}
+            {notes? notes.map((note) => (
+
+            <Accordion className="accordionContainer">
+        <AccordionSummary 
+         className="myAccordion"
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+     
+        >
+          <p>note title</p>
+        </AccordionSummary>
+        <AccordionDetails >
+          <p>
+            {note}
+          </p>
+        </AccordionDetails>
+      </Accordion>
+            )): null}
           </div>
-          <div className="btn-new-item">
+          <div >
+            
             {addNoteInput ? (
               <div>
                 <input

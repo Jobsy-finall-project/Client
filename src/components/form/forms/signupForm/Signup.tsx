@@ -135,7 +135,7 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
           title="Create New Account"
           color=""
           height="50px"
-          width="170px"
+          width="200px"
           top="32px"
           left="100px"
           onClick={handleSubmit}

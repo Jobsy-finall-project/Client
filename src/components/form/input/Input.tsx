@@ -22,7 +22,7 @@ const Input: React.FC<InputProps> = (props) => {
       marginTop={props.marginTop || "32px"}
     >
       <div className="input component">
-        <label htmlFor={props.name} className="form-label label-input-filed">
+        <label htmlFor={props.name} className="myLabel">
           {props.label}
         </label>
         <input
