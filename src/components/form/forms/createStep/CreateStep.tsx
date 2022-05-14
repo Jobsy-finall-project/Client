@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
-import { actionsCreators } from "../../../../state";
+import { actionsCreators, State } from "../../../../state";
 import * as Yup from "yup";
 import StepModel from "../../../../models/forms/StepModel";
 import CreateStepStyled from "./CreateStepStyled";
@@ -24,19 +24,21 @@ const CreateStep: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const tracks = useSelector((state: State) => state.tracks);
 
   const { createStep } = bindActionCreators(actionsCreators, dispatch);
 
   const doSubmit = (values: StepModel) => {
     console.log("step form submited!");
+    const applicationId = location.state as String;
     const newStep: StepModel = {
       ...values,
     };
-    newStep.applicationId = location.state as String;
 
-    console.log(newStep);
+    const trackToUpdate = tracks.find(curr => curr.id === applicationId)!!
+    trackToUpdate.steps.push(newStep)
 
-    createStep(newStep);
+    createStep(trackToUpdate);
     navigate("/");
   };
 
@@ -44,7 +46,6 @@ const CreateStep: React.FC = () => {
     <Formik<StepModel>
       initialValues={{
         id: v4(),
-        applicationId: "",
         title: "",
         stepDetails: "",
         date: new Date().toDateString(),

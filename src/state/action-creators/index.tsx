@@ -85,11 +85,11 @@ export const sortAttribute = (sortAttribute: SortAttribute) => {
 };
 
 
-export const createStep = (step: Step) => {
+export const createStep = (track: Track) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.CREATE_STEP,
-      payload: step
+      payload: track
     })
   }
 }
