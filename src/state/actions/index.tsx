@@ -37,7 +37,7 @@ interface SortAttributeAction {
 
 interface CreateStepAction {
   type: ActionType.CREATE_STEP;
-  payload: Step;
+  payload: Track;
 }
 interface AddCV {
   type: ActionType.ADD_CV;

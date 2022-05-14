@@ -30,11 +30,7 @@ interface TrackSectionProp {
 const TrackSection: React.FC<TrackSectionProp> = (props) => {
   let navigation = useNavigate();
   const trackToShow = props.track;
-  const steps = useSelector((state: State) => state.steps).filter(
-    (step) => step.applicationId === trackToShow.id
-  );
 
-  trackToShow.steps = steps;
   return (
     <TrackSectionStyled>
     <div>

@@ -5,7 +5,6 @@ import {
   loginUserReducer,
   sortAttributeReducer,
   cvsReducer,
-  stepReducer,
   trackReducer,
   companyReducer,
 } from "./reducer";
@@ -16,7 +15,6 @@ const reducers = combineReducers({
   loginUser: loginUserReducer,
   sortAttribute: sortAttributeReducer,
   cvs: cvsReducer,
-  steps: stepReducer,
   tracks: trackReducer,
   companys: companyReducer,
 });

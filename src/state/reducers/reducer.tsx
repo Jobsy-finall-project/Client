@@ -65,49 +65,6 @@ const initialCVsState: CV[] = [
   },
 ];
 
-const initialSteps: Step[] = [
-  {
-    id: "0",
-    applicationId: "2",
-    title: "Telephon interview",
-    stepDetails: "telephone interview",
-    date: "07/05/2022",
-    email: "c@c.c",
-  },
-  {
-    id: "1",
-    applicationId: "2",
-    title: "HR",
-    stepDetails: "Hr interview",
-    date: "11/05/2022",
-    email: "c@c.c",
-  },
-  {
-    id: "0",
-    applicationId: "1",
-    title: "Telephon interview",
-    stepDetails: "telephone interview",
-    date: "07/05/2022",
-    email: "c@c.c",
-  },
-  {
-    id: "1",
-    applicationId: "1",
-    title: "HR",
-    stepDetails: "Hr interview",
-    date: "11/05/2022",
-    email: "c@c.c",
-  },
-  {
-    id: "2",
-    applicationId: "1",
-    title: "Technical",
-    stepDetails: "CTO interview",
-    date: "13/05/2022",
-    email: "c@c.c",
-  },
-];
-
 const initialRecTracks: Track[] = [
   {
     id: "1",
@@ -120,7 +77,27 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [],
+    steps: [{
+      id: "0",
+      title: "Telephon interview",
+      stepDetails: "telephone interview",
+      date: "07/05/2022",
+      email: "c@c.c",
+    },
+    {
+      id: "1",
+      title: "HR",
+      stepDetails: "Hr interview",
+      date: "11/05/2022",
+      email: "c@c.c",
+    },
+    {
+      id: "2",
+      title: "Technical",
+      stepDetails: "CTO interview",
+      date: "13/05/2022",
+      email: "c@c.c",
+    },],
     comments: ["i realy want this one"],
     emails: [
       `Dear Felix Navarro,
@@ -149,7 +126,20 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [],
+    steps: [{
+      id: "0",
+      title: "Telephon interview",
+      stepDetails: "telephone interview",
+      date: "07/05/2022",
+      email: "c@c.c",
+    },
+    {
+      id: "1",
+      title: "HR",
+      stepDetails: "Hr interview",
+      date: "11/05/2022",
+      email: "c@c.c",
+    },],
     comments: ["i realy want this one"],
     emails: [
       `Dear hadar,
@@ -284,20 +274,6 @@ const sortAttributeReducer = (
   }
 };
 
-const stepReducer = (state: Array<Step> = initialSteps, action: Action) => {
-  switch (action.type) {
-    case ActionType.CREATE_STEP:
-      // const newStep = action.payload;
-      // return initialRecTracks
-      //   .find((track) => track.id === action.payload.applicationId)
-      //   ?.steps?.push(action.payload);
-
-      return [...state, action.payload];
-    default:
-      return state;
-  }
-};
-
 const trackReducer = (
   state: Array<Track> = initialRecTracks,
   action: Action
@@ -307,6 +283,15 @@ const trackReducer = (
       return [...state, action.payload];
     case ActionType.DELETE_TRACK:
       return state.filter((track: Track) => track.id === action.payload);
+    case ActionType.CREATE_STEP:
+      const updatedTrack = action.payload;
+      const oldTrack = state.findIndex(curr => curr.id === updatedTrack.id);
+      if (oldTrack !== -1) {
+        state[oldTrack].steps = updatedTrack.steps
+        return state
+      } else {
+        return [...state, updatedTrack]
+      }
     default:
       return state;
   }
@@ -347,7 +332,6 @@ export {
   userReducer,
   loginUserReducer,
   sortAttributeReducer,
-  stepReducer,
   cvsReducer,
   trackReducer,
   companyReducer,
