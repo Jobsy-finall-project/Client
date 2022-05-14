@@ -2,14 +2,16 @@ import styled from "styled-components";
 import * as Colors from "../../../assets/Colors";
 interface InputStyledProps {
   height: string;
+  width: string;
+  marginTop: string;
 }
 const InputStyled = styled.div<InputStyledProps>`
   text-align: left;
-  margin-top: 32px;
+  margin-top: ${(props) => props.marginTop};
   margin-left: 100px;
 
   & .input-filed {
-    width: 600px;
+    width: ${(props) => props.width};
     height: ${(props) => props.height};
   }
   & .errors {

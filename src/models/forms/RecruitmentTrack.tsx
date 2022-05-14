@@ -3,4 +3,5 @@ export default interface RecruitmentTrack {
   positionName: string;
   positionCode: string;
   description: string;
+  comments: string[];
 }
