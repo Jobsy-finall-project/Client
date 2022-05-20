@@ -40,6 +40,32 @@ const TrackStepSectionStyled = styled.div`
    font-weight:bold;
  }
 
+ & .notesContainer{
+   margin-top:20px;
+ }
+
+ & .addEmails{
+  margin:auto;
+}
+
+& .addEmailBtn{
+  margin-top:10px;
+  width:180px;
+}
+
+& .addEmailInput{
+  margin-top:30px;
+  width:180px;
+  margin-buttom:10px;
+  margin:auto;
+
+}
+
+& .addBtn{
+  margin-top:30px;
+  margin:auto;
+}
+
 `;
 
 export default TrackStepSectionStyled;

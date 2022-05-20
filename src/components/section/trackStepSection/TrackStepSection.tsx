@@ -11,31 +11,30 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { ListItemIcon } from "@mui/material";
+import ButtonMui from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ListItemButton from "@mui/material/ListItemButton";
+import Checkbox from "@mui/material/Checkbox";
+import ListSection from "../listSection/ListSection";
 
 interface TrackStepSectionProps {
   step: Step;
 }
+
+
 const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
-  const [notes, setNotes] = useState([props.step.notes]);
-  const [newNote, setNewNote] = useState("");
-  const [addNoteInput, setAddNoteInput] = React.useState(false);
 
   const [relatedEmails, setRelatedEmails] = useState([
     props.step.relatedEmails,
   ]);
+
   const [newEmail, setNewEmail] = useState("");
   const [addEmailInput, setAddEmailInput] = useState(false);
 
-  function handleAddNoteChange(event: any) {
-    setNewNote(event.target.value);
-  }
-
-  function handleAddNoteClick() {
-    if (newNote !== "") {
-      setNotes([...notes, newNote] as any);
-    }
-    setNewNote("");
-  }
 
   function handleAddEmailChange(event: any) {
     setNewEmail(event.target.value);
@@ -46,15 +45,14 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
       setRelatedEmails([...relatedEmails, newEmail] as any);
     }
     setNewEmail("");
+    setAddEmailInput(!addEmailInput);
   }
 
-  function showNoteInput() {
-    setAddNoteInput(!addNoteInput);
-  }
 
   function showEmailInput() {
     setAddEmailInput(!addEmailInput);
   }
+
 
   return (
     <TrackStepSectionStyled>
@@ -81,76 +79,36 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
       </Accordion>
         
             )):null}
-       
-          {addEmailInput ? (
-            <div>
-              <input
-                type="text"
-                value={newEmail}
-                onChange={handleAddEmailChange}
-              />
-              <Button
-              variant="contained"
-              onClick={handleAddEmailClick}>
-                +
-              </Button> 
-           
-            </div>
-          ) : null}
-          <Button
+            <div className="addEmails">
+            <Button
+            className="addEmailBtn"
           variant="contained"
           onClick={showEmailInput}
           >
-             {addEmailInput ? "X" : "Add email"}
+            Add email
              </Button>
-          <h3>notes:</h3>
-          <div>
-            {notes? notes.map((note) => (
-
-            <Accordion className="accordionContainer">
-        <AccordionSummary 
-         className="myAccordion"
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-     
-        >
-          <p>note title</p>
-        </AccordionSummary>
-        <AccordionDetails >
-          <p>
-            {note}
-          </p>
-        </AccordionDetails>
-      </Accordion>
-            )): null}
+       
+          {addEmailInput ? (
+            <div className="addEmailInput">
+            <input
+              type="text"
+              value={newEmail}
+              onChange={handleAddEmailChange}
+            />
+            <ButtonMui className="addBtn"
+            variant="contained"
+            onClick={handleAddEmailClick}>
+              +
+            </ButtonMui> 
+         
           </div>
-          <div >
-            
-            {addNoteInput ? (
-              <div>
-                <input
-                  type="text"
-                  value={newNote}
-                  onChange={handleAddNoteChange}
-                />
-                <Button
-                  variant="contained"
-                  onClick={handleAddNoteClick}
-                  >
-                    +
-                  </Button>
-              
-              </div>
-            ) : null}
-            <Button
-             variant="contained"
-             onClick={showNoteInput}
-             >
-             {addNoteInput ? "X" : "Add note"}
-             </Button>
-           
+          ) : null}
           </div>
+          
         </div>
+      </div>
+      <div className="notesContainer">
+      <ListSection title="notes" content={props.step.notes as string[]} addBtnText="add note" />
       </div>
     </TrackStepSectionStyled>
   );

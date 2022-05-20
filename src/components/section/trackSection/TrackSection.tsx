@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Position from "../../../models/forms/Position";
 import StepModel from "../../../models/forms/StepModel";
 import { useNavigate } from "react-router-dom";
+import ListItemButton from "@mui/material/ListItemButton";
+import Checkbox from "@mui/material/Checkbox";
 
 import Box from "@mui/material/Box";
 import Timeline from "@mui/lab/Timeline";
@@ -27,6 +29,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { ListItemIcon } from "@mui/material";
+import ButtonMui from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import ListSection from "../listSection/ListSection";
 
 interface TrackSectionProp {
   track: Track;
@@ -35,27 +40,15 @@ interface TrackSectionProp {
 const TrackSection: React.FC<TrackSectionProp> = (props) => {
   let navigation = useNavigate();
   const trackToShow = props.track;
-
+  
   return (
     <TrackSectionStyled>
-      <div>
+      <div className="container">
         <Typography className="trackTitle" variant="h3">{trackToShow.position.name}</Typography>
         <Typography className="trackDescription" variant="body1">
           {trackToShow.position.description}
         </Typography>
-        <Box sx={{ width: '100%', bgcolor: 'background.paper', marginTop: "32px" }}>
-          <Typography className="commentTitle" variant="h4" align="left" marginLeft="100px" >Comments:</Typography>
-          <List sx={{ marginLeft: "100px" }}>
-            {trackToShow.comments?.map(currComment => {
-              return (
-                <ListItem >
-                  <ListItemIcon><FiberManualRecordIcon /></ListItemIcon>
-                  <ListItemText primary={currComment} primaryTypographyProps={{ fontSize: '150%' }} />
-                </ListItem>
-              )
-            })}
-          </List>
-        </Box>
+       
         <Timeline
           position="alternate"
           className="timeline">
@@ -103,8 +96,11 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
           onClick={() => {
             navigation("/create-step", { state: trackToShow.id });
           }}
+     
         />
+   
       </div>
+      <ListSection title="comments" content={props.track.comments as string[]} addBtnText="add comment"/>
     </TrackSectionStyled>
   );
 };
