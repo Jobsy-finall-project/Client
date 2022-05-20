@@ -18,6 +18,8 @@ import CreateCompanyPage from "./pages/CreateCompanyPage";
 import CompanyListPage from "./pages/CompanyListPage";
 import CreatePositionPage from "./pages/CreatePostionPage";
 import PositionsListPage from "./pages/PositionsListPage";
+import PositionPage from "./pages/PositionPage";
+import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 
 const App: React.FC = () => {
   return (
@@ -33,10 +35,7 @@ const App: React.FC = () => {
             path="/create-recruitment-track-page"
             element={<CreateRecruitmentTrackPage />}
           />
-          <Route
-            path="/apply-job"
-            element={<ApplyJob />}
-          />
+          <Route path="/apply-job" element={<ApplyJob />} />
           <Route
             path="/recruitment-track-step-page"
             element={<RecruitmentTracksStepPage />}
@@ -51,6 +50,11 @@ const App: React.FC = () => {
           <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/create-position" element={<CreatePositionPage />} />
           <Route path="/positions" element={<PositionsListPage />} />
+          <Route path="/position" element={<PositionPage />} />
+          <Route
+            path="/add-step-template"
+            element={<AddStepToTemplatePage />}
+          />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>

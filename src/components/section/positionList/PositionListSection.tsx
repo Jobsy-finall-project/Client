@@ -31,13 +31,9 @@ import { loginUser } from "../../../state/action-creators";
 const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
   const currUser = useSelector((state: State) => state.loginUser);
-  let positions = useSelector((state: State) => state.companys).find(
+  const positions = useSelector((state: State) => state.companys).find(
     (curr) => curr.name === currUser.companyName
-  )?.positions;
-
-  if (!positions) {
-    positions = [];
-  }
+  )?.positions ?? [];
 
   const [search, setSearchBar] = useState("");
 
@@ -47,7 +43,7 @@ const PositionListSection: React.FC = () => {
   };
 
   const handleClick = (position: Position) => {
-    navigation("/recruitment-track-page", { state: position });
+    navigation("/position", { state: position.positionId });
   };
 
   const handleAddPosition = () => {

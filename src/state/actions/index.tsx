@@ -8,6 +8,7 @@ import Step from "../../models/forms/StepModel";
 import Track from "../../models/Track";
 
 import Company from "../../models/forms/Company";
+import { AddStepToTemplate } from "../action-creators";
 
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;
@@ -59,6 +60,11 @@ interface CreatePosition {
   payload: Company;
 }
 
+interface AddStepToTemplate {
+  type: ActionType.ADD_STEP_TO_TEMPLATE;
+  payload: Company;
+}
+
 export type Action =
   | CreateCardAction
   | DeleteCardAction
@@ -70,4 +76,5 @@ export type Action =
   | CreateTrackAction
   | DeleteTrackAction
   | CreateCompany
-  | CreatePosition;
+  | CreatePosition
+  | AddStepToTemplate;

@@ -111,3 +111,12 @@ export const AddPosition = (company: Company) => {
     })
   }
 }
+
+export const AddStepToTemplate = (company:Company) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.ADD_STEP_TO_TEMPLATE,
+      payload: company
+    })
+  }
+}
