@@ -30,13 +30,23 @@ const initialUserState: User[] = [
     role: "Admin",
   },
   {
-    id: 0,
+    id: 1,
     firstName: "Emily",
     lastName: "Zborovsky",
     userName: "Emilyz",
     email: "emilyz@gmail.com",
     password: "123",
     role: "Client",
+  },
+  {
+    id: 2,
+    firstName: "yohai",
+    lastName: "Knaani",
+    userName: "yohai109",
+    email: "yohai109@gmail.com",
+    password: "123",
+    role: "HR",
+    companyName:"IDF"
   },
 ];
 
@@ -48,6 +58,7 @@ const initialLoginUserState: User = {
   email: "maya@gmail.com",
   password: "123",
   role: "Admin",
+  companyName:"microsoft"
 };
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };

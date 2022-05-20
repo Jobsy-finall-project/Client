@@ -16,17 +16,28 @@ import { useSelector } from "react-redux";
 import { State } from "../../../state";
 import Track from "../../../models/Track";
 import { useNavigate } from "react-router-dom";
-import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
+import {
+  PageListSectionStyled,
+  positionTitle,
+} from "./PositionListSectionStyled";
 import Button from "@mui/material/Button";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
+import Position from "../../../models/forms/Position";
+import { loginUser } from "../../../state/action-creators";
 
-const HomePageSection: React.FC = () => {
+const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
-  const tracks = useSelector((state: State) => state.tracks);
-  console.log(tracks);
+  const currUser = useSelector((state: State) => state.loginUser);
+  let positions = useSelector((state: State) => state.companys).find(
+    (curr) => curr.name === currUser.companyName
+  )?.positions;
+
+  if (!positions) {
+    positions = [];
+  }
 
   const [search, setSearchBar] = useState("");
 
@@ -35,29 +46,28 @@ const HomePageSection: React.FC = () => {
     setSearchBar(title);
   };
 
-  const handleClick = (track: Track) => {
-    navigation("/recruitment-track-page", { state: track });
+  const handleClick = (position: Position) => {
+    navigation("/recruitment-track-page", { state: position });
   };
 
-  const handleAddTrack = () => {
-    navigation("/create-recruitment-track-page");
+  const handleAddPosition = () => {
+    navigation("/create-position");
   };
 
-  const searchFunction = (track: Track, queary: string) => {
-    const searchTerm = queary.toLowerCase()
+  const searchFunction = (position: Position, query: string) => {
+    const searchTerm = query.toLowerCase();
     return (
-      track.companyName.toLowerCase().includes(searchTerm) ||
-      track.position.name.toLowerCase().includes(searchTerm) ||
-      track.position.description.toLowerCase().includes(searchTerm)
+      position.name.toLowerCase().includes(searchTerm) ||
+      position.description.toLowerCase().includes(searchTerm)
     );
   };
 
   return (
-    <HomePageSectionStyled>
+    <PageListSectionStyled>
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
           <Grid item container>
-            <h1 className="welcomeTitle"> Welcome back Username,</h1>
+            <h1 className="welcomeTitle"> Welcome back {currUser.firstName}!</h1>
           </Grid>
 
           <Grid item container>
@@ -81,10 +91,10 @@ const HomePageSection: React.FC = () => {
 
           <Grid item width={"50%"}>
             <List>
-              {(tracks as Array<Track>).map((currTrack: Track) => {
+              {(positions as Array<Position>).map((currPosition: Position) => {
                 return (
                   <div>
-                    {searchFunction(currTrack, search) ? (
+                    {searchFunction(currPosition, search) ? (
                       <>
                         <ListItem
                           secondaryAction={
@@ -99,10 +109,10 @@ const HomePageSection: React.FC = () => {
                           <ListItemButton>
                             <KeyboardIcon />
                             <ListItemText
-                              primary={`${currTrack.companyName} - ${currTrack.position.name}`}
+                              primary={`${currPosition.name}`}
                               primaryTypographyProps={positionTitle}
                               onClick={() => {
-                                handleClick(currTrack);
+                                handleClick(currPosition);
                               }}
                             />
                           </ListItemButton>
@@ -123,15 +133,15 @@ const HomePageSection: React.FC = () => {
             variant="contained"
             startIcon={<AddBoxIcon />}
             onClick={() => {
-              handleAddTrack();
+              handleAddPosition();
             }}
           >
-            new recruitment track
+            new position
           </Button>
         </Grid>
       </div>
-    </HomePageSectionStyled>
+    </PageListSectionStyled>
   );
 };
 
-export default HomePageSection;
+export default PositionListSection;
