@@ -1,5 +1,5 @@
 import React from "react";
-import PositionsListSection from "../components/section/PositionsListSection/PositionsListSection";
+import PositionsListSection from "../components/section/positionList/PositionListSection";
 
 const PositionsListPage = () => {
     return (

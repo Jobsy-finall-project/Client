@@ -17,6 +17,7 @@ import CVs from "./pages/Cvs";
 import CreateCompanyPage from "./pages/CreateCompanyPage";
 import CompanyListPage from "./pages/CompanyListPage";
 import CreatePositionPage from "./pages/CreatePostionPage";
+import PositionsListPage from "./pages/PositionsListPage";
 
 const App: React.FC = () => {
   return (
@@ -49,6 +50,7 @@ const App: React.FC = () => {
           <Route path="/create-new-company" element={<CreateCompanyPage />} />
           <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/create-position" element={<CreatePositionPage />} />
+          <Route path="/positions" element={<PositionsListPage />} />
           <Route path="/" element={<HomePage />} />
         </Routes>
       </Router>

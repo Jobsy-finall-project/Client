@@ -6,4 +6,5 @@ export default interface UserModel {
   email: string;
   password: string;
   role: string;
+  companyName?: string
 }
