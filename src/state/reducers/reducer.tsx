@@ -4,13 +4,10 @@ import CV from "../../models/CV";
 import { Action } from "../actions/index";
 import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
-import Step from "../../models/forms/StepModel";
 
 import Company from "../../models/forms/Company";
 
 import Track from "../../models/Track";
-import Position from "../../models/forms/Position";
-import { store } from "../store";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -46,7 +43,7 @@ const initialUserState: User[] = [
     email: "yohai109@gmail.com",
     password: "123",
     role: "HR",
-    companyName:"IDF"
+    companyName: "IDF",
   },
 ];
 
@@ -58,7 +55,7 @@ const initialLoginUserState: User = {
   email: "maya@gmail.com",
   password: "123",
   role: "Admin",
-  companyName:"microsoft"
+  companyName: "microsoft",
 };
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
@@ -88,27 +85,29 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [{
-      id: "0",
-      title: "Telephon interview",
-      stepDetails: "telephone interview",
-      date: "07/05/2022",
-      email: "c@c.c",
-    },
-    {
-      id: "1",
-      title: "HR",
-      stepDetails: "Hr interview",
-      date: "11/05/2022",
-      email: "c@c.c",
-    },
-    {
-      id: "2",
-      title: "Technical",
-      stepDetails: "CTO interview",
-      date: "13/05/2022",
-      email: "c@c.c",
-    },],
+    steps: [
+      {
+        id: "0",
+        title: "Telephon interview",
+        stepDetails: "telephone interview",
+        date: "07/05/2022",
+        email: "c@c.c",
+      },
+      {
+        id: "1",
+        title: "HR",
+        stepDetails: "Hr interview",
+        date: "11/05/2022",
+        email: "c@c.c",
+      },
+      {
+        id: "2",
+        title: "Technical",
+        stepDetails: "CTO interview",
+        date: "13/05/2022",
+        email: "c@c.c",
+      },
+    ],
     comments: ["i realy want this one"],
     emails: [
       `Dear Felix Navarro,
@@ -137,20 +136,22 @@ const initialRecTracks: Track[] = [
     },
     isActive: true,
     isFavorite: true,
-    steps: [{
-      id: "0",
-      title: "Telephon interview",
-      stepDetails: "telephone interview",
-      date: "07/05/2022",
-      email: "c@c.c",
-    },
-    {
-      id: "1",
-      title: "HR",
-      stepDetails: "Hr interview",
-      date: "11/05/2022",
-      email: "c@c.c",
-    },],
+    steps: [
+      {
+        id: "0",
+        title: "Telephon interview",
+        stepDetails: "telephone interview",
+        date: "07/05/2022",
+        email: "c@c.c",
+      },
+      {
+        id: "1",
+        title: "HR",
+        stepDetails: "Hr interview",
+        date: "11/05/2022",
+        email: "c@c.c",
+      },
+    ],
     comments: ["i realy want this one"],
     emails: [
       `Dear hadar,
@@ -222,6 +223,18 @@ const initialCompanyState: Company[] = [
         positionId: "1",
         name: "Full stack developer",
         description: "python djngo and angular full stack developer",
+        template: [
+          {
+            id: "0",
+            title: "Telephon interview",
+            stepDetails: "telephone interview",
+          },
+          {
+            id: "1",
+            title: "HR",
+            stepDetails: "Hr interview",
+          },
+        ],
       },
     ],
   },
@@ -296,12 +309,12 @@ const trackReducer = (
       return state.filter((track: Track) => track.id === action.payload);
     case ActionType.CREATE_STEP:
       const updatedTrack = action.payload;
-      const oldTrack = state.findIndex(curr => curr.id === updatedTrack.id);
+      const oldTrack = state.findIndex((curr) => curr.id === updatedTrack.id);
       if (oldTrack !== -1) {
-        state[oldTrack].steps = updatedTrack.steps
-        return state
+        state[oldTrack].steps = updatedTrack.steps;
+        return state;
       } else {
-        return [...state, updatedTrack]
+        return [...state, updatedTrack];
       }
     default:
       return state;
@@ -332,7 +345,46 @@ const companyReducer = (
       } else {
         return [...state, updatedCompany];
       }
+    case ActionType.ADD_STEP_TO_TEMPLATE:
+      const companyToUpdate = action.payload;
+      const positionToUpdate = companyToUpdate.positions[0];
+      const newStep = positionToUpdate.template!!.at(0)!!;
+      console.log(companyToUpdate);
+      console.log(positionToUpdate);
+      console.log(newStep);
 
+      const companyIndex = state.findIndex(
+        (curr) => curr.id === companyToUpdate.id
+      );
+
+      console.log(companyIndex);
+      if (companyIndex !== -1) {
+        const positionIndex = state[companyIndex].positions.findIndex(
+          (curr) => curr.positionId === positionToUpdate.positionId
+        );
+        console.log(positionIndex);
+        if (positionIndex !== -1) {
+          const template =
+            state[companyIndex].positions[positionIndex].template;
+
+          console.log(template);
+
+          if (template) {
+            state[companyIndex].positions[positionIndex].template!!.push(
+              newStep
+            );
+          } else {
+            state[companyIndex].positions[positionIndex].template = [newStep];
+          }
+        } else {
+          state[companyIndex].positions.push(positionToUpdate);
+        }
+        console.log(state);
+        
+        return state;
+      } else {
+        return [...state, companyToUpdate];
+      }
     default:
       return state;
   }

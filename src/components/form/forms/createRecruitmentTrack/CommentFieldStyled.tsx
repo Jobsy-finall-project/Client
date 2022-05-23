@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const CommentField = styled.div`
-    .deleteBtn{
+    .deleteBtn {
         margin-top: 20%;
     }
     

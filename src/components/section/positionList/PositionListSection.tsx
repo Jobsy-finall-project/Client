@@ -1,43 +1,34 @@
-import React, { useState } from "react";
-import { ChangeEvent } from "react";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import Favorite from "@mui/icons-material/Favorite";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
+import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Grid from "@mui/material/Grid";
+import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
-import CommentIcon from "@mui/icons-material/Comment";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
+import React, { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
-import { State } from "../../../state";
-import Track from "../../../models/Track";
 import { useNavigate } from "react-router-dom";
+import Position from "../../../models/forms/Position";
+import { State } from "../../../state";
 import {
   PageListSectionStyled,
   positionTitle,
 } from "./PositionListSectionStyled";
-import Button from "@mui/material/Button";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
-import KeyboardIcon from "@mui/icons-material/Keyboard";
-import Position from "../../../models/forms/Position";
-import { loginUser } from "../../../state/action-creators";
 
 const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
   const currUser = useSelector((state: State) => state.loginUser);
-  let positions = useSelector((state: State) => state.companys).find(
-    (curr) => curr.name === currUser.companyName
-  )?.positions;
-
-  if (!positions) {
-    positions = [];
-  }
+  const positions =
+    useSelector((state: State) => state.companys).find(
+      (curr) => curr.name === currUser.companyName
+    )?.positions ?? [];
 
   const [search, setSearchBar] = useState("");
 
@@ -47,7 +38,7 @@ const PositionListSection: React.FC = () => {
   };
 
   const handleClick = (position: Position) => {
-    navigation("/recruitment-track-page", { state: position });
+    navigation("/position", { state: position.positionId });
   };
 
   const handleAddPosition = () => {
@@ -67,7 +58,10 @@ const PositionListSection: React.FC = () => {
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
           <Grid item container>
-            <h1 className="welcomeTitle"> Welcome back {currUser.firstName}!</h1>
+            <h1 className="welcomeTitle">
+              {" "}
+              Welcome back {currUser.firstName}!
+            </h1>
           </Grid>
 
           <Grid item container>
