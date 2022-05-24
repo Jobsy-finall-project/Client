@@ -12,6 +12,9 @@ import Button from "../../../common/button/Button";
 import { v4 } from "uuid";
 import Company from "../../../../models/forms/Company";
 import { MenuItem, Select } from "@mui/material";
+import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
@@ -54,7 +57,7 @@ const CreateCompany: React.FC = () => {
 
     console.log(newCompany);
 
-    navigate("/companys");
+    navigate("/positions");
   };
 
   return (
@@ -76,14 +79,20 @@ const CreateCompany: React.FC = () => {
 };
 
 const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
+  
   handleSubmit,
   handleChange,
   values,
   errors,
   touched,
 }) => {
+
+  const tags=["java","type script","python", "junior","expert", "backend","frontend","node.js","css","react","mongoDB","SQL"];
+  const fixedOptions = [tags[0]];
   return (
     <CreatePositionStyled>
+      <div className="container">
+      <h1>Create Position</h1>
       <form onSubmit={handleSubmit} className="needs-validation">
         <Input
           name="name"
@@ -115,6 +124,27 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           touched={touched.description}
           type="text"
         />
+        <div className="">
+        <Autocomplete
+     multiple
+     options={tags.map((option) => option)}
+    style={{ marginTop:"30px"}}
+     renderTags={(value: readonly string[], getTagProps) =>
+       value.map((option: string, index: number) => (
+         <Chip variant="filled" style={{marginTop:"20px", fontSize:"1.2em"}} color="primary" label={option}  {...getTagProps({ index })} />
+       ))
+     }
+     
+     renderInput={(params) => (
+       <TextField 
+         {...params}
+         variant="filled"
+         label="requires"
+         placeholder="choose position requires"
+       />
+     )}
+   />
+   </div>
         <Button
           title="Save"
           color=""
@@ -125,6 +155,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           onClick={handleSubmit}
         />
       </form>
+      </div>
     </CreatePositionStyled>
   );
 };
