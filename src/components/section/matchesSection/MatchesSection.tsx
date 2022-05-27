@@ -19,6 +19,9 @@ import { State } from "../../../state";
 import { MatchesSectionStyled } from "./MatchesSectionStyled";
 import match from "../../../images/match.jpeg"
 import Track from "../../../models/Track";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import Grid from "@mui/material/Grid";
 
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
@@ -48,56 +51,59 @@ const MatchesSection: React.FC = () => {
 
   return (
     <MatchesSectionStyled>
-        {tracks.forEach((track: Track) =>{
-            <Card sx={{ maxWidth: 345 }}>
-            <CardHeader
-              // action={
-              //   <IconButton aria-label="settings">
-              //     <MoreVertIcon />
-              //   </IconButton>
-              // }
-              title={track.position.name}
-              subheader={track.companyName}
-            />
-            <CardMedia
-              component="img"
-              height="194"
-              image={match}
-              alt="match"
-            />
-            {/* <CardContent>
-              <Typography variant="body2" color="text.secondary">
-                  {track.position.description}
-              </Typography>
-            </CardContent> */}
-            <CardActions disableSpacing>
-              <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-              </IconButton>
-              <IconButton aria-label="share">
-                <ShareIcon />
-              </IconButton>
-              <ExpandMore
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandMoreIcon />
-              </ExpandMore>
-            </CardActions>
-            <Collapse in={expanded} timeout="auto" unmountOnExit>
-              <CardContent>
-                <Typography paragraph>Description:</Typography>
-                <Typography paragraph>
-                  {track.position.description}
-                </Typography>
-              </CardContent>
-            </Collapse>
-          </Card>
+        <Grid container spacing={3} justifyContent="center" alignItems="center">
+        <Grid item >
+        <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' ,alignItems: 'center', justifyContent: "center" }}>
+        {(tracks as Array<Track>).map((track: Track) => {
+            return(
+                <ListItem>
+                <Card sx={{ maxWidth: 345 }}>
+                        <CardHeader
+                          title={track.position.name}
+                          subheader={track.companyName}
+                        />
+                        <CardMedia
+                          component="img"
+                          height="194"
+                          image={match}
+                          alt="match"
+                        />
+                        {/* <CardContent>
+                          <Typography variant="body2" color="text.secondary">
+                                description
+                          </Typography>
+                        </CardContent> */}
+                        <CardActions disableSpacing>
+                          <IconButton aria-label="add to favorites">
+                            <FavoriteIcon />
+                          </IconButton>
+                          <IconButton aria-label="share">
+                            <ShareIcon />
+                          </IconButton>
+                          <ExpandMore
+                            expand={expanded}
+                            onClick={handleExpandClick}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                          >
+                            <ExpandMoreIcon />
+                          </ExpandMore>
+                        </CardActions>
+                        <Collapse in={expanded} timeout="auto" unmountOnExit>
+                          <CardContent>
+                            <Typography paragraph>Description:</Typography>
+                            <Typography paragraph>
+                              {track.position.description}
+                            </Typography>
+                          </CardContent>
+                        </Collapse>
+                      </Card>
+                      </ListItem>
+            );
         })}
-    {tracks?.map((track) => {
-    })}
+        </List>
+        </Grid>
+        </Grid>
     </MatchesSectionStyled>
   );
 }
