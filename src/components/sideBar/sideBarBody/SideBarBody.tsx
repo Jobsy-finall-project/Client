@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import Nav from "react-bootstrap/Nav";
 import SideBarLink from "./sideBarLink/SideBarLink";
 
+
+
 const SideBarBody: React.FC = () => {
+
   return (
     <Offcanvas.Body>
       <Nav className="justify-content-end flex-grow-1 pe-3">
@@ -27,6 +30,8 @@ const SideBarBody: React.FC = () => {
         <SideBarLink title="Create new company" to="/create-new-company" />
         <SideBarLink title="Companys" to="/companys" />
         <SideBarLink title="create New Position" to="/create-position" />
+        <SideBarLink title="profile" to="/profile" />
+        <SideBarLink title="It's a Match" to="/matches"/>
       </Nav>
     </Offcanvas.Body>
   );
