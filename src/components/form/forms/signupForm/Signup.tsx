@@ -11,6 +11,8 @@ import Button from "../../../common/button/Button";
 import SignUpFormModel from "../../../../models/forms/Signup";
 import User from "../../../../models/User";
 import UploadImage from "../../uploadImg/UploadImage";
+import { register } from "../../../../services/userService";
+import { AxiosError } from "axios";
 
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
@@ -35,6 +37,8 @@ const SignupForm: React.FC = () => {
 
   const users = useSelector((state: State) => state.users);
 
+  const [errors, setErrors] = useState({ email: "", username: "" });
+
   const [data, setData] = useState<SignUpFormModel>({
     firstName: "",
     lastName: "",
@@ -43,12 +47,23 @@ const SignupForm: React.FC = () => {
     password: "",
   });
 
-  const doSubmit = () => {
+  const doSubmit = async () => {
     const copyData: SignUpFormModel = { ...data };
 
     let user: User = { id: users.length, ...copyData, role: "Client" };
-    createUser(user);
-    navigate("/");
+    try {
+      await register(user);
+      createUser(user);
+      navigate("/");
+    } catch (err) {
+      if (
+        (err as AxiosError).response &&
+        (err as AxiosError).response?.status === 400
+      ) {
+        const errorsCopy = { ...errors };
+        errorsCopy.email = (err as AxiosError).response?.data;
+      }
+    }
   };
 
   return (

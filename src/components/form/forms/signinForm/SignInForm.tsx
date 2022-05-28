@@ -10,6 +10,8 @@ import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
 import SignInFormModel from "../../../../models/forms/SignIn";
 import SignInFormStyled from "./SignInFormStyled";
+import { login } from "../../../../services/authService";
+import { AxiosError } from "axios";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -26,6 +28,8 @@ const SignInForm: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const [errors, setErrors] = useState({ email: "", username: "" });
+
   const { createUser } = bindActionCreators(actionsCreators, dispatch);
 
   const users = useSelector((state: State) => state.users);
@@ -35,10 +39,23 @@ const SignInForm: React.FC = () => {
     password: "",
   });
 
-  const doSubmit = () => {
+  const doSubmit = async () => {
     const copyData: SignInFormModel = { ...data };
     // delete copyData.confirmPassword;
     // delete copyData.checkbox;
+    try {
+      const { data: jwt } = await login(copyData.email, copyData.password);
+      localStorage.setItem("token", jwt);
+    } catch (err) {
+      if (
+        (err as AxiosError).response &&
+        (err as AxiosError).response?.status === 400
+      ) {
+        const errorsCopy = { ...errors };
+        errorsCopy.email = (err as AxiosError).response?.data;
+        setErrors(errorsCopy);
+      }
+    }
 
     //let user: User = { id: users.length, ...copyData, role: "Client" };
     //createUser(user);
