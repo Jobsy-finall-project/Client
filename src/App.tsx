@@ -22,6 +22,7 @@ import PositionsListPage from "./pages/PositionsListPage";
 import PositionPage from "./pages/PositionPage";
 import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
+import Logout from "./components/logout/Logout";
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/create-new-item" element={<CreateItem />} />
           <Route

@@ -12,16 +12,19 @@ import SignInFormModel from "../../../../models/forms/SignIn";
 import SignInFormStyled from "./SignInFormStyled";
 import { login } from "../../../../services/authService";
 import { AxiosError } from "axios";
+import { getCurrentUser } from "../../../../services/authService";
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required"),
   password: Yup.string()
     .required("No password provided.")
     .min(4, "Password is too short - should be 4 chars minimum.")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
       "Password can only contain minimum four characters, at least one letter and one number"
-    ),
+    )
 });
 
 const SignInForm: React.FC = () => {
@@ -36,16 +39,23 @@ const SignInForm: React.FC = () => {
 
   const [data, setData] = useState<SignInFormModel>({
     email: "",
-    password: "",
+    password: ""
   });
 
-  const doSubmit = async () => {
-    const copyData: SignInFormModel = { ...data };
+  const doSubmit = async (values: SignInFormModel) => {
+    const copyData: SignInFormModel = { ...values };
     // delete copyData.confirmPassword;
     // delete copyData.checkbox;
     try {
-      const { data: jwt } = await login(copyData.email, copyData.password);
-      localStorage.setItem("token", jwt);
+      await login(copyData.email, copyData.password);
+      //let user: User = { id: users.length, ...copyData, role: "Client" };
+      //TODO:createUser(user);
+      const currentUser = getCurrentUser();
+      if (currentUser && currentUser.role === "User") {
+        navigate("/");
+      } else if (currentUser && currentUser.role === "HR") {
+        navigate("/positions");
+      }
     } catch (err) {
       if (
         (err as AxiosError).response &&
@@ -56,22 +66,18 @@ const SignInForm: React.FC = () => {
         setErrors(errorsCopy);
       }
     }
-
-    //let user: User = { id: users.length, ...copyData, role: "Client" };
-    //createUser(user);
-    navigate("/");
   };
 
   return (
     <Formik<SignInFormModel>
       initialValues={{
         email: "",
-        password: "",
+        password: ""
       }}
       validationSchema={SignInSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         setData(values);
-        doSubmit();
+        doSubmit(values);
       }}
       component={LoginForm}
     ></Formik>
@@ -83,7 +89,7 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
   handleChange,
   values,
   errors,
-  touched,
+  touched
 }) => {
   return (
     <SignInFormStyled>

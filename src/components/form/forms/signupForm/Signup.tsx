@@ -13,20 +13,24 @@ import User from "../../../../models/User";
 import UploadImage from "../../uploadImg/UploadImage";
 import { register } from "../../../../services/userService";
 import { AxiosError } from "axios";
+import { loginWithJwt } from "../../../../services/authService";
+import { getCurrentUser } from "../../../../services/authService";
 
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
     .min(2, "User name is too short, at least two character")
     .max(50, "User name is too long, no more than 50 characters.")
     .required("Required"),
-  email: Yup.string().email("Invalid email").required("Required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Required"),
   password: Yup.string()
     .required("No password provided.")
     .min(4, "Password is too short - should be 4 chars minimum.")
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
       "Password can only contain minimum four characters, at least one letter and one number"
-    ),
+    )
 });
 
 const SignupForm: React.FC = () => {
@@ -44,18 +48,25 @@ const SignupForm: React.FC = () => {
     lastName: "",
     userName: "",
     email: "",
-    password: "",
+    password: ""
   });
 
-  const doSubmit = async () => {
-    const copyData: SignUpFormModel = { ...data };
+  const doSubmit = async (values: SignUpFormModel) => {
+    const copyData: SignUpFormModel = { ...values };
 
-    let user: User = { id: users.length, ...copyData, role: "Client" };
+    let user: User = { ...copyData, role: "User" };
     try {
-      await register(user);
+      const response = await register(user);
+      loginWithJwt(response.headers["x-auth-token"]);
       createUser(user);
-      navigate("/");
+      const currentUser = getCurrentUser();
+      if (currentUser && currentUser.role === "User") {
+        navigate("/");
+      } else if (currentUser && currentUser.role === "HR") {
+        navigate("/positions");
+      }
     } catch (err) {
+      console.log(err);
       if (
         (err as AxiosError).response &&
         (err as AxiosError).response?.status === 400
@@ -73,89 +84,96 @@ const SignupForm: React.FC = () => {
         lastName: "",
         userName: "",
         email: "",
-        password: "",
+        password: ""
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         setData(values);
-        doSubmit();
+        doSubmit(values);
       }}
       component={RegistrationForm}
     ></Formik>
   );
 };
 
-const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
-  ({ handleSubmit, handleChange, values, errors, touched }) => {
-    return (
-      <form onSubmit={handleSubmit} className="needs-validation">
-        <Input
-          type="text"
-          name="firstName"
-          label="First Name"
-          placeholder="First Name"
-          value={values.firstName}
-          onChange={handleChange}
-          errors={errors.firstName}
-          touched={touched.firstName}
-        />
-        <Input
-          type="text"
-          name="lastName"
-          label="Last Name"
-          placeholder="Last Name"
-          value={values.lastName}
-          onChange={handleChange}
-          errors={errors.lastName}
-          touched={touched.lastName}
-        />
-        <Input
-          type="text"
-          name="userName"
-          label="User Name"
-          placeholder="User Name"
-          value={values.userName}
-          onChange={handleChange}
-          errors={errors.userName}
-          touched={touched.userName}
-        />
-        <Input
-          type="email"
-          name="email"
-          label="Email"
-          placeholder="Email"
-          value={values.email}
-          onChange={handleChange}
-          errors={errors.email}
-          touched={touched.email}
-        />
-        <Input
-          type="password"
-          name="password"
-          label="Password"
-          placeholder="Password"
-          value={values.password}
-          onChange={handleChange}
-          errors={errors.password}
-          touched={touched.password}
-        />
-        <UploadImage
-          name="upload-img"
-          label="Upload profile image"
-          type="text"
-          error=""
-          onChange={handleChange}
-        />
-        <Button
-          title="Create New Account"
-          color=""
-          height="50px"
-          width="200px"
-          top="32px"
-          left="100px"
-          onClick={handleSubmit}
-        />
-      </form>
-    );
-  };
+const RegistrationForm: (
+  props: FormikProps<SignUpFormModel>
+) => JSX.Element = ({
+  handleSubmit,
+  handleChange,
+  values,
+  errors,
+  touched
+}) => {
+  return (
+    <form onSubmit={handleSubmit} className="needs-validation">
+      <Input
+        type="text"
+        name="firstName"
+        label="First Name"
+        placeholder="First Name"
+        value={values.firstName}
+        onChange={handleChange}
+        errors={errors.firstName}
+        touched={touched.firstName}
+      />
+      <Input
+        type="text"
+        name="lastName"
+        label="Last Name"
+        placeholder="Last Name"
+        value={values.lastName}
+        onChange={handleChange}
+        errors={errors.lastName}
+        touched={touched.lastName}
+      />
+      <Input
+        type="text"
+        name="userName"
+        label="User Name"
+        placeholder="User Name"
+        value={values.userName}
+        onChange={handleChange}
+        errors={errors.userName}
+        touched={touched.userName}
+      />
+      <Input
+        type="email"
+        name="email"
+        label="Email"
+        placeholder="Email"
+        value={values.email}
+        onChange={handleChange}
+        errors={errors.email}
+        touched={touched.email}
+      />
+      <Input
+        type="password"
+        name="password"
+        label="Password"
+        placeholder="Password"
+        value={values.password}
+        onChange={handleChange}
+        errors={errors.password}
+        touched={touched.password}
+      />
+      <UploadImage
+        name="upload-img"
+        label="Upload profile image"
+        type="text"
+        error=""
+        onChange={handleChange}
+      />
+      <Button
+        title="Create New Account"
+        color=""
+        height="50px"
+        width="200px"
+        top="32px"
+        left="100px"
+        onClick={handleSubmit}
+      />
+    </form>
+  );
+};
 export default SignupForm;

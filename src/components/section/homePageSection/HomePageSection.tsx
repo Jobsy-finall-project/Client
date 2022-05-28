@@ -8,8 +8,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
-import CommentIcon from "@mui/icons-material/Comment";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
@@ -24,11 +22,12 @@ import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import {
   getUserApplications,
-  changeApplicationIsFavorite,
+  changeApplicationIsFavorite
 } from "../../../services/applicationService";
 import { bindActionCreators } from "redux";
 import { actionsCreators } from "../../../state";
 import { useDispatch } from "react-redux";
+import { getCurrentUser } from "../../../services/authService";
 
 const HomePageSection: React.FC = () => {
   const navigation = useNavigate();
@@ -36,9 +35,13 @@ const HomePageSection: React.FC = () => {
 
   const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const tracks = useSelector((state: State) => state.tracks);
-  console.log(tracks);
 
   const [search, setSearchBar] = useState("");
+
+  function welcomeUser() {
+    const user = getCurrentUser();
+    return `Welcome ${user?.firstName || "User"}`;
+  }
 
   async function getData() {
     const applications = await getUserApplications();
@@ -60,13 +63,12 @@ const HomePageSection: React.FC = () => {
     navigation("/recruitment-track-page", { state: track });
   };
   const handleApplicationIsFavorite = async (track: Track) => {
-    
     const application = await changeApplicationIsFavorite(
       track.id,
       !track.isFavorite
     );
     console.log(1, application);
-    //UPDATE the global state track
+    //TODO:UPDATE the global state track
   };
 
   const handleAddTrack = () => {
@@ -87,7 +89,7 @@ const HomePageSection: React.FC = () => {
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
           <Grid item container>
-            <h1 className="welcomeTitle"> Welcome back Username,</h1>
+            <h1 className="welcomeTitle">{welcomeUser()}</h1>
           </Grid>
 
           <Grid item container>
@@ -103,7 +105,7 @@ const HomePageSection: React.FC = () => {
                   <InputAdornment position="start">
                     <SearchIcon />
                   </InputAdornment>
-                ),
+                )
               }}
               onChange={handleSetSearch}
             />
@@ -123,7 +125,7 @@ const HomePageSection: React.FC = () => {
                               checkedIcon={
                                 <Favorite className="favoriteIcon" />
                               }
-                              onChange={(e) =>
+                              onChange={e =>
                                 handleApplicationIsFavorite(currTrack)
                               }
                             />
