@@ -56,9 +56,6 @@ const HomePageSection: React.FC = () => {
     <HomePageSectionStyled>
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
-          <Grid item container>
-            <h1 className="welcomeTitle"> Welcome back Username,</h1>
-          </Grid>
 
           <Grid item container>
             <h3 className="activePositionsTitle"> Active positions:</h3>
