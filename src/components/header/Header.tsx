@@ -10,12 +10,11 @@ import { getCurrentUser } from "../../services/authService";
 import HeaderStyled1 from "./HeaderStyled";
 import Logo from "./../../JobsyHeader.png";
 
-
 interface HeaderProps {
   brandName: string;
 }
 
-const Header: React.FC<HeaderProps> = props => {
+const Header: React.FC<HeaderProps> = (props) => {
   function userIsConnect() {
     return getCurrentUser();
     //TODO: save this in a global state and remove this logic to useEffact *every time global state is update
@@ -25,8 +24,7 @@ const Header: React.FC<HeaderProps> = props => {
       <div className="nav-bar-color">
         <Navbar expand={false}>
           <Container fluid>
-
-            <BrandLink brandName={props.brandName} />
+            {/* <BrandLink brandName={props.brandName} /> */}
             {!userIsConnect() && (
               <React.Fragment>
                 <SideBarLink title="Sign in" to="sign-in" />
@@ -39,22 +37,18 @@ const Header: React.FC<HeaderProps> = props => {
                 <SideBarLink title="Logout" to="logout" />
               </React.Fragment>
             )}
-
-
             <Navbar.Brand href="/">
               <img
                 alt=""
-                src= {Logo}
+                src={Logo}
                 width="90"
                 height="40"
                 className="d-inline-block align-top"
-              />{' '}
+              />{" "}
             </Navbar.Brand>
             <Navbar.Text className="welcomeTitle">
               Welcome back, Username
             </Navbar.Text>
-            
-
             <HumburgerButton />
           </Container>
         </Navbar>
