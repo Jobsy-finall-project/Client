@@ -11,6 +11,12 @@ import Button from "../../../common/button/Button";
 import SignUpFormModel from "../../../../models/forms/Signup";
 import User from "../../../../models/User";
 import UploadImage from "../../uploadImg/UploadImage";
+
+import { register } from "../../../../services/userService";
+import { AxiosError } from "axios";
+import { loginWithJwt } from "../../../../services/authService";
+import { getCurrentUser } from "../../../../services/authService";
+
 import { Radio } from "@mui/material";
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -21,6 +27,7 @@ import CSS from 'csstype';
 const myRadio: CSS.Properties = {
   margin: '25px 900px 0 auto',
 };
+
 
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
@@ -35,7 +42,7 @@ const SignupSchema = Yup.object().shape({
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
       "Password can only contain minimum four characters, at least one letter and one number"
-    ),
+    )
 });
 
 const SignupForm: React.FC = () => {
@@ -46,21 +53,41 @@ const SignupForm: React.FC = () => {
 
   const users = useSelector((state: State) => state.users);
 
+  const [errors, setErrors] = useState({ email: "", username: "" });
+
   const [data, setData] = useState<SignUpFormModel>({
     firstName: "",
     lastName: "",
     userName: "",
     role: "",
     email: "",
-    password: "",
+    password: ""
   });
 
-  const doSubmit = () => {
-    const copyData: SignUpFormModel = { ...data };
+  const doSubmit = async (values: SignUpFormModel) => {
+    const copyData: SignUpFormModel = { ...values };
 
-    let user: User = { id: users.length, ...copyData, role: "Client" };
-    createUser(user);
-    navigate("/");
+    let user: User = { ...copyData, role: "User" };
+    try {
+      const response = await register(user);
+      loginWithJwt(response.headers["x-auth-token"]);
+      createUser(user);
+      const currentUser = getCurrentUser();
+      if (currentUser && currentUser.role === "User") {
+        navigate("/");
+      } else if (currentUser && currentUser.role === "HR") {
+        navigate("/positions");
+      }
+    } catch (err) {
+      console.log(err);
+      if (
+        (err as AxiosError).response &&
+        (err as AxiosError).response?.status === 400
+      ) {
+        const errorsCopy = { ...errors };
+        errorsCopy.email = (err as AxiosError).response?.data;
+      }
+    }
   };
 
   return (
@@ -71,17 +98,18 @@ const SignupForm: React.FC = () => {
         userName: "",
         role: "",
         email: "",
-        password: "",
+        password: ""
       }}
       validationSchema={SignupSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         setData(values);
-        doSubmit();
+        doSubmit(values);
       }}
       component={RegistrationForm}
     ></Formik>
   );
 };
+
 
 const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
   ({ handleSubmit, handleChange, values, errors, touched }) => {
@@ -167,4 +195,5 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
       </form>
     );
   };
+
 export default SignupForm;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -8,8 +8,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
-import IconButton from "@mui/material/IconButton";
-import CommentIcon from "@mui/icons-material/Comment";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import { useSelector } from "react-redux";
@@ -22,13 +20,39 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
+import {
+  getUserApplications,
+  changeApplicationIsFavorite
+} from "../../../services/applicationService";
+import { bindActionCreators } from "redux";
+import { actionsCreators } from "../../../state";
+import { useDispatch } from "react-redux";
+import { getCurrentUser } from "../../../services/authService";
 
 const HomePageSection: React.FC = () => {
-  let navigation = useNavigate();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const tracks = useSelector((state: State) => state.tracks);
-  console.log(tracks);
 
   const [search, setSearchBar] = useState("");
+
+  function welcomeUser() {
+    const user = getCurrentUser();
+    return `Welcome ${user?.firstName || "User"}`;
+  }
+
+  async function getData() {
+    const applications = await getUserApplications();
+    applications.forEach((application: Track) => {
+      createTrack(application);
+    }); //get all user tracks/applications and add them to the tracks.
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const title = event.currentTarget.value;
@@ -38,13 +62,21 @@ const HomePageSection: React.FC = () => {
   const handleClick = (track: Track) => {
     navigation("/recruitment-track-page", { state: track });
   };
+  const handleApplicationIsFavorite = async (track: Track) => {
+    const application = await changeApplicationIsFavorite(
+      track.id,
+      !track.isFavorite
+    );
+    console.log(1, application);
+    //TODO:UPDATE the global state track
+  };
 
   const handleAddTrack = () => {
     navigation("/create-recruitment-track-page");
   };
 
   const searchFunction = (track: Track, queary: string) => {
-    const searchTerm = queary.toLowerCase()
+    const searchTerm = queary.toLowerCase();
     return (
       track.companyName.toLowerCase().includes(searchTerm) ||
       track.position.name.toLowerCase().includes(searchTerm) ||
@@ -56,6 +88,11 @@ const HomePageSection: React.FC = () => {
     <HomePageSectionStyled>
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
+
+          <Grid item container>
+            <h1 className="welcomeTitle">{welcomeUser()}</h1>
+          </Grid>
+
 
           <Grid item container>
             <h3 className="activePositionsTitle"> Active positions:</h3>
@@ -70,7 +107,7 @@ const HomePageSection: React.FC = () => {
                   <InputAdornment position="start">
                     <SearchIcon />
                   </InputAdornment>
-                ),
+                )
               }}
               onChange={handleSetSearch}
             />
@@ -89,6 +126,9 @@ const HomePageSection: React.FC = () => {
                               icon={<FavoriteBorder />}
                               checkedIcon={
                                 <Favorite className="favoriteIcon" />
+                              }
+                              onChange={e =>
+                                handleApplicationIsFavorite(currTrack)
                               }
                             />
                           }
