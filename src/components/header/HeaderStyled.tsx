@@ -17,6 +17,15 @@ const HeaderStyled = styled.div`
   &.nav-link {
     color: ${Colors.WHITE};
   }
+
+  & .welcomeTitle{
+    font-size: 1.5em;
+    color: #566d70;
+    font-family: 'Quicksand', sans-serif;
+    margin:auto;
+    margin-left: 1370px;
+    font-weight:bold;
+  }
 `;
 
 export default HeaderStyled;

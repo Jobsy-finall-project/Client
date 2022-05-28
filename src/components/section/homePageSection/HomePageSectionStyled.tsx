@@ -4,6 +4,9 @@ import { purple } from '@mui/material/colors';
 
 
 export const HomePageSectionStyled = styled.div`
+
+
+
   & .rounded-3 {
     margin-top: 0px;
     padding: 1%;
@@ -29,10 +32,11 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .welcomeTitle{
-    font-size: 4em;
+    font-size: 3em;
     color: black;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     margin:auto;
+    margin-top: 20px;
     font-weight:bold;
   }
 
@@ -55,8 +59,9 @@ export const HomePageSectionStyled = styled.div`
 
   & .activePositionsTitle{
     font-size: 2.5em;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     margin:auto;
+    margin-top: 60px;
     font-weight:bold;
 
   }
@@ -96,7 +101,7 @@ export const HomePageSectionStyled = styled.div`
 export const positionTitle={
   fontSize: `1.5em`,
   fontWeight:"bold",
-  fontFamily: "Gill Sans",
+  fontFamily: "'Quicksand', sans-serif",
   marginLeft:"10px"
   };
 

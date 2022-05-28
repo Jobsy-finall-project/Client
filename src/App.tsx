@@ -20,6 +20,8 @@ import CompanyListPage from "./pages/CompanyListPage";
 import CreatePositionPage from "./pages/CreatePostionPage";
 import PositionsListPage from "./pages/PositionsListPage";
 import PositionPage from "./pages/PositionPage";
+import ProfilePage from "./pages/ProfilePage";
+import MatchesPage from "./pages/MatchesPage";
 import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
@@ -61,6 +63,8 @@ const App: React.FC = () => {
             element={<AddStepToTemplatePage />}
           />
           <Route path="/" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/matches" element={<MatchesPage />} />
         </Routes>
       </Router>
     </div>
