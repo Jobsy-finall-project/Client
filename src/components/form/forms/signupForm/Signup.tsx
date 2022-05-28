@@ -11,12 +11,23 @@ import Button from "../../../common/button/Button";
 import SignUpFormModel from "../../../../models/forms/Signup";
 import User from "../../../../models/User";
 import UploadImage from "../../uploadImg/UploadImage";
+import { Radio } from "@mui/material";
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
+import CSS from 'csstype';
+
+const myRadio: CSS.Properties = {
+  margin: '25px 900px 0 auto',
+};
 
 const SignupSchema = Yup.object().shape({
   userName: Yup.string()
     .min(2, "User name is too short, at least two character")
     .max(50, "User name is too long, no more than 50 characters.")
     .required("Required"),
+  role: Yup.string().required("Required"),
   email: Yup.string().email("Invalid email").required("Required"),
   password: Yup.string()
     .required("No password provided.")
@@ -39,6 +50,7 @@ const SignupForm: React.FC = () => {
     firstName: "",
     lastName: "",
     userName: "",
+    role: "",
     email: "",
     password: "",
   });
@@ -57,6 +69,7 @@ const SignupForm: React.FC = () => {
         firstName: "",
         lastName: "",
         userName: "",
+        role: "",
         email: "",
         password: "",
       }}
@@ -104,6 +117,17 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
           errors={errors.userName}
           touched={touched.userName}
         />
+        <FormControl style={myRadio}>
+          <FormLabel id="demo-row-radio-buttons-group-label" style={{display: 'flex'}}>Role:</FormLabel>
+          <RadioGroup
+            row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          >
+            <FormControlLabel value="Candidate" control={<Radio />} label="Candidate" />
+            <FormControlLabel value="HR" control={<Radio />} label="HR" />
+          </RadioGroup>
+        </FormControl>
         <Input
           type="email"
           name="email"
