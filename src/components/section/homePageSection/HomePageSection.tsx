@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ChangeEvent } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -22,13 +22,34 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
+import {
+  getUserApplications,
+  changeApplicationIsFavorite,
+} from "../../../services/applicationService";
+import { bindActionCreators } from "redux";
+import { actionsCreators } from "../../../state";
+import { useDispatch } from "react-redux";
 
 const HomePageSection: React.FC = () => {
-  let navigation = useNavigate();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+
+  const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const tracks = useSelector((state: State) => state.tracks);
   console.log(tracks);
 
   const [search, setSearchBar] = useState("");
+
+  async function getData() {
+    const applications = await getUserApplications();
+    applications.forEach((application: Track) => {
+      createTrack(application);
+    }); //get all user tracks/applications and add them to the tracks.
+  }
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
     const title = event.currentTarget.value;
@@ -38,13 +59,22 @@ const HomePageSection: React.FC = () => {
   const handleClick = (track: Track) => {
     navigation("/recruitment-track-page", { state: track });
   };
+  const handleApplicationIsFavorite = async (track: Track) => {
+    
+    const application = await changeApplicationIsFavorite(
+      track.id,
+      !track.isFavorite
+    );
+    console.log(1, application);
+    //UPDATE the global state track
+  };
 
   const handleAddTrack = () => {
     navigation("/create-recruitment-track-page");
   };
 
   const searchFunction = (track: Track, queary: string) => {
-    const searchTerm = queary.toLowerCase()
+    const searchTerm = queary.toLowerCase();
     return (
       track.companyName.toLowerCase().includes(searchTerm) ||
       track.position.name.toLowerCase().includes(searchTerm) ||
@@ -92,6 +122,9 @@ const HomePageSection: React.FC = () => {
                               icon={<FavoriteBorder />}
                               checkedIcon={
                                 <Favorite className="favoriteIcon" />
+                              }
+                              onChange={(e) =>
+                                handleApplicationIsFavorite(currTrack)
                               }
                             />
                           }
