@@ -10,4 +10,4 @@ export const RED: string = "#cc0000";
 export const BLUE_JEANS: string = "#455d7a";
 export const DARK_BLUE: string = "#233142";
 export const LIGHT_RED: string = "#f95959";
-export const PRAIMARY: string = "#007dc1";
+export const PRAIMARY: string = "#daf6fa";
