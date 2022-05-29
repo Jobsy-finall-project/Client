@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Position from "../../../models/forms/Position";
-import StepModel from "../../../models/forms/StepModel";
+import Position from "../../../models/Position";
+import StepModel from "../../../models/Step";
 import { useNavigate } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import Checkbox from "@mui/material/Checkbox";

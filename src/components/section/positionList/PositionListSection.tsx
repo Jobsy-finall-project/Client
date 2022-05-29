@@ -15,7 +15,7 @@ import TextField from "@mui/material/TextField";
 import React, { ChangeEvent, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import Position from "../../../models/forms/Position";
+import Position from "../../../models/Position";
 import { State } from "../../../state";
 import {
   PageListSectionStyled,
@@ -25,11 +25,7 @@ import {
 const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
   const currUser = useSelector((state: State) => state.loginUser);
-  const positions =
-    useSelector((state: State) => state.companys).find(
-      (curr) => curr.name === currUser.companyName
-    )?.positions ?? [];
-
+  const positions = currUser.applications?.map(curr => curr.position)
   const [search, setSearchBar] = useState("");
 
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -38,7 +34,7 @@ const PositionListSection: React.FC = () => {
   };
 
   const handleClick = (position: Position) => {
-    navigation("/position", { state: position.positionId });
+    navigation("/position", { state: position.id });
   };
 
   const handleAddPosition = () => {
@@ -49,7 +45,7 @@ const PositionListSection: React.FC = () => {
     const searchTerm = query.toLowerCase();
     return (
       position.name.toLowerCase().includes(searchTerm) ||
-      position.description.toLowerCase().includes(searchTerm)
+      position.description?.toLowerCase().includes(searchTerm)
     );
   };
 

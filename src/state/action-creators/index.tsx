@@ -5,10 +5,10 @@ import Card from "../../models/Card";
 import User from "../../models/User";
 import CV from "../../models/CV"
 import SortAttribute from "../../models/SortAttribute";
-import Step from "../../models/forms/StepModel";
+import Step from "../../models/Step";
 import Track from "../../models/Track";
-import Company from "../../models/forms/Company";
-import Position from "../../models/forms/Position";
+import Company from "../../models/Company";
+import Position from "../../models/Position";
 import { store } from "../store";
 
 

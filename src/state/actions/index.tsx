@@ -3,11 +3,11 @@ import User from "../../models/User";
 import CV from "../../models/CV";
 import SortAttribute from "../../models/SortAttribute";
 import { ActionType } from "../action-types/index";
-import Step from "../../models/forms/StepModel";
+import Step from "../../models/Step";
 
 import Track from "../../models/Track";
 
-import Company from "../../models/forms/Company";
+import Company from "../../models/Company";
 import { AddStepToTemplate } from "../action-creators";
 
 interface CreateCardAction {

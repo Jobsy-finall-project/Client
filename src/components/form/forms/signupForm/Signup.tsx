@@ -46,7 +46,7 @@ const SignupForm: React.FC = () => {
   const doSubmit = () => {
     const copyData: SignUpFormModel = { ...data };
 
-    let user: User = { id: users.length, ...copyData, role: "Client" };
+    let user: User = { id: users.length.toString(), ...copyData, role: "User" };
     createUser(user);
     navigate("/");
   };

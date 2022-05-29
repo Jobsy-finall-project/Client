@@ -5,7 +5,7 @@ import SectionContent from "../sectionContent/SectionContent";
 // import Button from "../../common/button/Button";
 import Button from '@mui/material/Button';
 import { useEffect } from "@storybook/addons";
-import Step from "../../../models/forms/StepModel";
+import Step from "../../../models/Step";
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -28,9 +28,7 @@ interface TrackStepSectionProps {
 
 const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
 
-  const [relatedEmails, setRelatedEmails] = useState([
-    props.step.relatedEmails,
-  ]);
+
 
   const [newEmail, setNewEmail] = useState("");
   const [addEmailInput, setAddEmailInput] = useState(false);
@@ -39,15 +37,6 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
   function handleAddEmailChange(event: any) {
     setNewEmail(event.target.value);
   }
-
-  function handleAddEmailClick() {
-    if (newEmail !== "") {
-      setRelatedEmails([...relatedEmails, newEmail] as any);
-    }
-    setNewEmail("");
-    setAddEmailInput(!addEmailInput);
-  }
-
 
   function showEmailInput() {
     setAddEmailInput(!addEmailInput);
@@ -59,56 +48,11 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
       <div >
         <div className="container" >
           <h1 className="stepTitle">{`${props.step.title} ${props.step.date}`} </h1>
-          <p className="stepDescription">{props.step.stepDetails} </p>
-          <p >related emails:</p>
-          {relatedEmails? relatedEmails.map((email) => (
-      <Accordion className="accordionContainer">
-        <AccordionSummary 
-        className="myAccordion"
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1a-content"
-       
-        >
-          <p >Email from hr</p>
-        </AccordionSummary>
-        <AccordionDetails>
-          <p>
-            {email}
-          </p>
-        </AccordionDetails>
-      </Accordion>
-        
-            )):null}
-            <div className="addEmails">
-            <Button
-            className="addEmailBtn"
-          variant="contained"
-          onClick={showEmailInput}
-          >
-            Add email
-             </Button>
-       
-          {addEmailInput ? (
-            <div className="addEmailInput">
-            <input
-              type="text"
-              value={newEmail}
-              onChange={handleAddEmailChange}
-            />
-            <ButtonMui className="addBtn"
-            variant="contained"
-            onClick={handleAddEmailClick}>
-              +
-            </ButtonMui> 
-         
-          </div>
-          ) : null}
-          </div>
-          
+          <p className="stepDescription">{props.step.description} </p>          
         </div>
       </div>
       <div className="notesContainer">
-      <ListSection title="notes" content={props.step.notes as string[]} addBtnText="add note" />
+      <ListSection title="notes" content={props.step.comments as string[]} addBtnText="add note" />
       </div>
     </TrackStepSectionStyled>
   );

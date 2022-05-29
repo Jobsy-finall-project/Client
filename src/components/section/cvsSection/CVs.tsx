@@ -66,7 +66,8 @@ const CVsSection: React.FC = () => {
       else {
         const newCV = {
           title: title,
-          file: uploadedFile
+          file: uploadedFile,
+          tags: []
         }
         addCv(newCV);
         handleSetPoputStatusClosed();

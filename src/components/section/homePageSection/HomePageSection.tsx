@@ -46,9 +46,9 @@ const HomePageSection: React.FC = () => {
   const searchFunction = (track: Track, queary: string) => {
     const searchTerm = queary.toLowerCase()
     return (
-      track.companyName.toLowerCase().includes(searchTerm) ||
+      track.company.name.toLowerCase().includes(searchTerm) ||
       track.position.name.toLowerCase().includes(searchTerm) ||
-      track.position.description.toLowerCase().includes(searchTerm)
+      track.position.description?.toLowerCase().includes(searchTerm)
     );
   };
 
@@ -99,7 +99,7 @@ const HomePageSection: React.FC = () => {
                           <ListItemButton>
                             <KeyboardIcon />
                             <ListItemText
-                              primary={`${currTrack.companyName} - ${currTrack.position.name}`}
+                              primary={`${currTrack.company.name} - ${currTrack.position.name}`}
                               primaryTypographyProps={positionTitle}
                               onClick={() => {
                                 handleClick(currTrack);
