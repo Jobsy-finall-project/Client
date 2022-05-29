@@ -1,14 +1,16 @@
-import Position from "./forms/Position";
-import Step from "./forms/StepModel";
+import Step from "./Step";
+import CV from "./CV"
+import Position from "./Position"
+import Company from "./Company"
 
 export default interface Track {
-  id: String;
-  companyName: string;
+  id: string;
+  company: Company;
   position: Position;
   isActive: boolean;
   isFavorite: boolean;
   steps: Step[];
   comments?: string[];
-  emails?: string[];
-  cvFiles?: string[];
+  cvFiles?: CV[];
+  isMatch: boolean;
 }

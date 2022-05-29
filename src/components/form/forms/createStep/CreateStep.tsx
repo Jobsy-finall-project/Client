@@ -5,7 +5,7 @@ import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
 import { actionsCreators, State } from "../../../../state";
 import * as Yup from "yup";
-import StepModel from "../../../../models/forms/StepModel";
+import Step from "../../../../models/Step";
 import CreateStepStyled from "./CreateStepStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
@@ -28,10 +28,10 @@ const CreateStep: React.FC = () => {
 
   const { createStep } = bindActionCreators(actionsCreators, dispatch);
 
-  const doSubmit = (values: StepModel) => {
+  const doSubmit = (values: Step) => {
     console.log("step form submited!");
     const applicationId = location.state as String;
-    const newStep: StepModel = {
+    const newStep: Step = {
       ...values,
     };
 
@@ -43,13 +43,11 @@ const CreateStep: React.FC = () => {
   };
 
   return (
-    <Formik<StepModel>
+    <Formik<Step>
       initialValues={{
         id: v4(),
         title: "",
-        stepDetails: "",
         date: new Date().toDateString(),
-        email: "",
       }}
       validationSchema={CreateStepSchema}
       onSubmit={(values) => {
@@ -61,7 +59,7 @@ const CreateStep: React.FC = () => {
   );
 };
 
-const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
+const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
   handleSubmit,
   handleChange,
   values,
@@ -85,10 +83,10 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
           name="stepDetails"
           label="Step Details"
           placeholder=""
-          value={values.stepDetails}
+          value={values.description}
           onChange={handleChange}
-          errors={errors.stepDetails}
-          touched={touched.stepDetails}
+          errors={errors.description}
+          touched={touched.description}
           type="text"
         />
         <Input
@@ -100,16 +98,6 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
           errors={errors.date}
           touched={touched.date}
           type="date"
-        />
-        <Input
-          name="email"
-          label="Attach an email"
-          placeholder=""
-          value={values.email}
-          onChange={handleChange}
-          errors={errors.email}
-          touched={touched.email}
-          type="text"
         />
         <Button
           title="Create New Step"

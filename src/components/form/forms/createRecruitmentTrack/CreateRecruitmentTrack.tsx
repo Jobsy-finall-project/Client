@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
 import CommentFieldStyled from "./CommentFieldStyled";
+import Track from "../../../../models/Track"
 import DeleteIcon from "@mui/icons-material/Delete";
 import { saveApplication } from "../../../../services/applicationService";
 
@@ -35,34 +36,22 @@ const CreateRecruitmentTrack: React.FC = () => {
   const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const tracks = useSelector((state: State) => state.tracks);
 
-  const doSubmit = (values: RecruitmentTrackModel) => {
-    const track = {
+  const doSubmit = (values: Track) => {
+    const track: Track = {
       id: tracks.length.toString(),
-      companyName: values.companyName,
+      company: values.company,
       position: {
-        positionId: "0",
-        name: values.positionName,
-        description: values.description,
+        id: "0",
+        tags: [],
+        name: values.position.name,
+        description: values.position.description ,
       },
       isActive: true,
       isFavorite: false,
       steps: [],
       comments: values.comments,
-      emails: [
-        `Dear Felix Navarro,
-      We are excited to offer you a full-time position as a Graphic Designer at Company ABC, reporting directly to our Art Director, Sarah Greene. Based on your experience, interviews and design portfolio, we look forward to seeing how you will take our brand messaging to the next level.
-      Per your conversation with Marvin Yates, we'd like to offer you an annual starting salary of $60,000 paid out on a semimonthly basis via direct deposit.
-      If you decide to accept this role, your anticipated start date will be March 12, 2021 at our 1234 Southern Avenue location. You will be expected to work 40 hours per week, Monday through Friday with the option to work remotely up to two days per week. Please find attached an updated copy of the job description to familiarize yourself with some of the position’s duties and responsibilities.
-      As an employee of Company ABC, you will also have access to our comprehensive benefits program, which includes unlimited vacation days, health insurance, RRSPs and tuition reimbursement. I have attached the full details of the benefits we offer for you to look over.
-      To accept this offer, please email me at tammy.guerrero@email.com by March 2, 2021, and I will get you started with the rest of the onboarding process.
-      We are excited about the possibility of you joining Company ABC! If you have any questions, please contact me directly via phone or email.
-      Sincerely,
-      Tammy Guerrero
-      Hiring Manager
-      tammy.guerrero@email.com
-      (123) 456-7890`,
-      ],
       cvFiles: [],
+      isMatch: false
     };
     saveApplication(track);
     createTrack(track);
@@ -70,13 +59,27 @@ const CreateRecruitmentTrack: React.FC = () => {
   };
 
   return (
-    <Formik<RecruitmentTrackModel>
+    <Formik<Track>
       initialValues={{
-        companyName: "",
-        positionName: "",
-        positionCode: "",
-        description: "",
-        comments: [],
+          id: "0",
+          company: {
+            id: "0",
+            name: "",
+            description: "",
+            positions: []
+          },
+          position: {
+            id: "0",
+            tags: [],
+            name: "",
+            description: ""
+          },
+          isActive: true,
+          isFavorite: false,
+          steps: [],
+          comments: [],
+          cvFiles: [],
+          isMatch: false
       }}
       validationSchema={CreateRecruitmentTrackSchema}
       onSubmit={(values) => {

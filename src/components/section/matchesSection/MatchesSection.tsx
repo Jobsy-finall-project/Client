@@ -60,7 +60,7 @@ const MatchesSection: React.FC = () => {
                 <Card sx={{ maxWidth: 345 }}>
                         <CardHeader
                           title={track.position.name}
-                          subheader={track.companyName}
+                          subheader={track.company.name}
                         />
                         <CardMedia
                           component="img"

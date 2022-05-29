@@ -1,7 +1,7 @@
 import Position from "./Position";
 
 export default interface Company {
-    id: string;
+    id?: string;
     name: string;
     description: string;
     positions: Position[];

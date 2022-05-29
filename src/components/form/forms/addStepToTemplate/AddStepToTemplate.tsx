@@ -5,13 +5,13 @@ import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
 import { actionsCreators, State } from "../../../../state";
 import * as Yup from "yup";
-import StepModel from "../../../../models/forms/StepModel";
+import StepModel from "../../../../models/Step";
 import { AddStepToTemplateStyled } from "./AddStepToTemplateStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
 import { v4 } from "uuid";
-import Position from "../../../../models/forms/Position";
-import Company from "../../../../models/forms/Company";
+import Position from "../../../../models/Position";
+import Company from "../../../../models/Company";
 
 const AddStepToTemplateSchema = Yup.object().shape({
   title: Yup.string().required("Required"),
@@ -58,7 +58,8 @@ const AddStepToTemplate: React.FC = () => {
       initialValues={{
         id: v4(),
         title: "",
-        stepDetails: "",
+        date: "",
+        description: "",
       }}
       validationSchema={AddStepToTemplateSchema}
       onSubmit={(values) => {
@@ -94,10 +95,10 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
           name="stepDetails"
           label="Step Details"
           placeholder=""
-          value={values.stepDetails}
+          value={values.description}
           onChange={handleChange}
-          errors={errors.stepDetails}
-          touched={touched.stepDetails}
+          errors={errors.description}
+          touched={touched.description}
           type="text"
         />
         <Button

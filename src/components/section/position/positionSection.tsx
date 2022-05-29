@@ -32,20 +32,9 @@ const PositionSection: React.FC = () => {
 
   const position = useSelector((state: State) => state.companys)
     .find((curr) => curr.name === currUser.companyName)
-    ?.positions?.find((curr) => curr.positionId === positionId)!!;
+    ?.positions?.find((curr) => curr.id === positionId)!!;
 
   const createTrack = () => {
-    const newTrack: Track = {
-      id: v4(),
-      companyName: currUser.companyName!!,
-      position: { ...position },
-      isActive: true,
-      isFavorite: false,
-      steps: [...(position.template ?? [])],
-      comments: [],
-      emails: [],
-      cvFiles: [],
-    };
 
     setOpen(true);
   };

@@ -5,17 +5,17 @@ import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
 import { actionsCreators, State } from "../../../../state";
 import * as Yup from "yup";
-import Position from "../../../../models/forms/Position";
+import Position from "../../../../models/Position";
 import CreatePositionStyled from "./CreatePositionStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
 import { v4 } from "uuid";
-import Company from "../../../../models/forms/Company";
+import Company from "../../../../models/Company";
 import { MenuItem, Select } from "@mui/material";
+import Step from "../../../../models/Step"
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -63,10 +63,12 @@ const CreateCompany: React.FC = () => {
   return (
     <Formik<FormResult>
       initialValues={{
-        positionId: v4(),
+        id: v4(),
         name: "",
         description: "",
-        companyName: "",
+        tags: [],
+        hrid: "",
+        companyName: ""
       }}
       validationSchema={CreateCompanySchema}
       onSubmit={(values) => {

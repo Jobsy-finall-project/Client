@@ -5,7 +5,7 @@ import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
 import { actionsCreators } from "../../../../state";
 import * as Yup from "yup";
-import Company from "../../../../models/forms/Company";
+import Company from "../../../../models/Company";
 import CreateCompanyStyled from "./CreateCompanyStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";

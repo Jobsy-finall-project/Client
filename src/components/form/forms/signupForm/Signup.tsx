@@ -67,6 +67,7 @@ const SignupForm: React.FC = () => {
   const doSubmit = async (values: SignUpFormModel) => {
     const copyData: SignUpFormModel = { ...values };
 
+
     let user: User = { ...copyData, role: "User" };
     try {
       const response = await register(user);
