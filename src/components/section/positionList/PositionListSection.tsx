@@ -52,6 +52,7 @@ const PositionListSection: React.FC = () => {
   return (
     <PageListSectionStyled>
       <div>
+
         <Grid container spacing={3} justifyContent="center" alignItems="center">
           <Grid item container>
             <h1 className="welcomeTitle">

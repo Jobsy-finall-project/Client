@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import HomePage from "./pages/HomePage";
 import Footer from "./components/footer/Footer";
@@ -19,16 +20,22 @@ import CompanyListPage from "./pages/CompanyListPage";
 import CreatePositionPage from "./pages/CreatePostionPage";
 import PositionsListPage from "./pages/PositionsListPage";
 import PositionPage from "./pages/PositionPage";
+import ProfilePage from "./pages/ProfilePage";
+import MatchesPage from "./pages/MatchesPage";
 import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
+import "react-toastify/dist/ReactToastify.css";
+import Logout from "./components/logout/Logout";
 
 const App: React.FC = () => {
   return (
     <div className="App">
+      <ToastContainer />
       <Header brandName="Jobsy" />
       <Router>
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/create-new-item" element={<CreateItem />} />
           <Route
@@ -56,6 +63,8 @@ const App: React.FC = () => {
             element={<AddStepToTemplatePage />}
           />
           <Route path="/" element={<HomePage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/matches" element={<MatchesPage />} />
         </Routes>
       </Router>
     </div>

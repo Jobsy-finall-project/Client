@@ -22,7 +22,7 @@ const initialUserState: User[] = [
     lastName: "Assayag",
     userName: "MayaAssayag",
     email: "maya@gmail.com",
-    password: "123",
+    password: "a1234",
     role: "Admin",
   },
   {
