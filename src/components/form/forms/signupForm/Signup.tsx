@@ -34,6 +34,7 @@ const SignupSchema = Yup.object().shape({
         .max(50, "User name is too long, no more than 50 characters.")
         .required("Required"),
     role: Yup.string().required("Required"),
+    // .oneOf(["User", "Admin", "HR"]),
     email: Yup.string().email("Invalid email").required("Required"),
     password: Yup.string()
         .required("No password provided.")
@@ -55,12 +56,12 @@ const SignupForm: React.FC = () => {
     const [errors, setErrors] = useState({ email: "", username: "" });
 
     const [data, setData] = useState<SignUpFormModel>({
-      firstName: "",
-      lastName: "",
-      userName: "",
-      role: "",
-      email: "",
-      password: ""
+        firstName: "",
+        lastName: "",
+        userName: "",
+        role: "",
+        email: "",
+        password: "",
     });
 
     const doSubmit = async (values: SignUpFormModel) => {
@@ -68,7 +69,9 @@ const SignupForm: React.FC = () => {
 
         console.log("doSubmit signUp");
 
-        let user: User = { ...copyData, role: "User" };
+        const roleToAdd = copyData.role === "User" ? "User" : "HR";
+
+        const user: User = { ...copyData, role: roleToAdd };
         try {
             const response = await register(user);
             loginWithJwt(response.headers["x-auth-token"]);
