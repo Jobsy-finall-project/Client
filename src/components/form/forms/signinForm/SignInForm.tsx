@@ -46,6 +46,7 @@ const SignInForm: React.FC = () => {
     const copyData: SignInFormModel = { ...values };
     // delete copyData.confirmPassword;
     // delete copyData.checkbox;
+    
     try {
       await login(copyData.email, copyData.password);
       //let user: User = { id: users.length, ...copyData, role: "Client" };
