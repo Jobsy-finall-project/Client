@@ -11,7 +11,6 @@ import CreateItem from "./pages/CreateItem";
 import CreateRecruitmentTrackPage from "./pages/createRecruitmentTrackPage/CreateRecruitmentTrackPage";
 import RecruitmentTracksStepPage from "./pages/TrackStepPage";
 import RecruitmentTrackPage from "./pages/RecruitmentTrackPage";
-import ApplyJob from "./pages/ApplyJob";
 import "./App.css";
 import CreateStepPage from "./pages/CreateStepPage";
 import CVs from "./pages/Cvs";
@@ -42,7 +41,6 @@ const App: React.FC = () => {
             path="/create-recruitment-track-page"
             element={<CreateRecruitmentTrackPage />}
           />
-          <Route path="/apply-job" element={<ApplyJob />} />
           <Route
             path="/recruitment-track-step-page"
             element={<RecruitmentTracksStepPage />}
