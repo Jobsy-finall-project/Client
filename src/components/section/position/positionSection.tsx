@@ -39,7 +39,7 @@ const PositionSection: React.FC = () => {
     setOpen(true);
   };
 
-  const ITEM_HEIGHT = 48;
+const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
