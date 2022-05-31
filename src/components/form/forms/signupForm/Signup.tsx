@@ -24,8 +24,13 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import CSS from "csstype";
 
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+
 const myRadio: CSS.Properties = {
-    margin: "25px 900px 0 auto",
+    margin: "25px 65% 0 auto",
 };
 
 const SignupSchema = Yup.object().shape({
@@ -114,8 +119,18 @@ const SignupForm: React.FC = () => {
     );
 };
 
+//TODO fix viability of select company
+// let isHR = false;
+// const handleClick = (role:String) => {
+//   if(role === "hr")
+//   isHR = true;
+//   else
+//   isHR = false;
+// }
+
 const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
     ({ handleSubmit, handleChange, values, errors, touched }) => {
+      const companys = useSelector((state: State) => state.companys);
         return (
             <form onSubmit={handleSubmit} className="needs-validation">
                 <Input
@@ -153,7 +168,7 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                         id="demo-row-radio-buttons-group-label"
                         style={{ display: "flex" }}
                     >
-                        Role:
+                    Role:
                     </FormLabel>
                     <RadioGroup
                         row
@@ -166,14 +181,32 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                             value="Candidate"
                             control={<Radio />}
                             label="Candidate"
+                            // onClick={handleClick("candidate")}
                         />
                         <FormControlLabel
                             value="HR"
                             control={<Radio />}
                             label="HR"
+                            // onClick={handleClick("hr")}
                         />
                     </RadioGroup>
                 </FormControl>
+                <Box sx={{ maxWidth: 200 , margin: "25px 72% 0 auto"}} >
+                <FormControl fullWidth>
+                <InputLabel id="company-select">Company</InputLabel>
+                <Select
+                 labelId="company-select-label"
+                  id="company-select"
+                // value={company}
+                label="Company"
+                onChange={handleChange}
+                >
+              <MenuItem value={10}>Microsoft</MenuItem>
+              <MenuItem value={20}>Facebook</MenuItem>
+              <MenuItem value={30}>Google</MenuItem>
+              </Select>
+              </FormControl>
+              </Box>
                 <Input
                     type="email"
                     name="email"
@@ -193,13 +226,6 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                     onChange={handleChange}
                     errors={errors.password}
                     touched={touched.password}
-                />
-                <UploadImage
-                    name="upload-img"
-                    label="Upload profile image"
-                    type="text"
-                    error=""
-                    onChange={handleChange}
                 />
                 <Button
                     title="Create New Account"
