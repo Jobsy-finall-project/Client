@@ -4,6 +4,7 @@ import TitleSection from "../../components/section/titleSection/TitleSection";
 import ThreeCircles from "../../components/threeCircles/ThreeCircles";
 import SignupForm from "../../components/form/forms/signupForm/Signup";
 import SignUpStyled from "./SignUpStyled";
+
 import Link from "@mui/material/Link";
 const longText =
   "It's quick and easy";
