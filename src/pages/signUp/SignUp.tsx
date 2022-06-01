@@ -4,6 +4,7 @@ import TitleSection from "../../components/section/titleSection/TitleSection";
 import ThreeCircles from "../../components/threeCircles/ThreeCircles";
 import SignupForm from "../../components/form/forms/signupForm/Signup";
 import SignUpStyled from "./SignUpStyled";
+
 const longText =
   "It's quick and easy";
 
