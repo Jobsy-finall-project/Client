@@ -270,7 +270,7 @@ const companyReducer = (
       if (!distinctState.find(company => company.name === action.payload.name)) {
         distinctState = [...distinctState, action.payload];
       }
-      return [...state, action.payload];
+      return distinctState;
       
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
