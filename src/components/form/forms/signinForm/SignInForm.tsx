@@ -94,7 +94,6 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
 }) => {
   return (
     <SignInFormStyled>
-       <TitleSection title="Login" />
       <form onSubmit={handleSubmit} className="needs-validation">
         <Input
           type="email"
