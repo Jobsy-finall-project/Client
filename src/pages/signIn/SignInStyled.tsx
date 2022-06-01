@@ -26,9 +26,6 @@ const SignInStyled = styled.div`
     font-family: Gill Sans;
   }
 
-  & .title-button{
-    background-color: #008CBA;
-  }
 
   & .bg-office{
     background-image: url("https://wallpaperaccess.com/full/1393206.jpg");
