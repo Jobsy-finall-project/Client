@@ -22,9 +22,14 @@ const SignUnStyled = styled.div`
   & .container{
     margin: 0 auto;
     text-align:center;
-    font-family: Gill Sans;
+    font-family:'Quicksand', sans-serif;
 
   }
+
+  & .title-button {
+    color: #008CBA;
+   }
+ 
 
 `;
 
