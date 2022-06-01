@@ -27,8 +27,8 @@ const Header: React.FC<HeaderProps> = (props) => {
             {/* <BrandLink brandName={props.brandName} /> */}
             {!userIsConnect() && (
               <React.Fragment>
-                <SideBarLink title="Sign in" to="sign-in" />
-                <SideBarLink title="Sign up" to="sign-up" />
+                {/* <SideBarLink title="Sign in" to="sign-in" />
+                <SideBarLink title="Sign up" to="sign-up" /> */}
               </React.Fragment>
             )}
             {userIsConnect() && (
@@ -37,18 +37,18 @@ const Header: React.FC<HeaderProps> = (props) => {
                 <SideBarLink title="Logout" to="logout" />
               </React.Fragment>
             )}
-            <Navbar.Brand href="/">
-              <img
-                alt=""
-                src={Logo}
-                width="90"
-                height="40"
-                className="d-inline-block align-top"
-              />{" "}
+            <Navbar.Brand className="jobsy-logo" href="/">
+                <img
+                  alt=""
+                  src={Logo}
+                  width="90"
+                  height="40"
+                  className="d-inline-block align-top"
+                />{" "}
             </Navbar.Brand>
-            <Navbar.Text className="welcomeTitle">
+            {/* <Navbar.Text className="welcomeTitle">
               Welcome back, Username
-            </Navbar.Text>
+            </Navbar.Text> */}
             <HumburgerButton />
           </Container>
         </Navbar>
