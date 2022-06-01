@@ -6,13 +6,15 @@ const HeaderStyled = styled.div`
 
   & .brand-title {
     color: ${Colors.WHITE};
-    margin-left: 100px;
+    margin-left: 1000px;
     font-family: "Bradley Hand";
     font-size: 32px;
     font-weight: bold;
   }
 
-  
+  & .jobsy-logo {
+    margin-right: 1370px;
+  }
 
   &.nav-link {
     color: ${Colors.WHITE};
@@ -23,7 +25,6 @@ const HeaderStyled = styled.div`
     color: #566d70;
     font-family: 'Quicksand', sans-serif;
     margin:auto;
-    margin-left: 1370px;
     font-weight:bold;
   }
 `;
