@@ -61,7 +61,7 @@ const App: React.FC = () => {
             path="/add-step-template"
             element={<AddStepToTemplatePage />}
           />
-          <Route path="/" element={<GettingStarted />} />
+          <Route path="/" element={<SignIn />} />
           <Route path="/HomePage" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<MatchesPage />} />
