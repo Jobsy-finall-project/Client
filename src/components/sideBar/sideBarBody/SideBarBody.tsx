@@ -18,10 +18,6 @@ const SideBarBody: React.FC = () => {
         {/* <SideBarLink title="Sign in" to="sign-in" />
         <SideBarLink title="Sign up" to="sign-up" /> */}
         <SideBarLink
-          title="Apply job"
-          to="/apply-job"
-        />
-        <SideBarLink
           title="Create recruitment track page"
           to="/create-recruitment-track-page"
         />
