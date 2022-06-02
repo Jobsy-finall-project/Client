@@ -31,8 +31,8 @@ const PositionSection: React.FC = () => {
     const [open, setOpen] = React.useState(false);
 
     const position = useSelector((state: State) => state.companys)
-        .find((curr) => curr.name === currUser.company?.name)
-        ?.positions?.find((curr) => curr.id === positionId)!!;
+        .find((curr) => curr.name === currUser.company!!.name)
+        ?.positions?.find((curr) => curr._id === positionId)!!;
 
     const createTrack = () => {
         setOpen(true);

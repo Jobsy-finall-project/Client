@@ -13,6 +13,10 @@ const CreateRecruitmentTrack = styled.div`
   & .button {
     margin-bottom: 52px;
   }
+
+ & .title-button{
+  color: #008CBA;
+ }
 `;
 
 export default CreateRecruitmentTrack;

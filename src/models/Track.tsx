@@ -4,8 +4,8 @@ import Position from "./Position"
 import Company from "./Company"
 
 export default interface Track {
-  id: string;
-  company: Company;
+  _id?: string;
+  company: any;
   position: Position;
   isActive: boolean;
   isFavorite: boolean;

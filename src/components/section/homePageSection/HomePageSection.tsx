@@ -46,6 +46,7 @@ const HomePageSection: React.FC = () => {
 
   async function getData() {
     const applications = await getUserApplications();
+    console.log(applications);
     applications.forEach((application: Track) => {
       createTrack(application);
     }); //get all user tracks/applications and add them to the tracks.
@@ -65,7 +66,7 @@ const HomePageSection: React.FC = () => {
   };
   const handleApplicationIsFavorite = async (track: Track) => {
     const application = await changeApplicationIsFavorite(
-      track.id,
+      track._id as string,
       !track.isFavorite
     );
     console.log(1, application);
@@ -76,8 +77,8 @@ const HomePageSection: React.FC = () => {
     navigation("/create-recruitment-track-page");
   };
 
-  const searchFunction = (track: Track, queary: string) => {
-    const searchTerm = queary.toLowerCase();
+  const searchFunction = (track: Track, query: string) => {
+    const searchTerm = query.toLowerCase();
     return (
       track.company.name.toLowerCase().includes(searchTerm) ||
       track.position.name.toLowerCase().includes(searchTerm) ||

@@ -86,7 +86,7 @@ const SignupForm: React.FC = () => {
         const copyData: SignUpFormModel = { ...values };
 
 
-        const roleToAdd = copyData.role === "User" ? "User" : "HR";
+        const roleToAdd = copyData.role === "Candidate" ? "Candidate" : "HR";
         const companyToAdd: Company = {
             name: copyData.company,
             description: "",
@@ -95,7 +95,7 @@ const SignupForm: React.FC = () => {
 
         const user: User = {
             ...copyData,
-            role: roleToAdd,
+            role: roleToAdd as any,
             company: companyToAdd,
         };
 
@@ -104,8 +104,8 @@ const SignupForm: React.FC = () => {
             loginWithJwt(response.headers["x-auth-token"]);
             createUser(user);
             const currentUser = getCurrentUser();
-            if (currentUser && currentUser.role === "User") {
-                navigate("/");
+            if (currentUser && currentUser.role === "Candidate") {
+                navigate("/applications");
             } else if (currentUser && currentUser.role === "HR") {
                 navigate("/positions");
             }

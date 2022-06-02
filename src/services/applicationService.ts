@@ -11,18 +11,18 @@ function applicationUrl(id: String) {
 }
 
 export async function getUserApplications() {
-  const { data } = await http.get(apiEndpoint);
+  const { data } = await http.get(`${apiEndpoint}/user/all`);
   return data;
 }
 
-export async function saveApplication(application: Track) {
+export async function saveApplication(application: Track, companyId: string) {
   //if exist update
-  if (application.id) {
+  if (application._id) {
     // const body = { ...application };
     // delete body.id;
     //await http.put(`${apiEndpoint}/${application.id}`, body);
     const { data } = await http.put(
-      applicationUrl(application.id),
+      applicationUrl(application._id),
       application
     );
     return data;
