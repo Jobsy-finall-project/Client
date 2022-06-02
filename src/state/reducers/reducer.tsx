@@ -52,8 +52,7 @@ const initialLoginUserState: DecodeJwt = {
   userName: "maya222",
   email: "email@gmail.com",
   cvs: [],
-  applications: [],
-  companyName: "red hat"
+  applications: []
 
 };
 

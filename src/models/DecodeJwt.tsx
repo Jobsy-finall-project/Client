@@ -1,5 +1,6 @@
 import CV from "./CV"
 import Track from "./Track"
+import Company from "./Company";
 
 export default interface DecodeJwt {
   _id: String;
@@ -8,7 +9,7 @@ export default interface DecodeJwt {
   lastName: string;
   email: string;
   role: "Anonymous" | "User" | "Admin" | "HR";
-  companyName?: string
+  company?: Company;
   applications?: Track[]
   cvs?: CV[]
 }

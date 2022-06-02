@@ -33,7 +33,6 @@ export function getCurrentUser() {
     const user: DecodeJwt = jwtDecode(jwt);
     return user;
   }
-  // window.alert("no jwt")
   // need to return a user in order that the function will always return user
   const stubuser: DecodeJwt = {
     _id: "0",
@@ -43,8 +42,7 @@ export function getCurrentUser() {
     userName: "maya222",
     email: "email@gmail.com",
     cvs: [],
-    applications: [],
-    companyName: "red hat"
+    applications: []
 
   }
 

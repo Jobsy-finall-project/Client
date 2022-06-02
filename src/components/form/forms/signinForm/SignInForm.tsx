@@ -52,13 +52,10 @@ const SignInForm: React.FC = () => {
     // delete copyData.checkbox;
 
     try {
-      window.alert("hey")
       await login(copyData.email, copyData.password);
-      window.alert("bye b")
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
       const currentUser = await getCurrentUser();
-      window.alert(Object.keys(currentUser))
 
       const user: DecodeJwt= {
         _id: currentUser._id.toString(),
@@ -67,11 +64,10 @@ const SignInForm: React.FC = () => {
         role: currentUser.role,
         userName: currentUser.userName,
         email: currentUser.email,
-        companyName: currentUser.companyName,
+        company: currentUser.company,
         cvs: currentUser.cvs,
         applications: currentUser.applications
       }
-      window.alert("bye")
       loginUser(user)
       if (currentUser && currentUser.role === "User") {
         navigate("/");
