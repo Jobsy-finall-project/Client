@@ -35,7 +35,7 @@ const CreateStep: React.FC = () => {
       ...values,
     };
 
-    const trackToUpdate = tracks.find(curr => curr.id === applicationId)!!
+    const trackToUpdate = tracks.find(curr => curr._id === applicationId)!!
     trackToUpdate.steps.push(newStep)
 
     createStep(trackToUpdate);

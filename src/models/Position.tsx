@@ -1,7 +1,7 @@
 import Step from "./Step";
 
 export default interface Position {
-    id: string;
+    _id?: string;
     tags: string[];
     name: string;
     description?: string;
