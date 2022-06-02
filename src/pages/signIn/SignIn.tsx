@@ -10,17 +10,17 @@ import PreviewIcon from '@mui/icons-material/Preview';
 
 
 const SignIn = () => {
-  const longText =
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum gravida scelerisque nunc senectus ac. Aliquam auctor lacinia pellentesque purus viverra dignissim. Vel quam varius.";
+  
   return (
     <SignInStyled>
-      <div className="container">
-        {/* <p className="logo">jobsy<PreviewIcon style={{fontSize:"2em"}}/> </p> */}
-      <TitleSection title="Login" />
-      <SignInForm />
-      <p> Do not have an account? Signup </p>
-      </div>
+      <div>
+        <div className="container">
+          <TitleSection title="Login" />
+          <SignInForm />
+        </div>
+        </div>
     </SignInStyled>
+    
   );
 };
 

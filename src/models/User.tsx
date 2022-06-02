@@ -1,14 +1,15 @@
-import CV from "./CV"
-import Track from "./Track"
+import Company from "./Company";
+import CV from "./CV";
+import Track from "./Track";
 export default interface UserModel {
-  id?: string;
-  userName: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  role: "Anonymous" | "User" | "Admin" | "HR";
-  companyName?: string
-  applications?: Track[]
-  cvs?: CV[]
+    id?: string;
+    userName: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    role: "Anonymous" | "User" | "Admin" | "HR";
+    company?: Company;
+    applications?: Track[];
+    cv?: CV[];
 }

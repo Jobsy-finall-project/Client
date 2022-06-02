@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "../../input/Input";
 import { Field, FieldArray, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
@@ -18,6 +18,14 @@ import CommentFieldStyled from "./CommentFieldStyled";
 import Track from "../../../../models/Track"
 import DeleteIcon from "@mui/icons-material/Delete";
 import { saveApplication } from "../../../../services/applicationService";
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import FormControl from "@mui/material/FormControl";
+import Company from "../../../../models/Company";
+import { faLessThanEqual } from "@fortawesome/free-solid-svg-icons";
+
 
 const CreateRecruitmentTrackSchema = Yup.object().shape({
   companyName: Yup.string().required("Required"),
@@ -101,9 +109,30 @@ const RecruitmentTrackForm: (
   errors,
   touched,
 }) => {
+  const companys = useSelector((state: State) => state.companys);
+  const [newCompany, setNewCompany] = useState(false);
+
   return (
     <CreateRecruitmentTrackStyled>
       <form onSubmit={handleSubmit} className="needs-validation">
+      <Box sx={{ minWidth: 500 , margin: "10px auto auto 104px"}} >
+                <FormControl fullWidth>
+                <InputLabel id="company-select">Company Name</InputLabel>
+                <Select
+                labelId="company-select-label"
+                id="company-select"
+                label="Company"
+                onChange={handleChange}
+                >
+                {(companys as Array<Company>).map((company: Company) => {
+                  return(
+                    <MenuItem value={company.name} onClick={()=>{setNewCompany(false)}}>{company.name}</MenuItem>
+                )})}
+                <MenuItem value={"new"} onClick={() =>{setNewCompany(true)}}>add new</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>   
+        {newCompany ? 
         <Input
           name="companyName"
           label="Company Name"
@@ -113,7 +142,7 @@ const RecruitmentTrackForm: (
           errors={errors.companyName}
           touched={touched.companyName}
           type="text"
-        />
+        /> : <></> }
         <Input
           name="positionName"
           label="Position Name"

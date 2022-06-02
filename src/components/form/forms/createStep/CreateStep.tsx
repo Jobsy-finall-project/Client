@@ -89,7 +89,7 @@ const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
           touched={touched.description}
           type="text"
         />
-        <Input
+        {/* <Input
           name="date"
           label="date"
           placeholder=""
@@ -98,7 +98,7 @@ const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
           errors={errors.date}
           touched={touched.date}
           type="date"
-        />
+        /> */}
         <Button
           title="Create New Step"
           color=""

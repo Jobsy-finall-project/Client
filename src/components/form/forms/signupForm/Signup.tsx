@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Formik, FormikProps } from "formik";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,8 +24,15 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import CSS from "csstype";
 
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Company from "../../../../models/Company";
+import { getAllCompanys } from "../../../../services/companyService";
+
 const myRadio: CSS.Properties = {
-    margin: "25px 900px 0 auto",
+    margin: "25px 65% 0 auto",
 };
 
 const SignupSchema = Yup.object().shape({
@@ -48,6 +55,16 @@ const SignupSchema = Yup.object().shape({
 const SignupForm: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { CreateCompany } = bindActionCreators(actionsCreators, dispatch);
+
+    async function getCompanys() {
+        const { data } = await getAllCompanys();
+        data.forEach((company: Company) => CreateCompany(company));
+    }
+
+    useEffect(() => {
+        getCompanys();
+    }, []);
 
     const { createUser } = bindActionCreators(actionsCreators, dispatch);
 
@@ -62,16 +79,26 @@ const SignupForm: React.FC = () => {
         role: "",
         email: "",
         password: "",
+        company: "",
     });
 
     const doSubmit = async (values: SignUpFormModel) => {
         const copyData: SignUpFormModel = { ...values };
 
-        console.log("doSubmit signUp");
 
         const roleToAdd = copyData.role === "User" ? "User" : "HR";
+        const companyToAdd: Company = {
+            name: copyData.company,
+            description: "",
+            positions: [],
+        };
 
-        const user: User = { ...copyData, role: roleToAdd };
+        const user: User = {
+            ...copyData,
+            role: roleToAdd,
+            company: companyToAdd,
+        };
+
         try {
             const response = await register(user);
             loginWithJwt(response.headers["x-auth-token"]);
@@ -103,6 +130,7 @@ const SignupForm: React.FC = () => {
                 role: "",
                 email: "",
                 password: "",
+                company: "",
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
@@ -116,6 +144,10 @@ const SignupForm: React.FC = () => {
 
 const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
     ({ handleSubmit, handleChange, values, errors, touched }) => {
+        const companys = useSelector((state: State) => state.companys);
+        const [isHR, setIsHR] = useState(false);
+        const [newCompany, setNewCompany] = useState(false);
+
         return (
             <form onSubmit={handleSubmit} className="needs-validation">
                 <Input
@@ -166,14 +198,75 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                             value="Candidate"
                             control={<Radio />}
                             label="Candidate"
+                            onClick={() => {
+                                setIsHR(false);
+                                setNewCompany(false);
+                            }}
                         />
                         <FormControlLabel
                             value="HR"
                             control={<Radio />}
                             label="HR"
+                            onClick={() => {
+                                setIsHR(true);
+                            }}
                         />
                     </RadioGroup>
                 </FormControl>
+                {isHR ? (
+                    <Box sx={{ maxWidth: 200, margin: "25px 72% 0 auto" }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="company-select">Company</InputLabel>
+                            <Select
+                                labelId="company-select-label"
+                                id="company-select"
+                                label="Company"
+                                onChange={handleChange}
+                                value={values.company}
+                            >
+                                {(companys as Array<Company>).map(
+                                    (company: Company) => {
+                                        return (
+                                            <MenuItem
+                                                key={company.name}
+                                                value={company.name}
+                                                onClick={() => {
+                                                    setNewCompany(false);
+                                                }}
+                                            >
+                                                {company.name}
+                                            </MenuItem>
+                                        );
+                                    }
+                                )}
+                                <MenuItem
+                                    value={"new"}
+                                    onClick={() => {
+                                        setNewCompany(true);
+                                    }}
+                                >
+                                    add new company
+                                </MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                ) : (
+                    <></>
+                )}
+                {newCompany && isHR ? (
+                    <Input
+                        name="company"
+                        label="Company Name"
+                        placeholder=""
+                        value={values.company}
+                        onChange={handleChange}
+                        errors={errors.company}
+                        touched={touched.company}
+                        type="text"
+                    />
+                ) : (
+                    <></>
+                )}
                 <Input
                     type="email"
                     name="email"
@@ -193,13 +286,6 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                     onChange={handleChange}
                     errors={errors.password}
                     touched={touched.password}
-                />
-                <UploadImage
-                    name="upload-img"
-                    label="Upload profile image"
-                    type="text"
-                    error=""
-                    onChange={handleChange}
                 />
                 <Button
                     title="Create New Account"

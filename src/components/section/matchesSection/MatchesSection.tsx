@@ -54,8 +54,8 @@ const MatchesSection: React.FC = () => {
         <Grid container spacing={3} justifyContent="center" alignItems="center">
         <Grid item >
         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' ,alignItems: 'center', justifyContent: "center" }}>
-        {(tracks as Array<Track>).map((track: Track) => {
             return(
+                {(tracks as Array<Track>).map((track: Track) => {
                 <ListItem>
                 <Card sx={{ maxWidth: 345 }}>
                         <CardHeader
@@ -99,8 +99,8 @@ const MatchesSection: React.FC = () => {
                         </Collapse>
                       </Card>
                       </ListItem>
+                })}
             );
-        })}
         </List>
         </Grid>
         </Grid>

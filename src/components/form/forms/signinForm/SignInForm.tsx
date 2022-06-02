@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Formik, FormikProps } from "formik";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
-import * as Yup from "yup";
-import SectionContent from "../../../section/sectionContent/SectionContent";
-import Input from "../../input/Input";
-import Button from "../../../common/button/Button";
-import SignInFormModel from "../../../../models/forms/SignIn";
-import SignInFormStyled from "./SignInFormStyled";
-import { login } from "../../../../services/authService";
 import { AxiosError } from "axios";
-import { getCurrentUser } from "../../../../services/authService";
+import { Formik, FormikProps } from "formik";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import * as Yup from "yup";
+import SignInFormModel from "../../../../models/forms/SignIn";
+import { getCurrentUser, login } from "../../../../services/authService";
+import { actionsCreators, State } from "../../../../state";
+import Button from "../../../common/button/Button";
+import Input from "../../input/Input";
+import SignInFormStyled from "./SignInFormStyled";
 import User from '../../../../models/User'
 import DecodeJwt from "../../../../models/DecodeJwt";
+import Link from '@mui/material/Link';
+import TitleSection from "../../../section/titleSection/TitleSection";
 
 
 const SignInSchema = Yup.object().shape({
@@ -50,7 +50,7 @@ const SignInForm: React.FC = () => {
     const copyData: SignInFormModel = { ...values };
     // delete copyData.confirmPassword;
     // delete copyData.checkbox;
-    
+
     try {
       window.alert("hey")
       await login(copyData.email, copyData.password);
@@ -120,6 +120,7 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           type="email"
           name="email"
           label="Email"
+          font-family="Quicksand', sans-serif;"
           placeholder="you@example.com"
           value={values.email}
           onChange={handleChange}
@@ -136,9 +137,9 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           errors={errors.password}
           touched={touched.password}
         />
-        <div className="forget-password">
+        {/* <div className="forget-password">
           <p>Forget password?</p>
-        </div>
+        </div> */}
         <Button
           title="Login"
           color=""
@@ -148,6 +149,9 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           left="100px"
           onClick={handleSubmit}
         />
+          <Link className="link-sign-up" href="/sign-up">
+                    {"Don't have an account? Sign Up"}
+          </Link>
       </form>
     </SignInFormStyled>
   );

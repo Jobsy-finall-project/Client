@@ -73,6 +73,7 @@ const CreateCompany: React.FC = () => {
       validationSchema={CreateCompanySchema}
       onSubmit={(values) => {
         console.log(values);
+        values.companyName = values.companyName
         doSubmit(values);
       }}
       component={CompanyForm}
@@ -106,7 +107,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           touched={touched.name}
           type="text"
         />
-        <Input
+        {/* <Input
           name="companyName"
           label="Company"
           placeholder=""
@@ -115,7 +116,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           errors={errors.companyName}
           touched={touched.companyName}
           type="text"
-        />
+        /> */}
         <Input
           name="description"
           label="Description"

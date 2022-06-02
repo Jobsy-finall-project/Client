@@ -271,10 +271,13 @@ const companyReducer = (
 ) => {
   switch (action.type) {
     case ActionType.CREATE_COMPANY:
-      return [...state, action.payload];
+      let distinctState = [...state];
+      if (!distinctState.find(company => company.name === action.payload.name)) {
+        distinctState = [...distinctState, action.payload];
+      }
+      return distinctState;
+      
     case ActionType.CREATE_POSITION:
-      console.log("adding position");
-
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
         (curr) => curr.id === updatedCompany.id
