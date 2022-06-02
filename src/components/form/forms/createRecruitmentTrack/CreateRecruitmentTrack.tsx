@@ -216,15 +216,6 @@ const RecruitmentTrackForm: (
                   </CommentFieldStyled>
                 );
               })}
-              <Button
-                onClick={() => arrayHelper.push("")}
-                color=""
-                width="170px"
-                height="50px"
-                title="+"
-                top="32px"
-                left="100px"
-              />
             </div>
           )}
         />

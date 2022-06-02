@@ -13,14 +13,11 @@ const SignIn = () => {
   
   return (
     <SignInStyled>
-      <div>
         <div className="container">
           <TitleSection title="Login" />
           <SignInForm />
         </div>
-        </div>
     </SignInStyled>
-    
   );
 };
 
