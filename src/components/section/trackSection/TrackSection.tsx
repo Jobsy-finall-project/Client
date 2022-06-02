@@ -94,7 +94,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
           top="32px"
           left="100px"
           onClick={() => {
-            navigation("/create-step", { state: trackToShow.id });
+            navigation("/create-step", { state: trackToShow._id });
           }}
      
         />

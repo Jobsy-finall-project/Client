@@ -34,7 +34,7 @@ const PositionListSection: React.FC = () => {
   };
 
   const handleClick = (position: Position) => {
-    navigation("/position", { state: position.id });
+    navigation("/position", { state: position._id });
   };
 
   const handleAddPosition = () => {
