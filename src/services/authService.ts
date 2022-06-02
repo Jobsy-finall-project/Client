@@ -29,9 +29,24 @@ export function logout() {
 
 export function getCurrentUser() {
   const jwt = localStorage.getItem(tokenKey);
-
   if (jwt) {
     const user: DecodeJwt = jwtDecode(jwt);
     return user;
   }
+  // window.alert("no jwt")
+  // need to return a user in order that the function will always return user
+  const stubuser: DecodeJwt = {
+    _id: "0",
+    firstName: "Maya",
+    lastName: "Assayag",
+    role: "Admin",
+    userName: "maya222",
+    email: "email@gmail.com",
+    cvs: [],
+    applications: [],
+    companyName: "red hat"
+
+  }
+
+  return stubuser
 }

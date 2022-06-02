@@ -9,6 +9,7 @@ import Track from "../../models/Track";
 
 import Company from "../../models/Company";
 import { AddStepToTemplate } from "../action-creators";
+import DecodeJwt from "../../models/DecodeJwt";
 
 interface CreateCardAction {
   type: ActionType.CREATE_CARD;
@@ -30,6 +31,11 @@ interface DeleteTrackAction {
 interface CreateUserAction {
   type: ActionType.CREATE_USER;
   payload: User;
+}
+
+interface LoginUserAction {
+  type: ActionType.LOGIN_USER;
+  payload: DecodeJwt;
 }
 interface SortAttributeAction {
   type: ActionType.SORT_ATTRIBUTE;
@@ -68,7 +74,8 @@ interface AddStepToTemplate {
 export type Action =
   | CreateCardAction
   | DeleteCardAction
-  | CreateUserAction
+  | CreateUserAction 
+  | LoginUserAction
   | SortAttributeAction
   | CreateStepAction
   | AddCV

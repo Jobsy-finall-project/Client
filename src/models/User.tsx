@@ -10,5 +10,5 @@ export default interface UserModel {
   role: "Anonymous" | "User" | "Admin" | "HR";
   companyName?: string
   applications?: Track[]
-  cv?: CV[]
+  cvs?: CV[]
 }

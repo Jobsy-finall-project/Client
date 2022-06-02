@@ -13,6 +13,9 @@ import SignInFormStyled from "./SignInFormStyled";
 import { login } from "../../../../services/authService";
 import { AxiosError } from "axios";
 import { getCurrentUser } from "../../../../services/authService";
+import User from '../../../../models/User'
+import DecodeJwt from "../../../../models/DecodeJwt";
+
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,7 +37,8 @@ const SignInForm: React.FC = () => {
   const [errors, setErrors] = useState({ email: "", username: "" });
 
   const { createUser } = bindActionCreators(actionsCreators, dispatch);
-
+  const { loginUser } = bindActionCreators(actionsCreators, dispatch);
+  
   const users = useSelector((state: State) => state.users);
 
   const [data, setData] = useState<SignInFormModel>({
@@ -48,10 +52,27 @@ const SignInForm: React.FC = () => {
     // delete copyData.checkbox;
     
     try {
+      window.alert("hey")
       await login(copyData.email, copyData.password);
+      window.alert("bye b")
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
-      const currentUser = getCurrentUser();
+      const currentUser = await getCurrentUser();
+      window.alert(Object.keys(currentUser))
+
+      const user: DecodeJwt= {
+        _id: currentUser._id.toString(),
+        firstName: currentUser.firstName.toString(),
+        lastName: currentUser.lastName.toString(),
+        role: currentUser.role,
+        userName: currentUser.userName,
+        email: currentUser.email,
+        companyName: currentUser.companyName,
+        cvs: currentUser.cvs,
+        applications: currentUser.applications
+      }
+      window.alert("bye")
+      loginUser(user)
       if (currentUser && currentUser.role === "User") {
         navigate("/");
       } else if (currentUser && currentUser.role === "HR") {

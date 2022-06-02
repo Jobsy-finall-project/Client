@@ -24,13 +24,15 @@ import MatchesPage from "./pages/MatchesPage";
 import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
+import { createBrowserHistory } from "history";
 
+const histoy = createBrowserHistory()
 const App: React.FC = () => {
   return (
     <div className="App">
       <ToastContainer />
       <Header brandName="Jobsy" />
-      <Router>
+      <Router> 
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />
