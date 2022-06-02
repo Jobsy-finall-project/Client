@@ -147,8 +147,6 @@ const RecruitmentTrackForm: (
                                 <MenuItem value={"new"} onClick={() => {
                                     setNewCompany(true)
                                 }}>add new</MenuItem>
-
-
                             </Select>
                         </FormControl>
                     </Box>}
@@ -226,15 +224,6 @@ const RecruitmentTrackForm: (
                                     </CommentFieldStyled>
                                 );
                             })}
-                            {/*<Button*/}
-                            {/*    onClick={() => arrayHelper.push("")}*/}
-                            {/*    color=""*/}
-                            {/*    width="170px"*/}
-                            {/*    height="50px"*/}
-                            {/*    title="+"*/}
-                            {/*    top="32px"*/}
-                            {/*    left="100px"*/}
-                            {/*/>*/}
                         </div>
                     )}
                 />
