@@ -31,7 +31,7 @@ const initialUserState: User[] = [
     userName: "Emilyz",
     email: "emilyz@gmail.com",
     password: "123",
-    role: "User",
+    role: "Candidate",
   },
   {
     firstName: "yohai",

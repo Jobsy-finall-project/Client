@@ -8,7 +8,7 @@ export default interface UserModel {
     lastName: string;
     email: string;
     password: string;
-    role: "Anonymous" | "User" | "Admin" | "HR";
+    role: "Anonymous" | "Candidate" | "Admin" | "HR";
     company?: Company;
     applications?: Track[];
     cv?: CV[];
