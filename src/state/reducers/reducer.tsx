@@ -39,8 +39,7 @@ const initialUserState: User[] = [
     userName: "yohai109",
     email: "yohai109@gmail.com",
     password: "sdffg123",
-    role: "HR",
-    companyName: "Microsoft"
+    role: "HR"
   },
 ];
 
