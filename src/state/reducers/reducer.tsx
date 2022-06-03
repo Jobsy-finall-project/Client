@@ -6,6 +6,7 @@ import { ActionType } from "../action-types/index";
 import SortAttribute from "../../models/SortAttribute";
 
 import Company from "../../models/Company";
+import DecodeJwt from "../../models/DecodeJwt";
 
 import Track from "../../models/Track";
 
@@ -43,13 +44,16 @@ const initialUserState: User[] = [
   },
 ];
 
-const initialLoginUserState: User = {
+const initialLoginUserState: DecodeJwt = {
+  _id: "0",
   firstName: "Maya",
   lastName: "Assayag",
-  userName: "MayaAssayag",
-  email: "maya@gmail.com",
-  password: "123",
   role: "Admin",
+  userName: "maya222",
+  email: "email@gmail.com",
+  cvs: [],
+  applications: []
+
 };
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
@@ -216,11 +220,11 @@ const cvsReducer = (state: Array<CV> = initialCVsState, action: Action) => {
 };
 
 const loginUserReducer = (
-  state: User = initialLoginUserState,
+  state: DecodeJwt = initialLoginUserState,
   action: Action
 ) => {
   switch (action.type) {
-    case ActionType.CREATE_USER:
+    case ActionType.LOGIN_USER:
       return action.payload;
     default:
       return state;
