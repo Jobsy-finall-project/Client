@@ -58,17 +58,19 @@ const initialLoginUserState: DecodeJwt = {
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
 
-var f = new File([""], "filename.txt", { type: "text/plain" });
+// var f = new File([""], "filename.txt", { type: "text/plain" });
 
 const initialCVsState: CV[] = [
   {
+    _id:"",
     title: "Senior devops engineer",
-    file: f,
+    cvFile: "",
     tags: [],
   },
   {
+    _id:"",
     title: "Senior fullstack engineer",
-    file: f,
+    cvFile: "",
     tags: [],
   },
 ];
