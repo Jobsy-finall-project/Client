@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { ProfileSectionStyled} from "./ProfileSectionStyled";
 import { useSelector } from "react-redux";
 import { State } from "../../../state";
-import { Typography } from "@mui/material";
+import { Avatar, Card, Grid, Typography } from "@mui/material";
 import CVsSection from "../cvsSection/CVs";
-
+import avatar from "../../../images/avatar.png"
 
 const ProfileSection: React.FC = () => {
 
@@ -12,16 +12,23 @@ const ProfileSection: React.FC = () => {
 
   return (
     <ProfileSectionStyled>
-        <Typography className="trackTitle" variant="h4">
+      <Grid container className="container" direction="column" margin="0px">
+        <Card className="card">
+        <Avatar alt="profileAvatar" className="avatar" src={avatar} />
+        <Typography className="title" variant="h4">
         {currUser.firstName + " " + currUser.lastName}
         </Typography>
-        <Typography className="trackTitle" variant="h6">
+        <Typography className="title" variant="h6">
         {currUser.email}
         </Typography>
-        <Typography className="trackTitle" variant="h6">
-        My CV's :
+      </Card>
+      <Card className="card">
+          <Typography className="myCvsTitle" variant="h6">
+          My CV's :
         </Typography>
-        <CVsSection />
+        <CVsSection />     
+      </Card>
+      </Grid>   
     </ProfileSectionStyled>
   );
 };

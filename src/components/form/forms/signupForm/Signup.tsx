@@ -42,7 +42,10 @@ const SignupSchema = Yup.object().shape({
         .required("Required"),
     role: Yup.string().required("Required"),
     // .oneOf(["User", "Admin", "HR"]),
-    email: Yup.string().email("Invalid email").required("Required"),
+    email: Yup.string().email("Invalid email").required("Required")
+    .min(10,"Invalid email, email is too short")
+    .max(255,"Invalid email, email is too long")
+    .lowercase("Invalid email"),
     password: Yup.string()
         .required("No password provided.")
         .min(4, "Password is too short - should be 4 chars minimum.")

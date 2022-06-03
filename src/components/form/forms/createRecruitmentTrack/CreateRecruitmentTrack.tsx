@@ -174,7 +174,7 @@ const RecruitmentTrackForm: (
                 <Input
                     name="description"
                     label="Position Description"
-                    placeholder=""
+                    placeholder="Describe job descriptipn here..."
                     value={values.description}
                     onChange={handleChange}
                     errors={errors.description}
