@@ -32,8 +32,9 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <ToastContainer />
-      <Header brandName="Jobsy" />
       <Router> 
+        <Header brandName="Jobsy" />
+
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />

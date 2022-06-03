@@ -1,14 +1,38 @@
 import React from "react";
-import Navbar from "react-bootstrap/Navbar";
-import Container from "react-bootstrap/Container";
-import HumburgerButton from "./hamburgerButton/HumburgerButton";
-import HeaderStyled from "./HeaderStyled";
+import { Link } from 'react-router-dom'
+import MaterialLink from "@mui/material/Link";
 
-import SideBarLink from "./../sideBar/sideBarBody/sideBarLink/SideBarLink";
 import { getCurrentUser } from "../../services/authService";
 
 import HeaderStyled1 from "./HeaderStyled";
 import Logo from "./../../JobsyHeader.png";
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import Menu from '@mui/material/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import Tooltip from '@mui/material/Tooltip';
+import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
+import Container from '@mui/material/Container'
+import AccountCircle from '@mui/icons-material/AccountCircle';
+
+const pages = [{"title": 'Home', "url": "/"},
+               {"title": 'Cvs', "url": "/cvs"},
+               {"title": 'Matches', "url": "/matches"}  ]
+const userlinks = [{"title": 'Profile', "url": "/profile"},
+                  {"title": 'Logout', "url": "/logout"}  ]
+
+const styles = {
+  largeIcon: {
+    width: 60,
+    height: 60,
+  },
+};
 
 interface HeaderProps {
   brandName: string;
@@ -19,42 +43,101 @@ const Header: React.FC<HeaderProps> = (props) => {
     return getCurrentUser();
     //TODO: save this in a global state and remove this logic to useEffact *every time global state is update
   }
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null);
+  };
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
+
   return (
-    <HeaderStyled>
-      <div className="nav-bar-color">
-        <Navbar expand={false}>
-          <Container fluid>
-            {/* <BrandLink brandName={props.brandName} /> */}
-            {!userIsConnect() && (
-              <React.Fragment>
-                {/* <SideBarLink title="Sign in" to="sign-in" />
-                <SideBarLink title="Sign up" to="sign-up" /> */}
-              </React.Fragment>
-            )}
-            {userIsConnect() && (
-              <React.Fragment>
-                <SideBarLink title="Profile" to="profile" />
-                <SideBarLink title="Logout" to="logout" />
-              </React.Fragment>
-            )}
-            <Navbar.Brand className="jobsy-logo" href="/">
-                <img
-                  alt=""
-                  src={Logo}
-                  width="90"
-                  height="40"
-                  className="d-inline-block align-top"
-                />{" "}
-            </Navbar.Brand>
-            {/* <Navbar.Text className="welcomeTitle">
-              Welcome back, Username
-            </Navbar.Text> */}
-            <HumburgerButton />
-          </Container>
-        </Navbar>
-      </div>
-    </HeaderStyled>
+    <AppBar position="static">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            JOBSY            
+          </Typography>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            
+          </Box>
+          {pages.map((page) => (
+              <Button
+                key={page.title}
+                component={Link} to={page.url}
+                sx={{ my: 2, color: 'white', display: 'block' }}
+              >
+                {page.title}
+              </Button>
+            ))}
+          <Box sx={{ flexGrow: 0 }}>
+          {userIsConnect() && (
+              <div>
+            <Tooltip title="Open settings">
+              <IconButton size="large" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <AccountCircle fontSize="large"></AccountCircle>
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+
+                {userlinks.map((page) => (
+                  <MenuItem key={page.title} onClick={handleCloseUserMenu}>
+                    <Button
+                        key={page.title}
+                        component={Link} to={page.url}
+                      >
+                        {page.title}
+                  </Button>
+                  </MenuItem>
+
+                ))}      
+                </Menu>
+                </div>
+                )}
+                
+            
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
-
 export default Header;
