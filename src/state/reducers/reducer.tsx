@@ -54,17 +54,17 @@ const initialLoginUserState: User = {
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
 
-var f = new File([""], "filename.txt", { type: "text/plain" });
+// var f = new File([""], "filename.txt", { type: "text/plain" });
 
 const initialCVsState: CV[] = [
   {
     title: "Senior devops engineer",
-    file: f,
+    file: "",
     tags: [],
   },
   {
     title: "Senior fullstack engineer",
-    file: f,
+    file: "",
     tags: [],
   },
 ];
