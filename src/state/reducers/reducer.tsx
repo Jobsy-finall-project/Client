@@ -39,7 +39,7 @@ const initialUserState: User[] = [
     userName: "yohai109",
     email: "yohai109@gmail.com",
     password: "sdffg123",
-    role: "HR"
+    role: "HR",
   },
 ];
 
@@ -60,16 +60,16 @@ const initialCVsState: CV[] = [
   {
     title: "Senior devops engineer",
     file: f,
-    tags: []
+    tags: [],
   },
   {
     title: "Senior fullstack engineer",
     file: f,
-    tags: []
+    tags: [],
   },
 ];
 
-const initialRecTracks: Track[] =[];
+const initialRecTracks: Track[] = [];
 // const initialRecTracks: Track[] = [
 //   {
 //     id: "1",
@@ -149,7 +149,7 @@ const initialRecTracks: Track[] =[];
 //   }
 // ];
 
-const initialCompanyState: Company[] =[];
+const initialCompanyState: Company[] = [];
 // const initialCompanyState: Company[] = [
 //   {
 //     id: "1",
@@ -246,16 +246,14 @@ const trackReducer = (
   switch (action.type) {
     case ActionType.CREATE_TRACK:
       let distinctState = [...state];
-      console.log("payload" +action.payload._id)
-      if (!distinctState.find(track =>{
-        console.log({track});
-
-       return track._id === action.payload._id
-      })) {
+      if (
+        !distinctState.find((track) => {
+          return track._id === action.payload._id;
+        })
+      ) {
         distinctState = [...distinctState, action.payload];
       }
       return distinctState;
-      // return [...state, action.payload];
     case ActionType.DELETE_TRACK:
       return state.filter((track: Track) => track._id === action.payload);
     case ActionType.CREATE_STEP:
@@ -279,11 +277,13 @@ const companyReducer = (
   switch (action.type) {
     case ActionType.CREATE_COMPANY:
       let distinctState = [...state];
-      if (!distinctState.find(company => company.name === action.payload.name)) {
+      if (
+        !distinctState.find((company) => company.name === action.payload.name)
+      ) {
         distinctState = [...distinctState, action.payload];
       }
       return distinctState;
-      
+
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
@@ -334,7 +334,7 @@ const companyReducer = (
           state[companyIndex].positions.push(positionToUpdate);
         }
         console.log(state);
-        
+
         return state;
       } else {
         return [...state, companyToUpdate];

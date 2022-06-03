@@ -17,7 +17,6 @@ export async function getUserApplications() {
 
 export async function saveApplication(application: Track, companyId: string) {
   const {data} = await http.post(`${apiEndpoint}/${companyId}`, application);
-  console.log(data);
   return data;
 }
 
