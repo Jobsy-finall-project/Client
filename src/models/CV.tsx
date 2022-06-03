@@ -1,6 +1,6 @@
 export default interface CV {
-    title: string;
-    cvFile: string;
-    tags: string[];
+  _id?: string;
+  title: string;
+  cvFile: string;
+  tags: string[];
 }
-  

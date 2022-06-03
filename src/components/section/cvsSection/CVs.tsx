@@ -10,7 +10,7 @@ import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import CV from "../../../models/CV";
-import { saveCV } from "../../../services/cvService";
+import { saveCV, deleteCV as deleteCvRemote } from "../../../services/cvService";
 import { actionsCreators, State } from "../../../state";
 import CVsStyled from "./CVsStyled";
 import CvUpload from "./uploadCvs/CvUpload";
@@ -38,10 +38,9 @@ const CVsSection: React.FC = () => {
     });
 
   const handleSetFile = async (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files!!;
-    const base64File = await toBase64(files[0]);
-
-    if (files) {
+    const files = event.target.files;
+    if (files && files[0]) {
+      const base64File = await toBase64(files[0]);
       setUploadedFile(base64File);
     }
   };
@@ -55,10 +54,12 @@ const CVsSection: React.FC = () => {
 
   const handleDeleteCv = (cv: CV) => {
     // deletedCv = cvs[cvIndex];
+    deleteCvRemote(cv._id!!)
     deleteCv(cv);
+    //TODO add delete here
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (uploadedFile) {
       if (title == "") {
         setErrorMessage("Enter Cv Title");
@@ -68,8 +69,8 @@ const CVsSection: React.FC = () => {
           cvFile: uploadedFile,
           tags: [],
         };
-        saveCV(newCV);
-        addCv(newCV);
+        const { data } = await saveCV(newCV);
+        addCv(data);
         setTitle("");
         setUploadedFile("");
         handleSetPoputStatusClosed();

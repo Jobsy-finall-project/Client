@@ -58,11 +58,13 @@ const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
 
 const initialCVsState: CV[] = [
   {
+    _id:"",
     title: "Senior devops engineer",
     cvFile: "",
     tags: [],
   },
   {
+    _id:"",
     title: "Senior fullstack engineer",
     cvFile: "",
     tags: [],

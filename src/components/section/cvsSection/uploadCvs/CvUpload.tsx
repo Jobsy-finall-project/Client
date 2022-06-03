@@ -29,6 +29,7 @@ const CvUpload: React.FC<CvUploadProps> = (props) => {
           name="file"
           id="file-input-id"
           onChange={props.setFile}
+          accept=".pdf,application/pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
         />
 
         <TextField

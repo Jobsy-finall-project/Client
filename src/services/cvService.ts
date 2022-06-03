@@ -7,5 +7,9 @@ const { apiUrl } = config;
 const apiEndpoint = `${apiUrl}/cv`;
 
 export async function saveCV(cv: CV) {
-    return await http.post(`${apiEndpoint}`, cv);
+  return await http.post(`${apiEndpoint}`, cv);
+}
+
+export async function deleteCV(cvId: string) {
+    return await http.delete(`${apiEndpoint}/${cvId}`)
 }
