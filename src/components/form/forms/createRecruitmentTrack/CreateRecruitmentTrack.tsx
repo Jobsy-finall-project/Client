@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Input from "../../input/Input";
-import {FieldArray, Formik, FormikProps} from "formik";
+import {FieldArray, Formik, FormikProps, useFormik} from "formik";
 import * as Yup from "yup";
 import RecruitmentTrackModel from "../../../../models/forms/RecruitmentTrack";
 import Button from "../../../common/button/Button";
@@ -23,9 +23,14 @@ import Select from '@mui/material/Select';
 import FormControl from "@mui/material/FormControl";
 import Company from "../../../../models/Company";
 import {getCurrentUser} from "../../../../services/authService";
-import {getCompanyByHrId, saveCompany} from "../../../../services/companyService";
+import {getAllCompanys, getCompanyByHrId, saveCompany} from "../../../../services/companyService";
+import Position from "../../../../models/Position";
+import Step from "../../../../models/Step";
+import CV from "../../../../models/CV";
 
-
+interface CreateRectuitmentTrackFormProps{
+    formik: any
+}
 const CreateRecruitmentTrackSchema = Yup.object().shape({
     companyName: Yup.string().required("Required"),
     positionName: Yup.string()
@@ -41,30 +46,34 @@ const CreateRecruitmentTrack: React.FC = () => {
     const dispatch = useDispatch();
 
     const {createTrack} = bindActionCreators(actionsCreators, dispatch);
+    const {CreateCompany} = bindActionCreators(actionsCreators, dispatch);
+
     const tracks = useSelector((state: State) => state.tracks);
     const currentUser = getCurrentUser();
-    const doSubmit = async (values: Track) => {
-        let companyId;
-        if(currentUser && currentUser.role === "HR"){
-            const {data} = await getCompanyByHrId();
-            companyId = data._id;
-        }else if(currentUser && currentUser.role === "Candidate"){
-            const company: Company={
-                name:values.company,
-                description:"",
-                positions:[]
-            }
-            const {data} = await saveCompany(company);
-            companyId = data._id;
-        }
 
-        console.log(1,values);
-        const track: Track = {
-            company: values.company,
+    async function getCompanys() {
+        const { data } = await getAllCompanys();
+        data.forEach((company: Company) => CreateCompany(company));
+    }
+
+    useEffect(() => {
+        getCompanys();
+    }, []);
+
+    const formik = useFormik({
+        initialValues: {
+            _id: "0",
+            company: {
+                id: "0",
+                name: "",
+                description: "",
+                positions: []
+            },
             position: {
+                _id: "0",
                 tags: [],
-                name: values.position.name,
-                description: values.position.description,
+                name: "",
+                description: ""
             },
             isActive: true,
             isFavorite: false,
@@ -72,61 +81,66 @@ const CreateRecruitmentTrack: React.FC = () => {
             comments: [],
             cvFiles: [],
             isMatch: false
-        };
-        saveApplication(track, companyId);
-        createTrack(track);
+        },
+        validationSchema: CreateRecruitmentTrackSchema,
+        onSubmit: (values) => {
+            doSubmit(values);
+        },
+    });
+    const doSubmit = async (values: any) => {
+        let companyId;
+        if(currentUser && currentUser.role === "HR"){
+            const {data} = await getCompanyByHrId();
+            companyId = data._id;
+        }else if(currentUser && currentUser.role === "Candidate"){
+            const company: Company={
+                name:values.companyName,
+                description:"",
+                positions:[]
+            }
+            console.log({company});
+            const {data} = await saveCompany(company);
+            companyId = data._id;
+        }
+        const positionToAdd: Position = {
+            name: values.positionName,
+            description: values.positionDescription,
+            tags:[],
 
-        // navigation("/user");
+        }
+        console.log({positionToAdd});
+        const track: any = {
+            position: {...positionToAdd},
+            isActive: true,
+            isFavorite: false,
+            steps: [],
+            comments: [],
+            cvFiles: [],
+            isMatch: false
+        };
+
+        const data = await saveApplication(track, companyId);
+        createTrack(data);
+
+        navigation("/recruitment-track-page", { state: data })
     };
 
     return (
-        <Formik<Track>
-            initialValues={{
-                _id: "0",
-                company: {
-                    id: "0",
-                    name: "",
-                    description: "",
-                    positions: []
-                },
-                position: {
-                    _id: "0",
-                    tags: [],
-                    name: "",
-                    description: ""
-                },
-                isActive: true,
-                isFavorite: false,
-                steps: [],
-                comments: [],
-                cvFiles: [],
-                isMatch: false
-            }}
-            validationSchema={CreateRecruitmentTrackSchema}
-            onSubmit={(values) => {
-
-                doSubmit(values);
-            }}
-            component={RecruitmentTrackForm}
-        ></Formik>
+        <RecruitmentTrackForm
+            formik={formik}
+            />
     );
 };
 
-const RecruitmentTrackForm: (
-    props: FormikProps<RecruitmentTrackModel>
-) => JSX.Element = ({
-                        handleSubmit,
-                        handleChange,
-                        values,
-                        errors,
-                        touched,
-                    }) => {
+const RecruitmentTrackForm:  React.FC<CreateRectuitmentTrackFormProps> = (props) => {
+    const formik = props.formik;
     const companys = useSelector((state: State) => state.companys);
     const [newCompany, setNewCompany] = useState(false);
     const currentUser = getCurrentUser();
+
     return (
         <CreateRecruitmentTrackStyled>
-            <form onSubmit={handleSubmit} className="needs-validation">
+            <form onSubmit={formik.handleSubmit} className="needs-validation">
                 {currentUser && currentUser.role === "Candidate" &&
                     <Box sx={{minWidth: 500, margin: "10px auto auto 104px"}}>
                         <FormControl fullWidth>
@@ -135,7 +149,8 @@ const RecruitmentTrackForm: (
                                 labelId="company-select-label"
                                 id="company-select"
                                 label="Company"
-                                onChange={handleChange}
+                                onChange={formik.handleChange}
+                                value={formik.values.companyName}
                             >
                                 {(companys as Array<Company>).map((company: Company) => {
                                     return (
@@ -155,30 +170,30 @@ const RecruitmentTrackForm: (
                         name="companyName"
                         label="Company Name"
                         placeholder=""
-                        value={values.companyName}
-                        onChange={handleChange}
-                        errors={errors.companyName}
-                        touched={touched.companyName}
+                        value={formik.values.companyName}
+                        onChange={formik.handleChange}
+                        errors={formik.errors.companyName}
+                        touched={formik.touched.companyName}
                         type="text"
                     /> : <></>}
                 <Input
                     name="positionName"
                     label="Position Name"
                     placeholder=""
-                    value={values.positionName}
-                    onChange={handleChange}
-                    errors={errors.positionName}
-                    touched={touched.positionName}
+                    value={formik.values.positionName}
+                    onChange={formik.handleChange}
+                    errors={formik.errors.positionName}
+                    touched={formik.touched.positionName}
                     type="text"
                 />
                 <Input
-                    name="description"
+                    name="positionDescription"
                     label="Position Description"
                     placeholder=""
-                    value={values.description}
-                    onChange={handleChange}
-                    errors={errors.description}
-                    touched={touched.description}
+                    value={formik.values.positionDescription}
+                    onChange={formik.handleChange}
+                    errors={formik.errors.positionDescription}
+                    touched={formik.touched.positionDescription}
                     type="text"
                     height="200px"
                 />
@@ -187,13 +202,13 @@ const RecruitmentTrackForm: (
                     label="Upload CV"
                     type="text"
                     error=""
-                    onChange={handleChange}
+                    onChange={formik.handleChange}
                 />
                 <FieldArray
                     name="comments"
                     render={(arrayHelper) => (
                         <div>
-                            {values.comments.map((currComment, index) => {
+                            {formik.values.comments.map((currComment:string, index:number) => {
                                 return (
                                     <CommentFieldStyled>
                                         <Grid container spacing={2} key={index}>
@@ -205,10 +220,10 @@ const RecruitmentTrackForm: (
                                                     placeholder=""
                                                     width="100%"
                                                     marginTop="0px"
-                                                    value={values.comments[index]}
-                                                    errors={errors.comments}
-                                                    touched={touched.comments}
-                                                    onChange={handleChange}
+                                                    value={formik.values.comments[index]}
+                                                    errors={formik.errors.comments}
+                                                    touched={formik.touched.comments}
+                                                    onChange={formik.handleChange}
                                                 />
                                             </Grid>
                                             <Grid item xs={2}>
@@ -234,7 +249,7 @@ const RecruitmentTrackForm: (
                     width="170px"
                     top="32px"
                     left="100px"
-                    onClick={handleSubmit}
+                    onClick={formik.handleSubmit}
                 />
             </form>
         </CreateRecruitmentTrackStyled>

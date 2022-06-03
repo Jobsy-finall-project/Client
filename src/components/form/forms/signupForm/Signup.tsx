@@ -222,7 +222,7 @@ const RegistrationForm: (props: FormikProps<SignUpFormModel>) => JSX.Element =
                                 id="company-select"
                                 label="Company"
                                 onChange={handleChange}
-                                value={values.company}
+                                value={values.company as any}
                             >
                                 {(companys as Array<Company>).map(
                                     (company: Company) => {

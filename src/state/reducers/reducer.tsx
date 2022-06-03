@@ -246,7 +246,12 @@ const trackReducer = (
   switch (action.type) {
     case ActionType.CREATE_TRACK:
       let distinctState = [...state];
-      if (!distinctState.find(track => track._id === action.payload._id)) {
+      console.log("payload" +action.payload._id)
+      if (!distinctState.find(track =>{
+        console.log({track});
+
+       return track._id === action.payload._id
+      })) {
         distinctState = [...distinctState, action.payload];
       }
       return distinctState;
