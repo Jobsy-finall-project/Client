@@ -10,6 +10,7 @@ import React, { ChangeEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import CV from "../../../models/CV";
+import { saveCV } from "../../../services/cvService";
 import { actionsCreators, State } from "../../../state";
 import CVsStyled from "./CVsStyled";
 import CvUpload from "./uploadCvs/CvUpload";
@@ -64,12 +65,13 @@ const CVsSection: React.FC = () => {
       } else {
         const newCV = {
           title: title,
-          file: uploadedFile,
+          cvFile: uploadedFile,
           tags: [],
         };
+        saveCV(newCV);
         addCv(newCV);
-        setTitle("")
-        setUploadedFile("")
+        setTitle("");
+        setUploadedFile("");
         handleSetPoputStatusClosed();
       }
     } else {
@@ -78,21 +80,20 @@ const CVsSection: React.FC = () => {
   };
 
   const downloadFile = (file: CV) => {
-  fetch(file.file)
-  .then(res => res.blob())
-  .then(blob=>{
-    const url = window.URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", file.title);
+    fetch(file.cvFile)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", file.title);
 
-    // Append to html link element page
-    document.body.appendChild(link);
+        // Append to html link element page
+        document.body.appendChild(link);
 
-    // Start download
-    link.click();
-  });
-    
+        // Start download
+        link.click();
+      });
   };
 
   return (
