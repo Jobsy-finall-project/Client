@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionsCreators, State } from "../../../../state";
 import UploadImage from "../../uploadImg/UploadImage";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
 import CommentFieldStyled from "./CommentFieldStyled";
@@ -36,18 +36,18 @@ interface CreateRectuitmentTrackFormProps {
   formik: any;
 }
 const CreateRecruitmentTrackSchema = Yup.object().shape({
-  companyName: Yup.string().required("Required"),
-  positionName: Yup.string()
-    .required("Required")
-    .min(4, "Password is too short - should be 4 chars minimum."),
-  positionCode: Yup.string(),
-  description: Yup.string().max(250, "Description is too long."),
-  comments: Yup.array(Yup.string()),
+    companyName: Yup.string().required("Required"),
+    positionName: Yup.string()
+        .required("Required")
+        .min(4, "Password is too short - should be 4 chars minimum."),
+    positionCode: Yup.string(),
+    description: Yup.string().max(250, "Description is too long."),
+    comments: Yup.array(Yup.string()),
 });
 
 const CreateRecruitmentTrack: React.FC = () => {
-  const navigation = useNavigate();
-  const dispatch = useDispatch();
+    const navigation = useNavigate();
+    const dispatch = useDispatch();
 
   const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const { CreateCompany } = bindActionCreators(actionsCreators, dispatch);
@@ -131,7 +131,7 @@ const CreateRecruitmentTrack: React.FC = () => {
 };
 
 const RecruitmentTrackForm: (
-  props: FormikProps<RecruitmentTrackModel>
+    props: FormikProps<RecruitmentTrackModel>
 ) => JSX.Element = ({
   handleSubmit,
   handleChange,
