@@ -15,7 +15,6 @@ import { State } from "../../../state";
 import Track from "../../../models/Track";
 import { useNavigate } from "react-router-dom";
 import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
-import Button from "@mui/material/Button";
 import AddBoxIcon from "@mui/icons-material/AddBox";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -28,6 +27,8 @@ import { bindActionCreators } from "redux";
 import { actionsCreators } from "../../../state";
 import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../../../services/authService";
+import { Link } from 'react-router-dom';
+import Button from "@mui/material/Button";
 
 const HomePageSection: React.FC = () => {
   const navigation = useNavigate();
@@ -89,6 +90,13 @@ const HomePageSection: React.FC = () => {
     <HomePageSectionStyled>
         <Grid width={"100%"} className="container" container spacing={5} justifyContent="center" alignItems="center">
           {/* <Grid item container>
+      <div>
+      <Button component={Link} to="/positions" color="primary">
+      MyButton
+    </Button>
+        <Grid container spacing={3} justifyContent="center" alignItems="center">
+
+          <Grid item container>
             <h1 className="welcomeTitle">{welcomeUser()}</h1>
           </Grid> */}
           <Grid item >
