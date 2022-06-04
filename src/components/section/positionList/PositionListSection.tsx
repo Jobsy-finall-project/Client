@@ -12,41 +12,65 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import TextField from "@mui/material/TextField";
-import React, { ChangeEvent, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { bindActionCreators } from "redux";
 import Position from "../../../models/Position";
-import { State } from "../../../state";
+import { getCurrentUser } from "../../../services/authService";
+import { getCompanyByHrId } from "../../../services/companyService";
+import { actionsCreators, State } from "../../../state";
 import {
   PageListSectionStyled,
-  positionTitle,
+  positionTitle
 } from "./PositionListSectionStyled";
 
 const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
-  const currUser = useSelector((state: State) => state.loginUser);
-  const positions = currUser.applications?.map(curr => curr.position)
+  const dispatch = useDispatch();
+  const { AddPosition, CreateCompany } = bindActionCreators(
+    actionsCreators,
+    dispatch
+  );
+
+  async function getCompanyPositions() {
+      const { data } = await getCompanyByHrId();
+      CreateCompany(data);
+      AddPosition(data);
+  }
+
+  useEffect(() => {
+      getCompanyPositions();
+  }, []);
+
+  const currUser = getCurrentUser();
+  const company = useSelector((state: State) => state.companys)
+        .find((curr) => curr._id === currUser?.company)
+  const positions = company ? company.positions : [] 
+
   const [search, setSearchBar] = useState("");
+  
+  
 
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    const title = event.currentTarget.value;
-    setSearchBar(title);
+      const title = event.currentTarget.value;
+      setSearchBar(title);
   };
 
   const handleClick = (position: Position) => {
-    navigation("/position", { state: position._id });
+      navigation("/position", { state: position._id });
   };
 
   const handleAddPosition = () => {
-    navigation("/create-position");
+      navigation("/create-position");
   };
 
   const searchFunction = (position: Position, query: string) => {
-    const searchTerm = query.toLowerCase();
-    return (
-      position.name.toLowerCase().includes(searchTerm) ||
-      position.description?.toLowerCase().includes(searchTerm)
-    );
+      const searchTerm = query.toLowerCase();
+      return (
+          position.name.toLowerCase().includes(searchTerm) ||
+          position.description?.toLowerCase().includes(searchTerm)
+      );
   };
 
   return (

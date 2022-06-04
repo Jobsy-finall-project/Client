@@ -39,7 +39,7 @@ const CreateStep: React.FC = () => {
     trackToUpdate.steps.push(newStep)
 
     createStep(trackToUpdate);
-    navigate("/");
+    navigate(-1);
   };
 
   return (

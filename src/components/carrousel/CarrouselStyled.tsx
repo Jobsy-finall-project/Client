@@ -9,6 +9,11 @@ const CarrouselStyled = styled.div`
   & .carousel-inner {
     margin-bottom: 20px;
   }
+
+  & .carousel-slide {
+    width: fit-content;
+    display: inline-block;
+  }
 `;
 
 export default CarrouselStyled;
