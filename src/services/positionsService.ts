@@ -11,3 +11,9 @@ export async function savePosition(companyID: string, position: Position) {
 
     return await http.post(`${apiEndpoint}/${companyID}`, position);
 }
+
+export async function getSuggestios(companyID: string, positionID: string) {
+    return await http.get(
+        `${apiEndpoint}/suggestions/${companyID}/${positionID}`
+    );
+}

@@ -104,7 +104,7 @@ const CreateRecruitmentTrack: React.FC = () => {
       steps: [],
       comments: [],
       cvFiles: [],
-      isMatch: false,
+      isMatch: true,
     };
 
     const data = await saveApplication(track, companyId);
