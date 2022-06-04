@@ -10,7 +10,7 @@ import Track from "../../models/Track";
 import Company from "../../models/Company";
 import Position from "../../models/Position";
 import { store } from "../store";
-
+import DecodeJwt from "../../models/DecodeJwt";
 
 
 export const addCv = (cv: CV) => {
@@ -66,10 +66,10 @@ export const createUser = (user: User) => {
   };
 };
 
-export const loginUser = (user: User) => {
+export const loginUser = (user: DecodeJwt) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
-      type: ActionType.CREATE_USER,
+      type: ActionType.LOGIN_USER,
       payload: user,
     });
   };

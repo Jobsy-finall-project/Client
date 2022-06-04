@@ -52,7 +52,7 @@ const SignInForm: React.FC = () => {
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
       const currentUser = getCurrentUser();
-      if (currentUser && currentUser.role === "User") {
+      if (currentUser && currentUser.role === "Candidate") {
         navigate("/");
       } else if (currentUser && currentUser.role === "HR") {
         navigate("/positions");
@@ -119,15 +119,7 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
         {/* <div className="forget-password">
           <p>Forget password?</p>
         </div> */}
-        <Button
-          title="Login"
-          color=""
-          height="50px"
-          width="170px"
-          top="32px"
-          left="100px"
-          onClick={handleSubmit}
-        />
+
           <Link className="link-sign-up" href="/sign-up">
                     {"Don't have an account? Sign Up"}
           </Link>

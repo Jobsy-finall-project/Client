@@ -64,7 +64,7 @@ const SignInSide: React.FC = () => {
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
       const currentUser = getCurrentUser();
-      if (currentUser && currentUser.role === "User") {
+      if (currentUser && currentUser.role === "Candidate") {
         navigate("/");
       } else if (currentUser && currentUser.role === "HR") {
         navigate("/positions");
