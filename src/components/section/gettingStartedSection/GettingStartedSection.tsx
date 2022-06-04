@@ -1,35 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { ChangeEvent } from "react";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-import Grid from "@mui/material/Grid";
-import TextField from "@mui/material/TextField";
-import { useSelector } from "react-redux";
-import { State } from "../../../state";
-import Track from "../../../models/Track";
-import { useNavigate } from "react-router-dom";
-import { GettingStartedSectionStyled, positionTitle } from "./GettingStartedSectionStyled";
-import Button from "@mui/material/Button";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
-import KeyboardIcon from "@mui/icons-material/Keyboard";
-import {
-  getUserApplications,
-  changeApplicationIsFavorite
-} from "../../../services/applicationService";
-import { bindActionCreators } from "redux";
-import { actionsCreators } from "../../../state";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button"
+import React from "react";
 import { useDispatch } from "react-redux";
-import { getCurrentUser } from "../../../services/authService";
-import SignInSide from "../../../components/SignInSide/SignInSide"
-import SignInForm from "../../form/forms/signinForm/SignInForm";
+import { useNavigate } from "react-router-dom";
+import candidate from "../../../images/getstart.png";
+import hr from "../../../images/hr.png";
+import jobsyBG from "../../../images/jobsyBG.png";
+import { GettingStartedSectionStyled } from "./GettingStartedSectionStyled";
 
 const GettingStartedSection: React.FC = () => {
   const navigation = useNavigate();
@@ -37,7 +14,41 @@ const GettingStartedSection: React.FC = () => {
 
   return (
     <GettingStartedSectionStyled>
-      <SignInForm></SignInForm>
+      <Box component="div" style={{
+        backgroundColor: "#edf6e7",
+        display: "flex",
+        justifyContent: "center",
+        flexFlow: "row-reverse"
+      }}>
+        <Box component="div" style={{position: "relative"}}>
+          <div>
+            <Box
+              style={{ maxHeight: "100vh", maxWidth: "65vw", overflow: "auto", float: "right", opacity: 0.6 }}
+              component="img"
+              src={jobsyBG}
+            />
+          </div>
+          <div style={{ top: "700px", left: "565px", position: "absolute"}}>
+             <Button className="myButton" onClick={() => {navigation("/sign-in");}}>Get Started</Button>
+          </div> 
+        </Box>
+       
+      
+        <Box component="div">
+          <Box
+            style={{ maxHeight: "100vh", maxWidth: "30vw", overflow: "auto", float: "left", opacity: 0.8 }}
+            component="img"
+            src={candidate}
+          />
+          <Box
+            style={{ maxHeight: "100vh", maxWidth: "28vw", overflow: "auto", opacity: 0.8 }}
+            component="img"
+            src={hr}
+          />
+          <Box />
+        </Box>
+      </Box>
+
     </GettingStartedSectionStyled>
   );
 };

@@ -5,7 +5,35 @@ import { purple } from '@mui/material/colors';
 
 export const GettingStartedSectionStyled = styled.div`
 
+& .carousel-size{
+  width: 60%;
+  display: inline-block;
+  margin-top: 100px;
+}
 
+& .myButton{
+  padding: 14px;
+  -webkit-transition: 0.3ms;
+  transition: 0.3ms;
+  margin-top: 32px;
+  margin-left: 100px;
+  background-color: #0edcc6;
+  width: 300px;
+  height: 70px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  color: #008CBA;
+    border-radius: 30px;
+  box-shadow: 0 4px 20px 0  rgb(0 0 0 / 20%);
+}
+
+& .container{
+  background-color: #edf6e7; 
+  display: flex; 
+  justify-content: center;
+  flex-flow: row-reverse;
+}
 
 `;
 

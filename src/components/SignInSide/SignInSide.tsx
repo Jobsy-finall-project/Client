@@ -148,8 +148,7 @@ const SignInSide: React.FC = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
-                value={values.email}
-                onChange={handleChange}
+                
               />
               <TextField
                 margin="normal"
