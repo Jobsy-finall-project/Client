@@ -40,3 +40,18 @@ export async function changeApplicationIsFavorite(
   });
   return data;
 }
+
+export async function changeApplicationIsMatch(
+    applicationId: String,
+    isMatch: Boolean
+) {
+    const { data } = await http.put(applicationUrl(applicationId), {
+      isMatch,
+    });
+    return data;
+}
+
+export async function deleteAplication(applicationId: String) {
+    const { data } = await http.delete(applicationUrl(applicationId));
+    return data;
+}

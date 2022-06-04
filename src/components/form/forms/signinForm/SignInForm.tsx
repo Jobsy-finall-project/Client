@@ -53,7 +53,7 @@ const SignInForm: React.FC = () => {
 
       const currentUser = getCurrentUser();
       if (currentUser && currentUser.role === "Candidate") {
-        navigate("/");
+        navigate("/applications");
       } else if (currentUser && currentUser.role === "HR") {
         navigate("/positions");
       }
