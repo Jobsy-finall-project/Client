@@ -88,6 +88,8 @@ const HomePageSection: React.FC = () => {
 
   return (
     <HomePageSectionStyled>
+        <Grid width={"100%"} className="container" container spacing={5} justifyContent="center" alignItems="center">
+          {/* <Grid item container>
       <div>
       <Button component={Link} to="/positions" color="primary">
       MyButton
@@ -96,13 +98,11 @@ const HomePageSection: React.FC = () => {
 
           <Grid item container>
             <h1 className="welcomeTitle">{welcomeUser()}</h1>
+          </Grid> */}
+          <Grid item >
+            <h3 className="activePositionsTitle"> My Active positions:</h3>
           </Grid>
-
-
-          <Grid item container>
-            <h3 className="activePositionsTitle"> Active positions:</h3>
-          </Grid>
-          <Grid container item xs={12}>
+          <Grid item xs={12}>
             <TextField
               id="outlined-basic"
               label="search position"
@@ -118,7 +118,7 @@ const HomePageSection: React.FC = () => {
             />
           </Grid>
 
-          <Grid item width={"50%"}>
+          <Grid item width={"100%"}>
             <List>
               {(tracks as Array<Track>).map((currTrack: Track) => {
                 return (
@@ -158,7 +158,6 @@ const HomePageSection: React.FC = () => {
               })}
             </List>
           </Grid>
-        </Grid>
         <Grid container item>
           <Button
             className="addNewTrackButton"
@@ -171,7 +170,7 @@ const HomePageSection: React.FC = () => {
             new recruitment track
           </Button>
         </Grid>
-      </div>
+        </Grid>
     </HomePageSectionStyled>
   );
 };

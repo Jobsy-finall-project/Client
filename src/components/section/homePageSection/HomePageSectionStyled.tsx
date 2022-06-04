@@ -5,8 +5,6 @@ import { purple } from '@mui/material/colors';
 
 export const HomePageSectionStyled = styled.div`
 
-
-
   & .rounded-3 {
     margin-top: 0px;
     padding: 1%;
@@ -20,9 +18,11 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .container {
+    margin= "0 auto"
+    text-align: center;
+    justify-content: center;
     position: relative;
-    height: 300px;
-    width: 300px;
+    display:flex;
   }
 
   & .circle {
@@ -42,19 +42,17 @@ export const HomePageSectionStyled = styled.div`
 
   & .addTrackButton{
     margin-Top:30px;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     background-color:red;
     margin:auto;
     margin-top:40px;
     height:50px;
-
   }
 
   & .searchPosition{
     width:50%;
     color:green;
     margin:auto;
-
   }
 
   & .activePositionsTitle{
@@ -67,7 +65,7 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .addNewTrackButton {
-    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
+    background-image: linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%);
     border-radius: .5rem;
     box-sizing: border-box;
     color: #FFFFFF;
@@ -83,7 +81,7 @@ export const HomePageSectionStyled = styled.div`
     -webkit-user-select: none;
     touch-action: manipulation;
     margin:auto;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     margin-top:80px;
   }
   

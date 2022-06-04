@@ -6,14 +6,14 @@ import TitleSection from "../../components/section/titleSection/TitleSection";
 import ThreeCircles from "../../components/threeCircles/ThreeCircles";
 import CreateRecruitmentTrackPageStyled from "./CreateRecruitmentTrackPageStyled";
 import * as Colors from "../../assets/Colors";
-import WorkBag from "../../images/WorkBag.jpeg";
+import createTrack from "../../images/createTrack.jpeg";
 const CreateRecruitmentTrackPage = () => {
   return (
     <CreateRecruitmentTrackPageStyled>
       <TitleSection title="Create New Track" />
       <div className="container-page">
         <CreateRecruitmentTrack />
-        <img src={WorkBag} className="work-bag-img" alt="..." />
+        <img src={createTrack} className="work-bag-img" alt="..." />
       </div>
     </CreateRecruitmentTrackPageStyled>
   );
