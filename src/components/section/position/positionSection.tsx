@@ -7,36 +7,65 @@ import TimelineContent from "@mui/lab/TimelineContent";
 import TimelineDot from "@mui/lab/TimelineDot";
 import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import { Alert, Fab, Snackbar, TextField, Typography } from "@mui/material";
-import React from "react";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { Theme, useTheme } from "@mui/material/styles";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { v4 } from "uuid";
 import Track from "../../../models/Track";
+import UserModel from "../../../models/User";
+import { suggestTrack } from "../../../services/applicationService";
+import { getCurrentUser } from "../../../services/authService";
+import { getSuggestios } from "../../../services/positionsService";
 import { State } from "../../../state";
 import Button from "../../common/button/Button";
 import { PositionStyled } from "./positionsStyled";
-import { Theme, useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
+
+interface userSuggestions {
+    user: UserModel;
+    score: Number;
+}
 
 const PositionSection: React.FC = () => {
     let navigation = useNavigate();
     const location = useLocation();
-    const currUser = useSelector((state: State) => state.loginUser);
+    const currUser = getCurrentUser();
     const positionId: string = location.state as string;
     const [isShareShown, setShowResults] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
     const position = useSelector((state: State) => state.companys)
-        .find((curr) => curr.name === currUser.company!!.name)
+        .find((curr) => curr._id === currUser.company)
         ?.positions?.find((curr) => curr._id === positionId)!!;
 
-    const createTrack = () => {
+    const createTrack = async  (users: string[]) => {
+        console.log({users});
+        const usersToMatch = suggestions.filter((curr) => {
+            return users.includes(curr.user.userName);
+        });
+        console.log({usersToMatch});
+
+        const newTrack: Track = {
+            company: "",
+            position: {...position},
+            isActive: true,
+            isFavorite: false,
+            steps: [...(position.template ? position.template : [])],
+            comments: [],
+            cvFiles: [],
+            isMatch: false,
+        };
+
+        const userIds = usersToMatch.map((user) => user.user._id);
+        await suggestTrack(newTrack,currUser.company, userIds)
         setOpen(true);
     };
+
+    const [suggestions, setSuggestions] = React.useState<Array<userSuggestions>>([])
 
     const ITEM_HEIGHT = 48;
     const ITEM_PADDING_TOP = 8;
@@ -48,6 +77,18 @@ const PositionSection: React.FC = () => {
             },
         },
     };
+
+    async function getCompanys() {
+        const { data } = await getSuggestios(
+            currUser.company!!,
+            position._id!!
+        );
+        setSuggestions(data);
+    }
+
+    useEffect(() => {
+        getCompanys();
+    }, []);
 
     const names = [
         "Oliver Hansen",
@@ -86,12 +127,15 @@ const PositionSection: React.FC = () => {
         );
     };
 
-    function getStyles(name: string, personName: string[], theme: Theme) {
+    function getStyles(
+        name: string | undefined,
+        personName: string[],
+        theme: Theme
+    ) {
         return {
-            fontWeight:
-                personName.indexOf(name) === -1
-                    ? theme.typography.fontWeightRegular
-                    : theme.typography.fontWeightMedium,
+            fontWeight: !personName.find((curr) => curr === name)
+                ? theme.typography.fontWeightRegular
+                : theme.typography.fontWeightMedium,
         };
     }
 
@@ -129,7 +173,7 @@ const PositionSection: React.FC = () => {
                     navigation("/add-step-template", { state: position });
                 }}
             />
-            <div>
+            {/* <div>
                 {isShareShown && (
                     <div>
                         <TextField label="email" />
@@ -153,7 +197,7 @@ const PositionSection: React.FC = () => {
                         setShowResults(!isShareShown);
                     }}
                 />
-            </div>
+            </div> */}
             <div>
                 <FormControl sx={{ m: 1, width: 300 }}>
                     <InputLabel id="demo-multiple-name-label">Match</InputLabel>
@@ -166,17 +210,27 @@ const PositionSection: React.FC = () => {
                         input={<OutlinedInput label="Match" />}
                         MenuProps={MenuProps}
                     >
-                        {names.map((name) => (
+                        {suggestions.map((user) => (
                             <MenuItem
-                                key={name}
-                                value={name}
-                                style={getStyles(name, personName, theme)}
+                                key={user.user._id}
+                                value={user.user.userName}
+                                style={getStyles(
+                                    user.user._id,
+                                    personName,
+                                    theme
+                                )}
                             >
-                                {name}
+                                {user.user.firstName} {user.user.lastName} -{" "}
+                                {user.score}
                             </MenuItem>
                         ))}
                     </Select>
                 </FormControl>
+                <Fab
+                    className="shareBtn"
+                    color="primary"
+                    onClick={() => createTrack(personName)}
+                ></Fab>
             </div>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert

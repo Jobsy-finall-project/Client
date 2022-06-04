@@ -20,6 +20,17 @@ export async function saveApplication(application: Track, companyId: string) {
   return data;
 }
 
+export async function suggestTrack(
+    track: Track,
+    compabyId: string | undefined,
+    usersIds: (String | undefined)[]
+) {
+    return await http.post(`${apiEndpoint}/matches/${compabyId}`, {
+        application: track,
+        users: usersIds,
+    });
+}
+
 export async function changeApplicationIsFavorite(
   applicationId: String,
   isFavorite: Boolean
@@ -28,4 +39,19 @@ export async function changeApplicationIsFavorite(
     isFavorite,
   });
   return data;
+}
+
+export async function changeApplicationIsMatch(
+    applicationId: String,
+    isMatch: Boolean
+) {
+    const { data } = await http.put(applicationUrl(applicationId), {
+      isMatch,
+    });
+    return data;
+}
+
+export async function deleteAplication(applicationId: String) {
+    const { data } = await http.delete(applicationUrl(applicationId));
+    return data;
 }

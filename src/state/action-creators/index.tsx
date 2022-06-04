@@ -112,11 +112,20 @@ export const AddPosition = (company: Company) => {
   }
 }
 
-export const AddStepToTemplate = (company:Company) => {
+export const AddStepToTemplate = (company: Company) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
       type: ActionType.ADD_STEP_TO_TEMPLATE,
       payload: company
+    })
+  }
+}
+
+export const RemoveTrack= (id:string) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.DELETE_TRACK,
+      payload: id
     })
   }
 }

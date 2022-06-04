@@ -1,14 +1,14 @@
 import Card from "../../models/Card";
-import User from "../../models/User";
-import CV from "../../models/CV";
-import { Action } from "../actions/index";
-import { ActionType } from "../action-types/index";
-import SortAttribute from "../../models/SortAttribute";
-
 import Company from "../../models/Company";
+import CV from "../../models/CV";
 import DecodeJwt from "../../models/DecodeJwt";
-
+import SortAttribute from "../../models/SortAttribute";
 import Track from "../../models/Track";
+import User from "../../models/User";
+import { ActionType } from "../action-types/index";
+import { Action } from "../actions/index";
+
+
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -246,34 +246,37 @@ const sortAttributeReducer = (
 };
 
 const trackReducer = (
-  state: Array<Track> = initialRecTracks,
-  action: Action
+    state: Array<Track> = initialRecTracks,
+    action: Action
 ) => {
-  switch (action.type) {
-    case ActionType.CREATE_TRACK:
-      let distinctState = [...state];
-      if (
-        !distinctState.find((track) => {
-          return track._id === action.payload._id;
-        })
-      ) {
-        distinctState = [...distinctState, action.payload];
-      }
-      return distinctState;
-    case ActionType.DELETE_TRACK:
-      return state.filter((track: Track) => track._id === action.payload);
-    case ActionType.CREATE_STEP:
-      const updatedTrack = action.payload;
-      const oldTrack = state.findIndex((curr) => curr._id === updatedTrack._id);
-      if (oldTrack !== -1) {
-        state[oldTrack].steps = updatedTrack.steps;
-        return state;
-      } else {
-        return [...state, updatedTrack];
-      }
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case ActionType.CREATE_TRACK:
+            let distinctState = [...state];
+            const trackIndex = distinctState.findIndex((track) => {
+                return track._id === action.payload._id;
+            });
+            if (trackIndex === -1) {
+                distinctState = [...distinctState, action.payload];
+            } else {
+              distinctState[trackIndex] = action.payload
+            }
+            return distinctState;
+        case ActionType.DELETE_TRACK:
+            return state.filter((track: Track) => track._id === action.payload);
+        case ActionType.CREATE_STEP:
+            const updatedTrack = action.payload;
+            const oldTrack = state.findIndex(
+                (curr) => curr._id === updatedTrack._id
+            );
+            if (oldTrack !== -1) {
+                state[oldTrack].steps = updatedTrack.steps;
+                return state;
+            } else {
+                return [...state, updatedTrack];
+            }
+        default:
+            return state;
+    }
 };
 
 const companyReducer = (
@@ -284,7 +287,7 @@ const companyReducer = (
     case ActionType.CREATE_COMPANY:
       let distinctState = [...state];
       if (
-        !distinctState.find((company) => company.name === action.payload.name)
+        !distinctState.find((company) => company._id === action.payload._id)
       ) {
         distinctState = [...distinctState, action.payload];
       }
@@ -293,15 +296,20 @@ const companyReducer = (
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
-        (curr) => curr.id === updatedCompany.id
+        (curr) => curr._id === updatedCompany._id
       );
 
       if (oldCompany !== -1) {
-        console.log("found old company", state[oldCompany]);
-
-        state[oldCompany].positions = updatedCompany.positions;
-        console.log("new state:", state);
-        return state;
+          updatedCompany.positions.forEach((posToAdd) => {
+              if (
+                  !state[oldCompany].positions.find(
+                      (oldPos) => oldPos._id === posToAdd._id
+                  )
+              ) {
+                  state[oldCompany].positions.push(posToAdd);
+              }
+          });
+          return state;
       } else {
         return [...state, updatedCompany];
       }
@@ -314,7 +322,7 @@ const companyReducer = (
       console.log(newStep);
 
       const companyIndex = state.findIndex(
-        (curr) => curr.id === companyToUpdate.id
+        (curr) => curr._id === companyToUpdate._id
       );
 
       console.log(companyIndex);
@@ -359,3 +367,4 @@ export {
   trackReducer,
   companyReducer,
 };
+

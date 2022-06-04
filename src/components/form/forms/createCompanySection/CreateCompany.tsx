@@ -37,7 +37,7 @@ const CreateCompany: React.FC = () => {
   return (
     <Formik<Company>
       initialValues={{
-        id: v4(),
+        _id: v4(),
         name: "",
         description: "",
         positions: [],

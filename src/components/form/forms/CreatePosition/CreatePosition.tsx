@@ -1,21 +1,20 @@
+import Autocomplete from '@mui/material/Autocomplete';
+import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
+import { Formik, FormikProps } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
+import { v4 } from "uuid";
 import * as Yup from "yup";
 import Position from "../../../../models/Position";
-import CreatePositionStyled from "./CreatePositionStyled";
-import Input from "../../input/Input";
+import { getCurrentUser } from "../../../../services/authService";
+import { savePosition } from "../../../../services/positionsService";
+import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
-import { v4 } from "uuid";
-import Company from "../../../../models/Company";
-import { MenuItem, Select } from "@mui/material";
-import Step from "../../../../models/Step"
-import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
+import Input from "../../input/Input";
+import CreatePositionStyled from "./CreatePositionStyled";
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -30,50 +29,61 @@ const CreateCompany: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const companys = useSelector((state: State) => state.companys);
+  const currUser = getCurrentUser();
 
   const { AddPosition, CreateCompany } = bindActionCreators(
     actionsCreators,
     dispatch
   );
 
-  const doSubmit = (values: FormResult) => {
-    console.log("step form submited!");
+  const doSubmit = async (values: FormResult) => {
+      console.log({ currUser });
 
-    const newCompany = companys.find(
-      (curr) => curr.name === values.companyName
-    );
-    const newPosition = { ...(values as Position) };
-    if (!newCompany) {
-      CreateCompany({
-        id: v4(),
-        name: values.companyName,
-        description: "",
-        positions: [newPosition],
-      });
-    } else {
-      newCompany.positions.push(newPosition);
-      AddPosition(newCompany);
-    }
+      const newCompany = companys.find(
+          (curr) => curr._id === currUser.company
+      );
+      const newPosition: Position = {
+          _id: values._id,
+          tags: values.tags,
+          name: values.name,
+          description: values.description,
+          template: values.template,
+      };
+      if (!newCompany) {
+          console.log("creating new");
 
-    console.log(newCompany);
+          CreateCompany({
+              _id: v4(),
+              name: values.companyName,
+              description: "",
+              positions: [newPosition],
+          });
+      } else {
+        console.log("company:", newCompany);
+        console.log("id:", newCompany._id);
 
-    navigate("/positions");
+        const { data } = await savePosition(newCompany._id!!, newPosition);
+        console.log({ data });
+
+        newCompany.positions.push(data);
+        AddPosition(newCompany);
+      }
+
+      console.log(newCompany);
+
+      navigate("/positions");
   };
 
   return (
     <Formik<FormResult>
       initialValues={{
-        _id: v4(),
         name: "",
         description: "",
         tags: [],
-        hrid: "",
         companyName: ""
       }}
       validationSchema={CreateCompanySchema}
       onSubmit={(values) => {
-        console.log(values);
-        values.companyName = values.companyName
         doSubmit(values);
       }}
       component={CompanyForm}
@@ -107,16 +117,6 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           touched={touched.name}
           type="text"
         />
-        {/* <Input
-          name="companyName"
-          label="Company"
-          placeholder=""
-          value={values.companyName}
-          onChange={handleChange}
-          errors={errors.companyName}
-          touched={touched.companyName}
-          type="text"
-        /> */}
         <Input
           name="description"
           label="Description"

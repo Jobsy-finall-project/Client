@@ -78,6 +78,19 @@ const CreateRecruitmentTrack: React.FC = () => {
 
         // navigation("/user");
     };
+    console.log({ positionToAdd });
+    const track: any = {
+      position: { ...positionToAdd },
+      isActive: true,
+      isFavorite: false,
+      steps: [],
+      comments: [],
+      cvFiles: [],
+      isMatch: true,
+    };
+
+    const data = await saveApplication(track, companyId);
+    createTrack(data);
 
     return (
         <Formik<Track>

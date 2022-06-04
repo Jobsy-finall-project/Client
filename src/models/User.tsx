@@ -2,7 +2,7 @@ import Company from "./Company";
 import CV from "./CV";
 import Track from "./Track";
 export default interface UserModel {
-    id?: string;
+    _id?: string;
     userName: string;
     firstName: string;
     lastName: string;
