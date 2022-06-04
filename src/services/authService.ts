@@ -2,6 +2,7 @@ import http from "./httpService";
 import config from "../config.json";
 import jwtDecode from "jwt-decode";
 import DecodeJwt from "./../models/DecodeJwt";
+import { WindowOutlined } from "@mui/icons-material";
 
 const { apiUrl } = config;
 
@@ -27,6 +28,15 @@ export function logout() {
   localStorage.removeItem(tokenKey);
 }
 
+export function userIsConnect() {
+  const jwt = localStorage.getItem(tokenKey);
+  if (jwt) {
+    return true;
+  } else {
+    return false
+  }
+}
+
 export function getCurrentUser() {
   const jwt = localStorage.getItem(tokenKey);
   if (jwt) {
@@ -34,17 +44,16 @@ export function getCurrentUser() {
     return user;
   }
   // need to return a user in order that the function will always return user
-  const stubuser: DecodeJwt = {
-    _id: "0",
-    firstName: "Maya",
-    lastName: "Assayag",
-    role: "Admin",
-    userName: "maya222",
-    email: "email@gmail.com",
-    cvs: [],
-    applications: []
+  // const stubuser:DecodeJwt  = {
+  //   _id: "0",
+  //   firstName: "Maya",
+  //   lastName: "Assayag",
+  //   role: "Admin",
+  //   userName: "maya222",
+  //   email: "email@gmail.com",
+  //   cvs: [],
+  //   applications: []
+  // }
 
-  }
-
-  return stubuser
+  // return stubuser
 }

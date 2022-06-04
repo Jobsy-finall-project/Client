@@ -56,21 +56,23 @@ const SignInForm: React.FC = () => {
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
       const currentUser = await getCurrentUser();
+      if(currentUser) {
+        const user: DecodeJwt= {
+          _id: currentUser._id.toString(),
+          firstName: currentUser.firstName.toString(),
+          lastName: currentUser.lastName.toString(),
+          role: currentUser.role,
+          userName: currentUser.userName,
+          email: currentUser.email,
+          company: currentUser.company,
+          cvs: currentUser.cvs,
+          applications: currentUser.applications
+        }
+        loginUser(user)
 
-      const user: DecodeJwt= {
-        _id: currentUser._id.toString(),
-        firstName: currentUser.firstName.toString(),
-        lastName: currentUser.lastName.toString(),
-        role: currentUser.role,
-        userName: currentUser.userName,
-        email: currentUser.email,
-        company: currentUser.company,
-        cvs: currentUser.cvs,
-        applications: currentUser.applications
-      }
-      loginUser(user)
+    }
       if (currentUser && currentUser.role === "Candidate") {
-        navigate("/");
+        navigate("/applications");
       } else if (currentUser && currentUser.role === "HR") {
         navigate("/positions");
       }

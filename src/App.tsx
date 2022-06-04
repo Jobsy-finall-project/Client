@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
+import HomePageRedirector from "./components/section/homePageSection/homePageRedirector";
+
 import HomePage from "./pages/HomePage";
 import GettingStarted from "./pages/GettingStarted";
 import Footer from "./components/footer/Footer";
@@ -64,7 +66,7 @@ const App: React.FC = () => {
             path="/add-step-template"
             element={<AddStepToTemplatePage />}
           />
-          <Route path="/" element={<SignIn />} />
+          <Route path="/" element={<HomePageRedirector />} />
           <Route path="/applications" element={<HomePage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<MatchesPage />} />

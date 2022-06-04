@@ -89,9 +89,6 @@ const HomePageSection: React.FC = () => {
   return (
     <HomePageSectionStyled>
       <div>
-      <Button component={Link} to="/positions" color="primary">
-      MyButton
-    </Button>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
 
           <Grid item container>
