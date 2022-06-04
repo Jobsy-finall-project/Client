@@ -57,7 +57,7 @@ const SignInForm: React.FC = () => {
       //TODO:createUser(user);
       const currentUser = await getCurrentUser();
 
-      const user: DecodeJwt= {
+      const user: DecodeJwt = {
         _id: currentUser._id.toString(),
         firstName: currentUser.firstName.toString(),
         lastName: currentUser.lastName.toString(),

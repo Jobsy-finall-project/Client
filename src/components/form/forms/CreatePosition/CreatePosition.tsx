@@ -16,6 +16,7 @@ import Step from "../../../../models/Step"
 import Chip from '@mui/material/Chip';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
+import { getCurrentUser } from "../../../../services/authService";
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -30,6 +31,7 @@ const CreateCompany: React.FC = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const companys = useSelector((state: State) => state.companys);
+  const currUser = getCurrentUser();
 
   const { AddPosition, CreateCompany } = bindActionCreators(
     actionsCreators,
@@ -37,22 +39,26 @@ const CreateCompany: React.FC = () => {
   );
 
   const doSubmit = (values: FormResult) => {
-    console.log("step form submited!");
-
+    console.log({currUser});
+    
     const newCompany = companys.find(
-      (curr) => curr.name === values.companyName
+      (curr) => curr.id === currUser.company?.id
     );
     const newPosition = { ...(values as Position) };
     if (!newCompany) {
-      CreateCompany({
-        id: v4(),
-        name: values.companyName,
-        description: "",
-        positions: [newPosition],
-      });
+        console.log("creating new");
+
+        CreateCompany({
+            id: v4(),
+            name: values.companyName,
+            description: "",
+            positions: [newPosition],
+        });
     } else {
-      newCompany.positions.push(newPosition);
-      AddPosition(newCompany);
+        console.log("inserting to existing", { newCompany });
+
+        newCompany.positions.push(newPosition);
+        AddPosition(newCompany);
     }
 
     console.log(newCompany);

@@ -21,17 +21,18 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { getCurrentUser } from "../../../services/authService";
 
 const PositionSection: React.FC = () => {
     let navigation = useNavigate();
     const location = useLocation();
-    const currUser = useSelector((state: State) => state.loginUser);
+    const currUser = getCurrentUser();
     const positionId: string = location.state as string;
     const [isShareShown, setShowResults] = React.useState(false);
     const [open, setOpen] = React.useState(false);
 
     const position = useSelector((state: State) => state.companys)
-        .find((curr) => curr.name === currUser.company!!.name)
+        .find((curr) => curr.id === currUser.company?.id)
         ?.positions?.find((curr) => curr._id === positionId)!!;
 
     const createTrack = () => {
