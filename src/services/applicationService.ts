@@ -20,6 +20,17 @@ export async function saveApplication(application: Track, companyId: string) {
   return data;
 }
 
+export async function suggestTrack(
+    track: Track,
+    compabyId: string | undefined,
+    usersIds: (String | undefined)[]
+) {
+    return await http.post(`${apiEndpoint}/matches/${compabyId}`, {
+        application: track,
+        users: usersIds,
+    });
+}
+
 export async function changeApplicationIsFavorite(
   applicationId: String,
   isFavorite: Boolean
