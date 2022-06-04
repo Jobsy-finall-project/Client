@@ -1,14 +1,14 @@
 import Card from "../../models/Card";
-import User from "../../models/User";
-import CV from "../../models/CV";
-import { Action } from "../actions/index";
-import { ActionType } from "../action-types/index";
-import SortAttribute from "../../models/SortAttribute";
-
 import Company from "../../models/Company";
+import CV from "../../models/CV";
 import DecodeJwt from "../../models/DecodeJwt";
-
+import SortAttribute from "../../models/SortAttribute";
 import Track from "../../models/Track";
+import User from "../../models/User";
+import { ActionType } from "../action-types/index";
+import { Action } from "../actions/index";
+
+
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -284,7 +284,7 @@ const companyReducer = (
     case ActionType.CREATE_COMPANY:
       let distinctState = [...state];
       if (
-        !distinctState.find((company) => company._id === action.payload._id || company.name === action.payload.name)
+        !distinctState.find((company) => company._id === action.payload._id)
       ) {
         distinctState = [...distinctState, action.payload];
       }
@@ -364,3 +364,4 @@ export {
   trackReducer,
   companyReducer,
 };
+

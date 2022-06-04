@@ -1,23 +1,20 @@
+import Autocomplete from '@mui/material/Autocomplete';
+import Chip from '@mui/material/Chip';
+import TextField from '@mui/material/TextField';
+import { Formik, FormikProps } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
+import { v4 } from "uuid";
 import * as Yup from "yup";
 import Position from "../../../../models/Position";
-import CreatePositionStyled from "./CreatePositionStyled";
-import Input from "../../input/Input";
-import Button from "../../../common/button/Button";
-import { v4 } from "uuid";
-import Company from "../../../../models/Company";
-import { MenuItem, Select } from "@mui/material";
-import Step from "../../../../models/Step"
-import Chip from '@mui/material/Chip';
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
 import { getCurrentUser } from "../../../../services/authService";
 import { savePosition } from "../../../../services/positionsService";
+import { actionsCreators, State } from "../../../../state";
+import Button from "../../../common/button/Button";
+import Input from "../../input/Input";
+import CreatePositionStyled from "./CreatePositionStyled";
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -68,7 +65,7 @@ const CreateCompany: React.FC = () => {
         const { data } = await savePosition(newCompany._id!!, newPosition);
         console.log({ data });
 
-        newCompany.positions.push(newPosition);
+        newCompany.positions.push(data);
         AddPosition(newCompany);
       }
 
