@@ -284,7 +284,7 @@ const companyReducer = (
     case ActionType.CREATE_COMPANY:
       let distinctState = [...state];
       if (
-        !distinctState.find((company) => company.id === action.payload.id || company.name === action.payload.name)
+        !distinctState.find((company) => company._id === action.payload._id || company.name === action.payload.name)
       ) {
         distinctState = [...distinctState, action.payload];
       }
@@ -293,12 +293,10 @@ const companyReducer = (
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
-        (curr) => curr.id === updatedCompany.id
+        (curr) => curr._id === updatedCompany._id
       );
 
       if (oldCompany !== -1) {
-          console.log("found old company", state[oldCompany]);
-
           updatedCompany.positions.forEach((posToAdd) => {
               if (
                   !state[oldCompany].positions.find(
@@ -308,8 +306,6 @@ const companyReducer = (
                   state[oldCompany].positions.push(posToAdd);
               }
           });
-          // state[oldCompany].positions = updatedCompany.positions;
-          console.log("new state:", state);
           return state;
       } else {
         return [...state, updatedCompany];
@@ -323,7 +319,7 @@ const companyReducer = (
       console.log(newStep);
 
       const companyIndex = state.findIndex(
-        (curr) => curr.id === companyToUpdate.id
+        (curr) => curr._id === companyToUpdate._id
       );
 
       console.log(companyIndex);

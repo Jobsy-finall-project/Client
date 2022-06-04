@@ -45,7 +45,7 @@ const PositionListSection: React.FC = () => {
 
   const currUser = getCurrentUser();
   const company = useSelector((state: State) => state.companys)
-        .find((curr) => curr.id === currUser?.company?.id)
+        .find((curr) => curr._id === currUser?.company)
   const positions = company ? company.positions : [] 
 
   const [search, setSearchBar] = useState("");
