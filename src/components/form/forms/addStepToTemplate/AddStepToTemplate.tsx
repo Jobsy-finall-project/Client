@@ -1,17 +1,18 @@
+import { Formik, FormikProps } from "formik";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Formik, FormikProps } from "formik";
 import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
-import * as Yup from "yup";
-import StepModel from "../../../../models/Step";
-import { AddStepToTemplateStyled } from "./AddStepToTemplateStyled";
-import Input from "../../input/Input";
-import Button from "../../../common/button/Button";
 import { v4 } from "uuid";
-import Position from "../../../../models/Position";
+import * as Yup from "yup";
 import Company from "../../../../models/Company";
+import Position from "../../../../models/Position";
+import StepModel from "../../../../models/Step";
+import { getCurrentUser } from "../../../../services/authService";
+import { actionsCreators, State } from "../../../../state";
+import Button from "../../../common/button/Button";
+import Input from "../../input/Input";
+import { AddStepToTemplateStyled } from "./AddStepToTemplateStyled";
 
 const AddStepToTemplateSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -22,9 +23,9 @@ const AddStepToTemplate: React.FC = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const location = useLocation();
-    const currUser = useSelector((state: State) => state.loginUser);
+    const currUser = getCurrentUser();
     const company = useSelector((state: State) => state.companys).find(
-        (curr) => curr.name === currUser.company?.name
+        (curr) => curr._id === currUser.company
     )!!;
 
     const { AddStepToTemplate } = bindActionCreators(actionsCreators, dispatch);

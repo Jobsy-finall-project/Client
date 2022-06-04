@@ -1,3 +1,4 @@
+import Link from '@mui/material/Link';
 import { AxiosError } from "axios";
 import { Formik, FormikProps } from "formik";
 import React, { useState } from "react";
@@ -11,8 +12,6 @@ import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import SignInFormStyled from "./SignInFormStyled";
-import Link from '@mui/material/Link';
-import TitleSection from "../../../section/titleSection/TitleSection";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -51,6 +50,7 @@ const SignInForm: React.FC = () => {
       await login(copyData.email, copyData.password);
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
+
       const currentUser = getCurrentUser();
       if (currentUser && currentUser.role === "Candidate") {
         navigate("/");
@@ -119,7 +119,15 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
         {/* <div className="forget-password">
           <p>Forget password?</p>
         </div> */}
-
+ <Button
+          title="Login"
+          color=""
+          height="50px"
+          width="170px"
+          top="32px"
+          left="100px"
+          onClick={handleSubmit}
+        />
           <Link className="link-sign-up" href="/sign-up">
                     {"Don't have an account? Sign Up"}
           </Link>

@@ -9,7 +9,7 @@ export default interface DecodeJwt {
   lastName: string;
   email: string;
   role: "Anonymous" | "Candidate" | "Admin" | "HR";
-  company?: Company;
+  company?: string;
   applications?: Track[]
   cvs?: CV[]
 }
