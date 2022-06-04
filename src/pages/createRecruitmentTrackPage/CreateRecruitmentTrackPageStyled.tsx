@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const CreateRecruitmentTrackPageStyled = styled.div`
+
+font-family: 'Quicksand', sans-serif;
+
   & .container-page {
     display: flex;
     flex-direction: row;

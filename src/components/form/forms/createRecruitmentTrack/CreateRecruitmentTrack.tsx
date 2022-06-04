@@ -43,7 +43,7 @@ const CreateRecruitmentTrack: React.FC = () => {
     const {createTrack} = bindActionCreators(actionsCreators, dispatch);
     const tracks = useSelector((state: State) => state.tracks);
     const currentUser = getCurrentUser();
-    const doSubmit = async (values: Track) => {
+    const doSubmit = async (values: any) => {
         let companyId;
         if(currentUser && currentUser.role === "HR"){
             const {data} = await getCompanyByHrId();
@@ -146,7 +146,7 @@ const RecruitmentTrackForm: (
                                 })}
                                 <MenuItem value={"new"} onClick={() => {
                                     setNewCompany(true)
-                                }}>add new</MenuItem>
+                                }}>Add new company</MenuItem>
                             </Select>
                         </FormControl>
                     </Box>}
@@ -171,6 +171,8 @@ const RecruitmentTrackForm: (
                     touched={touched.positionName}
                     type="text"
                 />
+                <textarea placeholder="add job description.." rows = {10} cols = {80} name = "description" value={values.positionDescription} onChange={handleChange}>
+                </textarea>
                 <Input
                     name="positionDescription"
                     label="Position Description"
