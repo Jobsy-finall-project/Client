@@ -225,7 +225,7 @@ const PositionSection: React.FC = () => {
             />
 
             <div>
-                <Button
+                { position && position.template && position.template.length>0 ?<Button
                     title="Share"
                     color=""
                     height="50px"
@@ -234,7 +234,7 @@ const PositionSection: React.FC = () => {
                     left="auto"
                     right="auto"
                     onClick={() => createTrack(personName)}
-                />
+                />: <h6>Please add steps in order to share your position</h6>}
                 <TableContainer
                     sx={{ mx: "auto", mt: 1, width: 3 / 4 }}
                     component={Paper}
