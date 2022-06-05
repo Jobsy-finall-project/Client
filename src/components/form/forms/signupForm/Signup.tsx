@@ -30,20 +30,23 @@ const myRadio: CSS.Properties = {
 };
 
 const SignupSchema = Yup.object().shape({
-  userName: Yup.string()
-    .min(2, "User name is too short, at least two character")
-    .max(50, "User name is too long, no more than 50 characters.")
-    .required("Required"),
-  role: Yup.string().required("Required"),
-  // .oneOf(["User", "Admin", "HR"]),
-  email: Yup.string().email("Invalid email").required("Required"),
-  password: Yup.string()
-    .required("No password provided.")
-    .min(4, "Password is too short - should be 4 chars minimum.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
-      "Password can only contain minimum four characters, at least one letter and one number"
-    ),
+    userName: Yup.string()
+        .min(2, "User name is too short, at least two character")
+        .max(50, "User name is too long, no more than 50 characters.")
+        .required("Required"),
+    role: Yup.string().required("Required"),
+    // .oneOf(["User", "Admin", "HR"]),
+    email: Yup.string().email("Invalid email").required("Required")
+    .min(10,"Invalid email, email is too short")
+    .max(255,"Invalid email, email is too long")
+    .lowercase("Invalid email"),
+    password: Yup.string()
+        .required("No password provided.")
+        .min(4, "Password is too short - should be 4 chars minimum.")
+        .matches(
+            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
+            "Password can only contain minimum four characters, at least one letter and one number"
+        ),
 });
 
 const SignupForm: React.FC = () => {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as Colors from "../../assets/Colors";
 
 const HeaderStyled = styled.div`
-  background-color: ${Colors.PRAIMARY};
+  background-color: ${Colors.HEADER};
 
   & .brand-title {
     color: ${Colors.WHITE};
