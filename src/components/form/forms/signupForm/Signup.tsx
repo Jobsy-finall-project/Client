@@ -44,8 +44,8 @@ const SignupSchema = Yup.object().shape({
         .required("No password provided.")
         .min(4, "Password is too short - should be 4 chars minimum.")
         .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
-            "Password can only contain minimum four characters, at least one letter and one number"
+          /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
+          "Password can only contain minimum four characters, at least one letter and one number"
         ),
 });
 
