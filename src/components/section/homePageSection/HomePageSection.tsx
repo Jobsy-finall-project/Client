@@ -167,7 +167,7 @@ const HomePageSection: React.FC = () => {
                           {
                             currTrack.position && currTrack.position.hrId && <ShareIcon/>
                           }
-                          {console.log(currTrack.position)}
+
                         </ListItemIcon>
 
                         }
