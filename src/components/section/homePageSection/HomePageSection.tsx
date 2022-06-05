@@ -80,15 +80,18 @@ const HomePageSection: React.FC = () => {
   const searchFunction = (track: Track, query: string) => {
     const searchTerm = query.toLowerCase();
     return (
-      track.company.name.toLowerCase().includes(searchTerm) ||
-      track.position.name.toLowerCase().includes(searchTerm) ||
-      track.position.description?.toLowerCase().includes(searchTerm)
+        track.company.name && track.company.name.toLowerCase().includes(searchTerm) ||
+        track.position.name && track.position.name.toLowerCase().includes(searchTerm) ||
+        track.position.description && track.position.description?.toLowerCase().includes(searchTerm)
     );
   };
 
   return (
     <HomePageSectionStyled>
+
+
       <Grid container
+
         width={"100%"}
         className="container"
         spacing={3}
@@ -96,8 +99,11 @@ const HomePageSection: React.FC = () => {
         alignItems="center"
         direction="column"
       >
+
+        { tracks && tracks.length>0 ?
+            <>
         <Grid item>
-          <h3 className="activePositionsTitle"> My Active positions:</h3>
+          <h3 className="activePositionsTitle"> My Active Tracks:</h3>
         </Grid>
         <Grid item>
         <Button
@@ -163,9 +169,27 @@ const HomePageSection: React.FC = () => {
                 </div>
               );
             })}
+
           </List>
         </Grid>
+            </> :
+            <>
+            <h6>Add your first recruitment track</h6>
+          <Grid item>
+          <Button
+          className="addNewTrackButton"
+          title="Add new recruitment track"
+          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          height="50px"
+          width="300px"
+          top="0"
+          left="0"
+          onClick={handleAddTrack}
+          ></Button>
+          </Grid>
+            </>}
       </Grid>
+
     </HomePageSectionStyled>
   );
 };
