@@ -8,13 +8,11 @@ import User from "../../models/User";
 import { ActionType } from "../action-types/index";
 import { Action } from "../actions/index";
 
-
-
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
   { id: 1, title: "Card 2", content: "Card Content 2" },
   { id: 2, title: "Card 2", content: "Card Content 2" },
-  { id: 3, title: "Card 2", content: "Card Content 2" },
+  { id: 3, title: "Card 2", content: "Card Content 2" }
 ];
 
 const initialUserState: User[] = [
@@ -24,7 +22,7 @@ const initialUserState: User[] = [
     userName: "MayaAssayag",
     email: "maya@gmail.com",
     password: "a1234",
-    role: "Admin",
+    role: "Admin"
   },
   {
     firstName: "Emily",
@@ -32,7 +30,7 @@ const initialUserState: User[] = [
     userName: "Emilyz",
     email: "emilyz@gmail.com",
     password: "123",
-    role: "Candidate",
+    role: "Candidate"
   },
   {
     firstName: "yohai",
@@ -40,8 +38,8 @@ const initialUserState: User[] = [
     userName: "yohai109",
     email: "yohai109@gmail.com",
     password: "sdffg123",
-    role: "HR",
-  },
+    role: "HR"
+  }
 ];
 
 const initialLoginUserState: DecodeJwt = {
@@ -53,7 +51,6 @@ const initialLoginUserState: DecodeJwt = {
   email: "email@gmail.com",
   cvs: [],
   applications: []
-
 };
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
@@ -62,17 +59,17 @@ const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
 
 const initialCVsState: CV[] = [
   {
-    _id:"",
+    _id: "",
     title: "Senior devops engineer",
     cvFile: "",
-    tags: [],
+    tags: []
   },
   {
-    _id:"",
+    _id: "",
     title: "Senior fullstack engineer",
     cvFile: "",
-    tags: [],
-  },
+    tags: []
+  }
 ];
 
 const initialRecTracks: Track[] = [];
@@ -246,8 +243,8 @@ const sortAttributeReducer = (
 };
 
 const trackReducer = (
-    state: Array<Track> = initialRecTracks,
-    action: Action
+  state: Array<Track> = initialRecTracks,
+  action: Action
 ) => {
     switch (action.type) {
         case ActionType.CREATE_TRACK:
@@ -277,6 +274,7 @@ const trackReducer = (
         default:
             return state;
     }
+
 };
 
 const companyReducer = (
@@ -286,35 +284,31 @@ const companyReducer = (
   switch (action.type) {
     case ActionType.CREATE_COMPANY:
       let distinctState = [...state];
-      if (
-        !distinctState.find((company) => company._id === action.payload._id)
-      ) {
-        console.log(action.payload)
+      if (!distinctState.find(company => company._id === action.payload._id)) {
+        console.log(action.payload);
         distinctState = [...distinctState, action.payload];
-
       }
       return distinctState;
 
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
-        (curr) => curr._id === updatedCompany._id
+        curr => curr._id === updatedCompany._id
       );
 
       if (oldCompany !== -1) {
-
-          updatedCompany.positions.forEach((posToAdd) => {
-            
-              if (
-                  !state[oldCompany].positions.find(
-                      (oldPos) => oldPos._id === posToAdd._id
-                  )
-
-                  ) {
-                  state[oldCompany].positions.push(posToAdd);
-              }
+        updatedCompany &&
+          updatedCompany.positions &&
+          updatedCompany.positions.forEach(posToAdd => {
+            if (
+              !state[oldCompany].positions.find(
+                oldPos => oldPos._id === posToAdd._id
+              )
+            ) {
+              state[oldCompany].positions.push(posToAdd);
+            }
           });
-          return state;
+        return state;
       } else {
         return [...state, updatedCompany];
       }
@@ -327,13 +321,13 @@ const companyReducer = (
       console.log(newStep);
 
       const companyIndex = state.findIndex(
-        (curr) => curr._id === companyToUpdate._id
+        curr => curr._id === companyToUpdate._id
       );
 
       console.log(companyIndex);
       if (companyIndex !== -1) {
         const positionIndex = state[companyIndex].positions.findIndex(
-          (curr) => curr._id === positionToUpdate._id
+          curr => curr._id === positionToUpdate._id
         );
         console.log(positionIndex);
         if (positionIndex !== -1) {
@@ -370,6 +364,5 @@ export {
   sortAttributeReducer,
   cvsReducer,
   trackReducer,
-  companyReducer,
+  companyReducer
 };
-
