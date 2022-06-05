@@ -13,6 +13,8 @@ import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import { AddStepToTemplateStyled } from "./AddStepToTemplateStyled";
+import {saveStepToPosition} from "../../../../services/stepService";
+import TitleSection from "../../../section/titleSection/TitleSection";
 
 const AddStepToTemplateSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -30,12 +32,16 @@ const AddStepToTemplate: React.FC = () => {
 
     const { AddStepToTemplate } = bindActionCreators(actionsCreators, dispatch);
 
-    const doSubmit = (values: StepModel) => {
+    const doSubmit = async (values: StepModel) => {
         console.log("step form submited!");
         const position = location.state as Position;
-        const newStep: StepModel = {
-            ...values,
+        const newStep: any = {
+            title:values.title,
+            description:values.description
         };
+
+        const data = await saveStepToPosition(newStep,position._id as string);
+        console.log({data});
 
         const positionToUpdate: Position = {
             ...position,
@@ -78,6 +84,7 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
 }) => {
     return (
         <AddStepToTemplateStyled>
+            <TitleSection title="Create Step" />
             <form onSubmit={handleSubmit} className="needs-validation">
                 <Input
                     name="title"
@@ -90,7 +97,7 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
                     type="text"
                 />
                 <Input
-                    name="stepDetails"
+                    name="description"
                     label="Step Details"
                     placeholder=""
                     value={values.description}
