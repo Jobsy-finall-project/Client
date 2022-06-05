@@ -2,8 +2,7 @@
 
 .App {
   text-align: center;
-  background-image: linear-gradient(-180deg, #def5e3 0%, #e7f9f7 80%);
-  height: 100vh;
+  background-image: linear-gradient(-180deg, #d3f2ff 0%, #a9ceca 100%);
 }
 
 .App-logo {
