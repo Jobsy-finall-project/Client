@@ -49,6 +49,24 @@ export const deleteCard = (id: number) => {
   };
 };
 
+export const deleteTrack = (id: string) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.DELETE_TRACK,
+      payload: id,
+    });
+  };
+};
+
+export const deletePosition = (company: Company) => {
+  return (dispatch: Dispatch<Action>) => {
+    dispatch({
+      type: ActionType.DELETE_POSITION,
+      payload: company,
+    });
+  };
+};
+
 export const createTrack = (track: Track) => {
   return (dispatch: Dispatch<Action>) => {
     dispatch({
