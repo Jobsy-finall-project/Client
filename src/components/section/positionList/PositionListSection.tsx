@@ -34,10 +34,14 @@ const PositionListSection: React.FC = () => {
   );
 
   async function getCompanyPositions() {
+
       const { data } = await getCompanyByHrId();
-      CreateCompany(data);
-      console.log(data)
-      AddPosition(data);
+      const curUser = getCurrentUser();
+      console.log({curUser});
+      const newData = {...data, positions:data.positions.filter((cur:Position)=>cur.hrId===curUser._id)};
+      console.log({newData});
+      CreateCompany(newData);
+      AddPosition(newData);
   }
 
   useEffect(() => {
@@ -48,7 +52,7 @@ const PositionListSection: React.FC = () => {
   const currUser = getCurrentUser();
   const company = useSelector((state: State) => state.companys)
       .find((curr) => curr._id === currUser?.company)
-      const positions = company ? company.positions : [] 
+      const positions = company ? company.positions.filter((cur:Position)=>cur.hrId===currUser._id) : []
 
 
 
