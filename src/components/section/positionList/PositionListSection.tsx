@@ -36,17 +36,22 @@ const PositionListSection: React.FC = () => {
   async function getCompanyPositions() {
       const { data } = await getCompanyByHrId();
       CreateCompany(data);
+      console.log(data)
       AddPosition(data);
   }
 
   useEffect(() => {
+    
       getCompanyPositions();
   }, []);
 
   const currUser = getCurrentUser();
   const company = useSelector((state: State) => state.companys)
-        .find((curr) => curr._id === currUser?.company)
-  const positions = company ? company.positions : [] 
+      .find((curr) => curr._id === currUser?.company)
+      const positions = company ? company.positions : [] 
+
+
+
 
   const [search, setSearchBar] = useState("");
   
@@ -67,10 +72,13 @@ const PositionListSection: React.FC = () => {
 
   const searchFunction = (position: Position, query: string) => {
       const searchTerm = query.toLowerCase();
+      if (position.name) {
+
       return (
-          position.name.toLowerCase().includes(searchTerm) ||
+          position.name.toLowerCase().includes(searchTerm) || 
           position.description?.toLowerCase().includes(searchTerm)
       );
+      }
   };
 
   return (

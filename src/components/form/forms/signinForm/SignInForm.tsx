@@ -1,4 +1,3 @@
-import Link from '@mui/material/Link';
 import { AxiosError } from "axios";
 import { Formik, FormikProps } from "formik";
 import React, { useState } from "react";
@@ -12,6 +11,13 @@ import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import SignInFormStyled from "./SignInFormStyled";
+import User from "../../../../models/User";
+import DecodeJwt from "../../../../models/DecodeJwt";
+import Link from "@mui/material/Link";
+import TitleSection from "../../../section/titleSection/TitleSection";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SignInSchema = Yup.object().shape({
   email: Yup.string()
@@ -33,6 +39,7 @@ const SignInForm: React.FC = () => {
   const [errors, setErrors] = useState({ email: "", username: "" });
 
   const { createUser } = bindActionCreators(actionsCreators, dispatch);
+  const { loginUser } = bindActionCreators(actionsCreators, dispatch);
 
   const users = useSelector((state: State) => state.users);
 
@@ -50,14 +57,28 @@ const SignInForm: React.FC = () => {
       await login(copyData.email, copyData.password);
       //let user: User = { id: users.length, ...copyData, role: "Client" };
       //TODO:createUser(user);
-
-      const currentUser = getCurrentUser();
+      const currentUser = await getCurrentUser();
+      if (currentUser) {
+        const user: DecodeJwt = {
+          _id: currentUser._id.toString(),
+          firstName: currentUser.firstName.toString(),
+          lastName: currentUser.lastName.toString(),
+          role: currentUser.role,
+          userName: currentUser.userName,
+          email: currentUser.email,
+          company: currentUser.company,
+          cvs: currentUser.cvs,
+          applications: currentUser.applications
+        };
+        loginUser(user);
+      }
       if (currentUser && currentUser.role === "Candidate") {
         navigate("/applications");
       } else if (currentUser && currentUser.role === "HR") {
         navigate("/positions");
       }
     } catch (err) {
+      toast.error((err as AxiosError).response?.data);
       if (
         (err as AxiosError).response &&
         (err as AxiosError).response?.status === 400
@@ -119,7 +140,8 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
         {/* <div className="forget-password">
           <p>Forget password?</p>
         </div> */}
- <Button
+        <ToastContainer />
+        <Button
           title="Login"
           color=""
           height="50px"
@@ -128,9 +150,9 @@ const LoginForm: (props: FormikProps<SignInFormModel>) => JSX.Element = ({
           left="100px"
           onClick={handleSubmit}
         />
-          <Link className="link-sign-up" href="/sign-up">
-                    {"Don't have an account? Sign Up"}
-          </Link>
+        <Link className="link-sign-up" href="/sign-up">
+          {"Don't have an account? Sign Up"}
+        </Link>
       </form>
     </SignInFormStyled>
   );
