@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import Position from "../../../models/Position";
 import StepModel from "../../../models/Step";
 import { useNavigate } from "react-router-dom";
@@ -32,6 +32,8 @@ import { ListItemIcon } from "@mui/material";
 import ButtonMui from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListSection from "../listSection/ListSection";
+import {getApplicationById} from "../../../services/applicationService";
+import {log} from "util";
 
 interface TrackSectionProp {
   track: Track;
@@ -39,20 +41,35 @@ interface TrackSectionProp {
 
 const TrackSection: React.FC<TrackSectionProp> = (props) => {
   let navigation = useNavigate();
-  const trackToShow = props.track;
-  
+    const tracks = useSelector((state: State) => state.tracks);
+    const applicationId = props.track._id;
+    const [currentTrack, setCurrentTrack] = useState(tracks.find(curr => curr._id === props.track._id)!!);
+    console.log("before all", currentTrack);
+
+    useEffect(( ) => {
+        async function getApplication(){
+            const trackToShow = await getApplicationById(applicationId as string);
+            setCurrentTrack(trackToShow);
+
+        }
+        getApplication();
+    }, []);
+
   return (
+
     <TrackSectionStyled>
+        {console.log("currentTrack1",currentTrack)}
       <div className="container">
-        <Typography className="trackTitle" variant="h3">{trackToShow.position.name}</Typography>
+        <Typography className="trackTitle" variant="h3">{
+            currentTrack && currentTrack.position.name}</Typography>
         <Typography className="trackDescription" variant="body1">
-          {trackToShow.position.description}
+          {currentTrack && currentTrack.position.description}
         </Typography>
        
         <Timeline
           position="alternate"
           className="timeline">
-          {trackToShow.steps?.map((step) => {
+          { currentTrack && currentTrack.steps?.map((step) => {
             return (
               <TimelineItem
                 onClick={() => {
@@ -65,7 +82,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                   variant="body2"
                   className="timelineDate"
                 >
-                  {step.date}
+                  {step.time && step.time.slice(0,10)}
                 </TimelineOppositeContent>
                 <TimelineSeparator
                   className="timelineSeperator"
@@ -94,7 +111,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
           top="32px"
           left="100px"
           onClick={() => {
-            navigation("/create-step", { state: trackToShow._id });
+            navigation("/create-step", { state: currentTrack._id });
           }}
      
         />

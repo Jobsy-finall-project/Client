@@ -10,6 +10,8 @@ import CreateStepStyled from "./CreateStepStyled";
 import Input from "../../input/Input";
 import Button from "../../../common/button/Button";
 import { v4 } from "uuid";
+import TitleSection from "../../../section/titleSection/TitleSection";
+import {saveStepToApllication} from "../../../../services/stepService";
 
 const CreateStepSchema = Yup.object().shape({
   title: Yup.string().required("Required"),
@@ -28,17 +30,21 @@ const CreateStep: React.FC = () => {
 
   const { createStep } = bindActionCreators(actionsCreators, dispatch);
 
-  const doSubmit = (values: Step) => {
-    console.log("step form submited!");
-    const applicationId = location.state as String;
-    const newStep: Step = {
-      ...values,
+  const doSubmit = async (values: Step) => {
+    const applicationId = location.state as string;
+    const newStep: any = {
+      title:values.title,
+      description: values.description
     };
+    const data = await saveStepToApllication(newStep, applicationId);
+    console.log({data});
 
     const trackToUpdate = tracks.find(curr => curr._id === applicationId)!!
-    trackToUpdate.steps.push(newStep)
+    console.log(({trackToUpdate}));
+    trackToUpdate.steps ? trackToUpdate.steps.push(newStep) : trackToUpdate.steps=[newStep];
 
     createStep(trackToUpdate);
+    console.log("track",tracks.find(curr => curr._id === applicationId)!!);
     navigate(-1);
   };
 
@@ -47,7 +53,7 @@ const CreateStep: React.FC = () => {
       initialValues={{
         id: v4(),
         title: "",
-        date: new Date().toDateString(),
+        time: new Date().toString(),
       }}
       validationSchema={CreateStepSchema}
       onSubmit={(values) => {
@@ -69,6 +75,7 @@ const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
   return (
     <CreateStepStyled>
       <form onSubmit={handleSubmit} className="needs-validation">
+        <TitleSection title="Create Step" />
         <Input
           name="title"
           label="Title"
@@ -80,7 +87,7 @@ const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
           type="text"
         />
         <Input
-          name="stepDetails"
+          name="description"
           label="Step Details"
           placeholder=""
           value={values.description}
