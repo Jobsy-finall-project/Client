@@ -91,9 +91,6 @@ const HomePageSection: React.FC = () => {
         <Grid width={"100%"} className="container" container spacing={5} justifyContent="center" alignItems="center">
           {/* <Grid item container>
       <div>
-      <Button component={Link} to="/positions" color="primary">
-      MyButton
-    </Button>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
 
           <Grid item container>

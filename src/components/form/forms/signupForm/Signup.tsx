@@ -18,13 +18,13 @@ import * as Yup from "yup";
 import Company from "../../../../models/Company";
 import SignUpFormModel from "../../../../models/forms/Signup";
 import User from "../../../../models/User";
-import { getCurrentUser, loginWithJwt } from "../../../../services/authService";
 import { getAllCompanys } from "../../../../services/companyService";
 import { register } from "../../../../services/userService";
 import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
-
+import { getCurrentUser, login } from "../../../../services/authService";
+import DecodeJwt from "../../../../models/DecodeJwt";
 const myRadio: CSS.Properties = {
   margin: "25px 65% 0 auto",
 };
@@ -56,6 +56,7 @@ const SignupForm: React.FC = () => {
 
   async function getCompanys() {
     const { data } = await getAllCompanys();
+    console.log(data)
     data.forEach((company: Company) => CreateCompany(company));
   }
 
@@ -64,6 +65,7 @@ const SignupForm: React.FC = () => {
   }, []);
 
   const { createUser } = bindActionCreators(actionsCreators, dispatch);
+  const { loginUser } = bindActionCreators(actionsCreators, dispatch);
 
   const users = useSelector((state: State) => state.users);
 
@@ -97,9 +99,25 @@ const SignupForm: React.FC = () => {
 
     try {
       const response = await register(user);
-      loginWithJwt(response.headers["x-auth-token"]);
+      // loginWithJwt(response.headers["x-auth-token"]);
       createUser(user);
+      await login(copyData.email, copyData.password);
       const currentUser = getCurrentUser();
+      if(currentUser) {
+        const user: DecodeJwt= {
+          _id: currentUser._id.toString(),
+          firstName: currentUser.firstName.toString(),
+          lastName: currentUser.lastName.toString(),
+          role: currentUser.role,
+          userName: currentUser.userName,
+          email: currentUser.email,
+          company: currentUser.company,
+          cvs: currentUser.cvs,
+          applications: currentUser.applications
+        }
+        loginUser(user)
+
+    }
       if (currentUser && currentUser.role === "Candidate") {
         navigate("/applications");
       } else if (currentUser && currentUser.role === "HR") {
