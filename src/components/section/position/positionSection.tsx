@@ -27,9 +27,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import CV from "../../../models/CV";
 import Track from "../../../models/Track";
 import UserModel from "../../../models/User";
-import { suggestTrack } from "../../../services/applicationService";
+import {getApplicationById, suggestTrack} from "../../../services/applicationService";
 import { getCurrentUser } from "../../../services/authService";
-import { getSuggestios } from "../../../services/positionsService";
+import {getPositionById, getSuggestios} from "../../../services/positionsService";
 import { State } from "../../../state";
 import Button from "../../common/button/Button";
 import { PositionStyled } from "./positionsStyled";
@@ -41,15 +41,28 @@ interface userSuggestions {
 }
 
 const PositionSection: React.FC = () => {
+
     let navigation = useNavigate();
     const location = useLocation();
     const currUser = getCurrentUser();
     const positionId: string = location.state as string;
     const [open, setOpen] = React.useState(false);
-
-    const position = useSelector((state: State) => state.companys)
+    const position_state = useSelector((state: State) => state.companys)
         .find((curr) => curr._id === currUser.company)
         ?.positions?.find((curr) => curr._id === positionId)!!;
+    const [position, setPosition] = React.useState(position_state);
+
+
+    useEffect(( ) => {
+        async function getPosition(){
+            const current_position = await getPositionById(positionId);
+            if(current_position) {
+                setPosition(current_position);
+            }
+        }
+        getPosition();
+
+    }, []);
 
     const createTrack = async (users: string[]) => {
         console.log({ users });
@@ -154,13 +167,13 @@ const PositionSection: React.FC = () => {
     return (
         <PositionStyled>
             <Typography className="trackTitle" variant="h3">
-                {position.name}
+                {position && position.name}
             </Typography>
             <Typography className="trackDescription" variant="body1">
-                {position.description}
+                {position && position.description}
             </Typography>
             <Timeline>
-                {position.template?.map((step, index) => (
+                {position && position.template?.map((step, index) => (
                     <TimelineItem>
                         <TimelineSeparator>
                             <TimelineDot>
