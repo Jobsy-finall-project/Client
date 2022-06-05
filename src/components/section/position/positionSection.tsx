@@ -8,7 +8,9 @@ import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import {
     Alert,
     Checkbox,
+    Chip,
     Paper,
+    Rating,
     Snackbar,
     Table,
     TableBody,
@@ -18,9 +20,11 @@ import {
     TableRow,
     Typography,
 } from "@mui/material";
+import DownloadIcon from "@mui/icons-material/Download";
 import React, { ChangeEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import CV from "../../../models/CV";
 import Track from "../../../models/Track";
 import UserModel from "../../../models/User";
 import {getApplicationById, suggestTrack} from "../../../services/applicationService";
@@ -32,7 +36,8 @@ import { PositionStyled } from "./positionsStyled";
 
 interface userSuggestions {
     user: UserModel;
-    score: Number;
+    score: number;
+    cvId: string;
 }
 
 const PositionSection: React.FC = () => {
@@ -111,6 +116,22 @@ const PositionSection: React.FC = () => {
         setOpen(false);
     };
 
+    const downloadFile = (file: CV) => {
+        fetch(file.cvFile)
+            .then((res) => res.blob())
+            .then((blob) => {
+                const url = window.URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.setAttribute("download", file.title);
+
+                // Append to html link element page
+                document.body.appendChild(link);
+
+                // Start download
+                link.click();
+            });
+    };
     const handleChange = (
         event: ChangeEvent<HTMLInputElement>,
         checked: boolean
@@ -133,6 +154,16 @@ const PositionSection: React.FC = () => {
         }
     };
 
+    const checkAll = (
+        event: ChangeEvent<HTMLInputElement>,
+        checked: boolean
+    ) => {
+        if (checked) {
+            setPersonName([...suggestions.map((curr) => curr.user.userName)]);
+        } else {
+            setPersonName([]);
+        }
+    };
     return (
         <PositionStyled>
             <Typography className="trackTitle" variant="h3">
@@ -175,23 +206,24 @@ const PositionSection: React.FC = () => {
                     height="50px"
                     width="170px"
                     top="32px"
-                    left="100px"
+                    left="auto"
+                    right="auto"
                     onClick={() => createTrack(personName)}
                 />
                 <TableContainer
-                    sx={{ mx: "auto", mt: 1, width: 1 / 2 }}
+                    sx={{ mx: "auto", mt: 1, width: 3 / 4 }}
                     component={Paper}
                 >
                     <Table size="small" aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <TableCell size="small" align="center">
-                                    <Checkbox />
+                                    <Checkbox onChange={checkAll} />
                                 </TableCell>
-                                <TableCell align="left">Full Name</TableCell>
-                                <TableCell align="left">Email</TableCell>
-                                <TableCell align="left">CV</TableCell>
-                                <TableCell align="left">
+                                <TableCell align="left" sx={{typography: "h5"}}>Full Name</TableCell>
+                                <TableCell align="left" sx={{typography: "h5"}}>Email</TableCell>
+                                <TableCell align="left" sx={{typography: "h5"}}>CV</TableCell>
+                                <TableCell align="left" sx={{typography: "h5"}}>
                                     Match Percentage
                                 </TableCell>
                             </TableRow>
@@ -211,20 +243,37 @@ const PositionSection: React.FC = () => {
                                             aria-label="Checkbox demo"
                                             value={currSuggestion.user.userName}
                                             onChange={handleChange}
+                                            checked={personName.includes(
+                                                currSuggestion.user.userName
+                                            )}
                                         />
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="left" sx={{typography: "h5"}}>
                                         {currSuggestion.user.firstName}{" "}
                                         {currSuggestion.user.lastName}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="left" sx={{typography: "h5"}}>
                                         {currSuggestion.user.email}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {currSuggestion.user.cvs}
+                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                        {currSuggestion.user?.cvs?.map(
+                                            (currCv) => (
+                                                <Chip
+                                                    label={currCv.title}
+                                                    color="primary"
+                                                    icon={<DownloadIcon />}
+                                                    size="medium"
+                                                    variant="outlined"
+                                                    onClick={() => {
+                                                        downloadFile(currCv);
+                                                    }}
+                                                />
+                                            )
+                                        )}
                                     </TableCell>
                                     <TableCell align="left">
-                                        {currSuggestion.score}
+                                    <Rating name="read-only" value={currSuggestion.score} readOnly />
+                                        
                                     </TableCell>
                                 </TableRow>
                             ))}
