@@ -1,6 +1,7 @@
 import http from "./httpService";
 import config from "../config.json";
 import Track from "../models/Track";
+import Step from "../models/Step";
 
 const { apiUrl } = config;
 
@@ -13,6 +14,12 @@ function applicationUrl(id: String) {
 export async function getUserApplications() {
   const { data } = await http.get(`${apiEndpoint}/user/all`);
   return data;
+}
+
+export async function getApplicationById(applicationId: string) {
+    const { data } = await http.get(`${apiEndpoint}/${applicationId}`);
+    console.log({data});
+    return data;
 }
 
 export async function saveApplication(application: Track, companyId: string) {

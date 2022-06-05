@@ -12,4 +12,6 @@ export const DARK_BLUE: string = "#233142";
 export const LIGHT_RED: string = "#f95959";
 export const PRAIMARY: string = "#daf6fa";
 export const LIGHT_PINK: string = "#FEEDEA";
+export const THEME: string = "#d5f6ff";
 export const HEADER: string = "#C3E5CD";
+

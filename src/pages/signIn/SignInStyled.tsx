@@ -24,10 +24,12 @@ const SignInStyled = styled.div`
     margin: 0 auto;
     text-align:center;
     font-family: Gill Sans;
+     min-height:900px;
   }
 
 
   & .bg-office{
+   
     background-image: url("https://wallpaperaccess.com/full/1393206.jpg");
   }
 

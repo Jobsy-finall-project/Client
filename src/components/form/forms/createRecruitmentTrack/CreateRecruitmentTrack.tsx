@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionsCreators, State } from "../../../../state";
 import UploadImage from "../../uploadImg/UploadImage";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import Grid from "@mui/material/Grid";
 import CommentFieldStyled from "./CommentFieldStyled";
@@ -27,7 +27,7 @@ import { getCurrentUser } from "../../../../services/authService";
 import {
   getAllCompanys,
   getCompanyByHrId,
-  saveCompany,
+  saveCompany
 } from "../../../../services/companyService";
 import Position from "../../../../models/Position";
 import Step from "../../../../models/Step";
@@ -37,18 +37,18 @@ interface CreateRectuitmentTrackFormProps {
   formik: any;
 }
 const CreateRecruitmentTrackSchema = Yup.object().shape({
-    companyName: Yup.string().required("Required"),
-    positionName: Yup.string()
-        .required("Required")
-        .min(4, "Password is too short - should be 4 chars minimum."),
-    positionCode: Yup.string(),
-    description: Yup.string().max(250, "Description is too long."),
-    comments: Yup.array(Yup.string()),
+  companyName: Yup.string().required("Required"),
+  positionName: Yup.string()
+    .required("Required")
+    .min(4, "Password is too short - should be 4 chars minimum."),
+  positionCode: Yup.string(),
+  description: Yup.string().max(250, "Description is too long."),
+  comments: Yup.array(Yup.string())
 });
 
 const CreateRecruitmentTrack: React.FC = () => {
-    const navigation = useNavigate();
-    const dispatch = useDispatch();
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
 
   const { createTrack } = bindActionCreators(actionsCreators, dispatch);
   const { CreateCompany } = bindActionCreators(actionsCreators, dispatch);
@@ -70,12 +70,12 @@ const CreateRecruitmentTrack: React.FC = () => {
       companyName: "",
       positionName: "",
       positionDescription: "",
-      comments: [""],
+      comments: [""]
     },
     validationSchema: CreateRecruitmentTrackSchema,
-    onSubmit: (values) => {
+    onSubmit: values => {
       doSubmit(values);
-    },
+    }
   });
   const doSubmit = async (values: any) => {
     let companyId;
@@ -86,7 +86,7 @@ const CreateRecruitmentTrack: React.FC = () => {
       const company: Company = {
         name: values.companyName,
         description: "",
-        positions: [],
+        positions: []
       };
       console.log({ company });
       const { data } = await saveCompany(company);
@@ -95,7 +95,7 @@ const CreateRecruitmentTrack: React.FC = () => {
     const positionToAdd: Position = {
       name: values.positionName,
       description: values.positionDescription,
-      tags: [],
+      tags: []
     };
     console.log({ positionToAdd });
     const track: any = {
@@ -105,7 +105,7 @@ const CreateRecruitmentTrack: React.FC = () => {
       steps: [],
       comments: [],
       cvFiles: [],
-      isMatch: true,
+      isMatch: true
     };
 
     const data = await saveApplication(track, companyId);
@@ -120,10 +120,10 @@ const CreateRecruitmentTrack: React.FC = () => {
         companyName: "",
         positionName: "",
         positionDescription: "",
-        comments: [""],
+        comments: [""]
       }}
       validationSchema={CreateRecruitmentTrackSchema}
-      onSubmit={(values) => {
+      onSubmit={values => {
         doSubmit(values);
       }}
       component={RecruitmentTrackForm}
@@ -132,15 +132,15 @@ const CreateRecruitmentTrack: React.FC = () => {
 };
 
 const RecruitmentTrackForm: (
-    props: FormikProps<RecruitmentTrackModel>
+  props: FormikProps<RecruitmentTrackModel>
 ) => JSX.Element = ({
   handleSubmit,
   handleChange,
   values,
   errors,
-  touched,
+  touched
 }) => {
-//   const formikinstance = { ...props.formik };
+  //   const formikinstance = { ...props.formik };
   const companys = useSelector((state: State) => state.companys);
   const [newCompany, setNewCompany] = useState(false);
   const currentUser = getCurrentUser();
@@ -173,7 +173,7 @@ const RecruitmentTrackForm: (
                   );
                 })}
                 <MenuItem
-                //   value={"new"}
+                  //   value={"new"}
                   onClick={() => {
                     setNewCompany(true);
                   }}
@@ -227,46 +227,7 @@ const RecruitmentTrackForm: (
           error=""
           onChange={handleChange}
         />
-        <FieldArray
-          name="comments"
-          render={(arrayHelper) => (
-            <div>
-              {values.comments.map(
-                (currComment: string, index: number) => {
-                  return (
-                    <CommentFieldStyled>
-                      <Grid container spacing={2} key={index}>
-                        <Grid item xs={8}>
-                          <Input
-                            name={`comments.${index}`}
-                            type="text"
-                            label=""
-                            placeholder=""
-                            width="100%"
-                            marginTop="0px"
-                            value={values.comments[index]}
-                            errors={errors.comments}
-                            touched={touched.comments}
-                            onChange={handleChange}
-                          />
-                        </Grid>
-                        <Grid item xs={2}>
-                          <Fab
-                            className="deleteBtn"
-                            color="primary"
-                            onClick={() => arrayHelper.remove(index)}
-                          >
-                            <DeleteIcon />
-                          </Fab>
-                        </Grid>
-                      </Grid>
-                    </CommentFieldStyled>
-                  );
-                }
-              )}
-            </div>
-          )}
-        />
+        
         <Button
           title="Create New Tarck"
           color=""
