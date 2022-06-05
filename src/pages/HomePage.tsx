@@ -8,16 +8,13 @@ import ProfileSection from "../components/section/profileSection/ProfileSection"
 const HomePage = () => {
   return (
     <React.Fragment>
-      <Grid container direction="row" align-context="flex-start" justify-content="space-between">
+      <Grid container display="flex" spacing={2} direction="row" >
         <Grid item id="profileSection" margin="20px 10px">
             <ProfileSection/>
         </Grid>
-        <Grid item id="homePage">
+        <Grid xs id="homePage">
           <HomePageSection />
         </Grid>
-      {/* <Grid item id="matches">
-        <MatchesSection/>
-      </Grid> */}
       </Grid>
     </React.Fragment>
   );

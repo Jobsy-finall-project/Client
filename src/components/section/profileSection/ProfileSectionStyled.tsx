@@ -8,6 +8,7 @@ text-align: center;
 
     & .card{
         background-color: ${Colors.LIGHT_PINK};
+        max-width:90%;
     }
 
     & .title{

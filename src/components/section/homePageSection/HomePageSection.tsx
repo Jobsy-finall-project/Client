@@ -88,24 +88,29 @@ const HomePageSection: React.FC = () => {
 
   return (
     <HomePageSectionStyled>
-      <Grid
+      <Grid container
         width={"100%"}
         className="container"
-        container
-        spacing={5}
+        spacing={3}
         justifyContent="center"
         alignItems="center"
+        direction="column"
       >
-        {/* <Grid item container>
-      <div>
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
-
-          <Grid item container>
-            <h1 className="welcomeTitle">{welcomeUser()}</h1>
-          </Grid> */}
         <Grid item>
           <h3 className="activePositionsTitle"> My Active positions:</h3>
         </Grid>
+        <Grid item>
+        <Button
+            className="addNewTrackButton"
+            title="Add new recruitment track"
+            color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+            height="50px"
+            width="300px"
+            top="0"
+            left="0"
+            onClick={handleAddTrack}
+          ></Button>
+          </Grid>
         <Grid item xs={12}>
           <TextField
             id="outlined-basic"
@@ -122,14 +127,14 @@ const HomePageSection: React.FC = () => {
           />
         </Grid>
 
-        <Grid item width={"100%"}>
-          <List>
+        <Grid container item width={"100%"}>
+          <List className="positionsList">
             {(tracks as Array<Track>).map((currTrack: Track) => {
               return (
                 <div>
                   {searchFunction(currTrack, search) ? (
                     <>
-                      <ListItem
+                      <ListItem className="listItem"
                         secondaryAction={
                           <Checkbox
                             icon={<FavoriteBorder />}
@@ -159,17 +164,6 @@ const HomePageSection: React.FC = () => {
               );
             })}
           </List>
-        </Grid>
-        <Grid container item>
-          <Button
-            title="Add new recruitment track"
-            color=""
-            height="60px"
-            width="210px"
-            top="32px"
-            left="70%"
-            onClick={handleAddTrack}
-          ></Button>
         </Grid>
       </Grid>
     </HomePageSectionStyled>
