@@ -1,23 +1,30 @@
 import styled from "styled-components";
 import * as Colors from "../../../assets/Colors";
 
-export const ProfileSectionStyled = styled.div`
+export const ProfilePageSectionStyled = styled.div`
+
+    .container {
+        text-align: center;
+        align-items: center;
+    }
 
     & .card{
         background-color: ${Colors.LIGHT_PINK};
-        max-width:90%;
-        margin: 2px 0;
+        width:100%;
+        height: 220px;
     }
 
     & .title{
         font-family: 'Quicksand', sans-serif;
-        margin-top: 4px;
+        margin-top: 10px;
     }
 
 
     & .avatar{
-        margin: 4px auto;
+        // margin: 10px auto;
         text-align: center;
+        width: 200px;
+        border-radius: 100%;
     }
 
     & .myCvsTitle{

@@ -1,11 +1,11 @@
 import React from "react";
-import ProfileSection from "../components/section/profileSection/ProfileSection";
-import ProfilePageStyled from "./ProfilePageStyled"
+import ProfilePageSection from "../components/section/profilePageSection/ProfilePageSection";
 const ProfilePage = () => {
   return (
     <React.Fragment>
-      <ProfilePageStyled/>
-      <ProfileSection />
+      <div>
+        <ProfilePageSection />
+      </div>
     </React.Fragment>
   );
 };

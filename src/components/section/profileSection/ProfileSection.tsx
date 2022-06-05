@@ -10,11 +10,12 @@ const ProfileSection: React.FC = () => {
 
   const currUser = useSelector((state: State) => state.loginUser);
 
+
   return (
     <ProfileSectionStyled>
       <Grid container className="container" direction="column" margin="0px">
         <Card className="card">
-        <Avatar alt="profileAvatar" className="avatar" src={avatar} />
+        <Avatar alt="profileAvatar" className="avatar" src={avatar}   sx={{ width: 56, height: 56 }}/>
         <Typography className="title" variant="h6">
         {currUser.firstName + " " + currUser.lastName}
         </Typography>
