@@ -49,10 +49,10 @@ const PositionListSection: React.FC = () => {
       getCompanyPositions();
   }, []);
 
-  const currUser = getCurrentUser();
+  const currUser = getCurrentUser()
   const company = useSelector((state: State) => state.companys)
       .find((curr) => curr._id === currUser?.company)
-      const positions = company ? company.positions.filter((cur:Position)=>cur.hrId===currUser._id) : []
+      const positions = company ? company.positions.filter((cur:Position)=>cur.hrId === currUser._id) : []
 
 
 

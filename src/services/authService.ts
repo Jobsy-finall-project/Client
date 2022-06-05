@@ -54,5 +54,5 @@ export function getCurrentUser() {
     applications: []
   }
 
-  return stubuser
+  return stubuser;
 }
