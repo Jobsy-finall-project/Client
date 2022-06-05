@@ -20,12 +20,14 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Container from '@mui/material/Container'
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Navbar from "react-bootstrap/esm/Navbar";
+import HeaderStyled from "./HeaderStyled";
 
-const pages = [{"title": 'Home', "url": "/"},
-               {"title": 'Cvs', "url": "/cvs"},
-               {"title": 'Matches', "url": "/matches"}  ]
-const userlinks = [{"title": 'Profile', "url": "/profile"},
-                  {"title": 'Logout', "url": "/logout"}  ]
+const pages = [{ "title": 'Home', "url": "/" },
+{ "title": 'Cvs', "url": "/cvs" },
+{ "title": 'Matches', "url": "/matches" }]
+const userlinks = [{ "title": 'Profile', "url": "/profile" },
+{ "title": 'Logout', "url": "/logout" }]
 
 const styles = {
   largeIcon: {
@@ -62,82 +64,86 @@ const Header: React.FC<HeaderProps> = (props) => {
   };
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Typography
-            variant="h6"
-            noWrap
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            JOBSY            
-          </Typography>
+    <HeaderStyled>
+    <AppBar position="static" className="gavno">
+      <Container maxWidth="xl" className="container-header">
+        <Toolbar disableGutters >
+          <Navbar.Brand className="jobsy-logo" href="/">
+            <img
+              alt=""
+              src={Logo}
+              width="90"
+              height="40"
+              className="d-inline-block align-top"
+            />{" "}
+          </Navbar.Brand>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            
+
           </Box>
           {pages.map((page) => (
-              <Button
-                key={page.title}
-                component={Link} to={page.url}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page.title}
-              </Button>
-            ))}
-          <Box sx={{ flexGrow: 0 }}>
-          {userIsConnect() && (
-              <div>
-            <Tooltip title="Open settings">
-              <IconButton size="large" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <AccountCircle fontSize="large"></AccountCircle>
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+            <Button
+              key={page.title}
+              component={Link} to={page.url}
+              sx={{ 
+                my: 2, 
+                color: '#189ab4', 
+                display: 'block', 
+                fontFamily: "'Quicksand', sans-serif", 
+                fontSize: '16px',
+                fontWeight: 'bold',
+                paddingRight: '20px'
               }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
             >
+              {page.title}
+            </Button>
+          ))}
+          <Box sx={{ flexGrow: 0 }}>
+            {userIsConnect() && (
+              <div>
+                <Tooltip title="Open settings">
+                  <IconButton size="large" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                    <AccountCircle fontSize="large"></AccountCircle>
+                  </IconButton>
+                </Tooltip>
+                <Menu
+                  sx={{ mt: '45px' }}
+                  id="menu-appbar"
+                  anchorEl={anchorElUser}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={Boolean(anchorElUser)}
+                  onClose={handleCloseUserMenu}
+                >
 
-                {userlinks.map((page) => (
-                  <MenuItem key={page.title} onClick={handleCloseUserMenu}>
-                    <Button
+                  {userlinks.map((page) => (
+                    <MenuItem key={page.title} onClick={handleCloseUserMenu}>
+                      <Button
                         key={page.title}
                         component={Link} to={page.url}
                       >
                         {page.title}
-                  </Button>
-                  </MenuItem>
+                      </Button>
+                    </MenuItem>
 
-                ))}      
+                  ))}
                 </Menu>
-                </div>
-                )}
-                
-            
+              </div>
+            )}
+
+
           </Box>
         </Toolbar>
       </Container>
     </AppBar>
+  </HeaderStyled>
   );
 };
 export default Header;

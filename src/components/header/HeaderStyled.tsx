@@ -2,22 +2,17 @@ import styled from "styled-components";
 import * as Colors from "../../assets/Colors";
 
 const HeaderStyled = styled.div`
-  background-color: ${Colors.PRAIMARY};
-
-  & .brand-title {
-    color: ${Colors.WHITE};
-    margin-left: 1000px;
-    font-family: "Bradley Hand";
-    font-size: 32px;
-    font-weight: bold;
-  }
-
-  & .jobsy-logo {
-    margin-right: 1370px;
-  }
+  background-color: ${Colors.DARK_BLUE};
 
   &.nav-link {
-    color: ${Colors.WHITE};
+    color: ${Colors.RED};
+  }
+
+  & .container-header{
+    max-width: 100vw;
+  }
+  & .gavno{
+    background-color:  ${Colors.THEME};
   }
 
   & .welcomeTitle{
@@ -27,6 +22,8 @@ const HeaderStyled = styled.div`
     margin:auto;
     font-weight:bold;
   }
+
+  
 `;
 
 export default HeaderStyled;
