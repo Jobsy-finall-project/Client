@@ -7,9 +7,9 @@ import DecodeJwt from "../../../models/DecodeJwt";
 const HomePageRedirector = () => {
   const navigate = useNavigate();
   async function getUser() {
-    const currentUser = await getCurrentUser();
+    const currentUser = await userIsConnect();
     if (!currentUser) {
-      navigate("/sign-in")
+      navigate("/welcome")
     } else {
       if (currentUser.role == "Candidate") {
         navigate("/applications")

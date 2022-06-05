@@ -286,7 +286,9 @@ const companyReducer = (
       if (
         !distinctState.find((company) => company._id === action.payload._id)
       ) {
+        console.log(action.payload)
         distinctState = [...distinctState, action.payload];
+
       }
       return distinctState;
 
@@ -297,12 +299,15 @@ const companyReducer = (
       );
 
       if (oldCompany !== -1) {
+
           updatedCompany.positions.forEach((posToAdd) => {
+            
               if (
                   !state[oldCompany].positions.find(
                       (oldPos) => oldPos._id === posToAdd._id
                   )
-              ) {
+
+                  ) {
                   state[oldCompany].positions.push(posToAdd);
               }
           });
