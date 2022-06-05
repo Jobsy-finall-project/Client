@@ -7,6 +7,7 @@ interface ButtonStyledProps {
   height: string;
   top: string;
   left: string;
+  right :string;
 }
 
 const ButtonStyled = styled.div<ButtonStyledProps>`
@@ -16,6 +17,7 @@ const ButtonStyled = styled.div<ButtonStyledProps>`
     transition: 0.3ms;
     margin-top: ${(props) => props.top};
     margin-left: ${(props) => props.left};
+    margin-right: ${(props) => props.left};
     background-color: ${Colors.PRAIMARY};
     width: ${(props) => props.width};
     height: ${(props) => props.height};
