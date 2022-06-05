@@ -24,7 +24,6 @@ const SignInStyled = styled.div`
     margin: 0 auto;
     text-align:center;
     font-family: Gill Sans;
-     min-height:900px;
   }
 
 

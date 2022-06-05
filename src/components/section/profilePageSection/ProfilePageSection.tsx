@@ -18,17 +18,17 @@ const ProfilePageSection: React.FC = () => {
         {/* <Card className="card"> */}
         <img alt="profileAvatar" className="avatar" src={avatar}></img>
         <Grid direction="column" margin="0px 20px">
-            <Typography className="title" variant="h6">
+            <Typography className="title" variant="h4">
             {currUser.firstName + " " + currUser.lastName}
             </Typography>
-            <Typography className="title" variant="body1">
+            <Typography className="title" variant="h5">
             {currUser.email}
             </Typography>
          </Grid>
     </Grid>  
     </Card> 
       {/* <Card className="card"> */}
-          <Typography className="myCvsTitle" variant="body1">
+          <Typography className="myCvsTitle" variant="h5">
           My CV's :
         </Typography>
         <CVsSection />     

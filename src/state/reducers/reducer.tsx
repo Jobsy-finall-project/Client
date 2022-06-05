@@ -7,6 +7,7 @@ import Track from "../../models/Track";
 import User from "../../models/User";
 import { ActionType } from "../action-types/index";
 import { Action } from "../actions/index";
+import Position from "../../models/Position";
 
 const initialCardState: Card[] = [
   { id: 0, title: "Card 1", content: "Card Content 1" },
@@ -259,7 +260,7 @@ const trackReducer = (
               return distinctState;
             }
         case ActionType.DELETE_TRACK:
-            return state.filter((track: Track) => track._id === action.payload);
+            return state.filter((track: Track) => track._id !== action.payload);
         case ActionType.CREATE_STEP:
             const updatedTrack = action.payload;
             const oldTrack = state.findIndex(
@@ -289,7 +290,18 @@ const companyReducer = (
         distinctState = [...distinctState, action.payload];
       }
       return distinctState;
-
+    case ActionType.DELETE_POSITION:
+      const updateCompany = action.payload;
+      const company = state.map(
+        curr=>{
+        if(curr._id === updateCompany._id) {
+          return updateCompany
+        }else {
+          return curr
+        }
+        }
+      );
+      return company;
     case ActionType.CREATE_POSITION:
       const updatedCompany = action.payload;
       const oldCompany = state.findIndex(
