@@ -1,15 +1,17 @@
 import styled from "styled-components";
+import * as Colors from "../../../assets/Colors"
 
 const TrackSectionStyled = styled.div`
 
   & .container{
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
+    max-width:100%;
   }
 
   & .trackTitle{
     font-size: 3em;
     color: black;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     margin:auto;
     font-weight:bold;
     margin-bottom:20px;
@@ -28,28 +30,40 @@ const TrackSectionStyled = styled.div`
 
   & .timelineStep{
     color:black;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     font-size: 1.5em;
     font-weight:bold;
-
   }
 
   & .trackDescription{
     width:70%;
     font-size: 1.75em;
-    font-family: Gill Sans;
     margin:auto;
-    
-
+    font-family: 'Quicksand', sans-serif;
   }
 
   & .timeline{
       margin-top:50px;
   }
 
+  & .timelineItem{
+    // background-color: ${Colors.PRAIMARY};
+    border:2px solid #85D3E6;
+    margin-bottom:4px;
+    border-radius:20px;
+  }
+
+  & .timelineItem:hover,timelineDate:hover{
+    background-color: ${Colors.PRAIMARY};
+    border:3px solid 85D3E6;
+    margin-bottom:4px;
+    border-radius:20px;
+  }
+
+
   & .timelineDate{
     color:gray;
-    font-family: Gill Sans;
+    font-family:'Quicksand', sans-serif;
     font-size: 1.5em;
   }
 
@@ -71,19 +85,16 @@ const TrackSectionStyled = styled.div`
 
   & .addBtn{
     margin-top:10px;
-    
-
   }
 
   & .listContainer{
     font-size:1.5em;
     margin-top:30px;
-    border: 3px solid gray;
+    border: 4px solid #FFF2E3;
     border-radius:20px;
     width:50%;
     margin:auto;
     margin-bottom:40px;
-
   }
 
   & .button{
