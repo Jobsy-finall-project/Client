@@ -73,9 +73,10 @@ const GettingStartedSection: React.FC = () => {
         </Box>
         <Box component="div" style={{
           position: "relative",
-          minWidth: "100vw",
-          padding: "20px"
-          }}>
+          minWidth: "160vw",
+          paddingBottom: "20px",
+          backgroundColor: "cadetblue"
+        }}>
           <Button className="myButton" onClick={() => { navigation("/sign-in"); }}>Get Started</Button>
         </Box>
 

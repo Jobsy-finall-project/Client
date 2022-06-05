@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
 import HomePageRedirector from "./components/section/homePageSection/homePageRedirector";
@@ -28,6 +28,8 @@ import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
 import { createBrowserHistory } from "history";
+import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
+import { getCurrentUser } from "./services/authService";
 
 const histoy = createBrowserHistory()
 const App: React.FC = () => {
@@ -36,12 +38,12 @@ const App: React.FC = () => {
       <ToastContainer />
       <Router> 
         <Header brandName="Jobsy" />
-
+       
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />
-          <Route path="/logout" element={<Logout />} />
           <Route path="/sign-up" element={<SignUp />} />
+          <Route path="/logout" element={<Logout />} />
           <Route path="/create-new-item" element={<CreateItem />} />
           <Route
             path="/create-recruitment-track-page"
@@ -61,10 +63,9 @@ const App: React.FC = () => {
           <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/create-position" element={<CreatePositionPage />} />
           <Route path="/positions" element={<PositionsListPage />} />
-          <Route path="/position" element={<PositionPage />} />
+          <Route path="/position/:positionId" element={<PositionPage />} />
           <Route
-            path="/add-step-template"
-            element={<AddStepToTemplatePage />}
+            path="/add-step-template" element={<AddStepToTemplatePage />}
           />
           <Route path="/" element={<HomePageRedirector />} />
           <Route path="/welcome" element={<GettingStarted />} />
@@ -72,6 +73,7 @@ const App: React.FC = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<MatchesPage />} />
+          <Route path="/apps-of-positions/:positionId" element={<ActiveApplicationsPage/>}/>
         </Routes>
       </Router>
     </div>

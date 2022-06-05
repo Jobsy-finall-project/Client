@@ -58,7 +58,11 @@ export async function changeApplicationIsMatch(
     return data;
 }
 
-export async function deleteAplication(applicationId: String) {
+export async function deleteAplication(applicationId: string) {
     const { data } = await http.delete(applicationUrl(applicationId));
     return data;
+}
+
+export async function getAllApplicationsByPositionId(positionId: string) {
+    return await http.get(`${apiEndpoint}/all/${positionId}`);
 }

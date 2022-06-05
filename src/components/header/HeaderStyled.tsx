@@ -11,7 +11,7 @@ const HeaderStyled = styled.div`
   & .container-header{
     max-width: 100vw;
   }
-  & .gavno{
+  & .header-style{
     background-color:  ${Colors.THEME};
   }
 

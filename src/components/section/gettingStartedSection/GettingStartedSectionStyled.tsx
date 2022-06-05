@@ -25,7 +25,7 @@ export const GettingStartedSectionStyled = styled.div`
   font-size: 24px;
   color: #008CBA;
     border-radius: 30px;
-  box-shadow: 0 4px 20px 0  rgb(0 0 0 / 20%);
+  box-shadow: 0 4px 20px 0  rgb(0 0 0 / 50%);
 }
 
 & .container{

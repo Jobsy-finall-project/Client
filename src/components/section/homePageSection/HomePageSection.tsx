@@ -21,7 +21,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import {
   getUserApplications,
-  changeApplicationIsFavorite
+  changeApplicationIsFavorite, deleteAplication
 } from "../../../services/applicationService";
 import { bindActionCreators } from "redux";
 import { actionsCreators } from "../../../state";
@@ -29,15 +29,23 @@ import { useDispatch } from "react-redux";
 import { getCurrentUser } from "../../../services/authService";
 import { Link } from "react-router-dom";
 import Button from "../../common/button/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ShareIcon from '@mui/icons-material/Share';
 
 const HomePageSection: React.FC = () => {
   const navigation = useNavigate();
   const dispatch = useDispatch();
 
-  const { createTrack } = bindActionCreators(actionsCreators, dispatch);
+  const { createTrack, deleteTrack } = bindActionCreators(actionsCreators, dispatch);
   const tracks = useSelector((state: State) => state.tracks);
 
   const [search, setSearchBar] = useState("");
+
+  async function handleDeleteApplication(applicationId: string){
+    await deleteAplication(applicationId);
+    deleteTrack(applicationId);
+  }
 
   function welcomeUser() {
     const user = getCurrentUser();
@@ -135,21 +143,35 @@ const HomePageSection: React.FC = () => {
 
         <Grid container item width={"100%"}>
           <List className="positionsList">
-            {(tracks as Array<Track>).map((currTrack: Track) => {
+            {(tracks as Array<Track>).filter(cur=>cur.isMatch===true).map((currTrack: Track) => {
               return (
                 <div>
                   {searchFunction(currTrack, search) ? (
                     <>
                       <ListItem className="listItem"
                         secondaryAction={
+                        <ListItemIcon>
                           <Checkbox
                             icon={<FavoriteBorder />}
                             checkedIcon={<Favorite className="favoriteIcon" />}
                             onChange={e =>
                               handleApplicationIsFavorite(currTrack)
+
                             }
                           />
+                          <IconButton onClick={e =>
+                              handleDeleteApplication(currTrack._id as string)
+                          }>
+                            <DeleteIcon/>
+                          </IconButton>
+                          {
+                            currTrack.position && currTrack.position.hrId && <ShareIcon/>
+                          }
+
+                        </ListItemIcon>
+
                         }
+
                       >
                         <ListItemButton>
                           <KeyboardIcon />

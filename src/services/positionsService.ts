@@ -25,3 +25,8 @@ export async function getPositionById(positionId: string) {
     return data;
 }
 
+export async function deletePositionById(positionId: string){
+    const { data } = await http.delete(`${apiEndpoint}/${positionId}`);
+    return data;
+}
+
