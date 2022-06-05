@@ -80,14 +80,15 @@ const HomePageSection: React.FC = () => {
   const searchFunction = (track: Track, query: string) => {
     const searchTerm = query.toLowerCase();
     return (
-      track.company.name.toLowerCase().includes(searchTerm) ||
-      track.position.name.toLowerCase().includes(searchTerm) ||
-      track.position.description?.toLowerCase().includes(searchTerm)
+        track.company.name && track.company.name.toLowerCase().includes(searchTerm) ||
+        track.position.name && track.position.name.toLowerCase().includes(searchTerm) ||
+        track.position.description && track.position.description?.toLowerCase().includes(searchTerm)
     );
   };
 
   return (
     <HomePageSectionStyled>
+
       <Grid
         width={"100%"}
         className="container"
@@ -96,6 +97,7 @@ const HomePageSection: React.FC = () => {
         justifyContent="center"
         alignItems="center"
       >
+
         {/* <Grid item container>
       <div>
         <Grid container spacing={3} justifyContent="center" alignItems="center">
@@ -103,8 +105,10 @@ const HomePageSection: React.FC = () => {
           <Grid item container>
             <h1 className="welcomeTitle">{welcomeUser()}</h1>
           </Grid> */}
+        { tracks && tracks.length>0 ?
+            <>
         <Grid item>
-          <h3 className="activePositionsTitle"> My Active positions:</h3>
+          <h3 className="activePositionsTitle"> My Active Tracks:</h3>
         </Grid>
         <Grid item xs={12}>
           <TextField
@@ -158,8 +162,11 @@ const HomePageSection: React.FC = () => {
                 </div>
               );
             })}
+
           </List>
         </Grid>
+            </>
+        : <h6>Add your first recruitment track</h6>}
         <Grid container item>
           <Button
             title="Add new recruitment track"
@@ -172,6 +179,7 @@ const HomePageSection: React.FC = () => {
           ></Button>
         </Grid>
       </Grid>
+
     </HomePageSectionStyled>
   );
 };
