@@ -246,32 +246,35 @@ const trackReducer = (
   state: Array<Track> = initialRecTracks,
   action: Action
 ) => {
-  switch (action.type) {
-    case ActionType.CREATE_TRACK:
-      let distinctState = [...state];
-      const trackIndex = distinctState.findIndex(track => {
-        return track._id === action.payload._id;
-      });
-      if (trackIndex === -1) {
-        distinctState = [...distinctState, action.payload];
-      } else {
-        distinctState[trackIndex] = action.payload;
-      }
-      return distinctState;
-    case ActionType.DELETE_TRACK:
-      return state.filter((track: Track) => track._id === action.payload);
-    case ActionType.CREATE_STEP:
-      const updatedTrack = action.payload;
-      const oldTrack = state.findIndex(curr => curr._id === updatedTrack._id);
-      if (oldTrack !== -1) {
-        state[oldTrack].steps = updatedTrack.steps;
-        return state;
-      } else {
-        return [...state, updatedTrack];
-      }
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case ActionType.CREATE_TRACK:
+            let distinctState = [...state];
+            const trackIndex = distinctState.findIndex((track) => {
+                return track._id === action.payload._id;
+            });
+            if (trackIndex === -1) {
+                return [...distinctState, action.payload];
+            } else {
+              distinctState[trackIndex] = action.payload
+              return distinctState;
+            }
+        case ActionType.DELETE_TRACK:
+            return state.filter((track: Track) => track._id === action.payload);
+        case ActionType.CREATE_STEP:
+            const updatedTrack = action.payload;
+            const oldTrack = state.findIndex(
+                (curr) => curr._id === updatedTrack._id
+            );
+            if (oldTrack !== -1) {
+                state[oldTrack].steps = updatedTrack.steps;
+                return state;
+            } else {
+                return [...state, updatedTrack];
+            }
+        default:
+            return state;
+    }
+
 };
 
 const companyReducer = (
