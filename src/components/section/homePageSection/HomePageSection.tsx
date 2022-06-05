@@ -172,7 +172,22 @@ const HomePageSection: React.FC = () => {
 
           </List>
         </Grid>
-            </> : <h6>Add your first recruitment track</h6>}
+            </> :
+            <>
+            <h6>Add your first recruitment track</h6>
+          <Grid item>
+          <Button
+          className="addNewTrackButton"
+          title="Add new recruitment track"
+          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          height="50px"
+          width="300px"
+          top="0"
+          left="0"
+          onClick={handleAddTrack}
+          ></Button>
+          </Grid>
+            </>}
       </Grid>
 
     </HomePageSectionStyled>
