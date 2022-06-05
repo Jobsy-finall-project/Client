@@ -15,15 +15,15 @@ const ProfileSection: React.FC = () => {
       <Grid container className="container" direction="column" margin="0px">
         <Card className="card">
         <Avatar alt="profileAvatar" className="avatar" src={avatar} />
-        <Typography className="title" variant="h4">
+        <Typography className="title" variant="h6">
         {currUser.firstName + " " + currUser.lastName}
         </Typography>
-        <Typography className="title" variant="h6">
+        <Typography className="title" variant="body1">
         {currUser.email}
         </Typography>
       </Card>
       <Card className="card">
-          <Typography className="myCvsTitle" variant="h6">
+          <Typography className="myCvsTitle" variant="body1">
           My CV's :
         </Typography>
         <CVsSection />     
