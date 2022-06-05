@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Input from "../../input/Input";
+import Textarea from "../../input/Textarea";
 import { FieldArray, Formik, FormikProps, useFormik } from "formik";
 import * as Yup from "yup";
 import RecruitmentTrackModel from "../../../../models/forms/RecruitmentTrack";
@@ -172,12 +173,12 @@ const RecruitmentTrackForm: (
                   );
                 })}
                 <MenuItem
-                  value={"new"}
+                //   value={"new"}
                   onClick={() => {
                     setNewCompany(true);
                   }}
                 >
-                  add new
+                  Add new company
                 </MenuItem>
               </Select>
             </FormControl>
@@ -207,7 +208,7 @@ const RecruitmentTrackForm: (
           touched={touched.positionName}
           type="text"
         />
-        <Input
+        <Textarea
           name="positionDescription"
           label="Position Description"
           placeholder=""
@@ -215,8 +216,9 @@ const RecruitmentTrackForm: (
           onChange={handleChange}
           errors={errors.positionDescription}
           touched={touched.positionDescription}
-          type="text"
           height="200px"
+          rows={10}
+          cols={70}
         />
         <UploadImage
           name="upload-cv"

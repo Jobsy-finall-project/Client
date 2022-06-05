@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as Colors from "../../assets/Colors";
 
 const HeaderStyled = styled.div`
-  background-color: ${Colors.DARK_BLUE};
+  background-color: ${Colors.HEADER};
 
   &.nav-link {
     color: ${Colors.RED};

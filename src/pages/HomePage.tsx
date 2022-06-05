@@ -15,9 +15,9 @@ const HomePage = () => {
         <Grid item id="homePage">
           <HomePageSection />
         </Grid>
-      <Grid item id="matches">
+      {/* <Grid item id="matches">
         <MatchesSection/>
-      </Grid>
+      </Grid> */}
       </Grid>
     </React.Fragment>
   );
