@@ -16,4 +16,9 @@ export async function saveStepToApllication(step: Step, applicationId: string) {
     return data;
 }
 
+export async function saveStepToPosition(step: Step, positionId: string) {
+    const {data} =  await http.post(`${apiEndpoint}/position/${positionId}`, step);
+    return data;
+}
+
 
