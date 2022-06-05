@@ -46,13 +46,13 @@ const SignupSchema = Yup.object().shape({
     .min(10, "Invalid email, email is too short")
     .max(255, "Invalid email, email is too long")
     .lowercase("Invalid email"),
-  password: Yup.string()
-    .required("No password provided.")
-    .min(4, "Password is too short - should be 4 chars minimum.")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
-      "Password can only contain minimum four characters, at least one letter and one number"
-    )
+    password: Yup.string()
+        .required("No password provided.")
+        .min(4, "Password is too short - should be 4 chars minimum.")
+        .matches(
+          /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/,
+          "Password can only contain minimum four characters, at least one letter and one number"
+        )
 });
 
 const SignupForm: React.FC = () => {
