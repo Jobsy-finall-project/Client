@@ -47,7 +47,7 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
     <TrackStepSectionStyled>
       <div >
         <div className="container" >
-          <h1 className="stepTitle">{`${props.step.title} ${props.step.time}`} </h1>
+          <h1 className="stepTitle">{`${props.step.title} ${props.step.time.slice(0,10)}`} </h1>
           <p className="stepDescription">{props.step.description} </p>          
         </div>
       </div>

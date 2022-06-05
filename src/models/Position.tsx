@@ -6,5 +6,5 @@ export default interface Position {
     name: string;
     description?: string;
     template?: Step[]
-    hrid?: string
+    hrId?: string
 }
