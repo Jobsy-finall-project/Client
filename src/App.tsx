@@ -28,6 +28,7 @@ import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
 import { createBrowserHistory } from "history";
+import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
 
 const histoy = createBrowserHistory()
 const App: React.FC = () => {
@@ -72,6 +73,7 @@ const App: React.FC = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<MatchesPage />} />
+          <Route path="/apps-of-positions/:positionId" element={<ActiveApplicationsPage/>}/>
         </Routes>
       </Router>
     </div>

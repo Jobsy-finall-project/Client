@@ -54,13 +54,8 @@ const PositionListSection: React.FC = () => {
       .find((curr) => curr._id === currUser?.company)
       const positions = company ? company.positions.filter((cur:Position)=>cur.hrId===currUser._id) : []
 
-
-
-
   const [search, setSearchBar] = useState("");
   
-  
-
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
       const title = event.currentTarget.value;
       setSearchBar(title);
