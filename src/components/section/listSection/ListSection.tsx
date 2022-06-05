@@ -46,7 +46,6 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
 
   return (
     <ListSectionStyled>
-
     <List className="listContainer" sx={{ marginLeft: "100px" }}>
     <p className="commentTitle" >{props.title}:</p>
 
@@ -67,7 +66,6 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
         <ListItemIcon />
         <ListItemText
           primary={currItem}
-        
         />
       </ListItemButton>
       </ListItem>
@@ -86,14 +84,12 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
     <ButtonMui className="addBtn"
     variant="contained"
     onClick={handleAddItemClick}>
-      +
+      add
     </ButtonMui> 
- 
   </div>
-) : null}
+) :null}
 </div>
 </List>
-
     </ListSectionStyled>
   );
 };

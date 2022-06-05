@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 
-
 import TrackSection from "../components/section/trackSection/TrackSection";
 import Track from "../models/Track";
 
