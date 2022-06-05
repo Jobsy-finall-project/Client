@@ -9,6 +9,7 @@ interface ButtonProps {
     top: string;
     left: string;
     right?: string;
+    className?: string;
     onClick: () => void;
 }
 
@@ -22,7 +23,7 @@ const Button: React.FC<ButtonProps> = (props) => {
             left={props.left}
             right={props.right || ""}
         >
-            <div className="button" onClick={props.onClick} role="button">
+            <div className={props.className || "button"} onClick={props.onClick} role="button">
                 <div className="title-button">{props.title}</div>
             </div>
         </ButtonStyled>
