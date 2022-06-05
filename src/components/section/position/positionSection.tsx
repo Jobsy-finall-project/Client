@@ -33,6 +33,7 @@ import {getPositionById, getSuggestios} from "../../../services/positionsService
 import { State } from "../../../state";
 import Button from "../../common/button/Button";
 import { PositionStyled } from "./positionsStyled";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 
 interface userSuggestions {
     user: UserModel;
@@ -172,21 +173,45 @@ const PositionSection: React.FC = () => {
             <Typography className="trackDescription" variant="body1">
                 {position && position.description}
             </Typography>
-            <Timeline>
-                {position && position.template?.map((step, index) => (
-                    <TimelineItem>
-                        <TimelineSeparator>
-                            <TimelineDot>
-                                <AssignmentIcon />
-                            </TimelineDot>
-                            {index !== position.template?.length!! - 1 && (
+
+            <Timeline
+                position="alternate"
+                className="timeline">
+                { position && position.template && position.template.map((step) => {
+                    return (
+                        <TimelineItem
+                            onClick={() => {
+                                navigation("/recruitment-track-step-page", { state: step });
+                            }}
+                        >
+                            <TimelineOppositeContent
+                                sx={{ m: "auto 0" }}
+                                align="right"
+                                variant="body2"
+                                className="timelineDate"
+                            >
+                                {step.time && step.time.slice(0,10)}
+                            </TimelineOppositeContent>
+                            <TimelineSeparator
+                                className="timelineSeperator"
+                            >
                                 <TimelineConnector />
-                            )}
-                        </TimelineSeparator>
-                        <TimelineContent>{step.title}</TimelineContent>
-                    </TimelineItem>
-                ))}
+                                <TimelineDot>
+                                    <AssignmentIcon />
+                                </TimelineDot>
+                                <TimelineConnector />
+                            </TimelineSeparator>
+                            <TimelineContent
+                                sx={{ m: "auto 0" }}>
+                                <Typography className="timelineStep" variant="h6" component="span">
+                                    {step.title}
+                                </Typography>
+                            </TimelineContent>
+                        </TimelineItem>
+                    );
+                })}
             </Timeline>
+
             <Button
                 title="Add New Step"
                 color=""
