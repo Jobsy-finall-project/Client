@@ -174,42 +174,45 @@ const PositionSection: React.FC = () => {
                 {position && position.description}
             </Typography>
 
-            <Timeline
-                position="alternate"
-                className="timeline">
-                { position && position.template && position.template.map((step) => {
-                    return (
-                        <TimelineItem
-                            onClick={() => {
-                                navigation("/recruitment-track-step-page", { state: step });
-                            }}
-                        >
-                            <TimelineOppositeContent
-                                sx={{ m: "auto 0" }}
-                                align="right"
-                                variant="body2"
-                                className="timelineDate"
+            <Timeline position="alternate" className="timeline">
+                {position &&
+                    position.template &&
+                    position.template.map((step) => {
+                        return (
+                            <TimelineItem
+                                onClick={() => {
+                                    navigation("/recruitment-track-step-page", {
+                                        state: step,
+                                    });
+                                }}
                             >
-                                {step.time && step.time.slice(0,10)}
-                            </TimelineOppositeContent>
-                            <TimelineSeparator
-                                className="timelineSeperator"
-                            >
-                                <TimelineConnector />
-                                <TimelineDot>
-                                    <AssignmentIcon />
-                                </TimelineDot>
-                                <TimelineConnector />
-                            </TimelineSeparator>
-                            <TimelineContent
-                                sx={{ m: "auto 0" }}>
-                                <Typography className="timelineStep" variant="h6" component="span">
-                                    {step.title}
-                                </Typography>
-                            </TimelineContent>
-                        </TimelineItem>
-                    );
-                })}
+                                <TimelineOppositeContent
+                                    sx={{ m: "auto 0" }}
+                                    align="right"
+                                    variant="body2"
+                                    className="timelineDate"
+                                >
+                                    {step.time && step.time.slice(0, 10)}
+                                </TimelineOppositeContent>
+                                <TimelineSeparator className="timelineSeperator">
+                                    <TimelineConnector />
+                                    <TimelineDot>
+                                        <AssignmentIcon />
+                                    </TimelineDot>
+                                    <TimelineConnector />
+                                </TimelineSeparator>
+                                <TimelineContent sx={{ m: "auto 0" }}>
+                                    <Typography
+                                        className="timelineStep"
+                                        variant="h6"
+                                        component="span"
+                                    >
+                                        {step.title}
+                                    </Typography>
+                                </TimelineContent>
+                            </TimelineItem>
+                        );
+                    })}
             </Timeline>
 
             <Button
@@ -223,7 +226,17 @@ const PositionSection: React.FC = () => {
                     navigation("/add-step-template", { state: position });
                 }}
             />
-
+            <Button
+                title="See all Applications"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left="100px"
+                onClick={() => {
+                    navigation("/apps-of-positions/" + position._id);
+                }}
+            />
             <div>
                 <Button
                     title="Share"
@@ -245,10 +258,28 @@ const PositionSection: React.FC = () => {
                                 <TableCell size="small" align="center">
                                     <Checkbox onChange={checkAll} />
                                 </TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>Full Name</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>Email</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>CV</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    Full Name
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    Email
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    CV
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
                                     Match Percentage
                                 </TableCell>
                             </TableRow>
@@ -273,14 +304,23 @@ const PositionSection: React.FC = () => {
                                             )}
                                         />
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user.firstName}{" "}
                                         {currSuggestion.user.lastName}
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user.email}
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user?.cvs?.map(
                                             (currCv) => (
                                                 <Chip
@@ -297,8 +337,11 @@ const PositionSection: React.FC = () => {
                                         )}
                                     </TableCell>
                                     <TableCell align="left">
-                                    <Rating name="read-only" value={currSuggestion.score} readOnly />
-                                        
+                                        <Rating
+                                            name="read-only"
+                                            value={currSuggestion.score}
+                                            readOnly
+                                        />
                                     </TableCell>
                                 </TableRow>
                             ))}

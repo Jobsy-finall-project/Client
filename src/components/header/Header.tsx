@@ -47,13 +47,12 @@ const Header: React.FC<HeaderProps> = (props) => {
   ];
   if (getCurrentUser().role === "Candidate") {
     pages = [
-      ...pages,
       { "title": 'Cvs', "url": "/cvs" },
       { "title": 'Matches', "url": "/matches" }]
   }
   if (getCurrentUser().role === "HR") {
     pages = [
-    { "title": 'Positions', "url": "/cvs" } ]
+    { "title": 'Positions', "url": "/positions" } ]
   }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
