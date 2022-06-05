@@ -56,7 +56,7 @@ const AddStepToTemplate: React.FC = () => {
             initialValues={{
                 id: v4(),
                 title: "",
-                date: "",
+                time: "",
                 description: "",
             }}
             validationSchema={AddStepToTemplateSchema}

@@ -256,11 +256,11 @@ const trackReducer = (
                 return track._id === action.payload._id;
             });
             if (trackIndex === -1) {
-                distinctState = [...distinctState, action.payload];
+                return [...distinctState, action.payload];
             } else {
               distinctState[trackIndex] = action.payload
+              return distinctState;
             }
-            return distinctState;
         case ActionType.DELETE_TRACK:
             return state.filter((track: Track) => track._id === action.payload);
         case ActionType.CREATE_STEP:
