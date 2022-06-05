@@ -63,7 +63,7 @@ const App: React.FC = () => {
           <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/create-position" element={<CreatePositionPage />} />
           <Route path="/positions" element={<PositionsListPage />} />
-          <Route path="/position" element={<PositionPage />} />
+          <Route path="/position/:positionId" element={<PositionPage />} />
           <Route
             path="/add-step-template" element={<AddStepToTemplatePage />}
           />
