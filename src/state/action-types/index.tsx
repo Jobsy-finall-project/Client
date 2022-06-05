@@ -11,5 +11,6 @@ export enum ActionType {
   DELETE_CV = "deleteCv",
   CREATE_COMPANY = "createCompany",
   CREATE_POSITION = "createPosition",
-  ADD_STEP_TO_TEMPLATE = "ADD_STEP_TO_TEMPLATE"
+  ADD_STEP_TO_TEMPLATE = "ADD_STEP_TO_TEMPLATE",
+  DELETE_POSITION = "delete_position"
 }
