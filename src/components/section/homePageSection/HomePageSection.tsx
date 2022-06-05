@@ -143,7 +143,8 @@ const HomePageSection: React.FC = () => {
 
         <Grid container item width={"100%"}>
           <List className="positionsList">
-            {(tracks as Array<Track>).map((currTrack: Track) => {
+            {
+              (tracks as Array<Track>).filter(cur=>cur.isMatch===true).map((currTrack: Track) => {
               return (
                 <div>
                   {searchFunction(currTrack, search) ? (
@@ -167,7 +168,7 @@ const HomePageSection: React.FC = () => {
                           {
                             currTrack.position && currTrack.position.hrId && <ShareIcon/>
                           }
-                          {console.log(currTrack.position)}
+
                         </ListItemIcon>
 
                         }
