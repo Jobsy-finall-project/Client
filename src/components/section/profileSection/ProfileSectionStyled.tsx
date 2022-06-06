@@ -5,7 +5,7 @@ export const ProfileSectionStyled = styled.div`
 
     & .card{
         background-color: ${Colors.LIGHT_PINK};
-        max-width:90%;
+        width:200px;
         margin: 2px 0;
     }
 

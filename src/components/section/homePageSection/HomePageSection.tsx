@@ -193,10 +193,10 @@ const HomePageSection: React.FC = () => {
             })}
 
           </List>
-        </Grid>
+        </Grid >
             </> :
             <>
-            <h6>Add your first recruitment track</h6>
+            <h6 className="emptyListTitle">Add your first recruitment track</h6>
           <Grid item>
           <Button
           className="addNewTrackButton"

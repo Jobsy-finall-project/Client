@@ -69,10 +69,9 @@ const MatchesSection: React.FC = () => {
                 container
                 spacing={3}
                 justifyContent="center"
-                alignItems="center"
-            >
+                alignItems="flex-start">
                 <Grid item>
-                    <List
+                    <List className = "list-container"
                         sx={{
                             width: "100%",
                             maxWidth: 360,
@@ -83,7 +82,7 @@ const MatchesSection: React.FC = () => {
                     >
                         {(tracks as Array<Track>).map((track: Track) => {
                             return (
-                                <ListItem>
+                                <ListItem className="list-item-container">
                                     <Card sx={{ maxWidth: 345 }}>
                                         <CardHeader
                                             title={track.position.name}

@@ -34,6 +34,14 @@ export const HomePageSectionStyled = styled.div`
     font-weight:bold;
   }
 
+  & .emptyListTitle{
+    font-size: 2em;
+    font-family: 'Quicksand', sans-serif;
+    margin:auto;
+    margin-top: 100px;
+    font-weight:bold;
+  }
+
   & .addNewTrackButton{
     // display: inline;
     text-align: center;
