@@ -78,7 +78,6 @@ const HomePageSection: React.FC = () => {
       !track.isFavorite
     );
     console.log(1, application);
-    //TODO:UPDATE the global state track
   };
 
   const handleAddTrack = () => {
