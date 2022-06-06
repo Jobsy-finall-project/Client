@@ -145,50 +145,58 @@ const HomePageSection: React.FC = () => {
           <List className="positionsList">
             {(tracks as Array<Track>).filter(cur=>cur.isMatch===true).map((currTrack: Track) => {
               return (
-                <div>
-                  {searchFunction(currTrack, search) ? (
-                    <>
-                      <ListItem className="listItem"
-                        secondaryAction={
-                        <ListItemIcon>
-                          <Checkbox
-                            icon={<FavoriteBorder />}
-                            checkedIcon={<Favorite className="favoriteIcon" />}
-                            onChange={e =>
-                              handleApplicationIsFavorite(currTrack)
-
-                            }
-                          />
-                          <IconButton onClick={e =>
-                              handleDeleteApplication(currTrack._id as string)
-                          }>
-                            <DeleteIcon/>
-                          </IconButton>
-                          {
-                            currTrack.position && currTrack.position.hrId && <ShareIcon/>
-                          }
-
-                        </ListItemIcon>
-
-                        }
-
-                      >
-                        <ListItemButton>
-                          <KeyboardIcon />
-                          <ListItemText
-                            primary={`${currTrack.company.name} - ${currTrack.position.name}`}
-                            primaryTypographyProps={positionTitle}
-                            onClick={() => {
-                              handleClick(currTrack);
-                            }}
-                          />
-                        </ListItemButton>
-                      </ListItem>
-                    </>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
+                  <div>
+                      {searchFunction(currTrack, search) ? (
+                          <>
+                              <ListItem
+                                  className="listItem"
+                                  secondaryAction={
+                                      <ListItemIcon>
+                                          <Checkbox
+                                              icon={<FavoriteBorder />}
+                                              checkedIcon={
+                                                  <Favorite className="favoriteIcon" />
+                                              }
+                                              onChange={(e) =>
+                                                  handleApplicationIsFavorite(
+                                                      currTrack
+                                                  )
+                                              }
+                                          />
+                                          <IconButton
+                                              onClick={(e) =>
+                                                  handleDeleteApplication(
+                                                      currTrack._id as string
+                                                  )
+                                              }
+                                          >
+                                              <DeleteIcon />
+                                          </IconButton>
+                                          <IconButton disabled>
+                                              {currTrack.position &&
+                                                  currTrack.position.hrId && (
+                                                      <ShareIcon />
+                                                  )}
+                                          </IconButton>
+                                      </ListItemIcon>
+                                  }
+                              >
+                                  <ListItemButton>
+                                      <KeyboardIcon />
+                                      <ListItemText
+                                          primary={`${currTrack.company.name} - ${currTrack.position.name}`}
+                                          primaryTypographyProps={positionTitle}
+                                          onClick={() => {
+                                              handleClick(currTrack);
+                                          }}
+                                      />
+                                  </ListItemButton>
+                              </ListItem>
+                          </>
+                      ) : (
+                          <div></div>
+                      )}
+                  </div>
               );
             })}
 

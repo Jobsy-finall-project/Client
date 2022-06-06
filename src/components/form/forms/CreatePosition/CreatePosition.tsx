@@ -15,6 +15,7 @@ import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import CreatePositionStyled from "./CreatePositionStyled";
+import tags from "../../../../assets/tag_pool.json";
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -100,7 +101,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
   touched,
 }) => {
 
-  const tags=["java","type script","python", "junior","expert", "backend","frontend","node.js","css","react","mongoDB","SQL"];
+  // const tags=["java","type script","python", "junior","expert", "backend","frontend","node.js","css","react","mongoDB","SQL"];
   const fixedOptions = [tags[0]];
   return (
     <CreatePositionStyled>

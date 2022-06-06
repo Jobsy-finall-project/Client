@@ -173,7 +173,6 @@ const RecruitmentTrackForm: (
                   );
                 })}
                 <MenuItem
-                  //   value={"new"}
                   onClick={() => {
                     setNewCompany(true);
                   }}
