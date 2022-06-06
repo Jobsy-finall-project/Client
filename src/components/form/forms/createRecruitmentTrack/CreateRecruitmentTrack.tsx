@@ -20,14 +20,10 @@ import {
   getCompanyByHrId,
   saveCompany
 } from "../../../../services/companyService";
-import {
-  getAllCVs
-} from "../../../../services/cvService";
 import { actionsCreators, State } from "../../../../state";
 import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import Textarea from "../../input/Textarea";
-import UploadImage from "../../uploadImg/UploadImage";
 import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
 
 interface CreateRectuitmentTrackFormProps {

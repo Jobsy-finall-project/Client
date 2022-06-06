@@ -14,6 +14,10 @@ export async function getAllCVs() {
   return await http.get(`${apiEndpoint}/all`);
 }
 
+export async function getCurrUserCvs() {
+    return await http.get(`${apiEndpoint}`);
+}
+
 export async function deleteCV(cvId: string) {
     return await http.delete(`${apiEndpoint}/${cvId}`)
 }
