@@ -96,10 +96,7 @@ const HomePageSection: React.FC = () => {
 
   return (
     <HomePageSectionStyled>
-
-
       <Grid container
-
         width={"100%"}
         className="container"
         spacing={3}

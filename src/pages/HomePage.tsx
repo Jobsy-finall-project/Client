@@ -1,8 +1,6 @@
-import { Card } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import React from "react";
 import HomePageSection from "../components/section/homePageSection/HomePageSection";
-import MatchesSection from "../components/section/matchesSection/MatchesSection";
 import ProfileSection from "../components/section/profileSection/ProfileSection";
 
 const HomePage = () => {
