@@ -43,12 +43,10 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .addNewTrackButton{
-    // display: inline;
     text-align: center;
     justify-content: center;
     display:flex;
     margin:0 auto;
-  //  background-color: ${Colors.PRAIMARY};
     border-radius: 30px;
     padding: 5px;
     transition: 0.3ms;

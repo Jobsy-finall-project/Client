@@ -10,11 +10,11 @@ import { useNavigate } from "react-router-dom";
 const ProfileSection: React.FC = () => {
 
   const currUser = getCurrentUser();
-
+  const navigate = useNavigate();
 
   return (
     <ProfileSectionStyled>
-      <Grid container className="container" direction="column" margin="0px" onClick={()=>this.navigate("/profile")}>
+      <Grid container className="container" direction="column" margin="0px" onClick={()=>navigate("/profile")}>
         <Card className="card">
         <Avatar alt="profileAvatar" className="avatar" src={avatar}   sx={{ width: 56, height: 56 }}/>
         <Typography className="title" variant="h6">

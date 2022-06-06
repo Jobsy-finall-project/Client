@@ -3,6 +3,10 @@ import * as Colors from "../../../assets/Colors";
 
 export const ProfileSectionStyled = styled.div`
 
+    & .container{
+        cursor: pointer;
+    }
+
     & .card{
         background-color: ${Colors.LIGHT_PINK};
         min-width:200px;
