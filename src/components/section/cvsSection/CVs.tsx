@@ -11,9 +11,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import CV from "../../../models/CV";
 import {
-  deleteCV as deleteCvRemote,
-  getCurrUserCvs,
-  saveCV
+    deleteCV as deleteCvRemote,
+    getCurrUserCvs,
+    saveCV,
 } from "../../../services/cvService";
 import { actionsCreators, State } from "../../../state";
 import CVsStyled from "./CVsStyled";
@@ -23,6 +23,7 @@ const CVsSection: React.FC = () => {
     const [popupStatus, setPopupStatus] = useState(false);
     const [uploadedFile, setUploadedFile] = useState("");
     const [title, setTitle] = useState("");
+    const [fileEnding, setfileEnding] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const cvs = useSelector((state: State) => state.cvs);
@@ -36,13 +37,13 @@ const CVsSection: React.FC = () => {
 
     useEffect(() => {
         async function getCvs() {
-          const { data } = await getCurrUserCvs();
-          console.log({data});
-          
-          data.cvs.forEach((currCv: CV) => {
-              if (!cvs.find(curr=> curr._id === currCv._id)) {
-                addCv(currCv);
-              }
+            const { data } = await getCurrUserCvs();
+            console.log({ data });
+
+            data.cvs.forEach((currCv: CV) => {
+                if (!cvs.find((curr) => curr._id === currCv._id)) {
+                    addCv(currCv);
+                }
             });
         }
         getCvs();
@@ -59,6 +60,8 @@ const CVsSection: React.FC = () => {
     const handleSetFile = async (event: ChangeEvent<HTMLInputElement>) => {
         const files = event.target.files;
         if (files && files[0]) {
+            const fileNameWords = files[0].name.split(".");
+            setfileEnding(fileNameWords[fileNameWords.length - 1]);
             const base64File = await toBase64(files[0]);
             setUploadedFile(base64File);
         }
@@ -83,8 +86,11 @@ const CVsSection: React.FC = () => {
             if (title === "") {
                 setErrorMessage("Enter Cv Title");
             } else {
+                const newTitle = title.endsWith("." + fileEnding)
+                    ? title
+                    : title + "." + fileEnding;
                 const newCV = {
-                    title: title,
+                    title: newTitle,
                     cvFile: uploadedFile,
                     tags: [],
                 };
@@ -92,6 +98,7 @@ const CVsSection: React.FC = () => {
                 addCv(data);
                 setTitle("");
                 setUploadedFile("");
+                setfileEnding("");
                 handleSetPoputStatusClosed();
             }
         } else {
