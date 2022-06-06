@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import Input from "../../input/Input";
-import Textarea from "../../input/Textarea";
+// import Input from "../../input/Input";
+// import Textarea from "../../input/Textarea";
 import { FieldArray, Formik, FormikProps, useFormik } from "formik";
 import * as Yup from "yup";
 import RecruitmentTrackModel from "../../../../models/forms/RecruitmentTrack";
-import Button from "../../../common/button/Button";
-import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
+// import Button from "../../../common/button/Button";
+// import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
+// import { actionsCreators, State } from "../../../../state";
 import UploadImage from "../../uploadImg/UploadImage";
 import { useNavigate } from "react-router-dom";
-import Fab from "@mui/material/Fab";
-import Grid from "@mui/material/Grid";
 import CommentFieldStyled from "./CommentFieldStyled";
 import Track from "../../../../models/Track";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -29,9 +27,12 @@ import {
   getCompanyByHrId,
   saveCompany
 } from "../../../../services/companyService";
+import { actionsCreators, State } from "../../../../state";
+import Button from "../../../common/button/Button";
+import Input from "../../input/Input";
+import Textarea from "../../input/Textarea";
+import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
 import Position from "../../../../models/Position";
-import Step from "../../../../models/Step";
-import CV from "../../../../models/CV";
 
 interface CreateRectuitmentTrackFormProps {
   formik: any;
