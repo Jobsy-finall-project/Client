@@ -72,6 +72,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
           { currentTrack && currentTrack.steps?.map((step) => {
             return (
               <TimelineItem
+                className="timelineItem"
                 onClick={() => {
                   navigation("/recruitment-track-step-page", { state: step });
                 }}

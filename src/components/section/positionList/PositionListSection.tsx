@@ -24,14 +24,28 @@ import {
   PageListSectionStyled,
   positionTitle
 } from "./PositionListSectionStyled";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import {deleteAplication} from "../../../services/applicationService";
+import { deletePositionById} from "../../../services/positionsService";
+import Company from "../../../models/Company";
+
 
 const PositionListSection: React.FC = () => {
   let navigation = useNavigate();
   const dispatch = useDispatch();
-  const { AddPosition, CreateCompany } = bindActionCreators(
+  const { AddPosition, CreateCompany, deletePosition } = bindActionCreators(
     actionsCreators,
     dispatch
   );
+
+    async function handleDeletePosition(position: Position){
+        await deletePositionById(position._id as string);
+        const { data } = await getCompanyByHrId();
+        const company = {...data};
+        company.positions=company.positions.filter((cur:Position)=>cur._id !==position._id);
+        deletePosition(company);
+    }
 
   async function getCompanyPositions() {
 
@@ -54,20 +68,15 @@ const PositionListSection: React.FC = () => {
       .find((curr) => curr._id === currUser?.company)
       const positions = company ? company.positions.filter((cur:Position)=>cur.hrId === currUser._id) : []
 
-
-
-
   const [search, setSearchBar] = useState("");
   
-  
-
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
       const title = event.currentTarget.value;
       setSearchBar(title);
   };
 
   const handleClick = (position: Position) => {
-      navigation("/position", { state: position._id });
+      navigation("/position/"+position._id/* , { state: position._id } */);
   };
 
   const handleAddPosition = () => {
@@ -125,12 +134,11 @@ const PositionListSection: React.FC = () => {
                       <>
                         <ListItem
                           secondaryAction={
-                            <Checkbox
-                              icon={<FavoriteBorder />}
-                              checkedIcon={
-                                <Favorite className="favoriteIcon" />
-                              }
-                            />
+                              <IconButton onClick={e =>
+                                  handleDeletePosition(currPosition as Position)
+                              }>
+                                  <DeleteIcon/>
+                              </IconButton>
                           }
                         >
                           <ListItemButton>

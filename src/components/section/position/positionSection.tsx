@@ -23,7 +23,7 @@ import {
 import DownloadIcon from "@mui/icons-material/Download";
 import React, { ChangeEvent, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import CV from "../../../models/CV";
 import Track from "../../../models/Track";
 import UserModel from "../../../models/User";
@@ -44,25 +44,33 @@ interface userSuggestions {
 const PositionSection: React.FC = () => {
 
     let navigation = useNavigate();
-    const location = useLocation();
+    // const location = useLocation();
     const currUser = getCurrentUser();
-    const positionId: string = location.state as string;
+    const { positionId } = useParams();
     const [open, setOpen] = React.useState(false);
     const position_state = useSelector((state: State) => state.companys)
         .find((curr) => curr._id === currUser.company)
         ?.positions?.find((curr) => curr._id === positionId)!!;
     const [position, setPosition] = React.useState(position_state);
 
-
-    useEffect(( ) => {
-        async function getPosition(){
-            const current_position = await getPositionById(positionId);
-            if(current_position) {
+    async function getSuggestions() {
+        const { data } = await getSuggestios(
+            currUser.company!!,
+            positionId ? positionId : ""
+        );
+        setSuggestions(data);
+    }
+    useEffect(() => {
+        async function getPosition() {
+            const current_position = await getPositionById(
+                positionId ? positionId : ""
+            );
+            if (current_position) {
                 setPosition(current_position);
             }
         }
         getPosition();
-
+        getSuggestions();
     }, []);
 
     const createTrack = async (users: string[]) => {
@@ -91,18 +99,6 @@ const PositionSection: React.FC = () => {
     const [suggestions, setSuggestions] = React.useState<
         Array<userSuggestions>
     >([]);
-
-    async function getCompanys() {
-        const { data } = await getSuggestios(
-            currUser.company!!,
-            position._id!!
-        );
-        setSuggestions(data);
-    }
-
-    useEffect(() => {
-        getCompanys();
-    }, []);
 
     const [personName, setPersonName] = React.useState<string[]>([]);
 
@@ -165,6 +161,19 @@ const PositionSection: React.FC = () => {
             setPersonName([]);
         }
     };
+
+    const getStatus = (suggestion:userSuggestions) => {
+        const app = suggestion.user.applications?.find(currApp => {
+            const currPosId = currApp.position._id ? currApp.position._id : currApp.position
+            return (currPosId === positionId)
+        })
+        if (app) {
+            return (app.isMatch ? "Appoved" :"Panding")
+        } else {
+            return "Available"
+        }
+    }
+
     return (
         <PositionStyled>
             <Typography className="trackTitle" variant="h3">
@@ -174,42 +183,45 @@ const PositionSection: React.FC = () => {
                 {position && position.description}
             </Typography>
 
-            <Timeline
-                position="alternate"
-                className="timeline">
-                { position && position.template && position.template.map((step) => {
-                    return (
-                        <TimelineItem
-                            onClick={() => {
-                                navigation("/recruitment-track-step-page", { state: step });
-                            }}
-                        >
-                            <TimelineOppositeContent
-                                sx={{ m: "auto 0" }}
-                                align="right"
-                                variant="body2"
-                                className="timelineDate"
+            <Timeline position="alternate" className="timeline">
+                {position &&
+                    position.template &&
+                    position.template.map((step) => {
+                        return (
+                            <TimelineItem
+                                onClick={() => {
+                                    navigation("/recruitment-track-step-page", {
+                                        state: step,
+                                    });
+                                }}
                             >
-                                {step.time && step.time.slice(0,10)}
-                            </TimelineOppositeContent>
-                            <TimelineSeparator
-                                className="timelineSeperator"
-                            >
-                                <TimelineConnector />
-                                <TimelineDot>
-                                    <AssignmentIcon />
-                                </TimelineDot>
-                                <TimelineConnector />
-                            </TimelineSeparator>
-                            <TimelineContent
-                                sx={{ m: "auto 0" }}>
-                                <Typography className="timelineStep" variant="h6" component="span">
-                                    {step.title}
-                                </Typography>
-                            </TimelineContent>
-                        </TimelineItem>
-                    );
-                })}
+                                <TimelineOppositeContent
+                                    sx={{ m: "auto 0" }}
+                                    align="right"
+                                    variant="body2"
+                                    className="timelineDate"
+                                >
+                                    {step.time && step.time.slice(0, 10)}
+                                </TimelineOppositeContent>
+                                <TimelineSeparator className="timelineSeperator">
+                                    <TimelineConnector />
+                                    <TimelineDot>
+                                        <AssignmentIcon />
+                                    </TimelineDot>
+                                    <TimelineConnector />
+                                </TimelineSeparator>
+                                <TimelineContent sx={{ m: "auto 0" }}>
+                                    <Typography
+                                        className="timelineStep"
+                                        variant="h6"
+                                        component="span"
+                                    >
+                                        {step.title}
+                                    </Typography>
+                                </TimelineContent>
+                            </TimelineItem>
+                        );
+                    })}
             </Timeline>
 
             <Button
@@ -223,9 +235,19 @@ const PositionSection: React.FC = () => {
                     navigation("/add-step-template", { state: position });
                 }}
             />
-
+            <Button
+                title="See all Applications"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left="100px"
+                onClick={() => {
+                    navigation("/apps-of-positions/" + position._id);
+                }}
+            />
             <div>
-                <Button
+                { position && position.template && position.template.length>0 ?<Button
                     title="Share"
                     color=""
                     height="50px"
@@ -234,7 +256,7 @@ const PositionSection: React.FC = () => {
                     left="auto"
                     right="auto"
                     onClick={() => createTrack(personName)}
-                />
+                />: <h6>Please add steps in order to share your position</h6>}
                 <TableContainer
                     sx={{ mx: "auto", mt: 1, width: 3 / 4 }}
                     component={Paper}
@@ -245,11 +267,35 @@ const PositionSection: React.FC = () => {
                                 <TableCell size="small" align="center">
                                     <Checkbox onChange={checkAll} />
                                 </TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>Full Name</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>Email</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>CV</TableCell>
-                                <TableCell align="left" sx={{typography: "h5"}}>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    Full Name
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    Email
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    CV
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
                                     Match Percentage
+                                </TableCell>
+                                <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    Status
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -273,14 +319,23 @@ const PositionSection: React.FC = () => {
                                             )}
                                         />
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user.firstName}{" "}
                                         {currSuggestion.user.lastName}
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user.email}
                                     </TableCell>
-                                    <TableCell align="left" sx={{typography: "h5"}}>
+                                    <TableCell
+                                        align="left"
+                                        sx={{ typography: "h5" }}
+                                    >
                                         {currSuggestion.user?.cvs?.map(
                                             (currCv) => (
                                                 <Chip
@@ -297,9 +352,18 @@ const PositionSection: React.FC = () => {
                                         )}
                                     </TableCell>
                                     <TableCell align="left">
-                                    <Rating name="read-only" value={currSuggestion.score} readOnly />
-                                        
+                                        <Rating
+                                            name="read-only"
+                                            value={currSuggestion.score}
+                                            readOnly
+                                        />
                                     </TableCell>
+                                    <TableCell
+                                    align="left"
+                                    sx={{ typography: "h5" }}
+                                >
+                                    {getStatus(currSuggestion)}
+                                </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>

@@ -56,6 +56,11 @@ interface DeleteCV {
   payload: CV; // change when theres add cv
 }
 
+interface DeletePosition {
+  type: ActionType.DELETE_POSITION;
+  payload: Company;
+}
+
 interface CreateCompany {
   type: ActionType.CREATE_COMPANY;
   payload: Company;
@@ -84,4 +89,5 @@ export type Action =
   | DeleteTrackAction
   | CreateCompany
   | CreatePosition
-  | AddStepToTemplate;
+  | AddStepToTemplate
+  | DeletePosition;

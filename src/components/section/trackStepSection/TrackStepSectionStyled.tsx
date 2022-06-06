@@ -3,7 +3,8 @@ import styled from "styled-components";
 const TrackStepSectionStyled = styled.div`
 
   & .container{
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
+    font-weight:bold;
   }
 
   & .stepTitle{

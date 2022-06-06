@@ -28,6 +28,7 @@ import AddStepToTemplatePage from "./pages/AddStepToTemplatePage";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
 import { createBrowserHistory } from "history";
+import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
 import { getCurrentUser } from "./services/authService";
 
 const histoy = createBrowserHistory()
@@ -62,7 +63,7 @@ const App: React.FC = () => {
           <Route path="/companys" element={<CompanyListPage />} />
           <Route path="/create-position" element={<CreatePositionPage />} />
           <Route path="/positions" element={<PositionsListPage />} />
-          <Route path="/position" element={<PositionPage />} />
+          <Route path="/position/:positionId" element={<PositionPage />} />
           <Route
             path="/add-step-template" element={<AddStepToTemplatePage />}
           />
@@ -72,6 +73,7 @@ const App: React.FC = () => {
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/matches" element={<MatchesPage />} />
+          <Route path="/apps-of-positions/:positionId" element={<ActiveApplicationsPage/>}/>
         </Routes>
       </Router>
     </div>
