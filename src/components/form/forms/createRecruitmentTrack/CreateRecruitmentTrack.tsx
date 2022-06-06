@@ -232,20 +232,14 @@ const RecruitmentTrackForm: (
                 <MenuItem
                   value={cv.cvFile}
                 >
-                  {cv.cvFile}
+                  {cv.title}
                 </MenuItem>
               );
             })}
           </Select>
           </FormControl>
           </Box>
-          <UploadImage
-            name="upload-cv"
-            label="Upload CV"
-            type="text"
-            error=""
-            onChange={handleChange}
-          />
+          
 
           <Button
             title="Create New Tarck"

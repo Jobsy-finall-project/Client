@@ -56,134 +56,15 @@ const initialLoginUserState: DecodeJwt = {
 
 const initialSortAttribute: SortAttribute = { attribute: "", order: "" };
 
-// var f = new File([""], "filename.txt", { type: "text/plain" });
 
 const initialCVsState: CV[] = [
-  {
-    _id: "",
-    title: "Senior devops engineer",
-    cvFile: "",
-    tags: []
-  },
-  {
-    _id: "",
-    title: "Senior fullstack engineer",
-    cvFile: "",
-    tags: []
-  }
+  
 ];
 
 const initialRecTracks: Track[] = [];
-// const initialRecTracks: Track[] = [
-//   {
-//     id: "1",
-//     company: {
-//       name: "Microsoft",
-//       description: "Microsoft is a company",
-//       positions: []
-//     },
-//     position: {
-//       id: "1",
-//       tags: [],
-//       name: "Full Stack Developer",
-//       description:
-//         "We are looking for an “all-around” backend engineer that will take a key role in building Slack-based products for Salesforce Marketing Cloud from scratch. We are on “day zero” - you will have the opportunity to design and develop a challenging large-scale system from scratch, as well as influence the culture and standards of a new engineering group. As a newcomer to the industry, you’ll get a chance to work with many technologies and receive mentorship from experienced engineers.",
-//       hrid: "1"
-//     },
-//     isActive: true,
-//     isFavorite: true,
-//     steps: [
-//       {
-//         id: "0",
-//         title: "Telephon interview",
-//         description: "telephone interview",
-//         date: "07/05/2022"
-//       },
-//       {
-//         id: "1",
-//         title: "HR",
-//         description: "Hr interview",
-//         date: "11/05/2022"
-//       },
-//       {
-//         id: "2",
-//         title: "Technical",
-//         description: "CTO interview",
-//         date: "13/05/2022"
-//       },
-//     ],
-//     comments: ["i realy want this one"],
-//     isMatch: true,
-//     cvFiles: [],
-//   },
-//   {
-//     id: "2",
-//     company: {
-//       name: "Rad hat",
-//       description: "Red hat is a company",
-//       positions: []
-//     },
-//     position: {
-//       id: "2",
-//       tags: [],
-//       name: "Devops",
-//       description: `We are building a cutting edge Cloud solution that gives customers visibility and control without impeding agility and helps them stay ahead of cyber threats as they evolve. You will join the group that is responsible for advanced threat detection capabilities, leveraging machine learning and behavioral profiling to detect emerging threats and advanced attacks by engineering a hyper-scale service to defend millions of hosts.
-//         We are seeking for top-notch individuals who are passionate about secu`,
-//       hrid: "2"
-//     },
-//     isActive: true,
-//     isFavorite: true,
-//     steps: [
-//       {
-//         id: "0",
-//         title: "Telephon interview",
-//         description: "telephone interview",
-//         date: "07/05/2022",
-//       },
-//       {
-//         id: "1",
-//         title: "HR",
-//         description: "Hr interview",
-//         date: "11/05/2022",
-//       },
-//     ],
-//     comments: ["i realy want this one"],
-//     isMatch: true,
-//     cvFiles: [],
-//   }
-// ];
 
 const initialCompanyState: Company[] = [];
-// const initialCompanyState: Company[] = [
-//   {
-//     id: "1",
-//     name: "microsoft",
-//     description:
-//       "Microsoft Corporation is an American multinational technology corporation which produces computer software, consumer electronics, personal computers, and related services",
-//     positions: [
-//       {
-//         id: "1",
-//         name: "Full stack developer",
-//         tags: [],
-//         description: "python djngo and angular full stack developer",
-//         template: [
-//           {
-//             id: "0",
-//             title: "Telephon interview",
-//             description: "telephone interview",
-//             date: "07/05/2022",
-//           },
-//           {
-//             id: "1",
-//             title: "HR",
-//             description: "Hr interview",
-//             date: "09/05/2022",
-//           },
-//         ]
-//       },
-//     ],
-//   },
-// ];
+
 
 const cardReducer = (state: Array<Card> = initialCardState, action: Action) => {
   switch (action.type) {

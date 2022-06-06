@@ -61,7 +61,7 @@ const CVsSection: React.FC = () => {
 
   const handleSave = async () => {
     if (uploadedFile) {
-      if (title == "") {
+      if (title === "") {
         setErrorMessage("Enter Cv Title");
       } else {
         const newCV = {

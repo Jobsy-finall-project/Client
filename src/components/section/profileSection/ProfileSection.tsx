@@ -1,14 +1,13 @@
-import React, { useState } from "react";
-import { ProfileSectionStyled} from "./ProfileSectionStyled";
-import { useSelector } from "react-redux";
-import { State } from "../../../state";
 import { Avatar, Card, Grid, Typography } from "@mui/material";
+import React from "react";
+import avatar from "../../../images/avatar.png";
+import { getCurrentUser } from "../../../services/authService";
 import CVsSection from "../cvsSection/CVs";
-import avatar from "../../../images/avatar.png"
+import { ProfileSectionStyled } from "./ProfileSectionStyled";
 
 const ProfileSection: React.FC = () => {
 
-  const currUser = useSelector((state: State) => state.loginUser);
+  const currUser = getCurrentUser();
 
 
   return (
