@@ -9,7 +9,7 @@ const HomePage = () => {
   return (
     <React.Fragment>
       <Grid container display="flex" spacing={2} direction="row" >
-        <Grid item id="profileSection" margin="20px 10px">
+        <Grid item id="profileSection" margin="20px 10px" >
             <ProfileSection/>
         </Grid>
         <Grid xs id="homePage">

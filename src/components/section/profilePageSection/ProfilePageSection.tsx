@@ -27,12 +27,14 @@ const ProfilePageSection: React.FC = () => {
          </Grid>
     </Grid>  
     </Card> 
-      {/* <Card className="card"> */}
-          <Typography className="myCvsTitle" variant="h5">
+    {currUser && currUser.role === "Candidate" && ( 
+      <div>
+      <Typography className="myCvsTitle" variant="h5">
           My CV's :
         </Typography>
-        <CVsSection />     
-      {/* </Card> */}
+        <CVsSection /> 
+      </div> 
+    )} 
     </ProfilePageSectionStyled>
   );
 };
