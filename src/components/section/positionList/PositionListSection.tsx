@@ -178,7 +178,7 @@ const PositionListSection: React.FC = () => {
           <Grid item>
           <Button
           className="addNewTrackButton"
-          title="Add new recruitment track"
+          title="Add new position"
           color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
           height="50px"
           width="300px"

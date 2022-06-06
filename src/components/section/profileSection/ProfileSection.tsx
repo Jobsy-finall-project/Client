@@ -12,6 +12,7 @@ const ProfileSection: React.FC = () => {
   const currUser = getCurrentUser();
   const navigate = useNavigate();
 
+
   return (
     <ProfileSectionStyled>
       <Grid container className="container" direction="column" margin="0px" onClick={()=>navigate("/profile")}>
