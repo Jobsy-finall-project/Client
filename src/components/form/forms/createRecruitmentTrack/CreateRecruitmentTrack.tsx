@@ -1,37 +1,34 @@
-import React, { useEffect, useState } from "react";
-import Input from "../../input/Input";
-import Textarea from "../../input/Textarea";
-import { FieldArray, Formik, FormikProps, useFormik } from "formik";
-import * as Yup from "yup";
-import RecruitmentTrackModel from "../../../../models/forms/RecruitmentTrack";
-import Button from "../../../common/button/Button";
-import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
-import { useDispatch, useSelector } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionsCreators, State } from "../../../../state";
-import UploadImage from "../../uploadImg/UploadImage";
-import { useNavigate } from "react-router-dom";
-import Fab from "@mui/material/Fab";
-import Grid from "@mui/material/Grid";
-import CommentFieldStyled from "./CommentFieldStyled";
-import Track from "../../../../models/Track";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { saveApplication } from "../../../../services/applicationService";
 import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
-import FormControl from "@mui/material/FormControl";
+import { Formik, FormikProps, useFormik } from "formik";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { bindActionCreators } from "redux";
+import * as Yup from "yup";
 import Company from "../../../../models/Company";
+import CV from "../../../../models/CV";
+import RecruitmentTrackModel from "../../../../models/forms/RecruitmentTrack";
+import Position from "../../../../models/Position";
+import { saveApplication } from "../../../../services/applicationService";
 import { getCurrentUser } from "../../../../services/authService";
 import {
   getAllCompanys,
   getCompanyByHrId,
   saveCompany
 } from "../../../../services/companyService";
-import Position from "../../../../models/Position";
-import Step from "../../../../models/Step";
-import CV from "../../../../models/CV";
+import {
+  getAllCVs
+} from "../../../../services/cvService";
+import { actionsCreators, State } from "../../../../state";
+import Button from "../../../common/button/Button";
+import Input from "../../input/Input";
+import Textarea from "../../input/Textarea";
+import UploadImage from "../../uploadImg/UploadImage";
+import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
 
 interface CreateRectuitmentTrackFormProps {
   formik: any;
@@ -140,106 +137,128 @@ const RecruitmentTrackForm: (
   errors,
   touched
 }) => {
-  //   const formikinstance = { ...props.formik };
-  const companys = useSelector((state: State) => state.companys);
-  const [newCompany, setNewCompany] = useState(false);
-  const currentUser = getCurrentUser();
+    //   const formikinstance = { ...props.formik };
+    const companys = useSelector((state: State) => state.companys);
+    const [newCompany, setNewCompany] = useState(false);
+    const currentUser = getCurrentUser();
+    const cvs = useSelector((state: State) => state.cvs);
 
-  return (
-    <CreateRecruitmentTrackStyled>
-      <form onSubmit={handleSubmit} className="needs-validation">
-        {currentUser && currentUser.role === "Candidate" && (
-          <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
-            <FormControl fullWidth>
-              <InputLabel id="company-select">Company Name</InputLabel>
-              <Select
-                labelId="company-select-label"
-                id="company-select"
-                label="Company"
-                name="companyName"
-                onChange={handleChange}
-                value={values.companyName}
-              >
-                {(companys as Array<Company>).map((company: Company) => {
-                  return (
-                    <MenuItem
-                      value={company.name}
-                      onClick={() => {
-                        setNewCompany(false);
-                      }}
-                    >
-                      {company.name}
-                    </MenuItem>
-                  );
-                })}
-                <MenuItem
-                  //   value={"new"}
-                  onClick={() => {
-                    setNewCompany(true);
-                  }}
+    return (
+      <CreateRecruitmentTrackStyled>
+        <form onSubmit={handleSubmit} className="needs-validation">
+          {currentUser && currentUser.role === "Candidate" && (
+            <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
+              <FormControl fullWidth>
+                <InputLabel id="company-select">Company Name</InputLabel>
+                <Select
+                  labelId="company-select-label"
+                  id="company-select"
+                  label="Company"
+                  name="companyName"
+                  onChange={handleChange}
+                  value={values.companyName}
                 >
-                  Add new company
-                </MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
-        )}
-        {newCompany ? (
+                  {(companys as Array<Company>).map((company: Company) => {
+                    return (
+                      <MenuItem
+                        value={company.name}
+                        onClick={() => {
+                          setNewCompany(false);
+                        }}
+                      >
+                        {company.name}
+                      </MenuItem>
+                    );
+                  })}
+                  <MenuItem
+                    onClick={() => {
+                      setNewCompany(true);
+                    }}
+                  >
+                    Add new company
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
+          )}
+          {newCompany ? (
+            <Input
+              name="companyName"
+              label="Company Name"
+              placeholder=""
+              value={values.companyName}
+              onChange={handleChange}
+              errors={errors.companyName}
+              touched={touched.companyName}
+              type="text"
+            />
+          ) : (
+            <></>
+          )}
           <Input
-            name="companyName"
-            label="Company Name"
+            name="positionName"
+            label="Position Name"
             placeholder=""
-            value={values.companyName}
+            value={values.positionName}
             onChange={handleChange}
-            errors={errors.companyName}
-            touched={touched.companyName}
+            errors={errors.positionName}
+            touched={touched.positionName}
             type="text"
           />
-        ) : (
-          <></>
-        )}
-        <Input
-          name="positionName"
-          label="Position Name"
-          placeholder=""
-          value={values.positionName}
-          onChange={handleChange}
-          errors={errors.positionName}
-          touched={touched.positionName}
-          type="text"
-        />
-        <Textarea
-          name="positionDescription"
-          label="Position Description"
-          placeholder=""
-          value={values.positionDescription}
-          onChange={handleChange}
-          errors={errors.positionDescription}
-          touched={touched.positionDescription}
-          height="200px"
-          rows={10}
-          cols={70}
-        />
-        <UploadImage
-          name="upload-cv"
-          label="Upload CV"
-          type="text"
-          error=""
-          onChange={handleChange}
-        />
-        
-        <Button
-          title="Create New Tarck"
-          color=""
-          height="50px"
-          width="170px"
-          top="32px"
-          left="100px"
-          onClick={handleSubmit}
-        />
-      </form>
-    </CreateRecruitmentTrackStyled>
-  );
-};
+          <Textarea
+            name="positionDescription"
+            label="Position Description"
+            placeholder=""
+            value={values.positionDescription}
+            onChange={handleChange}
+            errors={errors.positionDescription}
+            touched={touched.positionDescription}
+            height="200px"
+            rows={10}
+            cols={70}
+          />
+          <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
+          <FormControl fullWidth>
+          <InputLabel id="cv-select"> Select CV:</InputLabel>
+          <Select
+            labelId="cvs-select-label"
+            id="cv-select"
+            label="CV"
+            name="cv"
+            onChange={handleChange}
+          >
+            {(cvs as Array<CV>).map((cv: CV) => {
+              return (
+                <MenuItem
+                  value={cv.cvFile}
+                >
+                  {cv.cvFile}
+                </MenuItem>
+              );
+            })}
+          </Select>
+          </FormControl>
+          </Box>
+          <UploadImage
+            name="upload-cv"
+            label="Upload CV"
+            type="text"
+            error=""
+            onChange={handleChange}
+          />
+
+          <Button
+            title="Create New Tarck"
+            color=""
+            height="50px"
+            width="170px"
+            top="32px"
+            left="100px"
+            onClick={handleSubmit}
+          />
+        </form>
+      </CreateRecruitmentTrackStyled>
+    );
+  };
 
 export default CreateRecruitmentTrack;
