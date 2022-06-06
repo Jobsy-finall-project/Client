@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { getCurrentUser } from "../../services/authService";
 import Logo from "./../../JobsyHeader.png";
 import HeaderStyled from "./HeaderStyled";
+import { useNavigate } from "react-router-dom";
 
 
 // const pages = [{ "title": 'Home', "url": "/" },
@@ -43,13 +44,17 @@ const Header: React.FC<HeaderProps> = (props) => {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   let pages = [
-    { "title": 'Login', "url": "/sign-in" }
+    { "title": 'Login', "url": "/sign-in" },
+    { "title": '', "url": "" }
   ];
   if (getCurrentUser().role === "Candidate") {
     pages = [
-      ...pages,
+      pages[1],
+      
       { "title": 'Cvs', "url": "/cvs" },
-      { "title": 'Matches', "url": "/matches" }]
+      { "title": 'Matches', "url": "/matches" },
+      { "title": 'Logout', "url": "/logout" }
+    ]
   }
   if (getCurrentUser().role === "HR") {
     pages = [
@@ -70,13 +75,14 @@ const Header: React.FC<HeaderProps> = (props) => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const navigate = useNavigate();
 
   return (
     <HeaderStyled>
       <AppBar position="static" className="header-style">
         <Container maxWidth="xl" className="container-header">
           <Toolbar disableGutters >
-            <Navbar.Brand className="jobsy-logo" href="/">
+            <Navbar.Brand className="jobsy-logo" onClick={() => navigate("/")}>
               <img
                 alt=""
                 src={Logo}
