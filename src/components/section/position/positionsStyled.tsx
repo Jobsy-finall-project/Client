@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import * as Colors from "../../../assets/Colors"
 
 export const PositionStyled = styled.div`
     
@@ -17,5 +18,13 @@ export const PositionStyled = styled.div`
         justify-content: center;
         margin: 5px;
     }
+
+    & .button{
+        background-color: ${Colors.LIGHT_PINK}
+      }
+
+      & .button:hover{
+        background-color: ${Colors.PINK}
+      }
 
 `;

@@ -53,7 +53,7 @@ export const PositionListSectionStyled = styled.div`
     padding: 5px;
     transition: 0.3ms;
     height:40px;
-    background-image: linear-gradient(-180deg, #cbf7dc 0%, #89eeef 100%);
+    background-color: ${Colors.LIGHT_PINK};
     color: #008CBA;
     font-size: 18px;
     text-decoration: none;
@@ -67,7 +67,7 @@ export const PositionListSectionStyled = styled.div`
   }
   
   & .addNewTrackButton:hover {
-    background-image: linear-gradient(-180deg, #A2DBB8 0%, #85DED0 50%);
+    background-color: ${Colors.PINK};
   }
 
   & .favoriteIcon{
@@ -76,14 +76,14 @@ export const PositionListSectionStyled = styled.div`
   
   & .listItem {
     border-radius: 20px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.LIGHT_PINK};
     margin: 5px;
 
   }
 
   & .listItem:hover {
     border-radius: 30px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.PINK};
   }
 
 `;
