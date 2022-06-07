@@ -16,6 +16,9 @@ import Button from "../../../common/button/Button";
 import Input from "../../input/Input";
 import CreatePositionStyled from "./CreatePositionStyled";
 import tags from "../../../../assets/tag_pool.json";
+import Grid from '@mui/material/Grid';
+import { Typography } from '@mui/material';
+import Textarea from '../../input/Textarea';
 const CreateCompanySchema = Yup.object().shape({
   name: Yup.string().required("Required"),
   companyId: Yup.string(),
@@ -105,9 +108,19 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
   const fixedOptions = [tags[0]];
   return (
     <CreatePositionStyled>
-      <div className="container">
-      <h1>Create Position</h1>
+      <Grid container className="container" direction="column" width={"100%"}
+        spacing={3}
+        justifyContent="center"
+        alignItems="center">
+        <Grid item>
+        <Typography className="title" variant="h3">
+          Create Position 
+        </Typography>
+        {/* <h1 className="title">Create Position</h1> */}
+        </Grid>
+        <Grid item margin="0px"> 
       <form onSubmit={handleSubmit} className="needs-validation">
+        <div className="input">
         <Input
           name="name"
           label="Name"
@@ -118,7 +131,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           touched={touched.name}
           type="text"
         />
-        <Input
+        <Textarea
           name="description"
           label="Description"
           placeholder=""
@@ -126,10 +139,13 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           onChange={handleChange}
           errors={errors.description}
           touched={touched.description}
-          type="text"
+          rows= {20}
+          cols= {60}
+          height="200px"
         />
-        <div className="">
-        <Autocomplete
+        </div>
+        <div>
+        <Autocomplete className="complete"
      multiple
      options={tags.map((option) => option)}
     style={{ marginTop:"30px"}}
@@ -149,17 +165,21 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
      )}
    />
    </div>
+   <  Grid item container className="adBtn">
         <Button
           title="Save"
           color=""
           height="50px"
           width="170px"
           top="32px"
-          left="100px"
+          left="280px"
+          right=""
           onClick={handleSubmit}
         />
+        </Grid>
       </form>
-      </div>
+      </Grid>
+      </Grid>
     </CreatePositionStyled>
   );
 };

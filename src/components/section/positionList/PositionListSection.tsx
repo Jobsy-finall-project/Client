@@ -85,7 +85,6 @@ const PositionListSection: React.FC = () => {
   const searchFunction = (position: Position, query: string) => {
       const searchTerm = query.toLowerCase();
       if (position.name) {
-
       return (
           position.name.toLowerCase().includes(searchTerm) || 
           position.description?.toLowerCase().includes(searchTerm)
