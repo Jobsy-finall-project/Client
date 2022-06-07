@@ -54,7 +54,7 @@ export const PositionListSectionStyled = styled.div`
     transition: 0.3ms;
     height:40px;
     background-image: linear-gradient(-180deg, #caeaf1 0%, #bedcc9 100%);
-    color: #FFFFFF;
+    color: #008CBA;
     font-size: 18px;
     text-decoration: none;
     max-width: 300px;

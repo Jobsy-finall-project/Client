@@ -14,22 +14,12 @@ import { Link } from 'react-router-dom';
 import { getCurrentUser } from "../../services/authService";
 import Logo from "./../../JobsyHeader.png";
 import HeaderStyled from "./HeaderStyled";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
-
-// const pages = [{ "title": 'Home', "url": "/" },
-// { "title": 'Cvs', "url": "/cvs" },
-// { "title": 'Matches', "url": "/matches" }]
 const userlinks = [
   { "title": 'Profile', "url": "/profile" },
-  { "title": 'Logout', "url": "/logout" }]
-
-const styles = {
-  largeIcon: {
-    width: 60,
-    height: 60,
-  },
-};
+  { "title": 'Logout', "url": "/logout" }
+]
 
 interface HeaderProps {
   brandName: string;
@@ -43,22 +33,29 @@ const Header: React.FC<HeaderProps> = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
+  const location = useLocation();
+
   let pages = [
-    { "title": 'Login', "url": "/sign-in" },
-    { "title": '', "url": "" }
+    { "title": 'Login', "url": "/sign-in" }
   ];
+
+  if( location.pathname === "/sign-in" 
+      || location.pathname === "/sign-up"){
+    pages= [ 
+      { "title": '', "url": "" }
+     ]
+   }
+
   if (getCurrentUser().role === "Candidate") {
     pages = [
-      pages[1],
-      { "title": 'Cvs', "url": "/cvs" },
-      { "title": 'Matches', "url": "/matches" },
-      { "title": 'Logout', "url": "/logout" }
+      { "title": 'My matches', "url": "/matches" }
     ]
   }
+
   if (getCurrentUser().role === "HR") {
     pages = [
-    { "title": 'Positions', "url": "/positions" },
-    { "title": 'Logout', "url": "/logout" } ]
+      { "title": 'Positions', "url": "/positions" }
+     ]
   }
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -113,12 +110,12 @@ const Header: React.FC<HeaderProps> = (props) => {
               </Button>
             ))}
             <Box sx={{ flexGrow: 0 }}>
-              {userIsConnect().role === "Candidate"
-                || userIsConnect().role === "HR" && (
+              {( getCurrentUser().role === "Candidate"
+                || getCurrentUser().role === "HR") && (
                   <div>
                     <Tooltip title="Open settings">
                       <IconButton size="large" onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                        <AccountCircle fontSize="large"></AccountCircle>
+                        <AccountCircle fontSize="large" fontWeight="bold"></AccountCircle>
                       </IconButton>
                     </Tooltip>
                     <Menu

@@ -23,6 +23,10 @@ const HeaderStyled = styled.div`
     font-weight:bold;
   }
 
+  & .jobsy-logo{
+    cursor: pointer;
+  }
+
   
 `;
 
