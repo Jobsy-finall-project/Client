@@ -21,7 +21,6 @@ import ActiveApplicationsSectionStyled, {
     positionTitle,
 } from "./ActiveApplicationsSectionStyled";
 import UserModel from "../../../models/User";
-import { PositionListSectionStyled } from "../positionList/PositionListSectionStyled";
 import { getPositionById } from "../../../services/positionsService";
 import Position from "../../../models/Position";
 
@@ -83,7 +82,7 @@ const ActiveApplicationsSection: React.FC = () => {
         navigation("/recruitment-track-page", { state: user.applications!![0] }); //TODO handle Later
     };
     return (
-        <PositionListSectionStyled>
+        <ActiveApplicationsSectionStyled>
             <Grid
                 container
                 spacing={3}
@@ -146,7 +145,7 @@ const ActiveApplicationsSection: React.FC = () => {
                     </List>
                 </Grid>
             </Grid>
-        </PositionListSectionStyled>
+        </ActiveApplicationsSectionStyled>
     );
 };
 

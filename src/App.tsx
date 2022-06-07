@@ -32,13 +32,18 @@ import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
 import { getCurrentUser } from "./services/authService";
 
 const histoy = createBrowserHistory()
+const currUser = getCurrentUser();
+
 const App: React.FC = () => {
+  let css = "App";
+  if(currUser.role === "HR"){
+   {css="App2"}
+  } else {css="App"}
   return (
-    <div className="App">
+    <div className={css}>
       <ToastContainer />
       <Router> 
         <Header brandName="Jobsy" />
-       
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />

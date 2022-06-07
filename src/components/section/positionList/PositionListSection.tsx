@@ -85,7 +85,6 @@ const PositionListSection: React.FC = () => {
   const searchFunction = (position: Position, query: string) => {
       const searchTerm = query.toLowerCase();
       if (position.name) {
-
       return (
           position.name.toLowerCase().includes(searchTerm) || 
           position.description?.toLowerCase().includes(searchTerm)
@@ -105,7 +104,7 @@ const PositionListSection: React.FC = () => {
           { positions && positions.length > 0 ?
           <>
           <Grid item>
-            <h3 className="activePositionsTitle"> My Active positions:</h3>
+            <h3 className="activePositionsTitle"> My Positions</h3>
           </Grid>
           <Grid item>
         <Button
@@ -178,7 +177,7 @@ const PositionListSection: React.FC = () => {
           <Grid item>
           <Button
           className="addNewTrackButton"
-          title="Add new recruitment track"
+          title="Add new position"
           color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
           height="50px"
           width="300px"

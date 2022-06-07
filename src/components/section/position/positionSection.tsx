@@ -11,6 +11,7 @@ import {
     Alert,
     Checkbox,
     Chip,
+    Grid,
     Paper,
     Rating,
     Snackbar,
@@ -54,6 +55,8 @@ const PositionSection: React.FC = () => {
         .find((curr) => curr._id === currUser.company)
         ?.positions?.find((curr) => curr._id === positionId)!!;
     const [position, setPosition] = React.useState(position_state);
+    const companyName = useSelector((state: State) => state.companys)
+    .find((curr) => curr._id === currUser.company)?.name;
 
     async function getSuggestions() {
         const { data } = await getSuggestios(
@@ -180,13 +183,43 @@ const PositionSection: React.FC = () => {
 
     return (
         <PositionStyled>
-            <Typography className="trackTitle" variant="h3">
+            <Typography className="title" variant="h3">
                 {position && position.name}
             </Typography>
-            <Typography className="trackDescription" variant="body1">
-                {position && position.description}
+            <Typography className="title" variant="body1">
+                Company : {companyName}
             </Typography>
-
+            <Typography className="title" variant="body1">
+                Description : {position && position.description}
+            </Typography>
+            <Grid container item spacing={2} className="container" direction="row" display="flex" align-content="center" justify-items="center">
+            <Grid item >
+            <Button
+                title="Add New Step"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left=""
+                onClick={() => {
+                    navigation("/add-step-template", { state: position });
+                }}
+            />
+            </Grid>
+            <Grid item >
+            <Button
+                title="See all Applications"
+                color=""
+                height="50px"
+                width="180px"
+                top="32px"
+                left=""
+                onClick={() => {
+                    navigation("/apps-of-positions/" + position._id);
+                }}
+            />
+            </Grid>
+            </Grid>
             <Timeline position="alternate" className="timeline">
                 {position &&
                     position.template &&
@@ -227,29 +260,6 @@ const PositionSection: React.FC = () => {
                         );
                     })}
             </Timeline>
-
-            <Button
-                title="Add New Step"
-                color=""
-                height="50px"
-                width="170px"
-                top="32px"
-                left="100px"
-                onClick={() => {
-                    navigation("/add-step-template", { state: position });
-                }}
-            />
-            <Button
-                title="See all Applications"
-                color=""
-                height="50px"
-                width="170px"
-                top="32px"
-                left="100px"
-                onClick={() => {
-                    navigation("/apps-of-positions/" + position._id);
-                }}
-            />
             <div>
                 {position &&
                 position.template &&

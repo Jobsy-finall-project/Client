@@ -8,6 +8,20 @@ const TrackSectionStyled = styled.div`
     max-width:100%;
   }
 
+  & .title{
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 10px;
+  }
+  & .button {
+    color: #008CBA;
+    background-color: ${Colors.LIGHT_PINK}
+  }
+
+  & .button:hover {
+    box-shadow: 0 4px 8px 0 rgba(0.5, 0.5, 0.5, 0.5);
+    background-color: ${Colors.PINK};
+  }
+
   & .trackTitle{
     font-size: 3em;
     color: black;
@@ -25,7 +39,6 @@ const TrackSectionStyled = styled.div`
     margin:auto;
     margin-top:40px;
     height:50px;
-
   }
 
   & .timelineStep{
@@ -47,15 +60,16 @@ const TrackSectionStyled = styled.div`
   }
 
   & .timelineItem{
-    // background-color: ${Colors.PRAIMARY};
-    border:2px solid #85D3E6;
+    // background-color: ${Colors.LIGHT_PINK};
+    border:6px solid ${Colors.LIGHT_PINK};
     margin-bottom:4px;
     border-radius:20px;
+    cursor: pointer;
   }
 
   & .timelineItem:hover,timelineDate:hover{
-    background-color: ${Colors.PRAIMARY};
-    border:3px solid 85D3E6;
+    background-color: ${Colors.LIGHT_PINK};
+    border:5px solid 85D3E6;
     margin-bottom:4px;
     border-radius:20px;
   }

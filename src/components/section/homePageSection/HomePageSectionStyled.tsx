@@ -51,8 +51,7 @@ export const HomePageSectionStyled = styled.div`
     padding: 5px;
     transition: 0.3ms;
     height:40px;
-    background-image: linear-gradient(-180deg, #A2DBB8 0%, #98E2F5 100%);
-    color: #FFFFFF;
+    color: #008CBA;
     font-size: 18px;
     text-decoration: none;
     max-width: 300px;
@@ -64,9 +63,7 @@ export const HomePageSectionStyled = styled.div`
     font-family: 'Quicksand', sans-serif;
   }
   
-  & .addNewTrackButton:hover {
-    background-image: linear-gradient(-180deg, #A2DBB8 0%, #85DED0 50%);
-  }
+ 
 
   & .favoriteIcon{
     color:red;
@@ -74,14 +71,14 @@ export const HomePageSectionStyled = styled.div`
 
   & .listItem {
     border-radius: 20px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.LIGHT_PINK};
     margin: 5px;
 
   }
 
   & .listItem:hover {
     border-radius: 30px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.PINK};
 
   }
   

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import ListSectionStyled from "./ListSectionStyled";
-import ButtonMui from '@mui/material/Button';
+import Button from '../../common/button/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -10,7 +10,7 @@ import Checkbox from "@mui/material/Checkbox";
 import { ListItemIcon } from "@mui/material";
 import {addApplicationComments, deleteApplicationComments} from "../../../services/applicationService";
 import {addStepComments, deleteStepComments} from "../../../services/stepService";
-
+import Grid from '@mui/material/Grid'
 
 interface ListSectionProps {
   appId: string;
@@ -75,58 +75,76 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
   }
 
 
-  // function handeleDeleteItem(item: number){
-    
-  // }
 
   return (
     <ListSectionStyled>
-    <List className="listContainer" sx={{ marginLeft: "100px" }}>
-    <p className="commentTitle" >{props.title}:</p>
-  {items?.map((currItem, index)  => {
-    return (
-      <div>
-      <ListItem
-      secondaryAction={
-        <Checkbox
-          icon={<DeleteIcon />}
-          checkedIcon={
-            <DeleteIcon />
-          }
-          onClick={() =>  handeleDeleteItem(index)}
-        />
-      }
-      >
-      <ListItemButton>
-        <ListItemIcon />
-        <ListItemText
-          primary={currItem}
-        />
-      </ListItemButton>
-      </ListItem>
-      </div>
-                    )
-    
-                  })}
+      <List className="listContainer" sx={{ marginLeft: "100px" }}>
+        <p className="commentTitle" >{props.title}:</p>
 
-<div className="addComments">
-<ButtonMui className="addCommentBtn" variant="contained" onClick={showItemInput}> {props.addBtnText}</ButtonMui>
-{addItemInput ? (
-  <div className="addCommentInput">
-    <input
-      type="text"
-      value={newItem}
-      onChange={handleAddItemChange}
-    />
-    <ButtonMui className="addBtn"
-    variant="contained"
-    onClick={handleAddItemClick}>
-      add
-    </ButtonMui> 
-  </div>
-) :null}
-</div>
-</List>
+        {items?.map((currItem, index) => {
+          return (
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon />
+                <ListItemText primary={currItem} />
+              </ListItemButton>
+              <DeleteIcon onClick={() =>  handeleDeleteItem(index)} />
+            </ListItem>
+          )
+        })}
+
+        <div className="addComments">
+        <Grid
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+         
+        >
+
+          <Grid item xs={3}>
+            <div>
+            <Button
+              className="addBtn"
+              onClick={showItemInput}
+              title="Add comments"
+              color=""
+              height="50px"
+              width="170px"
+              top="32px"
+              left="100px"
+            />
+            </div>
+          </Grid>   
+        </Grid> 
+        
+          {addItemInput ? (
+            <div className="addCommentInput">
+              <input
+                className="input-comment"
+                type="text"
+                value={newItem}
+                onChange={handleAddItemChange}
+              />
+              <Button
+                className="addBtn"
+                onClick={handleAddItemClick}
+                title="Add"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left="100px"
+              />
+            </div>
+          ) : null}
+   
+          {/* <Button 
+            onClick={showItemInput}> {props.addBtnText}</Button> */}
+
+        </div>
+      </List>
     </ListSectionStyled>
   );
 };

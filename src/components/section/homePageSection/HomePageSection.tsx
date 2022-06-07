@@ -34,6 +34,7 @@ import IconButton from '@mui/material/IconButton';
 import ShareIcon from '@mui/icons-material/Share';
 
 const HomePageSection: React.FC = () => {
+
   const navigation = useNavigate();
   const dispatch = useDispatch();
 
@@ -78,7 +79,6 @@ const HomePageSection: React.FC = () => {
       !track.isFavorite
     );
     console.log(1, application);
-    //TODO:UPDATE the global state track
   };
 
   const handleAddTrack = () => {
@@ -108,7 +108,7 @@ const HomePageSection: React.FC = () => {
         { tracks && tracks.length>0 ?
             <>
         <Grid item>
-          <h3 className="activePositionsTitle"> My Active Tracks:</h3>
+          <h3 className="activePositionsTitle"> My Tracks</h3>
         </Grid>
         <Grid item>
         <Button

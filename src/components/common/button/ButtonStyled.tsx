@@ -12,7 +12,7 @@ interface ButtonStyledProps {
 
 const ButtonStyled = styled.div<ButtonStyledProps>`
   & .button {
-    color: ${Colors.WHITE};
+    color: ${Colors.BUTTON};
     padding: 14px;
     transition: 0.3ms;
     margin-top: ${(props) => props.top};
