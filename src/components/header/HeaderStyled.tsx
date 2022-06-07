@@ -2,7 +2,7 @@ import styled from "styled-components";
 import * as Colors from "../../assets/Colors";
 
 const HeaderStyled = styled.div`
-  background-color: ${Colors.HEADER};
+  background-color: ${Colors.LIGHT_PINK};
 
   &.nav-link {
     color: ${Colors.RED};
@@ -12,7 +12,7 @@ const HeaderStyled = styled.div`
     max-width: 100vw;
   }
   & .header-style{
-    background-color:  ${Colors.THEME};
+    background-color:  ${Colors.LIGHT_PINK};
   }
 
   & .welcomeTitle{
