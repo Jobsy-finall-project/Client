@@ -50,7 +50,7 @@ const CreateStep: React.FC = () => {
   return (
     <Formik<Step>
       initialValues={{
-        id: v4(),
+        _id: v4(),
         title: "",
         time: new Date().toString(),
       }}
