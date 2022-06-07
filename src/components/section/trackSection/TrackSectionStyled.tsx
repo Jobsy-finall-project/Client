@@ -51,6 +51,7 @@ const TrackSectionStyled = styled.div`
     border:2px solid #85D3E6;
     margin-bottom:4px;
     border-radius:20px;
+    cursor: pointer;
   }
 
   & .timelineItem:hover,timelineDate:hover{

@@ -4,7 +4,7 @@ const CVsStyled = styled.div`
   & .rounded-3 {
     margin-top: 0px;
     padding: 1%;
-    height: 350px;
+    max-height: 350px;
   }
 
   & .btn-new-item {
@@ -15,7 +15,7 @@ const CVsStyled = styled.div`
 
   & .container {
     position: relative;
-    height: 300px;
+    max-height: 300px;
     width: 300px;
   }
 

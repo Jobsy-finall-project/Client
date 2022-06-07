@@ -23,6 +23,9 @@ import FormControl from "@mui/material/FormControl";
 import Company from "../../../../models/Company";
 import { getCurrentUser } from "../../../../services/authService";
 import {
+  getCurrUserCvs,
+} from "../../../../services/cvService";
+import {
   getAllCompanys,
   getCompanyByHrId,
   saveCompany
@@ -33,6 +36,10 @@ import Input from "../../input/Input";
 import Textarea from "../../input/Textarea";
 import CreateRecruitmentTrackStyled from "./CreateRecruitmentTrackStyled";
 import Position from "../../../../models/Position";
+import CV from "../../../../models/CV";
+import CvUpload from "../../../section/cvsSection/uploadCvs/CvUpload";
+import CVsSection from "../../../section/cvsSection/CVs";
+
 
 interface CreateRectuitmentTrackFormProps {
   formik: any;
@@ -145,6 +152,7 @@ const RecruitmentTrackForm: (
   const companys = useSelector((state: State) => state.companys);
   const [newCompany, setNewCompany] = useState(false);
   const currentUser = getCurrentUser();
+  const cvs = useSelector((state: State) => state.cvs);
 
   return (
     <CreateRecruitmentTrackStyled>
@@ -220,14 +228,31 @@ const RecruitmentTrackForm: (
           rows={10}
           cols={70}
         />
-        <UploadImage
-          name="upload-cv"
-          label="Upload CV"
-          type="text"
-          error=""
-          onChange={handleChange}
-        />
-        
+        {((cvs?.length > 0)? (
+        <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
+          <FormControl fullWidth>
+          <InputLabel id="cv-select"> Select CV:</InputLabel>
+          <Select
+            labelId="cvs-select-label"
+            id="cv-select"
+            label="CV"
+            name="cv"
+            onChange={handleChange}
+          >
+            {(cvs as Array<CV>).map((cv: CV) => {
+              return (  
+              <MenuItem
+                value={cv.cvFile}
+              >
+                {cv.title}
+              </MenuItem>
+              );
+              })}
+              </Select>
+              </FormControl>
+          </Box>
+          ):(<div className="cvSectionContainer"><CVsSection/>
+          </div>))}        
         <Button
           title="Create New Tarck"
           color=""
