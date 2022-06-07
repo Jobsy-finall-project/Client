@@ -18,13 +18,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import match from "../../../images/match.jpeg";
 import Track from "../../../models/Track";
+import Alert from '@mui/material/Alert';
+import { makeStyles } from "@mui/material/styles";
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import {
     changeApplicationIsMatch,
     deleteAplication,
 } from "../../../services/applicationService";
 import { actionsCreators, State } from "../../../state";
 import { MatchesSectionStyled } from "./MatchesSectionStyled";
-
+import Box from '@mui/material/Box';
+import RadarIcon from '@mui/icons-material/Radar';
 interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
@@ -65,11 +69,24 @@ const MatchesSection: React.FC = () => {
 
     return (
         <MatchesSectionStyled>
+
             <Grid
                 container
                 spacing={3}
                 justifyContent="center"
                 alignItems="flex-start">
+                {tracks.length == 0 ? 
+                <Box pt={10}>
+                    {/* <Alert variant="filled" severity="info">
+                        No position got matched with your cv files
+                    </Alert>  */}
+                    <RadarIcon fontSize="large"/>
+                     <Typography variant="h4" gutterBottom component="div">
+                        No position got matched with your cv files
+                    </Typography>
+                </Box>: 
+                <div></div>}
+
                 <Grid item>
                     <List className = "list-container"
                         sx={{
@@ -82,7 +99,7 @@ const MatchesSection: React.FC = () => {
                             display: "grid",
                             gridTemplateColumns: "repeat(3 ,1fr)"
                         }}
-                    >
+                    >   
                         {(tracks as Array<Track>).map((track: Track) => {
                             return (
                                 <ListItem className="list-item-container">
