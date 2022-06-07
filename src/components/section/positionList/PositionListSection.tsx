@@ -104,7 +104,7 @@ const PositionListSection: React.FC = () => {
           { positions && positions.length > 0 ?
           <>
           <Grid item>
-            <h3 className="activePositionsTitle"> My Active positions:</h3>
+            <h3 className="activePositionsTitle"> My Positions</h3>
           </Grid>
           <Grid item>
         <Button
