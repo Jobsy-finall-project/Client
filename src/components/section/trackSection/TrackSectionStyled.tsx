@@ -8,6 +8,10 @@ const TrackSectionStyled = styled.div`
     max-width:100%;
   }
 
+  & .title{
+    font-family: 'Quicksand', sans-serif;
+    margin-top: 10px;
+  }
   & .button {
     color: #008CBA;
   }
@@ -29,7 +33,6 @@ const TrackSectionStyled = styled.div`
     margin:auto;
     margin-top:40px;
     height:50px;
-
   }
 
   & .timelineStep{
