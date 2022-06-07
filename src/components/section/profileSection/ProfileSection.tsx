@@ -21,8 +21,8 @@ const ProfileSection: React.FC = () => {
 
   return (
     <ProfileSectionStyled>
-      <Grid container className="container" direction="column" margin="0px" onClick={()=>navigate("/profile")}>
-        <Card className="card">
+      <Grid container className="container" direction="column" margin="0px">
+        <Card className="card-profile" onClick={()=>navigate("/profile")}>
         {(currUser.role === "HR" && currUser) ?
         ( <Avatar alt="profileAvatar" className="avatar" src={avatar2}   sx={{ width: 56, height: 56 }}/> ): 
         ( <Avatar alt="profileAvatar" className="avatar" src={avatar}   sx={{ width: 56, height: 56 }}/>

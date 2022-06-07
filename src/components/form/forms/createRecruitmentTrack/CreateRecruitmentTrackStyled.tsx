@@ -17,6 +17,10 @@ const CreateRecruitmentTrack = styled.div`
  & .title-button{
   color: #008CBA;
  }
+
+ & .cvSectionContainer{
+   position: list-item;
+ }
 `;
 
 export default CreateRecruitmentTrack;
