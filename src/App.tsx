@@ -29,16 +29,27 @@ import "react-toastify/dist/ReactToastify.css";
 import Logout from "./components/logout/Logout";
 import { createBrowserHistory } from "history";
 import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
-import { getCurrentUser } from "./services/authService";
+import { useSelector } from "react-redux";
+import { State } from "./state";
 
 const histoy = createBrowserHistory()
+// const currUser = useSelector((state: State) => state.loginUser);
+
+function User() { // Rule 2: call hooks in function component
+  const auth = useSelector((state: State) => state.loginUser); // Rule 1: call hooks in top-level
+  return auth;
+}
 const App: React.FC = () => {
+  let css = "App";
+  console.log(User());
+  if(User().role === "HR"){
+   (css="App")
+  } else {css="App2"}
   return (
-    <div className="App">
+    <div className={css}>
       <ToastContainer />
       <Router> 
         <Header brandName="Jobsy" />
-       
         <Routes>
           <Route path="/functional-page" element={<FunctionPage />} />
           <Route path="/sign-in" element={<SignIn />} />

@@ -78,7 +78,6 @@ const HomePageSection: React.FC = () => {
       !track.isFavorite
     );
     console.log(1, application);
-    //TODO:UPDATE the global state track
   };
 
   const handleAddTrack = () => {
@@ -96,10 +95,7 @@ const HomePageSection: React.FC = () => {
 
   return (
     <HomePageSectionStyled>
-
-
       <Grid container
-
         width={"100%"}
         className="container"
         spacing={3}

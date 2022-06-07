@@ -1,103 +1,98 @@
 import styled from "styled-components";
-import Button,  { ButtonProps } from '@mui/material/Button';
-import { purple } from '@mui/material/colors';
+import * as Colors from "../../../assets/Colors"
 
-
-export const PageListSectionStyled = styled.div`
-  & .rounded-3 {
-    margin-top: 0px;
-    padding: 1%;
-    height: 350px;
-  }
-
-  & .btn-new-item {
-    margin-left: 20px;
-    text-align: left;
-    margin-top: 15px;
-  }
+export const PositionListSectionStyled = styled.div`
 
   & .container {
-    position: relative;
-    height: 300px;
-    width: 300px;
-  }
-
-  & .circle {
-    top: 40px;
-    left: 25px;
-    position: absolute;
-  }
-
-  & .welcomeTitle{
-    font-size: 4em;
-    color: black;
-    font-family: Gill Sans;
-    margin:auto;
-    font-weight:bold;
-  }
-
-  & .addTrackButton{
-    margin-Top:30px;
-    font-family: Gill Sans;
-    background-color:red;
-    margin:auto;
-    margin-top:40px;
-    height:50px;
-
+    margin= "0 auto"
+    text-align: center;
+    justify-content: center;
+    display:block;
+    position : relative;
+    min-width : 100%;
   }
 
   & .searchPosition{
-    width:50%;
+    min-width:80%;
     color:green;
     margin:auto;
+  }
 
+  & .positionsList{
+    min-width:70%;
+    margin:auto;
   }
 
   & .activePositionsTitle{
     font-size: 2.5em;
-    font-family: Gill Sans;
+    font-family: 'Quicksand', sans-serif;
     margin:auto;
+    margin-top: 60px;
     font-weight:bold;
+  }
 
+  & .positionsList{
+    min-width:70%;
+    margin:auto;
+  }
+
+  & .emptyListTitle{
+    font-size: 2em;
+    font-family: 'Quicksand', sans-serif;
+    margin:auto;
+    margin-top: 100px;
+    font-weight:bold;
   }
 
   & .addNewTrackButton {
-    background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
-    border-radius: .5rem;
-    box-sizing: border-box;
-    color: #008CBA;
-    display: flex;
-    font-size: 16px;
+    text-align: center;
     justify-content: center;
-    padding: 1rem 1.75rem;
+    display:flex;
+    margin:0 auto;
+    border-radius: 30px;
+    padding: 5px;
+    transition: 0.3ms;
+    height:40px;
+    background-image: linear-gradient(-180deg, #caeaf1 0%, #bedcc9 100%);
+    color: #008CBA;
+    font-size: 18px;
     text-decoration: none;
-    width: 400px;
-    border: 0;
+    max-width: 300px;
+    min-width: 150px;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    margin:auto;
-    font-family: Gill Sans;
-    margin-top:80px;
+    font-family: 'Quicksand', sans-serif;
   }
   
   & .addNewTrackButton:hover {
-    background-image: linear-gradient(-180deg, #1D95C9 0%, #17759C 100%);
+    background-image: linear-gradient(-180deg, #A2DBB8 0%, #85DED0 50%);
   }
 
   & .favoriteIcon{
     color:red;
   }
   
+  & .listItem {
+    border-radius: 20px;
+    background-color: ${Colors.PRAIMARY};
+    margin: 5px;
+
+  }
+
+  & .listItem:hover {
+    border-radius: 30px;
+    background-color: ${Colors.PRAIMARY};
+  }
 
 `;
 
 export const positionTitle={
   fontSize: `1.5em`,
   fontWeight:"bold",
-  fontFamily: "Gill Sans",
-  marginLeft:"10px"
+  fontFamily: "'Quicksand', sans-serif",
+  marginLeft:"10%"
   };
 
   

@@ -3,7 +3,6 @@ import Favorite from "@mui/icons-material/Favorite";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import KeyboardIcon from "@mui/icons-material/Keyboard";
 import SearchIcon from "@mui/icons-material/Search";
-import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -21,7 +20,7 @@ import { getCurrentUser } from "../../../services/authService";
 import { getCompanyByHrId } from "../../../services/companyService";
 import { actionsCreators, State } from "../../../state";
 import {
-  PageListSectionStyled,
+  PositionListSectionStyled,
   positionTitle
 } from "./PositionListSectionStyled";
 import IconButton from "@mui/material/IconButton";
@@ -29,6 +28,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import {deleteAplication} from "../../../services/applicationService";
 import { deletePositionById} from "../../../services/positionsService";
 import Company from "../../../models/Company";
+import Button from "../../common/button/Button";
 
 
 const PositionListSection: React.FC = () => {
@@ -59,7 +59,6 @@ const PositionListSection: React.FC = () => {
   }
 
   useEffect(() => {
-    
       getCompanyPositions();
   }, []);
 
@@ -95,21 +94,32 @@ const PositionListSection: React.FC = () => {
   };
 
   return (
-    <PageListSectionStyled>
-      <div>
-
-        <Grid container spacing={3} justifyContent="center" alignItems="center">
-          <Grid item container>
-            <h1 className="welcomeTitle">
-              {" "}
-              Welcome back {currUser.firstName}!
-            </h1>
+    <PositionListSectionStyled>
+        <Grid container 
+          width={"100%"}
+          className="container"
+          spacing={3}
+          justifyContent="center"
+          alignItems="center"
+          direction="column">
+          { positions && positions.length > 0 ?
+          <>
+          <Grid item>
+            <h3 className="activePositionsTitle"> My Active positions:</h3>
           </Grid>
-
-          <Grid item container>
-            <h3 className="activePositionsTitle"> Active positions:</h3>
+          <Grid item>
+        <Button
+            className="addNewTrackButton"
+            title="Add new position"
+            color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+            height="50px"
+            width="300px"
+            top="0"
+            left="0"
+            onClick={handleAddPosition}
+          ></Button>
           </Grid>
-          <Grid container item xs={12}>
+          <Grid item xs={12}>
             <TextField
               id="outlined-basic"
               label="search position"
@@ -125,14 +135,15 @@ const PositionListSection: React.FC = () => {
             />
           </Grid>
 
-          <Grid item width={"50%"}>
-            <List>
+          <Grid container item width={"100%"}>
+            <List className="positionsList">
               {(positions as Array<Position>).map((currPosition: Position) => {
                 return (
                   <div>
                     {searchFunction(currPosition, search) ? (
                       <>
                         <ListItem
+                          className="listItem"
                           secondaryAction={
                               <IconButton onClick={e =>
                                   handleDeletePosition(currPosition as Position)
@@ -161,21 +172,24 @@ const PositionListSection: React.FC = () => {
               })}
             </List>
           </Grid>
-        </Grid>
-        <Grid container item>
+          </> :
+            <>
+            <h6 className="emptyListTitle">Add your first position</h6>
+          <Grid item>
           <Button
-            className="addNewTrackButton"
-            variant="contained"
-            startIcon={<AddBoxIcon />}
-            onClick={() => {
-              handleAddPosition();
-            }}
-          >
-            new position
-          </Button>
+          className="addNewTrackButton"
+          title="Add new position"
+          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          height="50px"
+          width="300px"
+          top="0"
+          left="0"
+          onClick={handleAddPosition}
+          ></Button>
+          </Grid>
+            </>}
         </Grid>
-      </div>
-    </PageListSectionStyled>
+    </PositionListSectionStyled>
   );
 };
 
