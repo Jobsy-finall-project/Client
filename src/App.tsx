@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./components/header/Header";
@@ -30,17 +30,29 @@ import Logout from "./components/logout/Logout";
 import { createBrowserHistory } from "history";
 import ActiveApplicationsPage from "./pages/ActiveApplicationsPage";
 import { getCurrentUser } from "./services/authService";
+import DecodeJwt from "./models/DecodeJwt";
+import { State } from "./state";
+import { useSelector } from "react-redux";
+import { store } from "./state/index";
 
 const histoy = createBrowserHistory()
 const currUser = getCurrentUser();
 
 const App: React.FC = () => {
-  let css = "App";
-  if(currUser.role === "HR"){
-   {css="App2"}
-  } else {css="App"}
+  const user = useSelector((state: State) => state.loginUser);
+
+  const [cssClass, setCssClass] = useState("App");
+  useEffect(() => {
+    const currUser = getCurrentUser();
+    if(currUser.role === "HR"){
+      setCssClass("App2")
+     } else {
+       setCssClass("App")
+      }
+    }, [user]);
+
   return (
-    <div className={css}>
+    <div className={cssClass}>
       <ToastContainer />
       <Router> 
         <Header brandName="Jobsy" />
