@@ -53,7 +53,11 @@ export const PositionListSectionStyled = styled.div`
     padding: 5px;
     transition: 0.3ms;
     height:40px;
+<<<<<<< HEAD
     background-image: linear-gradient(-180deg, ${Colors.LIGHT_PINK} 0%, ${Colors.LIGHT_YELLOW} 100%);
+=======
+    background-color: ${Colors.LIGHT_PINK};
+>>>>>>> 3131617d5c4423e825fb1e02cd24dac29b067491
     color: #008CBA;
     font-size: 18px;
     text-decoration: none;
@@ -86,8 +90,11 @@ export const PositionListSectionStyled = styled.div`
   & .listItem:hover {
     border-radius: 30px;
     background-color: ${Colors.PINK};
+<<<<<<< HEAD
     border: 2px solid ${Colors.LIGHT_PINK}
 
+=======
+>>>>>>> 3131617d5c4423e825fb1e02cd24dac29b067491
   }
 
 `;
