@@ -75,15 +75,18 @@ const MatchesSection: React.FC = () => {
                         sx={{
                             width: "100%",
                             maxWidth: 360,
-                            bgcolor: "background.paper",
+                            bgcolor: "",
                             alignItems: "center",
                             justifyContent: "center",
+                            marginTop: "20px",
+                            display: "grid",
+                            gridTemplateColumns: "repeat(3 ,1fr)"
                         }}
                     >
                         {(tracks as Array<Track>).map((track: Track) => {
                             return (
                                 <ListItem className="list-item-container">
-                                    <Card sx={{ maxWidth: 345 }}>
+                                    <Card sx={{ maxWidth: 345 , minWidth: "275px", borderStyle: "double" }}>
                                         <CardHeader
                                             title={track.position.name}
                                             subheader={track.company.name}
@@ -96,7 +99,8 @@ const MatchesSection: React.FC = () => {
                                         />
                                         <CardActions disableSpacing>
                                             <IconButton
-                                                aria-label="add to favorites"
+                                                style={{color: "green"}}
+                                                aria-label="approve"
                                                 onClick={() =>
                                                     handleApprove(track)
                                                 }
@@ -104,7 +108,8 @@ const MatchesSection: React.FC = () => {
                                                 <DoneIcon />
                                             </IconButton>
                                             <IconButton
-                                                aria-label="share"
+                                                style={{color: "red"}}
+                                                aria-label="decline"
                                                 onClick={() =>
                                                     handleDecilne(track)
                                                 }
