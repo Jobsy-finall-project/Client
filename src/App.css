@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-image: linear-gradient(-180deg,#9ad5e3 0%, #c9f5da 100%);
+  background-image: linear-gradient(-180deg,#D4FEFC 0%, #c9f5da 100%);
   min-height: 100vh;
   background-size: cover;
   background-position: center;
@@ -30,7 +30,7 @@
 }
 
 .App-header {
-  background-color: #28342f;
+  background-color: #FEEDEA;
   min-height: 100vh;
   display: flex;
   flex-direction: column;

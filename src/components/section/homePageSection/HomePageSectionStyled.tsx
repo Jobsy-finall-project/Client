@@ -51,6 +51,8 @@ export const HomePageSectionStyled = styled.div`
     padding: 5px;
     transition: 0.3ms;
     height:40px;
+    background-image: linear-gradient(-180deg, ${Colors.LIGHT_PINK} 0%, ${Colors.LIGHT_YELLOW} 100%);
+    border: 2px solid ${Colors.LIGHT_PINK}
     color: #008CBA;
     font-size: 18px;
     text-decoration: none;
@@ -61,6 +63,11 @@ export const HomePageSectionStyled = styled.div`
     -webkit-user-select: none;
     touch-action: manipulation;
     font-family: 'Quicksand', sans-serif;
+  }
+
+  .addNewTrackButton:hover{
+    background-image: linear-gradient(-180deg, ${Colors.PINK} 0%, ${Colors.LIGHT_YELLOW} 50%);
+    border: 2px solid ${Colors.LIGHT_PINK}
   }
   
  

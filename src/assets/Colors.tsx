@@ -17,4 +17,5 @@ export const THEME: string = "#d5f6ff";
 export const HEADER: string = "#d6fff9";
 export const BUTTON: string = "#008CBA";
 export const PROFILE: string = "#daf6fa";
+export const LIGHT_YELLOW: string = "#F9EEE0";
 
