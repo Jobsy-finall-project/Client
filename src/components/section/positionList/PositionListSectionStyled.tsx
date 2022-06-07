@@ -65,7 +65,7 @@ export const PageListSectionStyled = styled.div`
     background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
     border-radius: .5rem;
     box-sizing: border-box;
-    color: #FFFFFF;
+    color: #008CBA;
     display: flex;
     font-size: 16px;
     justify-content: center;

@@ -43,18 +43,16 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .addNewTrackButton{
-    // display: inline;
     text-align: center;
     justify-content: center;
     display:flex;
     margin:0 auto;
-  //  background-color: ${Colors.PRAIMARY};
     border-radius: 30px;
     padding: 5px;
     transition: 0.3ms;
     height:40px;
     background-image: linear-gradient(-180deg, #A2DBB8 0%, #98E2F5 100%);
-    color: #FFFFFF;
+    color: #008CBA;
     font-size: 18px;
     text-decoration: none;
     max-width: 300px;
