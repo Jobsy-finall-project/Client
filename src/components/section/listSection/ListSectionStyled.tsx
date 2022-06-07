@@ -21,7 +21,7 @@ const ListSectionStyled = styled.div`
 
   & .addCommentBtn:hover , .addBtn:hover {
     box-shadow: 0 4px 8px 0 rgba(0.5, 0.5, 0.5, 0.5);
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.PINK};
   }
 
   & .addCommentInput{
@@ -34,7 +34,7 @@ const ListSectionStyled = styled.div`
   & .addBtn{
     margin-top:10px;
     color: #008CBA;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.LIGHT_PINK};
     padding: 14px;
     transition: 0.3ms;
     box-shadow: 0 4px 8px 0 rgba(0.2, 0.2, 0.2, 0.2);
@@ -45,7 +45,7 @@ const ListSectionStyled = styled.div`
     font-family: 'Quicksand', sans-serif;
     font-size:1.5em;
     margin-top:30px;
-    border: 3px solid #daf6fa;
+    border: 5px solid ${Colors.LIGHT_PINK};
     border-radius:20px;
     width:50%;
     margin:auto;

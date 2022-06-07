@@ -1,5 +1,5 @@
 export default interface Step {
-    id: string;
+    _id: string;
     title: string;
     description?: string;
     time: string;

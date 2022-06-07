@@ -61,7 +61,7 @@ const AddStepToTemplate: React.FC = () => {
     return (
         <Formik<StepModel>
             initialValues={{
-                id: v4(),
+                _id: v4(),
                 title: "",
                 time: "",
                 description: "",

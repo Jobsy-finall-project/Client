@@ -10,6 +10,7 @@ export const ProfileSectionStyled = styled.div`
         min-width:200px;
         max-width:100%;
         margin: 2px 0;
+        
     }
 
     & .card-profile{
