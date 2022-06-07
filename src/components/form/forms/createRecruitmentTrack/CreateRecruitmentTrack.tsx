@@ -22,9 +22,7 @@ import Select from "@mui/material/Select";
 import FormControl from "@mui/material/FormControl";
 import Company from "../../../../models/Company";
 import { getCurrentUser } from "../../../../services/authService";
-import {
-  getCurrUserCvs,
-} from "../../../../services/cvService";
+//import { getCurrUserCvs } from "../../../../services/cvService";
 import {
   getAllCompanys,
   getCompanyByHrId,

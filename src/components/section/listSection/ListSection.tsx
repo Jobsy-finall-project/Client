@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ListSectionStyled from "./ListSectionStyled";
-import ButtonMui from '@mui/material/Button';
+import Button from '../../common/button/Button';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -12,14 +12,14 @@ import { ListItemIcon } from "@mui/material";
 
 interface ListSectionProps {
   title: string;
-  content:string[];
-  addBtnText:string;
+  content: string[];
+  addBtnText: string;
 }
 const ListSection: React.FC<ListSectionProps> = (props) => {
 
-    const [items, setItems] = useState([props.content]);
-    const [newItem, setNewItem] = useState("");
-    const [addItemInput, setAddItemInput] = React.useState(false);
+  const [items, setItems] = useState([props.content]);
+  const [newItem, setNewItem] = useState("");
+  const [addItemInput, setAddItemInput] = React.useState(false);
 
 
   function handleAddItemChange(event: any) {
@@ -40,56 +40,64 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
   }
 
 
-  function handeleDeleteItem(){
-    
+  function handeleDeleteItem() {
+
   }
 
   return (
     <ListSectionStyled>
-    <List className="listContainer" sx={{ marginLeft: "100px" }}>
-    <p className="commentTitle" >{props.title}:</p>
+      <List className="listContainer" sx={{ marginLeft: "100px" }}>
+        <p className="commentTitle" >{props.title}:</p>
 
-  {items?.map(currItem => {
-    return (
-      <ListItem
-      secondaryAction={
-        <Checkbox
-          icon={<DeleteIcon />}
-          checkedIcon={
-            <DeleteIcon />
-          }
-          onClick={handeleDeleteItem}
-        />
-      }
-      >
-      <ListItemButton>
-        <ListItemIcon />
-        <ListItemText
-          primary={currItem}
-        />
-      </ListItemButton>
-      </ListItem>
-                    )
-                  })}
+        {items?.map(currItem => {
+          return (
+            <ListItem>
+              <ListItemButton>
+                <ListItemIcon />
+                <ListItemText primary={currItem} />
+              </ListItemButton>
+              <DeleteIcon onClick={handeleDeleteItem} />
+            </ListItem>
+          )
+        })}
 
-<div className="addComments">
-<ButtonMui className="addCommentBtn" variant="contained" onClick={showItemInput}> {props.addBtnText}</ButtonMui>
-{addItemInput ? (
-  <div className="addCommentInput">
-    <input
-      type="text"
-      value={newItem}
-      onChange={handleAddItemChange}
-    />
-    <ButtonMui className="addBtn"
-    variant="contained"
-    onClick={handleAddItemClick}>
-      add
-    </ButtonMui> 
-  </div>
-) :null}
-</div>
-</List>
+        <div className="addComments">
+        <Button
+            className="addBtn"
+            onClick={showItemInput}
+            title="Add comments"
+            color=""
+            height="50px"
+            width="170px"
+            top="32px"
+            left="100px"
+          />
+          {addItemInput ? (
+            <div className="addCommentInput">
+              <input
+                className="input-comment"
+                type="text"
+                value={newItem}
+                onChange={handleAddItemChange}
+              />
+              <Button
+                className="addBtn"
+                onClick={handleAddItemClick}
+                title="Add"
+                color=""
+                height="50px"
+                width="170px"
+                top="32px"
+                left="100px"
+              />
+            </div>
+          ) : null}
+   
+          {/* <Button 
+            onClick={showItemInput}> {props.addBtnText}</Button> */}
+
+        </div>
+      </List>
     </ListSectionStyled>
   );
 };

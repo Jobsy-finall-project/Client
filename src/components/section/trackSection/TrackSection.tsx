@@ -1,39 +1,22 @@
-import React, {useEffect, useState} from "react";
-import Position from "../../../models/Position";
-import StepModel from "../../../models/Step";
-import { useNavigate } from "react-router-dom";
-import ListItemButton from "@mui/material/ListItemButton";
-import Checkbox from "@mui/material/Checkbox";
-
-import Box from "@mui/material/Box";
+import AssignmentIcon from '@mui/icons-material/Assignment';
 import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import TimelineConnector from "@mui/lab/TimelineConnector";
 import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
 import TimelineDot from "@mui/lab/TimelineDot";
-import LaptopMacIcon from "@mui/icons-material/LaptopMac";
-import HotelIcon from "@mui/icons-material/Hotel";
-import RepeatIcon from "@mui/icons-material/Repeat";
+import TimelineItem from "@mui/lab/TimelineItem";
+import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
+import TimelineSeparator from "@mui/lab/TimelineSeparator";
 import Typography from "@mui/material/Typography";
-import { PropaneTwoTone } from "@mui/icons-material";
-import Button from "../../common/button/Button";
-import Track from "../../../models/Track";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import Track from "../../../models/Track";
+import { getApplicationById } from "../../../services/applicationService";
 import { State } from "../../../state";
-import TrackSectionStyled from "./TrackSectionStyled";
-import AssignmentIcon from '@mui/icons-material/Assignment';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import { ListItemIcon } from "@mui/material";
-import ButtonMui from '@mui/material/Button';
-import DeleteIcon from '@mui/icons-material/Delete';
+import Button from "../../common/button/Button";
 import ListSection from "../listSection/ListSection";
-import {getApplicationById} from "../../../services/applicationService";
-import {log} from "util";
+import TrackSectionStyled from "./TrackSectionStyled";
+
 
 interface TrackSectionProp {
   track: Track;
@@ -118,7 +101,11 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
         />
    
       </div>
-      <ListSection title="comments" content={props.track.comments as string[]} addBtnText="add comment"/>
+      <ListSection 
+        title="comments" 
+        content={props.track.comments as string[]} 
+        addBtnText="add comment"
+        />
     </TrackSectionStyled>
   );
 };
