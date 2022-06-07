@@ -149,7 +149,7 @@ const HomePageSection: React.FC = () => {
                                   className="listItem"
                                   secondaryAction={
                                       <ListItemIcon>
-                                          <Checkbox
+                                          {/* <Checkbox
                                               icon={<FavoriteBorder />}
                                               checkedIcon={
                                                   <Favorite className="favoriteIcon" />
@@ -159,7 +159,7 @@ const HomePageSection: React.FC = () => {
                                                       currTrack
                                                   )
                                               }
-                                          />
+                                          /> */}
                                           <IconButton
                                               onClick={(e) =>
                                                   handleDeleteApplication(
