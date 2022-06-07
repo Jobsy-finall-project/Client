@@ -48,6 +48,26 @@ export async function changeApplicationIsFavorite(
   return data;
 }
 
+export async function addApplicationComments(
+  applicationId: String,
+  comment: String
+) {
+  const { data } = await http.post(`${apiEndpoint}/comment/${applicationId}`, {
+    comment,
+  });
+  return data;
+}
+
+export async function deleteApplicationComments(
+  applicationId: String,
+  commentIndex: number
+) {
+  const { data } = await http.post(`${apiEndpoint}/comment/${applicationId}/delete`, {
+    commentIndex,
+  });
+  return data;
+}
+
 export async function changeApplicationIsMatch(
     applicationId: String,
     isMatch: Boolean

@@ -4,7 +4,7 @@ import StepModel from "../../../models/Step";
 import { useNavigate } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import Checkbox from "@mui/material/Checkbox";
-
+import { bindActionCreators } from "redux";
 import Box from "@mui/material/Box";
 import Timeline from "@mui/lab/Timeline";
 import TimelineItem from "@mui/lab/TimelineItem";
@@ -33,24 +33,31 @@ import ButtonMui from '@mui/material/Button';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListSection from "../listSection/ListSection";
 import {getApplicationById} from "../../../services/applicationService";
+import {getAllSteps} from "../../../services/stepService";
+import {addApplicationComments} from "../../../services/applicationService";
 import {log} from "util";
+import { actionsCreators } from "../../../state";
+import { useDispatch } from "react-redux";
+import Step from "../../../models/Step";
 
 interface TrackSectionProp {
   track: Track;
 }
 
 const TrackSection: React.FC<TrackSectionProp> = (props) => {
+  const dispatch = useDispatch();
   let navigation = useNavigate();
     const tracks = useSelector((state: State) => state.tracks);
     const applicationId = props.track._id;
     const [currentTrack, setCurrentTrack] = useState(tracks.find(curr => curr._id === props.track._id)!!);
     console.log("before all", currentTrack);
 
+   
+    const steps=[]
     useEffect(( ) => {
         async function getApplication(){
             const trackToShow = await getApplicationById(applicationId as string);
             setCurrentTrack(trackToShow);
-
         }
         getApplication();
     }, []);
@@ -70,6 +77,8 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
           position="alternate"
           className="timeline">
           { currentTrack && currentTrack.steps?.map((step) => {
+            console.log("wow")
+            console.log(step)
             return (
               <TimelineItem
                 className="timelineItem"
@@ -118,7 +127,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
         />
    
       </div>
-      <ListSection title="comments" content={props.track.comments as string[]} addBtnText="add comment"/>
+      <ListSection fromComponent="track" appId={currentTrack._id!!} title="comments" content={props.track.comments as string[]} addBtnText="add comment"/>
     </TrackSectionStyled>
   );
 };
