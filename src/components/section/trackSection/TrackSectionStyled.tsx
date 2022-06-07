@@ -8,6 +8,10 @@ const TrackSectionStyled = styled.div`
     max-width:100%;
   }
 
+  & .button {
+    color: #008CBA;
+  }
+
   & .trackTitle{
     font-size: 3em;
     color: black;

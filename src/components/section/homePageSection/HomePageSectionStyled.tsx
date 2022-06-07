@@ -52,7 +52,7 @@ export const HomePageSectionStyled = styled.div`
     transition: 0.3ms;
     height:40px;
     background-image: linear-gradient(-180deg, #A2DBB8 0%, #98E2F5 100%);
-    color: #FFFFFF;
+    color: #008CBA;
     font-size: 18px;
     text-decoration: none;
     max-width: 300px;
