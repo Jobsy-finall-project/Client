@@ -6,7 +6,7 @@ import TitleSection from "../../components/section/titleSection/TitleSection";
 import ThreeCircles from "../../components/threeCircles/ThreeCircles";
 import CreateRecruitmentTrackPageStyled from "./CreateRecruitmentTrackPageStyled";
 import * as Colors from "../../assets/Colors";
-import createTrack from "../../images/createTrack.jpeg";
+import createTrack from "../../images/icon-tracking.png";
 const CreateRecruitmentTrackPage = () => {
   return (
     <CreateRecruitmentTrackPageStyled>

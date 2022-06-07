@@ -31,10 +31,9 @@ const ListSectionStyled = styled.div`
     margin-buttom:10px;
   }
 
-
   & .addBtn{
     margin-top:10px;
-    color: ${Colors.WHITE};
+    color: #008CBA;
     background-color: ${Colors.PRAIMARY};
     padding: 14px;
     transition: 0.3ms;
@@ -57,6 +56,11 @@ const ListSectionStyled = styled.div`
   & .button{
     margin:auto;
     margin-bottom:20px;
+  }
+
+  & .input-comment{
+    min-height: 200px;
+    min-width: 700px;
   }
 
 `;

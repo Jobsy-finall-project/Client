@@ -11,9 +11,9 @@ font-family: 'Quicksand', sans-serif;
   }
 
   & .work-bag-img {
-    margin-top: 100px;
-    margin-left: 20%;
-    min-width:40%;
+    margin-top: 40px;
+    margin-left: 16%;
+    min-width: 40%;
     height:100%;
     opacity:0.5;
     border-radius:15px;
