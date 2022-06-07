@@ -14,6 +14,10 @@ const SignInFormStyled = styled.footer`
   & .title-button {
    color: #008CBA;
   }
+
+  & .link-sign-up{
+    margin-right: 135px;
+  }
   
 `;
 
