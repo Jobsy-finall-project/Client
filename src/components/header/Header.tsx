@@ -48,7 +48,8 @@ const Header: React.FC<HeaderProps> = (props) => {
 
   if (getCurrentUser().role === "Candidate") {
     pages = [
-      { "title": 'My matches', "url": "/matches" }
+      { "title": 'My matches', "url": "/matches" },
+      { "title": 'Home', "url": "/applications" }
     ]
   }
 
