@@ -4,6 +4,8 @@ import * as Colors from "../../../assets/Colors"
 export const PositionStyled = styled.div`
     
     font-family: 'Quicksand', sans-serif;
+    margin:0;
+    padding:0;
 
     .title{
         margin-top:3px;
@@ -45,7 +47,6 @@ export const PositionStyled = styled.div`
     .table{
         font-family: 'Quicksand', sans-serif;
         background-color: #D4F0EF;
-        margin-buttom: 10px;
         border-radius:10px;
     }    
 

@@ -16,4 +16,4 @@ export const PINK: string = "#f3dfdb";
 export const THEME: string = "#d5f6ff";
 export const HEADER: string = "#C3E5CD";
 export const BUTTON: string = "#008CBA";
-
+export const LIGHT_YELLOW: string = "#F9EEE0";
