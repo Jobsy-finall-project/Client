@@ -34,7 +34,7 @@ const AddStepToTemplate: React.FC = () => {
     const { AddStepToTemplate } = bindActionCreators(actionsCreators, dispatch);
 
     const doSubmit = async (values: StepModel) => {
-        console.log("step form submited!");
+    
         const position = location.state as Position;
         const newStep: any = {
             title:values.title,
@@ -42,7 +42,7 @@ const AddStepToTemplate: React.FC = () => {
         };
 
         const data = await saveStepToPosition(newStep,position._id as string);
-        console.log({data});
+   
 
         const positionToUpdate: Position = {
             ...position,
@@ -68,7 +68,7 @@ const AddStepToTemplate: React.FC = () => {
             }}
             validationSchema={AddStepToTemplateSchema}
             onSubmit={(values) => {
-                console.log(values);
+             
                 doSubmit(values);
             }}
             component={StepForm}

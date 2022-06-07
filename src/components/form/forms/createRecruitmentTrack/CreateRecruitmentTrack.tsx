@@ -38,15 +38,12 @@ import CV from "../../../../models/CV";
 import CvUpload from "../../../section/cvsSection/uploadCvs/CvUpload";
 import CVsSection from "../../../section/cvsSection/CVs";
 
-
 interface CreateRectuitmentTrackFormProps {
   formik: any;
 }
 const CreateRecruitmentTrackSchema = Yup.object().shape({
   companyName: Yup.string().required("Required"),
-  positionName: Yup.string()
-    .required("Required")
-    .min(4, "Password is too short - should be 4 chars minimum."),
+  positionName: Yup.string().required("Required"),
   positionCode: Yup.string(),
   description: Yup.string().max(250, "Description is too long."),
   comments: Yup.array(Yup.string())
@@ -94,7 +91,7 @@ const CreateRecruitmentTrack: React.FC = () => {
         description: "",
         positions: []
       };
-      console.log({ company });
+
       const { data } = await saveCompany(company);
       companyId = data._id;
     }
@@ -103,7 +100,7 @@ const CreateRecruitmentTrack: React.FC = () => {
       description: values.positionDescription,
       tags: []
     };
-    console.log({ positionToAdd });
+
     const track: any = {
       position: { ...positionToAdd },
       isActive: true,
@@ -226,31 +223,28 @@ const RecruitmentTrackForm: (
           rows={10}
           cols={70}
         />
-        {((cvs?.length > 0)? (
-        <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
-          <FormControl fullWidth>
-          <InputLabel id="cv-select"> Select CV:</InputLabel>
-          <Select
-            labelId="cvs-select-label"
-            id="cv-select"
-            label="CV"
-            name="cv"
-            onChange={handleChange}
-          >
-            {(cvs as Array<CV>).map((cv: CV) => {
-              return (  
-              <MenuItem
-                value={cv.cvFile}
+        {cvs?.length > 0 ? (
+          <Box sx={{ minWidth: 500, margin: "10px auto auto 104px" }}>
+            <FormControl fullWidth>
+              <InputLabel id="cv-select"> Select CV:</InputLabel>
+              <Select
+                labelId="cvs-select-label"
+                id="cv-select"
+                label="CV"
+                name="cv"
+                onChange={handleChange}
               >
-                {cv.title}
-              </MenuItem>
-              );
-              })}
+                {(cvs as Array<CV>).map((cv: CV) => {
+                  return <MenuItem value={cv.cvFile}>{cv.title}</MenuItem>;
+                })}
               </Select>
-              </FormControl>
+            </FormControl>
           </Box>
-          ):(<div className="cvSectionContainer"><CVsSection/>
-          </div>))}        
+        ) : (
+          <div className="cvSectionContainer">
+            <CVsSection />
+          </div>
+        )}
         <Button
           title="Create New Tarck"
           color=""

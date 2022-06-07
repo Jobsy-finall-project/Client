@@ -79,11 +79,11 @@ const PositionSection: React.FC = () => {
     },[]);
 
     const createTrack = async (users: string[]) => {
-        console.log({ users });
+   
         const usersToMatch = suggestions.filter((curr) => {
             return users.includes(curr.user.userName);
         });
-        console.log({ usersToMatch });
+   
 
         const newTrack: Track = {
             company: "",
@@ -389,8 +389,10 @@ const PositionSection: React.FC = () => {
                                     <TableCell align="left">
                                         <Rating
                                             name="read-only"
-                                            value={currSuggestion.score}
+                                            value={currSuggestion.score/100*5}
                                             readOnly
+                                            precision={0.5}
+
                                         />
                                     </TableCell>
                                     <TableCell

@@ -18,7 +18,7 @@ export async function getUserApplications() {
 
 export async function getApplicationById(applicationId: string) {
     const { data } = await http.get(`${apiEndpoint}/${applicationId}`);
-    console.log({data});
+
     return data;
 }
 

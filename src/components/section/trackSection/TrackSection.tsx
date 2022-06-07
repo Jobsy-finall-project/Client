@@ -38,7 +38,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
     const tracks = useSelector((state: State) => state.tracks);
     const applicationId = props.track._id;
     const [currentTrack, setCurrentTrack] = useState(tracks.find(curr => curr._id === props.track._id)!!);
-    console.log("before all", currentTrack);
+ 
 
    
     const steps=[]

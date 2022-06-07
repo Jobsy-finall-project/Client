@@ -40,11 +40,11 @@ const ActiveApplicationsSection: React.FC = () => {
 
     useEffect(() => {
         async function getPosition() {
-            console.log({ positionId });
+         
             const viewdPosition = await getPositionById(
                 positionId ? positionId : ""
             );
-            console.log({ viewdPosition });
+         
             setPosition(viewdPosition);
             const { data } = await getAllApplicationsByPositionId(
                 positionId ? positionId : ""

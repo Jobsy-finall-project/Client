@@ -55,7 +55,7 @@ const HomePageSection: React.FC = () => {
 
   async function getData() {
     const applications = await getUserApplications();
-    console.log(applications);
+  
     applications.forEach((application: Track) => {
       createTrack(application);
     }); //get all user tracks/applications and add them to the tracks.
@@ -78,7 +78,7 @@ const HomePageSection: React.FC = () => {
       track._id as string,
       !track.isFavorite
     );
-    console.log(1, application);
+   
   };
 
   const handleAddTrack = () => {

@@ -209,25 +209,23 @@ const companyReducer = (
       const companyToUpdate = action.payload;
       const positionToUpdate = companyToUpdate.positions[0];
       const newStep = positionToUpdate.template!!.at(0)!!;
-      console.log(companyToUpdate);
-      console.log(positionToUpdate);
-      console.log(newStep);
+   
 
       const companyIndex = state.findIndex(
         curr => curr._id === companyToUpdate._id
       );
 
-      console.log(companyIndex);
+    
       if (companyIndex !== -1) {
         const positionIndex = state[companyIndex].positions.findIndex(
           curr => curr._id === positionToUpdate._id
         );
-        console.log(positionIndex);
+     
         if (positionIndex !== -1) {
           const template =
             state[companyIndex].positions[positionIndex].template;
 
-          console.log(template);
+       
 
           if (template) {
             state[companyIndex].positions[positionIndex].template!!.push(

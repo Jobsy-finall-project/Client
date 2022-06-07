@@ -23,12 +23,12 @@ const CreateCompany: React.FC = () => {
   const { CreateCompany } = bindActionCreators(actionsCreators, dispatch);
 
   const doSubmit = (values: Company) => {
-    console.log("step form submited!");
+  
     const newCompany: Company = {
       ...values,
     };
 
-    console.log(newCompany);
+  
 
     CreateCompany(newCompany);
     navigate("/companys");
@@ -44,7 +44,7 @@ const CreateCompany: React.FC = () => {
       }}
       validationSchema={CreateCompanySchema}
       onSubmit={(values) => {
-        console.log(values);
+       
         doSubmit(values);
       }}
       component={CompanyForm}

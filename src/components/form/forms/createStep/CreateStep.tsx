@@ -37,14 +37,13 @@ const CreateStep: React.FC = () => {
       description: values.description
     };
     const data = await saveStepToApllication(newStep, applicationId);
-    console.log({data});
+ 
 
     const trackToUpdate = tracks.find(curr => curr._id === applicationId)!!
-    console.log(({trackToUpdate}));
+  
     trackToUpdate.steps ? trackToUpdate.steps.push(newStep) : trackToUpdate.steps=[newStep];
 
     createStep(trackToUpdate);
-    console.log("track",tracks.find(curr => curr._id === applicationId)!!);
     navigate(-1);
   };
 
@@ -57,7 +56,7 @@ const CreateStep: React.FC = () => {
       }}
       validationSchema={CreateStepSchema}
       onSubmit={(values) => {
-        console.log(values);
+      
         doSubmit(values);
       }}
       component={StepForm}

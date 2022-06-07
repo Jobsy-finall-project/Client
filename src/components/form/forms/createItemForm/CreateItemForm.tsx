@@ -36,7 +36,7 @@ const CreateItemForm: React.FC = () => {
     };
 
     createCard(card);
-    console.log(cards);
+   
     navigate("/functional-page");
   };
   return (
@@ -48,7 +48,7 @@ const CreateItemForm: React.FC = () => {
       }}
       validationSchema={CreateItemSchema}
       onSubmit={(values) => {
-        console.log(values);
+    
         handleCreateNewCard(values);
       }}
       component={ItemCreationForm}
