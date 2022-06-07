@@ -12,7 +12,7 @@ const HeaderStyled = styled.div`
     max-width: 100vw;
   }
   & .header-style{
-    background-color:  ${Colors.LIGHT_PINK};
+    background-color:  ${Colors.HEADER};
   }
 
   & .welcomeTitle{

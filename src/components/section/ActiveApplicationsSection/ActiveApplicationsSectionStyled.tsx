@@ -26,13 +26,14 @@ const ActiveApplicationsSectionStyled = styled.div`
     font-size: 2.5em;
     font-family: 'Quicksand', sans-serif;
     margin:auto;
-    margin-top: 60px;
+    margin-top: 20px;
     font-weight:bold;
   }
 
   & .positionsList{
     min-width:70%;
     margin:auto;
+    font-family: 'Quicksand', sans-serif;
   }
 
   & .emptyListTitle{
@@ -75,20 +76,20 @@ const ActiveApplicationsSectionStyled = styled.div`
   
   & .listItem {
     border-radius: 20px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.LIGHT_PINK};
     margin: 5px;
-
+    font-family: 'Quicksand', sans-serif;
   }
 
   & .listItem:hover {
     border-radius: 30px;
-    background-color: ${Colors.PRAIMARY};
+    background-color: ${Colors.PINK};
   }
 `;
 export const positionTitle={
     fontSize: `1.5em`,
     fontWeight:"bold",
-    fontFamily: "Gill Sans",
+    fontFamily: 'Quicksand',
     marginLeft:"10px"
     };
 export default ActiveApplicationsSectionStyled;

@@ -85,14 +85,16 @@ const ActiveApplicationsSection: React.FC = () => {
         <ActiveApplicationsSectionStyled>
             <Grid
                 container
-                spacing={3}
+                spacing={2}
+                width={"100%"}
+                direction="column"
+                className="container"
                 justifyContent="center"
                 alignItems="center"
             >
                 <Grid item container>
-                    <h1 className="welcomeTitle">{position?.name}</h1>
+                    <h1 className="activePositionsTitle">{position?.name}</h1>
                 </Grid>
-
                 <Grid item container>
                     <h3 className="activePositionsTitle">Active Users:</h3>
                 </Grid>
@@ -112,14 +114,14 @@ const ActiveApplicationsSection: React.FC = () => {
                     />
                 </Grid>
 
-                <Grid container item width={"50%"}>
-                    <List>
+                <Grid container item width={"100%"}>
+                    <List className="positionsList">
                         {(users as Array<UserModel>).map(
                             (currUser: UserModel) => {
                                 return (
                                     <div>
                                         {searchFunction(currUser, search) ? (
-                                            <ListItem>
+                                            <ListItem className="listItem"                                            >
                                                 <ListItemButton>
                                                     <ListItemText
                                                         key={currUser.email}

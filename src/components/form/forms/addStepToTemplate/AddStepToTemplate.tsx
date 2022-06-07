@@ -15,6 +15,7 @@ import Input from "../../input/Input";
 import { AddStepToTemplateStyled } from "./AddStepToTemplateStyled";
 import {saveStepToPosition} from "../../../../services/stepService";
 import TitleSection from "../../../section/titleSection/TitleSection";
+import Textarea from "../../input/Textarea";
 
 const AddStepToTemplateSchema = Yup.object().shape({
     title: Yup.string().required("Required"),
@@ -96,7 +97,7 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
                     touched={touched.title}
                     type="text"
                 />
-                <Input
+                <Textarea
                     name="description"
                     label="Step Details"
                     placeholder=""
@@ -104,7 +105,9 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
                     onChange={handleChange}
                     errors={errors.description}
                     touched={touched.description}
-                    type="text"
+                    rows= {20}
+                    cols= {60}
+                    height="200px"
                 />
                 <Button
                     title="Create New Step"
@@ -114,6 +117,7 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
                     top="32px"
                     left="100px"
                     onClick={handleSubmit}
+                    margin-button="10px"
                 />
             </form>
         </AddStepToTemplateStyled>

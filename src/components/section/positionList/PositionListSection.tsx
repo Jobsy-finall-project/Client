@@ -110,7 +110,7 @@ const PositionListSection: React.FC = () => {
         <Button
             className="addNewTrackButton"
             title="Add new position"
-            color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+            color= "#008CBA"
             height="50px"
             width="300px"
             top="0"
@@ -179,7 +179,7 @@ const PositionListSection: React.FC = () => {
           <Button
           className="addNewTrackButton"
           title="Add new position"
-          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          color="#008CBA"
           height="50px"
           width="300px"
           top="0"
