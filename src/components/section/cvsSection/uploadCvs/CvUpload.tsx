@@ -3,11 +3,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 
 const listCvs = [
   { cv_name: "bla", file: "" },
-  { cv_name: "bla2", file: "" },
+  { cv_name: "bla2", file: "" }
 ];
 interface CvUploadProps {
   closePopup: () => void;
@@ -17,7 +17,8 @@ interface CvUploadProps {
   setFormErrorMessage: (message: string) => void;
   formErrorMessage: string;
 }
-const CvUpload: React.FC<CvUploadProps> = (props) => {
+const CvUpload: React.FC<CvUploadProps> = props => {
+  const [isDisableButton, setDisableButton] = useState(false);
   useEffect(() => {
     props.setFormErrorMessage("");
   }, []);
@@ -42,9 +43,18 @@ const CvUpload: React.FC<CvUploadProps> = (props) => {
         <Typography color="red">{props.formErrorMessage}</Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary" onClick={props.saveCv}>
+        <Button
+          disabled={isDisableButton}
+          size="small"
+          color="primary"
+          onClick={() => {
+            setDisableButton(!isDisableButton);
+            props.saveCv();
+          }}
+        >
           Save
         </Button>
+
         <Button size="small" color="primary" onClick={props.closePopup}>
           Close
         </Button>

@@ -94,7 +94,7 @@ const CreateRecruitmentTrack: React.FC = () => {
         description: "",
         positions: []
       };
-      console.log({ company });
+  
       const { data } = await saveCompany(company);
       companyId = data._id;
     }
@@ -103,7 +103,7 @@ const CreateRecruitmentTrack: React.FC = () => {
       description: values.positionDescription,
       tags: []
     };
-    console.log({ positionToAdd });
+ 
     const track: any = {
       position: { ...positionToAdd },
       isActive: true,

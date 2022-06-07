@@ -51,9 +51,9 @@ const PositionListSection: React.FC = () => {
 
       const { data } = await getCompanyByHrId();
       const curUser = getCurrentUser();
-      console.log({curUser});
+   
       const newData = {...data, positions:data.positions.filter((cur:Position)=>cur.hrId===curUser._id)};
-      console.log({newData});
+    
       CreateCompany(newData);
       AddPosition(newData);
   }

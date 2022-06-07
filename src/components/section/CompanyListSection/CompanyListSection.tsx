@@ -7,7 +7,7 @@ import CompanyListStyled from "./CompanyListSectionStyled";
 const CompanyListSection: React.FC = () => {
   // let navigation = useNavigate();
   const companys = useSelector((state: State) => state.companys);
-  console.log(companys);
+
 
   return (
     <CompanyListStyled>

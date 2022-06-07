@@ -62,7 +62,7 @@ const SignupForm: React.FC = () => {
 
   async function getCompanys() {
     const { data } = await getAllCompanys();
-    console.log(data);
+  
     data.forEach((company: Company) => CreateCompany(company));
   }
 
