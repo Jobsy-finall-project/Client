@@ -226,6 +226,7 @@ const PositionSection: React.FC = () => {
                     position.template.map((step) => {
                         return (
                             <TimelineItem
+                            className="timelineItem"
                                 onClick={() => {
                                     navigation("/recruitment-track-step-page", {
                                         state: step,
@@ -278,10 +279,11 @@ const PositionSection: React.FC = () => {
                     <h6>Please add steps in order to share your position</h6>
                 )}
                 <TableContainer
+                className="table"
                     sx={{ mx: "auto", mt: 1, width: 3 / 4 }}
                     component={Paper}
                 >
-                    <Table size="small" aria-label="simple table">
+                    <Table className="table" size="small" aria-label="simple table">
                         <TableHead>
                             <TableRow>
                                 <TableCell size="small" align="center">
@@ -289,30 +291,35 @@ const PositionSection: React.FC = () => {
                                 </TableCell>
                                 <TableCell
                                     align="left"
+                                    className="font"
                                     sx={{ typography: "h5" }}
                                 >
                                     Full Name
                                 </TableCell>
                                 <TableCell
                                     align="left"
+                                    className="font"
                                     sx={{ typography: "h5" }}
                                 >
                                     Email
                                 </TableCell>
                                 <TableCell
                                     align="left"
+                                    className="font"
                                     sx={{ typography: "h5" }}
                                 >
                                     CV
                                 </TableCell>
                                 <TableCell
                                     align="left"
+                                    className="font"
                                     sx={{ typography: "h5" }}
                                 >
                                     Match Percentage
                                 </TableCell>
                                 <TableCell
                                     align="left"
+                                    className="font"
                                     sx={{ typography: "h5" }}
                                 >
                                     Status
@@ -321,7 +328,7 @@ const PositionSection: React.FC = () => {
                         </TableHead>
                         <TableBody>
                             {suggestions.map((currSuggestion) => (
-                                <TableRow
+                                <TableRow 
                                     key={currSuggestion.user.email}
                                     sx={{
                                         "&:last-child td, &:last-child th": {
@@ -341,20 +348,23 @@ const PositionSection: React.FC = () => {
                                     </TableCell>
                                     <TableCell
                                         align="left"
-                                        sx={{ typography: "h5" }}
+                                        className="font-item"
+                                        sx={{ typography: "h6" }}
                                     >
                                         {currSuggestion.user.firstName}{" "}
                                         {currSuggestion.user.lastName}
                                     </TableCell>
                                     <TableCell
                                         align="left"
-                                        sx={{ typography: "h5" }}
+                                        className="font-item"
+                                        sx={{ typography: "h6" }}
                                     >
                                         {currSuggestion.user.email}
                                     </TableCell>
                                     <TableCell
                                         align="left"
-                                        sx={{ typography: "h5" }}
+                                        className="font-item"
+                                        sx={{ typography: "h6" }}
                                     >
                                         {currSuggestion.user?.cvs
                                             ?.filter((currCv) => {
@@ -385,7 +395,8 @@ const PositionSection: React.FC = () => {
                                     </TableCell>
                                     <TableCell
                                         align="left"
-                                        sx={{ typography: "h5" }}
+                                        className="font-item"
+                                        sx={{ typography: "h6" }}
                                     >
                                         {getStatus(currSuggestion)}
                                     </TableCell>
