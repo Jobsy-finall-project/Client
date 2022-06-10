@@ -79,7 +79,10 @@ const ActiveApplicationsSection: React.FC = () => {
         );
     };
     const handleClick = (user: UserModel) => {
-        navigation("/recruitment-track-page", { state: user.applications!![0] }); //TODO handle Later
+        const app = user.applications?.find(
+            (curr) => curr.position._id === positionId
+        );
+        navigation("/recruitment-track-page/" + app?._id);
     };
     return (
         <ActiveApplicationsSectionStyled>

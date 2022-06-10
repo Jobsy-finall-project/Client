@@ -1,18 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
-
+import { useParams } from "react-router";
 import TrackSection from "../components/section/trackSection/TrackSection";
-import Track from "../models/Track";
 
 const RecruitmentTrackPage = () => {
-  const location = useLocation();
-  return (
-    <React.Fragment>
-      <TrackSection
-        track={location.state as Track}
-      />
-    </React.Fragment>
-  );
+    const { trackId } = useParams();
+
+    return (
+        <React.Fragment>
+            <TrackSection track={trackId} />
+        </React.Fragment>
+    );
 };
 
 export default RecruitmentTrackPage;
