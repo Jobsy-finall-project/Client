@@ -76,18 +76,24 @@ interface AddStepToTemplate {
   payload: Company;
 }
 
+interface clear {
+  type: ActionType.CLEAR_TRACKS | ActionType.CLEAR_COMPANYS | ActionType.CLEAR_CVS | ActionType.CLEAR_USERS | ActionType.CLEAR_CURR_USER;
+
+}
+
 export type Action =
-  | CreateCardAction
-  | DeleteCardAction
-  | CreateUserAction 
-  | LoginUserAction
-  | SortAttributeAction
-  | CreateStepAction
-  | AddCV
-  | DeleteCV
-  | CreateTrackAction
-  | DeleteTrackAction
-  | CreateCompany
-  | CreatePosition
-  | AddStepToTemplate
-  | DeletePosition;
+    | CreateCardAction
+    | DeleteCardAction
+    | CreateUserAction
+    | LoginUserAction
+    | SortAttributeAction
+    | CreateStepAction
+    | AddCV
+    | DeleteCV
+    | CreateTrackAction
+    | DeleteTrackAction
+    | CreateCompany
+    | CreatePosition
+    | AddStepToTemplate
+    | DeletePosition
+    | clear;
