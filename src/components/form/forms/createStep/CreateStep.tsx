@@ -16,9 +16,7 @@ import {saveStepToApllication} from "../../../../services/stepService";
 const CreateStepSchema = Yup.object().shape({
   title: Yup.string().required("Required"),
   stepDetails: Yup.string(),
-  date: Yup.date().default(function () {
-    return new Date();
-  }),
+  date: Yup.date(),
   email: Yup.string(),
 });
 
@@ -34,7 +32,8 @@ const CreateStep: React.FC = () => {
     const applicationId = location.state as string;
     const newStep: any = {
       title:values.title,
-      description: values.description
+      description: values.description,
+      time: values.time.toString()
     };
     const data = await saveStepToApllication(newStep, applicationId);
  
@@ -52,7 +51,7 @@ const CreateStep: React.FC = () => {
       initialValues={{
         _id: v4(),
         title: "",
-        time: new Date().toString(),
+        time: "",
       }}
       validationSchema={CreateStepSchema}
       onSubmit={(values) => {
@@ -95,16 +94,16 @@ const StepForm: (props: FormikProps<Step>) => JSX.Element = ({
           touched={touched.description}
           type="text"
         />
-        {/* <Input
-          name="date"
+         <Input
+          name="time"
           label="date"
           placeholder=""
-          value={values.date}
+          value={values.time}
           onChange={handleChange}
-          errors={errors.date}
-          touched={touched.date}
+          errors={errors.time}
+          touched={touched.time}
           type="date"
-        /> */}
+        />
         <Button
           title="Create New Step"
           color=""

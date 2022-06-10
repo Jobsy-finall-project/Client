@@ -38,7 +38,8 @@ const AddStepToTemplate: React.FC = () => {
         const position = location.state as Position;
         const newStep: any = {
             title:values.title,
-            description:values.description
+            description:values.description,
+            time: values.time.toString()
         };
 
         const data = await saveStepToPosition(newStep,position._id as string);
@@ -108,6 +109,16 @@ const StepForm: (props: FormikProps<StepModel>) => JSX.Element = ({
                     rows= {20}
                     cols= {60}
                     height="200px"
+                />
+                <Input
+                    name="time"
+                    label="date"
+                    placeholder=""
+                    value={values.time}
+                    onChange={handleChange}
+                    errors={errors.time}
+                    touched={touched.time}
+                    type="date"
                 />
                 <Button
                     title="Create New Step"
