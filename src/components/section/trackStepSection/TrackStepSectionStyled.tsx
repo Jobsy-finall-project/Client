@@ -8,15 +8,16 @@ const TrackStepSectionStyled = styled.div`
   }
 
   & .stepTitle{
-    font-size: 2em;
+    font-size: 2.2em;
     color: black;    
     margin:auto;
     font-weight:bold;
-    margin-top:20px;
+    margin-top:30px;
+    margin-bottom:20px;
   }
 
   & .stepDescription{ 
-    font-size: 2em;
+    font-size: 1.5em;
     color: black;
     margin:auto;
 
