@@ -48,16 +48,16 @@ export const HomePageSectionStyled = styled.div`
     display:flex;
     margin:0 auto;
     border-radius: 30px;
+    border: 2px solid ${Colors.WHITE}
     padding: 5px;
     transition: 0.3ms;
-    height:40px;
-    background-image: linear-gradient(-180deg, ${Colors.LIGHT_PINK} 0%, ${Colors.LIGHT_YELLOW} 100%);
-    border: 2px solid ${Colors.LIGHT_PINK}
+    height:30px;
+    background-image: linear-gradient(-180deg, ${Colors.TURKIZ} 0%, ${Colors.LIGHT_GREEN} 100%);
     color: #008CBA;
     font-size: 18px;
     text-decoration: none;
     max-width: 300px;
-    min-width: 150px;
+    min-width: 200px;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
@@ -66,8 +66,8 @@ export const HomePageSectionStyled = styled.div`
   }
 
   .addNewTrackButton:hover{
-    background-image: linear-gradient(-180deg, ${Colors.PINK} 0%, ${Colors.LIGHT_YELLOW} 50%);
-    border: 2px solid ${Colors.LIGHT_PINK}
+    background-image: linear-gradient(-180deg, ${Colors.TURKIZ} 0%, ${Colors.LIGHT_GREEN} 50%);
+    border: 2px solid ${Colors.WHITE}
   }
   
  
@@ -77,15 +77,15 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .listItem {
-    border-radius: 20px;
-    background-color: ${Colors.LIGHT_PINK};
-    margin: 5px;
-
+    border-radius: 25px;
+    background-color: ${Colors.LIGHT_BLUE};
+    margin: 8px;
+    border: 5px solid ${Colors.TURKIZ}
   }
 
   & .listItem:hover {
-    border-radius: 30px;
-    background-color: ${Colors.PINK};
+    border-radius: 25px;
+    background-color: #EBFAEF;
 
   }
   

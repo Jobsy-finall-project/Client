@@ -9,7 +9,7 @@ export const ProfilePageSectionStyled = styled.div`
     }
 
     & .card{
-        background-color: ${Colors.LIGHT_PINK};
+        background-color: ${Colors.LIGHT_GREEN};
         width:100%;
         height: 220px;
     }

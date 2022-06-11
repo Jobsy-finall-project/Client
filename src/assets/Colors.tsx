@@ -18,4 +18,10 @@ export const HEADER: string = "#d6fff9";
 export const BUTTON: string = "#008CBA";
 export const PROFILE: string = "#daf6fa";
 export const LIGHT_YELLOW: string = "#F9EEE0";
+export const LIGHT_SKY_BLUE: string = "#DCF4FD";
+export const TURKIZ: string = "#C5E3E3";
+export const LIGHT_BLUE: string = "#E7FAF5";
+export const LIGHT_GREEN: string = "#EBFAEF";
+export const GREEN: string = "#C5E3D3";
+
 

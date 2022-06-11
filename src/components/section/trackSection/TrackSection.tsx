@@ -58,6 +58,9 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
         <Typography className="trackTitle" variant="h3">{
             currentTrack && currentTrack.position.name}</Typography>
         <Typography className="trackDescription" variant="body1">
+          Description:
+        </Typography>
+        <Typography className="trackDescription" variant="body1">
           {currentTrack && currentTrack.position.description}
         </Typography>
        

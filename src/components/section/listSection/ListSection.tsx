@@ -77,10 +77,14 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
 
 
   return (
+    <Grid container width={"100%"} direction="column"
+    alignItems="center"
+    justifyContent="center"
+    className="commentscontainer">
     <ListSectionStyled>
-      <List className="listContainer" sx={{ marginLeft: "100px" }}>
+      <List className="listContainer">
         <p className="commentTitle" >{props.title}:</p>
-
+        <Grid item>
         {items?.map((currItem, index) => {
           return (
             <ListItem>
@@ -92,60 +96,70 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
             </ListItem>
           )
         })}
-
-        <div className="addComments">
+        </Grid>
+        {/* <div > */}
         <Grid
           container
           spacing={0}
           direction="column"
           alignItems="center"
           justifyContent="center"
-         
+          className="addComments"
+          width={"100%"}
         >
-
-          <Grid item xs={3}>
-            <div>
+            {/* <div> */}
+            <Grid item>
             <Button
-              className="addBtn"
+              className="addCommentBtn"
               onClick={showItemInput}
               title="Add comments"
               color=""
-              height="50px"
-              width="170px"
+              height="20px"
+              width="180px"
               top="32px"
               left="100px"
             />
-            </div>
-          </Grid>   
-        </Grid> 
-        
+            </Grid>
+            {/* </div> */}
+          
+          {/* <Grid item direction="column" width={"100%"} alignItems="center"
+          justifyContent="center">        */}
           {addItemInput ? (
-            <div className="addCommentInput">
+            // <div className="addCommentInput">
+              <Grid item container className="addCommentInput" direction="column" width={"100%"} alignItems="center"
+              justifyContent="center">
+              <Grid item width={"90%"} alignItems="center"> 
               <input
                 className="input-comment"
                 type="text"
                 value={newItem}
                 onChange={handleAddItemChange}
               />
+              </Grid>
+              <Grid>
               <Button
                 className="addBtn"
                 onClick={handleAddItemClick}
                 title="Add"
                 color=""
-                height="50px"
-                width="170px"
+                height="30px"
+                width="200px"
                 top="32px"
-                left="100px"
+                left="200px"
               />
-            </div>
+              </Grid>
+              </Grid>
+            // </div>
           ) : null}
-   
+          </Grid> 
+           {/* </Grid>  */}
           {/* <Button 
             onClick={showItemInput}> {props.addBtnText}</Button> */}
 
-        </div>
+        {/* </div> */}
       </List>
     </ListSectionStyled>
+    </Grid>
   );
 };
 
