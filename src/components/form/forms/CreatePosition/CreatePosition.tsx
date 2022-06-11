@@ -41,7 +41,7 @@ const CreateCompany: React.FC = () => {
   );
 
   const doSubmit = async (values: FormResult) => {
-    console.log("*********************", values);
+   
 
     const newCompany = companys.find(curr => curr._id === currUser.company);
     const newPosition: Position = {

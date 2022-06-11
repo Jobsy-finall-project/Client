@@ -143,7 +143,7 @@ const companyReducer = (
                     (company) => company._id === action.payload._id
                 )
             ) {
-                console.log(action.payload);
+                
                 distinctState = [...distinctState, action.payload];
             }
             return distinctState;
@@ -208,7 +208,7 @@ const companyReducer = (
                 } else {
                     state[companyIndex].positions.push(positionToUpdate);
                 }
-                console.log(state);
+                
 
                 return state;
             } else {

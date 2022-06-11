@@ -61,6 +61,11 @@ const PositionSection: React.FC = () => {
     curr => curr._id === currUser.company
   )?.name;
   const [companyNameState, setCompany] = React.useState(companyName);
+  const [suggestions, setSuggestions] = React.useState<Array<userSuggestions>>(
+    []
+  );
+
+  const [personName, setPersonName] = React.useState<string[]>([]);
 
   async function getSuggestions() {
     const { data } = await getSuggestios(
@@ -111,12 +116,6 @@ const PositionSection: React.FC = () => {
     await suggestTrack(newTrack, currUser.company, userIds);
     setOpen(true);
   };
-
-  const [suggestions, setSuggestions] = React.useState<Array<userSuggestions>>(
-    []
-  );
-
-  const [personName, setPersonName] = React.useState<string[]>([]);
 
   const handleClose = (
     event?: React.SyntheticEvent | Event,
@@ -183,7 +182,7 @@ const PositionSection: React.FC = () => {
       return currPosId === positionId;
     });
     if (app) {
-      return app.isMatch ? "Appoved" : "Pending";
+      return app.isMatch ? "Approved" : "Pending";
     } else {
       return "Available";
     }
@@ -232,14 +231,16 @@ const PositionSection: React.FC = () => {
         </Grid>
         <Grid item>
           <Button
-            title="See all Applications"
+            title="Active Candidates"
             color=""
             height="50px"
             width="180px"
             top="32px"
             left=""
             onClick={() => {
-              navigation("/apps-of-positions/" + position._id);
+              navigation("/apps-of-positions/" + position._id, {
+                state: suggestions
+              });
             }}
           />
         </Grid>

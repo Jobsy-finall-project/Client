@@ -10,3 +10,11 @@ const apiEndpoint = `${apiUrl}/user`;
 export async function register(user: User) {
   return await http.post(apiEndpoint, user);
 }
+
+export async function getIntersectionTagsBetweenUserAndPosition(
+  userId: string,
+  positionId: string,
+  cvId: string
+) {
+  return await http.get(`${apiEndpoint}/tags/${userId}/${positionId}/${cvId}`);
+}

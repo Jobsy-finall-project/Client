@@ -55,8 +55,8 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                 <Timeline position="alternate" className="timeline">
                     {currentTrack &&
                         currentTrack.steps?.map((step) => {
-                            console.log("wow");
-                            console.log(step);
+                           
+                           
                             return (
                                 <TimelineItem
                                     className="timelineItem"

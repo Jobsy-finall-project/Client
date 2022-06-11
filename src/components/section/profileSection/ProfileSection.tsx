@@ -17,7 +17,7 @@ const ProfileSection: React.FC = () => {
   const companyName = useSelector((state: State) => state.companys)
   .find((curr) => curr._id === currUser.company)?.name;
 
-  console.log("company :" + companyName);
+  
 
   return (
     <ProfileSectionStyled>
