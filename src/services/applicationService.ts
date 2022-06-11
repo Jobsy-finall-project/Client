@@ -17,25 +17,25 @@ export async function getUserApplications() {
 }
 
 export async function getApplicationById(applicationId: string) {
-    const { data } = await http.get(`${apiEndpoint}/${applicationId}`);
+  const { data } = await http.get(`${apiEndpoint}/${applicationId}`);
 
-    return data;
+  return data;
 }
 
 export async function saveApplication(application: Track, companyId: string) {
-  const {data} = await http.post(`${apiEndpoint}/${companyId}`, application);
+  const { data } = await http.post(`${apiEndpoint}/${companyId}`, application);
   return data;
 }
 
 export async function suggestTrack(
-    track: Track,
-    compabyId: string | undefined,
-    usersIds: (String | undefined)[]
+  track: Track,
+  compabyId: string | undefined,
+  usersIds: (String | undefined)[]
 ) {
-    return await http.post(`${apiEndpoint}/matches/${compabyId}`, {
-        application: track,
-        users: usersIds,
-    });
+  return await http.post(`${apiEndpoint}/matches/${compabyId}`, {
+    application: track,
+    users: usersIds
+  });
 }
 
 export async function changeApplicationIsFavorite(
@@ -43,7 +43,7 @@ export async function changeApplicationIsFavorite(
   isFavorite: Boolean
 ) {
   const { data } = await http.put(applicationUrl(applicationId), {
-    isFavorite,
+    isFavorite
   });
   return data;
 }
@@ -53,7 +53,7 @@ export async function addApplicationComments(
   comment: String
 ) {
   const { data } = await http.post(`${apiEndpoint}/comment/${applicationId}`, {
-    comment,
+    comment
   });
   return data;
 }
@@ -62,27 +62,30 @@ export async function deleteApplicationComments(
   applicationId: String,
   commentIndex: number
 ) {
-  const { data } = await http.post(`${apiEndpoint}/comment/${applicationId}/delete`, {
-    commentIndex,
-  });
+  const { data } = await http.post(
+    `${apiEndpoint}/comment/${applicationId}/delete`,
+    {
+      commentIndex
+    }
+  );
   return data;
 }
 
 export async function changeApplicationIsMatch(
-    applicationId: String,
-    isMatch: Boolean
+  applicationId: String,
+  isMatch: Boolean
 ) {
-    const { data } = await http.put(applicationUrl(applicationId), {
-      isMatch,
-    });
-    return data;
+  const { data } = await http.put(applicationUrl(applicationId), {
+    isMatch
+  });
+  return data;
 }
 
 export async function deleteAplication(applicationId: string) {
-    const { data } = await http.delete(applicationUrl(applicationId));
-    return data;
+  const { data } = await http.delete(applicationUrl(applicationId));
+  return data;
 }
 
 export async function getAllApplicationsByPositionId(positionId: string) {
-    return await http.get(`${apiEndpoint}/all/${positionId}`);
+  return await http.get(`${apiEndpoint}/all/${positionId}`);
 }
