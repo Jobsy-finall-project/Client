@@ -17,7 +17,7 @@ export const GettingStartedSectionStyled = styled.div`
   transition: 0.3ms;
   margin-top: 32px;
   margin-left: 100px;
-  background-color: #0edcc6;
+  background-color: #bef8f2;
   width: 300px;
   height: 70px;
   font-family: 'Quicksand', sans-serif;
@@ -26,6 +26,10 @@ export const GettingStartedSectionStyled = styled.div`
   color: #008CBA;
     border-radius: 30px;
   box-shadow: 0 4px 20px 0  rgb(0 0 0 / 50%);
+}
+
+& .myButton:hover{
+  background-color:white;
 }
 
 & .container{

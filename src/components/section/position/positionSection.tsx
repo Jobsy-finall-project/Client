@@ -193,13 +193,13 @@ const PositionSection: React.FC = () => {
       <Typography className="title" variant="h3">
         {position && position.name}
       </Typography>
-      <Typography className="meta-data" variant="body1">
+      <Typography className="meta-data" variant="h5">
         Company : {companyNameState}
       </Typography>
-      <Typography className="meta-data" variant="body1">
+      <Typography className="meta-data" variant="h5">
         Description : {position && position.description}
       </Typography>
-      <Typography className="meta-data" variant="body1">
+      <Typography className="meta-data" variant="h5">
         Requirements:
         {position &&
           position.tags.map(tag => (

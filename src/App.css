@@ -1,6 +1,8 @@
 .App {
   text-align: center;
-  background-image: linear-gradient(-180deg,#D4FEFC 0%, #c9f5da 100%);
+  /* background-image: linear-gradient(-180deg,#D4FEFC 0%, #c9f5da 100%); */
+  /* background-color: #d4e5e7; */
+  background-color: #e5efee;
   min-height: 100vh;
   background-size: cover;
   background-position: center;
@@ -11,6 +13,7 @@
 .App2{
   text-align: center;
   background-image: linear-gradient(-180deg,#f4e5c2 0%, #ecced0 100%);
+  background-color: #ddeeef;
   min-height: 100vh;
   background-size: cover;
   background-position: center;
