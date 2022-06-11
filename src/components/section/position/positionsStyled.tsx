@@ -10,8 +10,6 @@ export const PositionStyled = styled.div`
     .title{
         margin-top:20px;
         font-family: 'Quicksand', sans-serif;
-        width: 75%;
-        margin-left:200px;
 
     }
     .meta-data{
@@ -41,26 +39,26 @@ export const PositionStyled = styled.div`
   
     & .timelineItem{
       // background-color: ${Colors.PRAIMARY};
-      border:2px solid #85D3E6;
+      border:3px solid #ffffff;
       margin: auto;
       margin-bottom:5px;
       border-radius:20px;
       cursor: pointer;
-      width:75%;
+      width:52%;
       
 
     }
   
     & .timelineItem:hover,timelineDate:hover{
-      background-color: ${Colors.PRAIMARY};
+      background-color: ${Colors.LIGHT_PINK};
       border:3px solid 85D3E6;
-      margin-bottom:4px;
+      //margin-bottom:4px;
       border-radius:20px;
     }  
 
     .table{
         font-family: 'Quicksand', sans-serif;
-        background-color: #D4F0EF;
+        background-color: #FFFFFF;
         border-radius:10px;
     }    
 
