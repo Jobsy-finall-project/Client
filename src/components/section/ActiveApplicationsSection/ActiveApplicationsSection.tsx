@@ -145,32 +145,36 @@ const ActiveApplicationsSection: React.FC = () => {
 
         <Grid container item width={"100%"}>
           <List className="positionsList">
-            {(users as Array<UserModel>).map((currUser: UserModel) => {
-              return (
-                <div>
-                  {searchFunction(currUser, search) ? (
-                    <ListItem className="listItem">
-                      <ListItemButton>
-                        <ListItemText
-                          key={currUser.email}
-                          primary={`${currUser.firstName} ${currUser.lastName}`}
-                          primaryTypographyProps={positionTitle}
-                          onClick={() => {
-                            handleClick(currUser);
-                          }}
-                        />
-                        {currUser.intersectionTags &&
-                          currUser.intersectionTags.map(tag => (
-                            <ChipTag className="position-tag" label={tag} />
-                          ))}
-                      </ListItemButton>
-                    </ListItem>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-              );
-            })}
+            {users.length > 0 ? (
+              (users as Array<UserModel>).map((currUser: UserModel) => {
+                return (
+                  <div>
+                    {searchFunction(currUser, search) ? (
+                      <ListItem className="listItem">
+                        <ListItemButton>
+                          <ListItemText
+                            key={currUser.email}
+                            primary={`${currUser.firstName} ${currUser.lastName}`}
+                            primaryTypographyProps={positionTitle}
+                            onClick={() => {
+                              handleClick(currUser);
+                            }}
+                          />
+                          {currUser.intersectionTags &&
+                            currUser.intersectionTags.map(tag => (
+                              <ChipTag className="position-tag" label={tag} />
+                            ))}
+                        </ListItemButton>
+                      </ListItem>
+                    ) : (
+                      <div></div>
+                    )}
+                  </div>
+                );
+              })
+            ) : (
+              <p>opss... There are no active candidates yet</p>
+            )}
           </List>
         </Grid>
       </Grid>
