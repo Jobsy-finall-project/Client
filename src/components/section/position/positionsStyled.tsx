@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as Colors from "../../../assets/Colors"
+import * as Colors from "../../../assets/Colors";
 
 export const PositionStyled = styled.div`
     
@@ -8,8 +8,18 @@ export const PositionStyled = styled.div`
     padding:0;
 
     .title{
-        margin-top:3px;
+        margin-top:20px;
         font-family: 'Quicksand', sans-serif;
+        width: 75%;
+        margin-left:200px;
+
+    }
+    .meta-data{
+        margin-top:20px;
+        font-family: 'Quicksand', sans-serif;
+        text-align: left;
+        width: 74%;
+        margin-left:200px;
     }
 
     & .timelineStep{
@@ -32,9 +42,13 @@ export const PositionStyled = styled.div`
     & .timelineItem{
       // background-color: ${Colors.PRAIMARY};
       border:2px solid #85D3E6;
-      margin-bottom:4px;
+      margin: auto;
+      margin-bottom:5px;
       border-radius:20px;
       cursor: pointer;
+      width:75%;
+      
+
     }
   
     & .timelineItem:hover,timelineDate:hover{
@@ -67,5 +81,12 @@ export const PositionStyled = styled.div`
     .font-item{
         font-family: 'Quicksand', sans-serif;
         text-size: 10px;
+    }
+
+    & .position-tag{
+        margin-right:3px;
+        margin-left:3px;
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
 `;
