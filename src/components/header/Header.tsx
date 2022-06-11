@@ -36,21 +36,13 @@ const Header: React.FC<HeaderProps> = (props) => {
   const location = useLocation();
 
   let pages = [
-    { "title": 'Sign Up', "url": "/sign-up" },
     { "title": 'Login', "url": "/sign-in" }
-    
   ];
 
-  if( location.pathname === "/sign-in" ){
+  if( location.pathname === "/sign-in" 
+      || location.pathname === "/sign-up"){
     pages= [ 
       { "title": '', "url": "" }
-     ]
-   }
-
-  
-   if( location.pathname === "/sign-up" ){
-    pages= [ 
-      { "title": 'Login', "url": "/sign-in" }
      ]
    }
 

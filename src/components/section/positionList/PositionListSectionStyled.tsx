@@ -12,9 +12,10 @@ export const PositionListSectionStyled = styled.div`
     min-width : 100%;
   }
 
-  & .searchPosition {
-    width: 70%;
-    margin: auto;
+  & .searchPosition{
+    min-width:80%;
+    color:green;
+    margin:auto;
   }
 
   & .positionsList{

@@ -30,11 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const myRadio: CSS.Properties = {
-  margin: "25px 900px 0 auto"
-};
-
-const companyList: CSS.Properties = {
-  marginLeft: "-120px"
+  margin: "25px 65% 0 auto"
 };
 
 const SignupSchema = Yup.object().shape({
@@ -245,7 +241,7 @@ const RegistrationForm: (
       </FormControl>
       {isHR ? (
         <Box sx={{ maxWidth: 200, margin: "25px 72% 0 auto" }}>
-          <FormControl fullWidth style={companyList}>
+          <FormControl fullWidth>
             <InputLabel id="company-select">Company</InputLabel>
             <Select
               labelId="company-select-label"
