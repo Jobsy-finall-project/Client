@@ -23,7 +23,9 @@ import { getCurrentUser } from "../../../services/authService";
 import { actionsCreators, State } from "../../../state";
 import Button from "../../common/button/Button";
 import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
-
+import {getUserById} from '../../../services/userService'
+import User from '../../../models/User'
+import { Typography } from '@mui/material';
 const HomePageSection: React.FC = () => {
 
   const navigation = useNavigate();
@@ -33,6 +35,17 @@ const HomePageSection: React.FC = () => {
   const tracks = useSelector((state: State) => state.tracks);
 
   const [search, setSearchBar] = useState("");
+
+
+
+  const [hrs, setHrs] = useState<Array<User>>([{
+    firstName: "",
+    lastName: "",
+    userName: "",
+    role: "HR",
+    email: "",
+    password: "",
+  }]);
 
   async function handleDeleteApplication(applicationId: string){
     await deleteAplication(applicationId);
@@ -54,6 +67,7 @@ const HomePageSection: React.FC = () => {
 
   useEffect(() => {
     getData();
+    getHrs();
   }, []);
 
   const handleSetSearch = (event: ChangeEvent<HTMLInputElement>) => {
@@ -71,6 +85,23 @@ const HomePageSection: React.FC = () => {
     );
    
   };
+
+
+  async function getHrs(){
+    const hrFound: string[] = [];
+    {(tracks as Array<Track>).filter(cur=>cur.isMatch===true).map((currTrack: Track) => {
+      if(currTrack.position && currTrack.position.hrId) {
+        hrFound.push(currTrack.position.hrId)
+        
+      }
+    })
+  }
+    hrFound.forEach(async function (value) {
+      const {data} = await getUserById(value)
+        const user = {...data};
+        setHrs([{...hrs}, user])
+    })
+  }
 
   const handleAddTrack = () => {
     navigation("/create-recruitment-track-page");
@@ -151,6 +182,20 @@ const HomePageSection: React.FC = () => {
                                                   )
                                               }
                                           /> */}
+                                           <IconButton disabled>
+                                              {currTrack.position &&
+                                                  currTrack.position.hrId && (
+                                                      <div>
+                                                        <ShareIcon />
+                                                        <Typography>
+                                                          HR: {' '}
+                                                        {hrs.find(hr => hr._id === currTrack.position.hrId)?.firstName}
+                                                        {' '}
+                                                          {hrs.find(hr => hr._id === currTrack.position.hrId)?.lastName}
+                                                          </Typography>
+                                                      </div>
+                                                  )}
+                                          </IconButton>
                                           <IconButton
                                               onClick={(e) =>
                                                   handleDeleteApplication(
@@ -160,12 +205,7 @@ const HomePageSection: React.FC = () => {
                                           >
                                               <DeleteIcon />
                                           </IconButton>
-                                          <IconButton disabled>
-                                              {currTrack.position &&
-                                                  currTrack.position.hrId && (
-                                                      <ShareIcon />
-                                                  )}
-                                          </IconButton>
+                                         
                                       </ListItemIcon>
                                   }
                               >
