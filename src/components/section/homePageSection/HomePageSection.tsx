@@ -1,37 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { ChangeEvent } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import KeyboardIcon from "@mui/icons-material/Keyboard";
+import SearchIcon from "@mui/icons-material/Search";
+import ShareIcon from '@mui/icons-material/Share';
+import Grid from "@mui/material/Grid";
+import IconButton from '@mui/material/IconButton';
+import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import { useSelector } from "react-redux";
-import { State } from "../../../state";
-import Track from "../../../models/Track";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
-import AddBoxIcon from "@mui/icons-material/AddBox";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
-import KeyboardIcon from "@mui/icons-material/Keyboard";
-import {
-  getUserApplications,
-  changeApplicationIsFavorite, deleteAplication
-} from "../../../services/applicationService";
 import { bindActionCreators } from "redux";
-import { actionsCreators } from "../../../state";
-import { useDispatch } from "react-redux";
+import Track from "../../../models/Track";
+import {
+  changeApplicationIsFavorite, deleteAplication, getUserApplications
+} from "../../../services/applicationService";
 import { getCurrentUser } from "../../../services/authService";
-import { Link } from "react-router-dom";
+import { actionsCreators, State } from "../../../state";
 import Button from "../../common/button/Button";
-import DeleteIcon from '@mui/icons-material/Delete';
-import IconButton from '@mui/material/IconButton';
-import ShareIcon from '@mui/icons-material/Share';
+import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
 
 const HomePageSection: React.FC = () => {
 
@@ -71,7 +62,7 @@ const HomePageSection: React.FC = () => {
   };
 
   const handleClick = (track: Track) => {
-    navigation("/recruitment-track-page", { state: track });
+    navigation("/recruitment-track-page/" + track._id);
   };
   const handleApplicationIsFavorite = async (track: Track) => {
     const application = await changeApplicationIsFavorite(

@@ -114,7 +114,7 @@ const CreateRecruitmentTrack: React.FC = () => {
     const data = await saveApplication(track, companyId);
     createTrack(data);
 
-    navigation("/recruitment-track-page", { state: data });
+    navigation("/recruitment-track-page/" + data._id);
   };
 
   return (
