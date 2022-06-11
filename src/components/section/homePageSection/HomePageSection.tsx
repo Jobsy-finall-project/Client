@@ -105,7 +105,8 @@ const HomePageSection: React.FC = () => {
         <Button
             className="addNewTrackButton"
             title="Add new recruitment track"
-            color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+            //color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+            color="#008CBA"
             height="50px"
             width="300px"
             top="0"
@@ -197,7 +198,8 @@ const HomePageSection: React.FC = () => {
           <Button
           className="addNewTrackButton"
           title="Add new recruitment track"
-          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          // color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
+          color="008CBA"
           height="50px"
           width="300px"
           top="0"

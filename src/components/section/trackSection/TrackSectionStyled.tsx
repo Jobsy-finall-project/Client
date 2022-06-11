@@ -61,15 +61,17 @@ const TrackSectionStyled = styled.div`
 
   & .timelineItem{
     // background-color: ${Colors.LIGHT_PINK};
-    border:6px solid ${Colors.LIGHT_PINK};
+    border:3px solid #b2c7c5;
     margin-bottom:4px;
     border-radius:20px;
     cursor: pointer;
+    width:52%;
+    align-self: center;
   }
 
   & .timelineItem:hover,timelineDate:hover{
-    background-color: ${Colors.LIGHT_PINK};
-    border:5px solid 85D3E6;
+    background-color: #c2cfd3;
+    border:3px solid #b2c7c5;
     margin-bottom:4px;
     border-radius:20px;
   }
@@ -99,12 +101,13 @@ const TrackSectionStyled = styled.div`
 
   & .addBtn{
     margin-top:10px;
+    font-size: 16px;
   }
 
   & .listContainer{
     font-size:1.5em;
     margin-top:30px;
-    border: 4px solid #FFF2E3;
+    border: 4px solid #b2c7c5;
     border-radius:20px;
     width:50%;
     margin:auto;
