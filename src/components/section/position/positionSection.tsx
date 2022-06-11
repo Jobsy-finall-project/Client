@@ -32,6 +32,7 @@ import Track from "../../../models/Track";
 import UserModel from "../../../models/User";
 import { suggestTrack } from "../../../services/applicationService";
 import { getCurrentUser } from "../../../services/authService";
+import { getCompanyByHrId } from "../../../services/companyService";
 import {
   getPositionById,
   getSuggestios
@@ -59,6 +60,7 @@ const PositionSection: React.FC = () => {
   const companyName = useSelector((state: State) => state.companys).find(
     curr => curr._id === currUser.company
   )?.name;
+  const [companyNameState, setCompany] = React.useState(companyName);
 
   async function getSuggestions() {
     const { data } = await getSuggestios(
@@ -67,6 +69,14 @@ const PositionSection: React.FC = () => {
     );
     setSuggestions(data);
   }
+
+  async function getCompanyName() {
+    const { data: current_comany } = await getCompanyByHrId();
+    if (current_comany) {
+      setCompany(current_comany.name);
+    }
+  }
+
   useEffect(() => {
     async function getPosition() {
       const current_position = await getPositionById(
@@ -78,6 +88,7 @@ const PositionSection: React.FC = () => {
     }
     getPosition();
     getSuggestions();
+    getCompanyName();
   }, []);
 
   const createTrack = async (users: string[]) => {
@@ -184,7 +195,7 @@ const PositionSection: React.FC = () => {
         {position && position.name}
       </Typography>
       <Typography className="meta-data" variant="body1">
-        Company : {companyName}
+        Company : {companyNameState}
       </Typography>
       <Typography className="meta-data" variant="body1">
         Description : {position && position.description}
