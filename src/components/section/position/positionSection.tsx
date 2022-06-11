@@ -172,7 +172,7 @@ const PositionSection: React.FC = () => {
       return currPosId === positionId;
     });
     if (app) {
-      return app.isMatch ? "Appoved" : "Panding";
+      return app.isMatch ? "Appoved" : "Pending";
     } else {
       return "Available";
     }
