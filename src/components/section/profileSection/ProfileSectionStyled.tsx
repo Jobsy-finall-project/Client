@@ -6,7 +6,7 @@ export const ProfileSectionStyled = styled.div`
 
 
     & .card{
-        background-color: ${Colors.LIGHT_PINK};
+        background-color: ${Colors.LIGHT_GREEN};
         min-width:200px;
         max-width:100%;
         margin: 2px 0;
@@ -15,7 +15,7 @@ export const ProfileSectionStyled = styled.div`
 
     & .card-profile{
         cursor: pointer;
-        background-color: ${Colors.LIGHT_PINK};
+        background-color: ${Colors.LIGHT_GREEN};
         min-width:200px;
         max-width:100%;
         margin: 2px 0;

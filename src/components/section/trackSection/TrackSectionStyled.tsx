@@ -12,15 +12,6 @@ const TrackSectionStyled = styled.div`
     font-family: 'Quicksand', sans-serif;
     margin-top: 10px;
   }
-  & .button {
-    color: #008CBA;
-    background-color: ${Colors.LIGHT_PINK}
-  }
-
-  & .button:hover {
-    box-shadow: 0 4px 8px 0 rgba(0.5, 0.5, 0.5, 0.5);
-    background-color: ${Colors.PINK};
-  }
 
   & .trackTitle{
     font-size: 3em;
@@ -50,28 +41,33 @@ const TrackSectionStyled = styled.div`
 
   & .trackDescription{
     width:70%;
-    font-size: 1.75em;
+    font-size: 1.5em;
     margin:auto;
+    text-align:left;
     font-family: 'Quicksand', sans-serif;
+    margin-buttom:10px;
   }
 
   & .timeline{
-      margin-top:50px;
+      margin-top:30px;
+      item-align:center;
+      width:75%;
+      margin:auto;
   }
 
   & .timelineItem{
-    // background-color: ${Colors.LIGHT_PINK};
-    border:3px solid #b2c7c5;
+    background-color: ${Colors.LIGHT_BLUE};
+    border:3px solid ${Colors.TURKIZ};
     margin-bottom:4px;
     border-radius:20px;
     cursor: pointer;
-    width:52%;
+    width:100%;
     align-self: center;
   }
 
   & .timelineItem:hover,timelineDate:hover{
-    background-color: #c2cfd3;
-    border:3px solid #b2c7c5;
+    background-color: ${Colors.LIGHT_GREEN};
+    border:3px solid ${Colors.TURKIZ};
     margin-bottom:4px;
     border-radius:20px;
   }
@@ -83,36 +79,30 @@ const TrackSectionStyled = styled.div`
     font-size: 1.5em;
   }
 
-  & .addComments{
-    text-align:left;
-  }
+  // & .addComments{
+  //   text-align:center;
+  // }
 
-  & .addCommentBtn{
-    margin-left:20px;
-    width:180px;
-  }
+  // & .Commentscontainer, .listContainer{
+  //   // margin-left:20px;
+  //   width:100%;
+  //   margin:auto;
+  //   position: relative;
+  //   align-items: center;
+  //   // display: flex;
+  // }
 
-  & .addCommentInput{
-    margin-top:10px;
-    margin-left:20px;
-    width:180px;
-    margin-buttom:10px;
-  }
+  // & .addCommentInput{
+  //   margin-top:10px;
+  //   // margin-left:20px;
+  //   width:180px;
+  //   margin-buttom:10px;
+  // }
 
-  & .addBtn{
-    margin-top:10px;
-    font-size: 16px;
-  }
+  // & .addBtn{
+  //   margin-top:10px;
+  // }
 
-  & .listContainer{
-    font-size:1.5em;
-    margin-top:30px;
-    border: 4px solid #b2c7c5;
-    border-radius:20px;
-    width:50%;
-    margin:auto;
-    margin-bottom:40px;
-  }
 
   & .button{
     margin:auto;

@@ -38,27 +38,29 @@ export const PositionStyled = styled.div`
       }
   
     & .timelineItem{
-      // background-color: ${Colors.PRAIMARY};
-      border:3px solid #ffffff;
+      background-color: ${Colors.LIGHT_BLUE};
+      border:2px solid ${Colors.TURKIZ};
       margin: auto;
       margin-bottom:5px;
       border-radius:20px;
       cursor: pointer;
-      width:52%;
-      
-
+      width:75%;
     }
   
     & .timelineItem:hover,timelineDate:hover{
-      background-color: ${Colors.LIGHT_PINK};
-      border:3px solid 85D3E6;
-      //margin-bottom:4px;
+      background-color: ${Colors.LIGHT_GREEN};
+      border:3px solid ${Colors.TURKIZ};
+      margin-bottom:4px;
       border-radius:20px;
     }  
 
     .table{
         font-family: 'Quicksand', sans-serif;
+<<<<<<< HEAD
+        background-color: ${Colors.LIGHT_BLUE};
+=======
         background-color: #FFFFFF;
+>>>>>>> 4f84d42736995ebca768682be3fc410831312946
         border-radius:10px;
     }    
 

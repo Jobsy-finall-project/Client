@@ -49,7 +49,10 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                     {currentTrack && currentTrack.position.name}
                 </Typography>
                 <Typography className="trackDescription" variant="body1">
-                    {currentTrack && currentTrack.position.description}
+                   Description:
+                </Typography>
+                <Typography className="trackDescription" variant="body1">
+                  {currentTrack && currentTrack.position.description}
                 </Typography>
 
                 <Timeline position="alternate" className="timeline">
