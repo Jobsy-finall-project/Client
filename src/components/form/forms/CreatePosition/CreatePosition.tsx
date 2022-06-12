@@ -115,7 +115,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
           </Typography>
           {/* <h1 className="title">Create Position</h1> */}
         </Grid>
-        <Grid item margin="0px">
+        <Grid item margin="0px" className="input">
           <form onSubmit={handleSubmit} className="needs-validation">
             <div className="input">
               <Input
@@ -146,7 +146,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                 className="complete"
                 multiple
                 options={tags.map(option => option)}
-                style={{ marginTop: "30px" }}
+                style={{ marginTop: "30px", color: "white", width:"600px", margin:"auto" }}
                 onChange={(event, value) => {
                   setFieldValue("tags", value);
                 }}
@@ -154,7 +154,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                   value.map((option: string, index: number) => (
                     <Chip
                       variant="filled"
-                      style={{ marginTop: "20px", fontSize: "1.2em" }}
+                      style={{ marginTop: "20px", fontSize: "1.2em" ,backgroundColor: "#C5E3E3", color:"black"}}
                       color="primary"
                       label={option}
                       {...getTagProps({ index })}
@@ -169,6 +169,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                     variant="filled"
                     label="requires"
                     placeholder="choose position requires"
+                    style={{maxWidth: 600}}
                     // onChange={handleChange}
                   />
                 )}
@@ -181,7 +182,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                 height="50px"
                 width="170px"
                 top="32px"
-                left="280px"
+                left="100px"
                 right=""
                 onClick={handleSubmit}
               />

@@ -10,8 +10,7 @@ const ActiveApplicationsSectionStyled = styled.div`
   }
 
   & .searchPosition {
-    min-width: 80%;
-    color: green;
+    width: 52%;
     margin: auto;
   }
 
@@ -84,11 +83,13 @@ const ActiveApplicationsSectionStyled = styled.div`
     background-color: ${Colors.LIGHT_PINK};
     margin: 5px;
     font-family: "Quicksand", sans-serif;
+    width: 75%;
+    margin-left: 168px;
   }
 
   & .listItem:hover {
     border-radius: 30px;
-    background-color: ${Colors.PINK};
+    background-color: ${Colors.WHITE};
   }
   & .position-tag {
     margin-right: 3px;

@@ -12,10 +12,9 @@ export const PositionListSectionStyled = styled.div`
     min-width : 100%;
   }
 
-  & .searchPosition{
-    min-width:80%;
-    color:green;
-    margin:auto;
+  & .searchPosition {
+    width: 70%;
+    margin: auto;
   }
 
   & .positionsList{
@@ -47,29 +46,28 @@ export const PositionListSectionStyled = styled.div`
   & .addNewTrackButton {
     text-align: center;
     justify-content: center;
-    display:flex;
-    margin:0 auto;
+    // display:flex;
+    margin: auto;
     border-radius: 30px;
     padding: 5px;
-    transition: 0.3ms;
+    // transition: 0.3ms;
     height:40px;
-    background-image: linear-gradient(-180deg, ${Colors.LIGHT_PINK} 0%, ${Colors.LIGHT_YELLOW} 100%);
+    background-image: linear-gradient(-180deg, ${Colors.LIGHT_GREEN} 20%, ${Colors.BEIGE} 100%);
     color: #008CBA;
+    border: 2px solid ${Colors.PINK}
     font-size: 18px;
-    text-decoration: none;
+    // text-decoration: none;
     max-width: 300px;
-    min-width: 150px;
+    min-width: 200px;
     cursor: pointer;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
+    // user-select: none;
+    // touch-action: manipulation;
     font-family: 'Quicksand', sans-serif;
-    border: 2px solid ${Colors.LIGHT_PINK}
   }
   
   & .addNewTrackButton:hover {
-    background-image: linear-gradient(-180deg, ${Colors.PINK} 0%, ${Colors.LIGHT_YELLOW} 50%);
-    border: 2px solid ${Colors.LIGHT_PINK}
+    background-image: linear-gradient(-180deg, ${Colors.LIGHT_GREEN} 0%, ${Colors.BEIGE} 50%);
+    border: 2px solid ${Colors.WHITE}
   }
 
   & .favoriteIcon{
@@ -78,15 +76,15 @@ export const PositionListSectionStyled = styled.div`
   
   & .listItem {
     border-radius: 20px;
-    background-color: ${Colors.LIGHT_PINK};
+    background-color: ${Colors.BEIGE};
     margin: 5px;
-    border: 2px solid ${Colors.LIGHT_PINK}
+    border: 5px solid ${Colors.PINK}
   }
 
   & .listItem:hover {
-    border-radius: 30px;
-    background-color: ${Colors.PINK};
-    border: 2px solid ${Colors.LIGHT_PINK}
+    border-radius: 20px;
+    background-color: #FAF3F0;
+    border: 5px solid ${Colors.PINK}
 
   }
 
