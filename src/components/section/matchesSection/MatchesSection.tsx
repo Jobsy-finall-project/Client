@@ -15,7 +15,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { styled } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import React, { useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import match from "../../../images/match.jpeg";
@@ -48,6 +48,13 @@ const MatchesSection: React.FC = () => {
     const tracks = useSelector((state: State) => state.tracks).filter(
         (curr) => !curr.isMatch
     );
+
+    const trackExpandArray: boolean[]= []
+    tracks.forEach((track: Track) => {
+        trackExpandArray.push(false);
+    });
+    const [expandedArray, setExpandedArray] = useState <boolean[]>(trackExpandArray);
+    const [currentExpanded, setCurrentExpanded] = useState(9999)
     const { RemoveTrack, createTrack } = bindActionCreators(
         actionsCreators,
         dispatch
@@ -64,7 +71,7 @@ const MatchesSection: React.FC = () => {
 
     useEffect(() => {
         getData();
-    }, []);
+    }, [expandedArray]);
     const handleApprove = (track: Track) => {
         changeApplicationIsMatch(track._id!!, true);
         createTrack({ ...track, isMatch: true });
@@ -75,8 +82,18 @@ const MatchesSection: React.FC = () => {
         RemoveTrack(track._id!!);
     };
 
-    const handleExpandClick = () => {
-        setExpanded(!expanded);
+    const handleExpandClick = (index: number) => {
+        const trackExpandArray: boolean[]= []
+        tracks.forEach((track: Track) => {
+            trackExpandArray.push(false);
+        });
+        if (currentExpanded != index) {
+            trackExpandArray[index]=true
+            setCurrentExpanded(index)
+        } else {
+            setCurrentExpanded(9999)
+        }
+        setExpandedArray(trackExpandArray)
     };
 
     return (
@@ -102,7 +119,7 @@ const MatchesSection: React.FC = () => {
                 )}
 
                 <Grid item>
-                    <List
+                    {/* <List
                         className="list-container"
                         sx={{
                             width: "100%",
@@ -114,14 +131,14 @@ const MatchesSection: React.FC = () => {
                             display: "grid",
                             gridTemplateColumns: "repeat(3 ,1fr)",
                         }}
-                    >
-                        {(tracks as Array<Track>).map((track: Track) => {
+                    > */}
+                        {(tracks as Array<Track>).map((track: Track, index) => {
                             return (
-                                <ListItem className="list-item-container">
+                                // <ListItem className="list-item-container">
                                     <Card
                                         sx={{
-                                            maxWidth: 345,
-                                            minWidth: "275px",
+                                            maxWidth: 600,
+                                            minWidth: "500px",
                                             borderStyle: "double",
                                         }}
                                     >
@@ -155,16 +172,16 @@ const MatchesSection: React.FC = () => {
                                                 <ClearIcon />
                                             </IconButton>
                                             <ExpandMore
-                                                expand={expanded}
-                                                onClick={handleExpandClick}
-                                                aria-expanded={expanded}
+                                                expand={expandedArray[index]}
+                                                onClick={() => {handleExpandClick(index)}}
+                                                aria-expanded={expandedArray[index]}
                                                 aria-label="show more"
                                             >
                                                 <ExpandMoreIcon />
                                             </ExpandMore>
                                         </CardActions>
                                         <Collapse
-                                            in={expanded}
+                                            in={expandedArray[index]}
                                             timeout="auto"
                                             unmountOnExit
                                         >
@@ -178,10 +195,10 @@ const MatchesSection: React.FC = () => {
                                             </CardContent>
                                         </Collapse>
                                     </Card>
-                                </ListItem>
+                                // </ListItem>
                             );
                         })}
-                    </List>
+                    {/* </List> */}
                 </Grid>
             </Grid>
         </MatchesSectionStyled>
