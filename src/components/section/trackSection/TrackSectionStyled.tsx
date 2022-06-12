@@ -56,18 +56,18 @@ const TrackSectionStyled = styled.div`
   }
 
   & .timelineItem{
-    // background-color: ${Colors.LIGHT_PINK};
-    border:3px solid #b2c7c5;
+    background-color: ${Colors.LIGHT_BLUE};
+    border:3px solid ${Colors.TURKIZ};
     margin-bottom:4px;
     border-radius:20px;
     cursor: pointer;
-    width:52%;
+    width:100%;
     align-self: center;
   }
 
   & .timelineItem:hover,timelineDate:hover{
-    background-color: #c2cfd3;
-    border:3px solid #b2c7c5;
+    background-color: ${Colors.LIGHT_GREEN};
+    border:3px solid ${Colors.TURKIZ};
     margin-bottom:4px;
     border-radius:20px;
   }
@@ -83,14 +83,14 @@ const TrackSectionStyled = styled.div`
   //   text-align:center;
   // }
 
-  & .Commentscontainer, .listContainer{
-    // margin-left:20px;
-    width:100%;
-    margin:auto;
-    position: relative;
-    align-items: center;
-    // display: flex;
-  }
+  // & .Commentscontainer, .listContainer{
+  //   // margin-left:20px;
+  //   width:100%;
+  //   margin:auto;
+  //   position: relative;
+  //   align-items: center;
+  //   // display: flex;
+  // }
 
   // & .addCommentInput{
   //   margin-top:10px;

@@ -8,7 +8,7 @@ const ListSectionStyled = styled.div`
     align-items: center;
     border:5px solid red;
     margin:auto;
-    width:100%;
+    width:75%;
   }
 
   & .addComments{
@@ -59,7 +59,7 @@ const ListSectionStyled = styled.div`
     font-family: 'Quicksand', sans-serif;
     font-size:1.1em;
     margin-top:30px;
-    border: 5px solid ${Colors.WHITE};
+    border: 5px solid ${Colors.TURKIZ};
     border-radius:20px;
     width:75%;
     margin:auto;
@@ -74,7 +74,7 @@ const ListSectionStyled = styled.div`
 
   & .addCommentInput{
     margin-top:20px;
-    width:95%;
+    width:85%;
     margin:auto;
     margin-buttom:10px;
     border-radius:10px;
