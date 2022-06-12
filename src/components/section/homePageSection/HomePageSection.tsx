@@ -1,28 +1,37 @@
-import DeleteIcon from '@mui/icons-material/Delete';
-import KeyboardIcon from "@mui/icons-material/Keyboard";
-import SearchIcon from "@mui/icons-material/Search";
-import ShareIcon from '@mui/icons-material/Share';
-import Grid from "@mui/material/Grid";
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from "@mui/material/InputAdornment";
+import React, { useState, useEffect } from "react";
+import { ChangeEvent } from "react";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
-import React, { ChangeEvent, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { bindActionCreators } from "redux";
+import { useSelector } from "react-redux";
+import { State } from "../../../state";
 import Track from "../../../models/Track";
-import {
-  changeApplicationIsFavorite, deleteAplication, getUserApplications
-} from "../../../services/applicationService";
-import { getCurrentUser } from "../../../services/authService";
-import { actionsCreators, State } from "../../../state";
-import Button from "../../common/button/Button";
+import { useNavigate } from "react-router-dom";
 import { HomePageSectionStyled, positionTitle } from "./HomePageSectionStyled";
+import AddBoxIcon from "@mui/icons-material/AddBox";
+import SearchIcon from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
+import {
+  getUserApplications,
+  changeApplicationIsFavorite, deleteAplication
+} from "../../../services/applicationService";
+import { bindActionCreators } from "redux";
+import { actionsCreators } from "../../../state";
+import { useDispatch } from "react-redux";
+import { getCurrentUser } from "../../../services/authService";
+import { Link } from "react-router-dom";
+import Button from "../../common/button/Button";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+import ShareIcon from '@mui/icons-material/Share';
 
 const HomePageSection: React.FC = () => {
 
@@ -46,7 +55,7 @@ const HomePageSection: React.FC = () => {
 
   async function getData() {
     const applications = await getUserApplications();
-  
+    console.log(applications);
     applications.forEach((application: Track) => {
       createTrack(application);
     }); //get all user tracks/applications and add them to the tracks.
@@ -62,14 +71,14 @@ const HomePageSection: React.FC = () => {
   };
 
   const handleClick = (track: Track) => {
-    navigation("/recruitment-track-page/" + track._id);
+    navigation("/recruitment-track-page", { state: track });
   };
   const handleApplicationIsFavorite = async (track: Track) => {
     const application = await changeApplicationIsFavorite(
       track._id as string,
       !track.isFavorite
     );
-   
+    console.log(1, application);
   };
 
   const handleAddTrack = () => {
@@ -105,8 +114,7 @@ const HomePageSection: React.FC = () => {
         <Button
             className="addNewTrackButton"
             title="Add new recruitment track"
-            //color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
-            color="#008CBA"
+            color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
             height="50px"
             width="300px"
             top="0"
@@ -141,7 +149,7 @@ const HomePageSection: React.FC = () => {
                                   className="listItem"
                                   secondaryAction={
                                       <ListItemIcon>
-                                          {/* <Checkbox
+                                          <Checkbox
                                               icon={<FavoriteBorder />}
                                               checkedIcon={
                                                   <Favorite className="favoriteIcon" />
@@ -151,7 +159,7 @@ const HomePageSection: React.FC = () => {
                                                       currTrack
                                                   )
                                               }
-                                          /> */}
+                                          />
                                           <IconButton
                                               onClick={(e) =>
                                                   handleDeleteApplication(
@@ -183,8 +191,8 @@ const HomePageSection: React.FC = () => {
                               </ListItem>
                           </>
                       ) : (
-                          <div></div>
-                      )}
+                        <h6 className="emptyListTitle">Add your first recruitment track</h6>
+                        )}
                   </div>
               );
             })}
@@ -198,8 +206,7 @@ const HomePageSection: React.FC = () => {
           <Button
           className="addNewTrackButton"
           title="Add new recruitment track"
-          // color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
-          color="008CBA"
+          color="linear-gradient(-150deg, #37AEE2 0%, #98E2F5 100%)"
           height="50px"
           width="300px"
           top="0"
