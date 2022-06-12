@@ -15,10 +15,9 @@ export const HomePageSectionStyled = styled.div`
     min-width : 100%;
   }
 
-  & .searchPosition{
-    min-width:80%;
-    color:green;
-    margin:auto;
+  & .searchPosition {
+    width: 70%;
+    margin: auto;
   }
 
   & .positionsList{
@@ -63,11 +62,19 @@ export const HomePageSectionStyled = styled.div`
     -webkit-user-select: none;
     touch-action: manipulation;
     font-family: 'Quicksand', sans-serif;
+    box-shadow: 0px 0px 9px 1px rgba(0,0,0,0.3);
+
   }
 
   .addNewTrackButton:hover{
+<<<<<<< HEAD
     background-image: linear-gradient(-180deg, ${Colors.TURKIZ} 0%, ${Colors.LIGHT_GREEN} 50%);
     border: 2px solid ${Colors.WHITE}
+=======
+    // background-image: linear-gradient(-180deg, ${Colors.PINK} 0%, ${Colors.LIGHT_YELLOW} 50%);
+    background-color: #cbdddb;
+    border: 2px solid #b0e6ff;
+>>>>>>> 4f84d42736995ebca768682be3fc410831312946
   }
   
  
@@ -84,8 +91,13 @@ export const HomePageSectionStyled = styled.div`
   }
 
   & .listItem:hover {
+<<<<<<< HEAD
     border-radius: 25px;
     background-color: #EBFAEF;
+=======
+    border-radius: 30px;
+    background-color: ${Colors.LIGHT_GRAY};
+>>>>>>> 4f84d42736995ebca768682be3fc410831312946
 
   }
   

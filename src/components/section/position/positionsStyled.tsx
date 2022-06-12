@@ -10,8 +10,6 @@ export const PositionStyled = styled.div`
     .title{
         margin-top:20px;
         font-family: 'Quicksand', sans-serif;
-        width: 75%;
-        margin-left:200px;
 
     }
     .meta-data{
@@ -58,7 +56,11 @@ export const PositionStyled = styled.div`
 
     .table{
         font-family: 'Quicksand', sans-serif;
+<<<<<<< HEAD
         background-color: ${Colors.LIGHT_BLUE};
+=======
+        background-color: #FFFFFF;
+>>>>>>> 4f84d42736995ebca768682be3fc410831312946
         border-radius:10px;
     }    
 

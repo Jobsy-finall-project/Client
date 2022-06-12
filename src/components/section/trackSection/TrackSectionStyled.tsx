@@ -57,15 +57,17 @@ const TrackSectionStyled = styled.div`
 
   & .timelineItem{
     // background-color: ${Colors.LIGHT_PINK};
-    border:6px solid ${Colors.LIGHT_PINK};
+    border:3px solid #b2c7c5;
     margin-bottom:4px;
     border-radius:20px;
     cursor: pointer;
+    width:52%;
+    align-self: center;
   }
 
   & .timelineItem:hover,timelineDate:hover{
-    background-color: ${Colors.LIGHT_PINK};
-    border:5px solid 85D3E6;
+    background-color: #c2cfd3;
+    border:3px solid #b2c7c5;
     margin-bottom:4px;
     border-radius:20px;
   }

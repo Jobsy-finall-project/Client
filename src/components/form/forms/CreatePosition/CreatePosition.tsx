@@ -169,6 +169,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                     variant="filled"
                     label="requires"
                     placeholder="choose position requires"
+                    style={{maxWidth: 600}}
                     // onChange={handleChange}
                   />
                 )}
@@ -181,7 +182,7 @@ const CompanyForm: (props: FormikProps<FormResult>) => JSX.Element = ({
                 height="50px"
                 width="170px"
                 top="32px"
-                left="280px"
+                left="100px"
                 right=""
                 onClick={handleSubmit}
               />
