@@ -99,17 +99,19 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                             );
                         })}
                 </Timeline>
-                <Button
-                    title="Add New Step"
-                    color=""
-                    height="50px"
-                    width="170px"
-                    top="32px"
-                    left="100px"
-                    onClick={() => {
-                        navigation("/create-step", { state: currentTrack._id });
-                    }}
-                />
+                {currentTrack.position.hrId ? <div style={{marginTop:'40px'}}></div> :
+                    <Button
+                        title="Add New Step"
+                        color=""
+                        height="50px"
+                        width="300px"
+                        top="32px"
+                        left="100px"
+                        onClick={() => {
+                            navigation("/create-step", {state: currentTrack._id});
+                        }}
+                    />
+                }
             </div>
             <ListSection
                 fromComponent="track"

@@ -19,6 +19,9 @@ interface ListSectionProps {
   addBtnText: string;
   shared: boolean;
   fromComponent: "step" | "track";
+  btnHeight?: string;
+  btnWeight?: string;
+
 }
 const ListSection: React.FC<ListSectionProps> = (props) => {
 
@@ -124,7 +127,7 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
             <Button
               className="addCommentBtn"
               onClick={showItemInput}
-              title="Add comments"
+              title="Add comment"
               color=""
               height="20px"
               width="180px"
@@ -154,8 +157,8 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
                 onClick={handleAddItemClick}
                 title="Add"
                 color=""
-                height="30px"
-                width="200px"
+                height={props.btnHeight? props.btnHeight :"30px"}
+                width={props.btnWeight? props.btnWeight:"200px"}
                 top="32px"
                 left="200px"
               />
