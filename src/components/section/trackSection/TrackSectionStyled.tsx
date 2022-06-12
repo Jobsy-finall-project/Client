@@ -53,7 +53,6 @@ const TrackSectionStyled = styled.div`
       item-align:center;
       width:75%;
       margin:auto;
-
   }
 
   & .timelineItem{

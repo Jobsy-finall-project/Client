@@ -15,7 +15,6 @@ const CreatePosition = styled.div`
     font-family: 'Quicksand', sans-serif;
     margin-top: 10px;
     bold: true;
-
     // margin-right: 50px;
   }
 
@@ -31,6 +30,7 @@ const CreatePosition = styled.div`
       margin-top:20px;
       margin:auto;
       font-size:2em;
+
   }
 `;
 

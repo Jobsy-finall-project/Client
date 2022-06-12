@@ -11,7 +11,7 @@ export const BLUE_JEANS: string = "#455d7a";
 export const DARK_BLUE: string = "#233142";
 export const LIGHT_RED: string = "#f95959";
 export const PRAIMARY: string = "#daf6fa";
-export const LIGHT_PINK: string = "#FEEDEA";
+export const LIGHT_PINK: string = "#FFE6E7";
 export const PINK: string = "#f3dfdb";
 export const THEME: string = "#d5f6ff";
 export const HEADER: string = "#d6fff9";
@@ -23,5 +23,5 @@ export const TURKIZ: string = "#C5E3E3";
 export const LIGHT_BLUE: string = "#E7FAF5";
 export const LIGHT_GREEN: string = "#EBFAEF";
 export const GREEN: string = "#C5E3D3";
-
-
+export const BEIGE: string = "#FBEEE7"
+export const LIGHT_PEACH : string = "#FAE5E1"

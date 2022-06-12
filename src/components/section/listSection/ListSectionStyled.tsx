@@ -7,7 +7,6 @@ const ListSectionStyled = styled.div`
     text-align:center;
     align-items: center;
     border:5px solid red;
-    display: flex;
     margin:auto;
     width:100%;
   }
@@ -15,7 +14,6 @@ const ListSectionStyled = styled.div`
   & .addComments{
     text-align:center;
     align-items: center;
-    max-width:800px;
     display:flex;
     position:relative;
   }
@@ -63,7 +61,7 @@ const ListSectionStyled = styled.div`
     margin-top:30px;
     border: 5px solid ${Colors.WHITE};
     border-radius:20px;
-    width:95%;
+    width:75%;
     margin:auto;
     margin-bottom:40px;
     align-items: center;
@@ -84,6 +82,7 @@ const ListSectionStyled = styled.div`
   }
 
   & .input-comment{
+    margin-top:10px;
     border-radius:10px;
     border: 2px solid ${Colors.WHITE};
     min-height: 50px;

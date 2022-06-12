@@ -77,10 +77,6 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
 
 
   return (
-    <Grid container width={"100%"} direction="column"
-    alignItems="center"
-    justifyContent="center"
-    className="commentscontainer">
     <ListSectionStyled>
       <List className="listContainer">
         <p className="commentTitle" >{props.title}:</p>
@@ -127,7 +123,7 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
           {addItemInput ? (
             // <div className="addCommentInput">
               <Grid item container className="addCommentInput" direction="column" width={"100%"} alignItems="center"
-              justifyContent="center">
+              justifyContent="center" spacing={2}>
               <Grid item width={"90%"} alignItems="center"> 
               <input
                 className="input-comment"
@@ -159,7 +155,6 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
         {/* </div> */}
       </List>
     </ListSectionStyled>
-    </Grid>
   );
 };
 
