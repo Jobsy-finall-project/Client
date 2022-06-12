@@ -29,6 +29,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
     const [currentTrack, setCurrentTrack] = useState(
         tracks.find((curr) => curr._id === props.track)!!
     );
+
     const { createTrack } = bindActionCreators(actionsCreators, dispatch);
     const steps = [];
     useEffect(() => {
@@ -116,6 +117,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                 title="comments"
                 content={currentTrack && (currentTrack.comments as string[])}
                 addBtnText="add comment"
+                shared={'position' in currentTrack && 'hrId' in currentTrack.position}
             />
         </TrackSectionStyled>
     );

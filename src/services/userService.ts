@@ -18,3 +18,9 @@ export async function getIntersectionTagsBetweenUserAndPosition(
 ) {
   return await http.get(`${apiEndpoint}/tags/${userId}/${positionId}/${cvId}`);
 }
+
+export async function getUserById(
+  userId: string,
+) {
+  return await http.get(`${apiEndpoint}/${userId}`);
+}

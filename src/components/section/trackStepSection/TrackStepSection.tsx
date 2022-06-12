@@ -52,7 +52,7 @@ const TrackStepSection: React.FC<TrackStepSectionProps> = (props) => {
         </div>
       </div>
       <div className="notesContainer">
-      <ListSection fromComponent="step" appId={props.step._id} title="notes" content={props.step.comments as string[]} addBtnText="add note" />
+      <ListSection shared={false} fromComponent="step" appId={props.step._id} title="notes" content={props.step.comments as string[]} addBtnText="add note" />
       </div>
     </TrackStepSectionStyled>
   );

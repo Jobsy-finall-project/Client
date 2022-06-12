@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import ListSectionStyled from "./ListSectionStyled";
 import Button from '../../common/button/Button';
 import List from '@mui/material/List';
@@ -7,37 +7,52 @@ import ListItemText from '@mui/material/ListItemText';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemButton from "@mui/material/ListItemButton";
 import Checkbox from "@mui/material/Checkbox";
-import { ListItemIcon } from "@mui/material";
-import {addApplicationComments, deleteApplicationComments} from "../../../services/applicationService";
-import {addStepComments, deleteStepComments} from "../../../services/stepService";
+import { IconButton, ListItemIcon } from "@mui/material";
+import { addApplicationComments, deleteApplicationComments } from "../../../services/applicationService";
+import { addStepComments, deleteStepComments } from "../../../services/stepService";
 import Grid from '@mui/material/Grid'
-
+import { getCurrentUser } from '../../../services/authService'
 interface ListSectionProps {
   appId: string;
   title: string;
-  content:string[];
-  addBtnText:string;
+  content: string[];
+  addBtnText: string;
+  shared: boolean;
   fromComponent: "step" | "track";
 }
 const ListSection: React.FC<ListSectionProps> = (props) => {
 
-    const [items, setItems] = useState(props.content);
-    const [newItem, setNewItem] = useState("");
-    const [addItemInput, setAddItemInput] = React.useState(false);
+  const [items, setItems] = useState(props.content);
+  const [newItem, setNewItem] = useState("");
+  const [addItemInput, setAddItemInput] = React.useState(false);
+
+  const getNewComment = () => {
+    const user = getCurrentUser();
+    var comment = ''
+    if (props.shared == true) {
+       comment = user.firstName.concat(' ', user.lastName, ': ', newItem);
+    }
+    if (props.shared == false) {
+       comment = newItem
+    }
+    return comment
+  }
 
   async function updateTrackComments() {
-      const { data } = await addApplicationComments(props.appId, newItem);
+    const comment = getNewComment()
+    const { data } = await addApplicationComments(props.appId, comment);
   }
 
   async function updateStepComments() {
-    const { data } = await addStepComments(props.appId, newItem);
-}
+    const comment = getNewComment()
+    const { data } = await addStepComments(props.appId, comment);
+  }
 
   async function deleteTrackComments(index: number) {
     const { data } = await deleteApplicationComments(props.appId, index);
-}
+  }
 
-  function updateComments(){
+  function updateComments() {
     if (props.fromComponent == "track") {
       updateTrackComments()
     }
@@ -46,9 +61,9 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
     }
   }
 
-  function handeleDeleteItem(index: number){
-    const newArr=[...items]
-    newArr.splice(index,1)
+  function handeleDeleteItem(index: number) {
+    const newArr = [...items]
+    newArr.splice(index, 1)
     setItems(newArr)
     if (props.fromComponent == "track") {
       deleteTrackComments(index)
@@ -62,7 +77,8 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
 
   function handleAddItemClick() {
     if (newItem !== "") {
-      setItems([...items, newItem] as any);
+      const comment = getNewComment()
+      setItems([...items, comment] as any);
     }
     updateComments()
     setNewItem("");
@@ -84,11 +100,11 @@ const ListSection: React.FC<ListSectionProps> = (props) => {
         {items?.map((currItem, index) => {
           return (
             <ListItem>
-              <ListItemButton>
                 <ListItemIcon />
                 <ListItemText primary={currItem} />
-              </ListItemButton>
-              <DeleteIcon onClick={() =>  handeleDeleteItem(index)} />
+              <IconButton>
+              <DeleteIcon onClick={() => handeleDeleteItem(index)} />
+              </IconButton>
             </ListItem>
           )
         })}
