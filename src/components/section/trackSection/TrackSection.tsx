@@ -27,7 +27,7 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
     const tracks = useSelector((state: State) => state.tracks);
     const applicationId = props.track;
     const [currentTrack, setCurrentTrack] = useState(
-        tracks.find((curr) => curr._id === props.track)!!
+        tracks.find((curr) => curr._id === props.track)
     );
 
     const { createTrack } = bindActionCreators(actionsCreators, dispatch);
@@ -37,6 +37,8 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
             const trackToShow = await getApplicationById(
                 applicationId as string
             );
+            console.log({trackToShow});
+            
             setCurrentTrack(trackToShow);
             createTrack(trackToShow);
         }
@@ -50,17 +52,15 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                     {currentTrack && currentTrack.position.name}
                 </Typography>
                 <Typography className="trackDescription" variant="body1">
-                   Description:
+                    Description:
                 </Typography>
                 <Typography className="trackDescription" variant="body1">
-                  {currentTrack && currentTrack.position.description}
+                    {currentTrack && currentTrack.position.description}
                 </Typography>
 
                 <Timeline position="alternate" className="timeline">
                     {currentTrack &&
-                        currentTrack.steps?.map((step) => {
-                           
-                           
+                        currentTrack?.steps?.map((step) => {
                             return (
                                 <TimelineItem
                                     className="timelineItem"
@@ -99,7 +99,9 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                             );
                         })}
                 </Timeline>
-                {currentTrack.position.hrId ? <div style={{marginTop:'40px'}}></div> :
+                {currentTrack && currentTrack.position.hrId ? (
+                    <div style={{ marginTop: "40px" }}></div>
+                ) : (
                     <Button
                         title="Add New Step"
                         color=""
@@ -108,18 +110,25 @@ const TrackSection: React.FC<TrackSectionProp> = (props) => {
                         top="32px"
                         left="100px"
                         onClick={() => {
-                            navigation("/create-step", {state: currentTrack._id});
+                            navigation("/create-step", {
+                                state: currentTrack && currentTrack._id,
+                            });
                         }}
                     />
-                }
+                )}
             </div>
             <ListSection
                 fromComponent="track"
-                appId={currentTrack && currentTrack._id!!}
+                appId={currentTrack?._id || ""}
                 title="comments"
-                content={currentTrack && (currentTrack.comments as string[])}
+                content={currentTrack?.comments as string[]}
                 addBtnText="add comment"
-                shared={'position' in currentTrack && 'hrId' in currentTrack.position}
+                shared={
+                    (currentTrack &&
+                    "position" in currentTrack &&
+                        "hrId" in currentTrack.position
+                    ) || false
+                }
             />
         </TrackSectionStyled>
     );

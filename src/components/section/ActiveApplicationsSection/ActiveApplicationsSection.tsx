@@ -112,7 +112,7 @@ const ActiveApplicationsSection: React.FC = () => {
         console.log({ user });
 
         const app = user.applications?.find(
-            (curr) => (curr.position as unknown) as string === positionId
+            (curr) => curr.position._id === positionId
         );
         console.log({ app });
 
